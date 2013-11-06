@@ -153,20 +153,14 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3FD001D61829D8B900971B43 /* bb_header.h */,
+				3FF42C37182A3A310008CFC7 /* kiss_fft */,
 				3FD001E6182A1AA100971B43 /* queue.h */,
 				3FD001E7182A1AC500971B43 /* queue.cpp */,
 				3FD001D31829D89E00971B43 /* bb_freq_util.h */,
 				3FD001D21829D89E00971B43 /* bb_freq_util.cpp */,
-				3FD001D51829D8B900971B43 /* _kiss_fft_guts.h */,
-				3FD001D71829D8B900971B43 /* kiss_fastfir.c */,
-				3FD001D81829D8B900971B43 /* kiss_fastfir.h */,
-				3FD001D91829D8B900971B43 /* kiss_fft.c */,
-				3FD001DA1829D8B900971B43 /* kiss_fft.h */,
-				3FD001DB1829D8B900971B43 /* kiss_fftr.c */,
-				3FD001DC1829D8B900971B43 /* kiss_fftr.h */,
-				3FD001DD1829D8B900971B43 /* rscode.c */,
 				3FD001DE1829D8B900971B43 /* rscode.h */,
-				3FD001D61829D8B900971B43 /* bb_header.h */,
+				3FD001DD1829D8B900971B43 /* rscode.c */,
 				A10A0BFE0DEDDFD000E5A482 /* fft */,
 				F74ADD0E0DDA24AA0046BEC2 /* iPublicUtility */,
 				F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */,
@@ -201,6 +195,20 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3FF42C37182A3A310008CFC7 /* kiss_fft */ = {
+			isa = PBXGroup;
+			children = (
+				3FD001D51829D8B900971B43 /* _kiss_fft_guts.h */,
+				3FD001D71829D8B900971B43 /* kiss_fastfir.c */,
+				3FD001D81829D8B900971B43 /* kiss_fastfir.h */,
+				3FD001D91829D8B900971B43 /* kiss_fft.c */,
+				3FD001DA1829D8B900971B43 /* kiss_fft.h */,
+				3FD001DB1829D8B900971B43 /* kiss_fftr.c */,
+				3FD001DC1829D8B900971B43 /* kiss_fftr.h */,
+			);
+			name = kiss_fft;
 			sourceTree = "<group>";
 		};
 		A10A0BFE0DEDDFD000E5A482 /* fft */ = {
