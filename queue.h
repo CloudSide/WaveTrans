@@ -28,24 +28,6 @@ void init_queue(queue *q, int length);
 void enqueue(queue *q, queue_item x);
 queue_item dequeue(queue *q);
 int queue_is_empty(queue *q);
-
-/*
-void print_queue(queue *q)
-{
-    int i;
-    
-    i=q->first;
-    
-    while (i != q->last) {
-        
-        printf("%c ",q->q[i]);
-        i = (i+1) % q->length;
-    }
-    
-    printf("%.2f ",q->q[i]);
-    printf("\n");
-}
- */
-
+void print_queue(queue *q);
 
 #endif

@@ -52,3 +52,19 @@ int queue_is_empty(queue *q)
     if (q->count <= 0) return (true);
     else return (false);
 }
+
+void print_queue(queue *q)
+{
+    int i;
+    
+    i = q->first;
+    
+    while (i != q->last) {
+        
+        //printf("%f ",q->q[i]);
+        i = (i+1) % q->length;
+    }
+    
+    //printf("%.2f ",q->q[i]);
+    printf("\n");
+}
