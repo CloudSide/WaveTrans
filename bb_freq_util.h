@@ -39,7 +39,7 @@
 
 typedef struct _bb_item_group bb_item_group;
 
-typedef int element;
+typedef float element;
 
 //void freq_init();
 
