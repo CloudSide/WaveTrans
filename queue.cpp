@@ -16,7 +16,7 @@ void init_queue(queue *q, int length)
 		printf("Warning: queue overflow enqueue x=%d\n", length);
     
     q->first = 0;
-    q->last = QUEUESIZE-1;
+    q->last = length-1;
     q->count = 0;
     q->length = length;
 }
