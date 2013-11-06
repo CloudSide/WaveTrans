@@ -35,7 +35,7 @@ void enqueue(queue *q, queue_item x)
 
 queue_item dequeue(queue *q)
 {
-    int x;
+    queue_item x;
     
     if (q->count <= 0) printf("Warning: empty queue dequeue.\n");
     else {
