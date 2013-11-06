@@ -16,10 +16,10 @@ typedef float queue_item;
 
 typedef struct {
     
-    queue_item q[QUEUESIZE+1];		/* body of queue */
-    int first;                      /* position of first element */
-    int last;                       /* position of last element */
-    int count;                      /* number of queue elements */
+    queue_item q[QUEUESIZE+1] = {0};		/* body of queue */
+    int first;                              /* position of first element */
+    int last;                               /* position of last element */
+    int count;                              /* number of queue elements */
     int length;
 
 } queue;
