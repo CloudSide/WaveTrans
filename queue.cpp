@@ -55,15 +55,11 @@ int queue_is_empty(queue *q)
 
 queue_item queue_item_at_index(queue *q, int index)
 {
-    int i;
+    int i = q->first;
     
-    if (index == 0) {
+    if (index > 0) {
         
-        i = q->first;
-        
-    } else {
-    
-        i = (q->first + index) % q->length;
+        i = (q->first + i) % q->length;
     }
     
     return q->q[i];
