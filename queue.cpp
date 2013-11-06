@@ -59,7 +59,7 @@ queue_item queue_item_at_index(queue *q, int index)
     
     if (index > 0) {
         
-        i = (q->first + i) % q->length;
+        i = (i + index) % q->length;
     }
     
     return q->q[i];
