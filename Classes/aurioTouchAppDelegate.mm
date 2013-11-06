@@ -867,52 +867,53 @@ static float   _savedBuffer[100][32];
 static int     _indexBufferX;
 
 
-- (void)helper:(double)fftIdx_i interpVal:(CGFloat)interpVal {
+- (void)helper:(double)fftIdx_i interpVal:(CGFloat)interpVal timeSlice:(int)length {
 
-    _indexBufferX++;
-    
-    if (_indexBufferX > 4) {
-        
-        _indexBufferX = 4;
-    }
     
     float fff = (drawFormat.mSampleRate / 2.0) * (int)fftIdx_i / (fftLength);
     int code = -1;
     if (freq_to_num(fff, &code) == 0 && (code==17 || code == 19)) {
         
-        if (_indexBufferX >= 3) {
+        if (_indexBufferX >= length-1) {
             
-            for (int i=1; i<4; i++) {
+            for (int i=1; i<length; i++) {
                 
                 _savedBuffer[i - 1][code] = _savedBuffer[i][code];
             }
             
             _savedBuffer[_indexBufferX][code] = interpVal;
-            
-            
-            float vol = 0.17;
-            for (int i=0; i<3; i++) {
-                
-                if (_savedBuffer[i][17] > vol && _savedBuffer[0][17] > vol) {
-                    
-                    for (int j = i; j < 3; j++) {
-                        
-                        if (_savedBuffer[j][19] > vol) {
-                            NSLog(@"-----======================");
-                            
-                            _savedBuffer[0][17] = 0;_savedBuffer[1][17] = 0;_savedBuffer[2][17] = 0;_savedBuffer[3][17] = 0;
-                            _savedBuffer[0][19] = 0;_savedBuffer[1][19] = 0;_savedBuffer[2][19] = 0;_savedBuffer[3][19] = 0;
-                            
-                            break;
-                        }
-                    }
-                    
-                }
-            }
         }
         
     }
     
+}
+
+- (void)helperResultWithTimeSlice:(int)length {
+    
+    _indexBufferX++;
+    if (_indexBufferX > length-1) {
+        _indexBufferX = length-1;
+    }
+    
+    float vol = 0.17;
+    for (int i=0; i<length; i++) {
+        
+        if (_savedBuffer[i][17] > vol && _savedBuffer[0][17] > vol) {
+            
+            for (int j = i; j < length - 1; j++) {
+                
+                if (_savedBuffer[j][19] > vol) {
+                    NSLog(@"-----======================");
+                    
+                    _savedBuffer[0][17] = 0;_savedBuffer[1][17] = 0;_savedBuffer[2][17] = 0;_savedBuffer[3][17] = 0;
+                    _savedBuffer[0][19] = 0;_savedBuffer[1][19] = 0;_savedBuffer[2][19] = 0;_savedBuffer[3][19] = 0;
+                    
+                    break;
+                }
+            }
+            
+        }
+    }
 }
 
 
@@ -951,7 +952,7 @@ static int     _indexBufferX;
         /*****************************************************/
         ///////////////////////////////////////////////*******/
         ///////////////////////////////////////////////*******/
-        [self helper:fftIdx_i interpVal:interpVal];////*******/
+        [self helper:fftIdx_i interpVal:interpVal timeSlice:6];////*******/
         ///////////////////////////////////////////////*******/
         ///////////////////////////////////////////////*******/
         /*****************************************************/
@@ -986,6 +987,9 @@ static int     _indexBufferX;
 		
 		*texBitBuffer_ptr++ = newPx;
 	}
+    
+    
+    [self helperResultWithTimeSlice:6];
 	
 	glBindTexture(GL_TEXTURE_2D, firstTex->texName);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 512, 0, GL_RGBA, GL_UNSIGNED_BYTE, texBitBuffer);
