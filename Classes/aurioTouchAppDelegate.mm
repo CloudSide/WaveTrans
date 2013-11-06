@@ -898,16 +898,86 @@ static queue   _savedBuffer[32];
     }
 }
 
-- (void)helperResultWithTimeSlice:(int)length {
+static int maxTable[100][32] ={0};
 
-    queue *q = &_savedBuffer[17];
+- (void)helperResultWithTimeSlice:(int)length {
     
-    if (q->q[q->first] > 0.0 &&
-        fabs(q->q[q->first] - q->q[(q->first + 1) % q->length]) < q->q[q->first] &&
-        fabs(q->q[q->first + 1] - q->q[q->first + 2]) < q->q[q->first + 1]) {
+    
+    
+    for (int i = 0; i<32; i++) {
         
-        NSLog(@"1111111111111112222222222:%f,%f,%f", q->q[q->first], q->q[q->first+1], q->q[q->first]);
+        for (int k = 0; k<100; k++) {
+            
+            queue *q = &_savedBuffer[i];
+            float currentValue = queue_item_at_index(q, k);
+            
+            printf("%d,%d,%.4f]", i, k, currentValue);
+            
+//            if (currentValue == 0) {
+//                continue;
+//            }
+//            
+//            bool top = false;
+//            bool bottom = false;
+//            
+//            for (int j = i-1; j > i - 2 && j >= 0; j--) {
+//                
+//                queue *q = &_savedBuffer[j];
+//                float tmp = queue_item_at_index(q, k);
+//                
+//                if (currentValue < tmp) {
+//                    top = false;
+//                    break;
+//                }else {
+//                    top = true;
+//                }
+//            }
+//            
+//            for (int j = i+1; j < i + 2 && j < 32; j++) {
+//                
+//                queue *q = &_savedBuffer[j];
+//                float tmp = queue_item_at_index(q, k);
+//                
+//                if (currentValue < tmp) {
+//                    bottom = false;
+//                    break;
+//                }else {
+//                    bottom = true;
+//                }
+//            }
+//            
+//            if (top && bottom) {
+//                
+//                maxTable[k][i] = 1;
+//            }
+        }
     }
+    
+//    queue *q = &_savedBuffer[17];
+//    
+//    if (q->q[q->first] > 0.0 &&
+//        fabs(q->q[q->first] - q->q[(q->first + 1) % q->length]) < q->q[q->first] &&
+//        fabs(q->q[q->first + 1] - q->q[q->first + 2]) < q->q[q->first + 1]) {
+//        
+//        NSLog(@"1111111111111112222222222:%f,%f,%f", q->q[q->first], q->q[q->first+1], q->q[q->first]);
+//    }
+    
+//    for (int i=31; i >= 0; i--) {
+//        
+//        printf("%2d ----------", i);
+//        
+//        for (int k=0; k<100; k++) {
+//            
+//            if (maxTable[k][i]==0) {
+//                printf("  ");
+//            }else
+//                printf("%d ", maxTable[k][i]);
+//            maxTable[k][i] = 0;
+//        }
+//        printf("---------- %2d \n", i);
+//    }
+    
+    NSLog(@"\n===================================");
 }
 
 
