@@ -29,5 +29,6 @@ void enqueue(queue *q, queue_item x);
 queue_item dequeue(queue *q);
 int queue_is_empty(queue *q);
 void print_queue(queue *q);
+queue_item queue_item_at_index(queue *q, int index);
 
 #endif

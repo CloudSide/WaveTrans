@@ -899,52 +899,15 @@ static queue   _savedBuffer[32];
 }
 
 - (void)helperResultWithTimeSlice:(int)length {
+
+    queue *q = &_savedBuffer[17];
     
-    
-    /*
-     
-    _indexBufferX++;
-     
-    if (_indexBufferX > length-1) {
-     
-        _indexBufferX = length-1;
-    }
-    
-    float vol = 0.17;
-    
-    for (int i=0; i<length - 1; i++) {
+    if (q->q[q->first] > 0.0 &&
+        fabs(q->q[q->first] - q->q[(q->first + 1) % q->length]) < q->q[q->first] &&
+        fabs(q->q[q->first + 1] - q->q[q->first + 2]) < q->q[q->first + 1]) {
         
-        if (_savedBuffer[i][17] > vol && _savedBuffer[0][17] > vol) {
-            
-            for (int j = i; j < length - 1; j++) {
-                
-                if (_savedBuffer[j][19] > vol) {
-                    
-                    NSLog(@"-----======================");
-                    
-                    printf("\n~ 17: ");
-                    
-                    for (int k=0; k<length; k++) {
-                        
-                        printf("%f, ", _savedBuffer[k][17]);
-                        _savedBuffer[k][17] = 0;
-                    }
-                    
-                    printf("\n~ 19: ");
-                    
-                    for (int k=0; k<length; k++) {
-                        
-                        printf("%f, ", _savedBuffer[k][19]);
-                        _savedBuffer[k][19] = 0;
-                    }
-                    printf("\n\n");
-                    
-                    break;
-                }
-            }
-        }
+        NSLog(@"1111111111111112222222222:%f,%f,%f", q->q[q->first], q->q[q->first+1], q->q[q->first]);
     }
-     */
 }
 
 

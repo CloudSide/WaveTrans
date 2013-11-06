@@ -53,6 +53,13 @@ int queue_is_empty(queue *q)
     else return (false);
 }
 
+queue_item queue_item_at_index(queue *q, int index)
+{
+    int i;
+    i = (q->first + index) % q->length;
+    return q->q[i];
+}
+
 void print_queue(queue *q)
 {
     int i;
