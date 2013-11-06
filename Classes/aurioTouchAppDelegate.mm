@@ -304,7 +304,7 @@ static OSStatus	PerformThru(
 	
 	// mute should be on at launch
 	self.mute = YES;
-	displayMode = aurioTouchDisplayModeOscilloscopeWaveform;
+	displayMode = aurioTouchDisplayModeSpectrum;
 	
 	// Initialize our remote i/o unit
 	
@@ -896,22 +896,37 @@ static int     _indexBufferX;
     }
     
     float vol = 0.17;
-    for (int i=0; i<length; i++) {
+    
+    for (int i=0; i<length - 1; i++) {
         
         if (_savedBuffer[i][17] > vol && _savedBuffer[0][17] > vol) {
             
             for (int j = i; j < length - 1; j++) {
                 
                 if (_savedBuffer[j][19] > vol) {
+                    
                     NSLog(@"-----======================");
                     
-                    _savedBuffer[0][17] = 0;_savedBuffer[1][17] = 0;_savedBuffer[2][17] = 0;_savedBuffer[3][17] = 0;
-                    _savedBuffer[0][19] = 0;_savedBuffer[1][19] = 0;_savedBuffer[2][19] = 0;_savedBuffer[3][19] = 0;
+                    printf("\n~ 17: ");
+                    
+                    for (int k=0; k<length; k++) {
+                        
+                        printf("%f, ", _savedBuffer[k][17]);
+                        _savedBuffer[k][17] = 0;
+                    }
+                    
+                    printf("\n~ 19: ");
+                    
+                    for (int k=0; k<length; k++) {
+                        
+                        printf("%f, ", _savedBuffer[k][19]);
+                        _savedBuffer[k][19] = 0;
+                    }
+                    printf("\n\n");
                     
                     break;
                 }
             }
-            
         }
     }
 }
