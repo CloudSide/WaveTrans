@@ -59,6 +59,7 @@
 #import "aurio_helper.h"
 #import "CAStreamBasicDescription.h"
 #import "bb_header.h"
+#import "queue.h"
 
 #define SPECTRUM_BAR_WIDTH 4
 

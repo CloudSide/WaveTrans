@@ -25,7 +25,8 @@ void enqueue(queue *q, queue_item x)
 {
     if (q->count >= q->length)
 		dequeue(q);
-    else {
+    //else
+    {
         q->last = (q->last+1) % q->length;
         q->q[ q->last ] = x;
         q->count = q->count + 1;
