@@ -19,6 +19,7 @@
 		3FD001E01829D8B900971B43 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001D91829D8B900971B43 /* kiss_fft.c */; };
 		3FD001E11829D8B900971B43 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001DB1829D8B900971B43 /* kiss_fftr.c */; };
 		3FD001E21829D8B900971B43 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001DD1829D8B900971B43 /* rscode.c */; };
+		3FD001E8182A1AC500971B43 /* queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001E7182A1AC500971B43 /* queue.cpp */; };
 		8250CD57145B602D00806437 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8250CD56145B602D00806437 /* Accelerate.framework */; };
 		A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */; };
 		A15CFB1D0DE4A8C600FB5D08 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A15CFB1C0DE4A8C600FB5D08 /* icon.png */; };
@@ -64,6 +65,8 @@
 		3FD001DC1829D8B900971B43 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
 		3FD001DD1829D8B900971B43 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
 		3FD001DE1829D8B900971B43 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		3FD001E6182A1AA100971B43 /* queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
+		3FD001E7182A1AC500971B43 /* queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = queue.cpp; sourceTree = "<group>"; };
 		8250CD55145B601A00806437 /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
 		8250CD56145B602D00806437 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3FD001E6182A1AA100971B43 /* queue.h */,
+				3FD001E7182A1AC500971B43 /* queue.cpp */,
 				3FD001D31829D89E00971B43 /* bb_freq_util.h */,
 				3FD001D21829D89E00971B43 /* bb_freq_util.cpp */,
 				3FD001D51829D8B900971B43 /* _kiss_fft_guts.h */,
@@ -271,7 +276,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "aurioTouch2" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -328,6 +333,7 @@
 				A16C46DE0DE37EC400F4A0B3 /* EAGLView.m in Sources */,
 				3FD001DF1829D8B900971B43 /* kiss_fastfir.c in Sources */,
 				A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */,
+				3FD001E8182A1AC500971B43 /* queue.cpp in Sources */,
 				F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */,
 				3FD001E11829D8B900971B43 /* kiss_fftr.c in Sources */,
 			);
@@ -365,7 +371,6 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -381,7 +386,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
