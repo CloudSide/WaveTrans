@@ -902,8 +902,35 @@ static int maxTable[100][32] ={0};
 
 - (void)helperResultWithTimeSlice:(int)length {
     
+
+    queue *qq = &_savedBuffer[17];
+    float currentValue = queue_item_at_index(qq, 0);
     
+    if (currentValue > 0.0) {
+        
+        for (int i = 0; i<32; i++) {
+            
+            float tmp = 0;
+            
+            for (int k = 0; k<100; k++) {
+                
+                queue *q = &_savedBuffer[i];
+                float currentValue = queue_item_at_index(q, k);
+                
+                currentValue = (currentValue + tmp) * 0.5;
+                
+                if (currentValue < 0.05) {
+                    currentValue = 0;
+                }
+                
+                tmp = currentValue;
+                
+                printf("%d,%d,%.4f]", i, k, currentValue);
+            }
+        }
+    }
     
+    /*
     for (int i = 0; i<32; i++) {
         
         for (int k = 0; k<100; k++) {
@@ -913,69 +940,61 @@ static int maxTable[100][32] ={0};
             
             printf("%d,%d,%.4f]", i, k, currentValue);
             
-//            if (currentValue == 0) {
-//                continue;
-//            }
-//            
-//            bool top = false;
-//            bool bottom = false;
-//            
-//            for (int j = i-1; j > i - 2 && j >= 0; j--) {
-//                
-//                queue *q = &_savedBuffer[j];
-//                float tmp = queue_item_at_index(q, k);
-//                
-//                if (currentValue < tmp) {
-//                    top = false;
-//                    break;
-//                }else {
-//                    top = true;
-//                }
-//            }
-//            
-//            for (int j = i+1; j < i + 2 && j < 32; j++) {
-//                
-//                queue *q = &_savedBuffer[j];
-//                float tmp = queue_item_at_index(q, k);
-//                
-//                if (currentValue < tmp) {
-//                    bottom = false;
-//                    break;
-//                }else {
-//                    bottom = true;
-//                }
-//            }
-//            
-//            if (top && bottom) {
-//                
-//                maxTable[k][i] = 1;
-//            }
+            if (currentValue == 0) {
+                continue;
+            }
+            
+            bool top = false;
+            bool bottom = false;
+            
+            for (int j = i-1; j > i - 2 && j >= 0; j--) {
+                
+                queue *q = &_savedBuffer[j];
+                float tmp = queue_item_at_index(q, k);
+                
+                if (currentValue < tmp) {
+                    top = false;
+                    break;
+                }else {
+                    top = true;
+                }
+            }
+            
+            for (int j = i+1; j < i + 2 && j < 32; j++) {
+                
+                queue *q = &_savedBuffer[j];
+                float tmp = queue_item_at_index(q, k);
+                
+                if (currentValue < tmp) {
+                    bottom = false;
+                    break;
+                }else {
+                    bottom = true;
+                }
+            }
+            
+            if (top && bottom) {
+                
+                maxTable[k][i] = 1;
+            }
         }
     }
     
-//    queue *q = &_savedBuffer[17];
-//    
-//    if (q->q[q->first] > 0.0 &&
-//        fabs(q->q[q->first] - q->q[(q->first + 1) % q->length]) < q->q[q->first] &&
-//        fabs(q->q[q->first + 1] - q->q[q->first + 2]) < q->q[q->first + 1]) {
-//        
-//        NSLog(@"1111111111111112222222222:%f,%f,%f", q->q[q->first], q->q[q->first+1], q->q[q->first]);
-//    }
-    
-//    for (int i=31; i >= 0; i--) {
-//        
-//        printf("%2d ----------", i);
-//        
-//        for (int k=0; k<100; k++) {
-//            
-//            if (maxTable[k][i]==0) {
-//                printf("  ");
-//            }else
-//                printf("%d ", maxTable[k][i]);
-//            maxTable[k][i] = 0;
-//        }
-//        printf("---------- %2d \n", i);
-//    }
+    for (int i=31; i >= 0; i--) {
+        
+        printf("%2d ----------", i);
+        
+        for (int k=0; k<100; k++) {
+            
+            if (maxTable[k][i]==0) {
+                printf("  ");
+            }else
+                printf("%d ", maxTable[k][i]);
+            maxTable[k][i] = 0;
+        }
+        printf("---------- %2d \n", i);
+    }
+     */
     
     NSLog(@"\n===================================");
 }
