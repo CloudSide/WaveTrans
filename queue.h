@@ -10,7 +10,7 @@
 #define aurioTouch2_queue_h
 
 
-#define QUEUESIZE       1000
+#define QUEUESIZE       128
 
 typedef float queue_item;
 
