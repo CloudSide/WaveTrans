@@ -23,7 +23,6 @@ void init_queue(queue *q, int length)
 
 void enqueue_adv(queue *q, queue_item x)
 {
-    
     queue_item xx = x;
     
     if (q->count > 0) {
