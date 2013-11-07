@@ -21,6 +21,24 @@ void init_queue(queue *q, int length)
     q->length = length;
 }
 
+void enqueue_adv(queue *q, queue_item x)
+{
+    
+    queue_item xx = x;
+    
+    if (q->count > 0) {
+        
+        xx = x * 0.5 + q->q[q->last] * 0.5;
+        
+        if (xx < 0.05) {
+            
+            xx = (queue_item)0.0;
+        }
+    }
+    
+    enqueue(q, xx);
+}
+
 void enqueue(queue *q, queue_item x)
 {
     if (q->count >= q->length)
