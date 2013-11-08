@@ -43,11 +43,7 @@ void enqueue_adv(queue *q, queue_item x)
         
         if (q->q[q->last] >= xx) {
             
-            xx = (queue_item)0.0;
-        
-        } else {
-        
-            q->q[q->last] = (queue_item)0.0;
+            xx = (queue_item)0.0;;
         }
         
         if (xx < 0.05) {
