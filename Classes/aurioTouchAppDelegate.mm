@@ -894,7 +894,9 @@ static queue   _savedBuffer[32];
     
     if (freq_to_num(fff, &code) == 0 && code >= 0 && code < 32) {
         
-        enqueue_adv(&_savedBuffer[code], interpVal);
+        //enqueue_adv(&_savedBuffer[code], interpVal);
+        
+        enqueue(&_savedBuffer[code], interpVal);
     }
 }
 
