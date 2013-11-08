@@ -894,7 +894,7 @@ static queue   _savedBuffer[32];
     
     if (freq_to_num(fff, &code) == 0 && code >= 0 && code < 32) {
         
-        enqueue(&_savedBuffer[code], interpVal);
+        enqueue_adv(&_savedBuffer[code], interpVal);
     }
 }
 
@@ -910,20 +910,10 @@ static int maxTable[100][32] ={0};
         
         for (int i = 0; i<32; i++) {
             
-            float tmp = 0;
-            
             for (int k = 0; k<100; k++) {
                 
                 queue *q = &_savedBuffer[i];
                 float currentValue = queue_item_at_index(q, k);
-                
-                currentValue = (currentValue + tmp) * 0.5;
-                
-                if (currentValue < 0.05) {
-                    currentValue = 0;
-                }
-                
-                tmp = currentValue;
                 
                 printf("%d,%d,%.4f]", i, k, currentValue);
             }
