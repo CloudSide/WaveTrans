@@ -25,9 +25,14 @@ void enqueue_adv(queue *q, queue_item x)
 {
     queue_item xx = x;
     
-    if (q->count > 0) {
+    if (!queue_is_empty(q)) {
         
         xx = x * 0.5 + q->q[q->last] * 0.5;
+        
+        if (xx <= x) {
+            
+            xx = x;
+        }
         
         if (xx < 0.05) {
             
