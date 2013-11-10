@@ -876,7 +876,7 @@ static queue   _savedBuffer[32];
             
             queue q;
             _savedBuffer[i] = q;
-            init_queue(&_savedBuffer[i], 100);
+            init_queue(&_savedBuffer[i], 20);
         }
      
         flag = YES;
@@ -897,29 +897,42 @@ static queue   _savedBuffer[32];
         //enqueue_adv(&_savedBuffer[code], interpVal);
         
         enqueue(&_savedBuffer[code], interpVal);
+        
+        //NSLog(@"%d", code);
     }
 }
 
-static int maxTable[100][32] ={0};
+//static int maxTable[100][32] ={0};
 
 - (void)helperResultWithTimeSlice:(int)length {
     
-
-    queue *qq = &_savedBuffer[17];
-    float currentValue = queue_item_at_index(qq, 0);
+    queue *q17 = &_savedBuffer[17];
+    queue *q19 = &_savedBuffer[19];
     
-    if (currentValue > 0.0) {
+    if (queue_item_at_index(q17, 0) > 0.0 &&
+        queue_item_at_index(q17, 1) > 0.0 &&
+        queue_item_at_index(q19, 1) > 0.0 &&
+        queue_item_at_index(q19, 2) > 0.0) {
+        
+        printf("\n================= start ==================\n");
         
         for (int i = 0; i<32; i++) {
             
-            for (int k = 0; k<100; k++) {
+            for (int k = 0; k<20; k++) {
                 
                 queue *q = &_savedBuffer[i];
                 float currentValue = queue_item_at_index(q, k);
                 
+                if (currentValue <= queue_item_at_index(q17, 2) && currentValue <= queue_item_at_index(q19, 3)) {
+                    
+                    currentValue = 0.0;
+                }
+                
                 printf("%d,%d,%.4f]", i, k, currentValue);
             }
         }
+        
+        printf("\n================  end  ==================\n");
     }
     
     /*
@@ -988,7 +1001,7 @@ static int maxTable[100][32] ={0};
     }
      */
     
-    NSLog(@"\n===================================");
+    //NSLog(@"\n===================================");
 }
 
 
@@ -1000,6 +1013,47 @@ static int maxTable[100][32] ={0};
 	
 	static int numLevels = sizeof(colorLevels) / sizeof(GLfloat) / 5;
 	
+    int i;
+    for (i=0; i<32; i++) {
+        
+        unsigned int freq;
+        int fftIdx;
+        
+        num_to_freq(i, &freq);
+        fftIdx = freq / (drawFormat.mSampleRate / 2.0) * fftLength;
+        
+        double fftIdx_i, fftIdx_f;
+		fftIdx_f = modf(fftIdx, &fftIdx_i);
+		
+		SInt8 fft_l, fft_r;
+		CGFloat fft_l_fl, fft_r_fl;
+		CGFloat interpVal;
+		
+		fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
+		fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
+		fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
+		fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
+		interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
+		
+		interpVal = sqrt(CLAMP(0., interpVal, 1.));
+        
+        //////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////
+        [self helper:fftIdx interpVal:interpVal timeSlice:6];///////////
+        //////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////
+        
+    }
+    
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    [self helperResultWithTimeSlice:6];///////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    
+    
+    
 	int y, maxY;
 	maxY = CGRectGetHeight(spectrumRect);
 	for (y=0; y<maxY; y++)
@@ -1021,16 +1075,6 @@ static int maxTable[100][32] ={0};
 		interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
 		
 		interpVal = sqrt(CLAMP(0., interpVal, 1.));
-        
-        
-        
-        //////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////
-        [self helper:fftIdx_i interpVal:interpVal timeSlice:6];///////////
-        //////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////
-        
         
         
 		UInt32 newPx = 0xFF000000;
@@ -1062,12 +1106,7 @@ static int maxTable[100][32] ={0};
 		*texBitBuffer_ptr++ = newPx;
 	}
     
-    //////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////
-    [self helperResultWithTimeSlice:6];///////////////////////////////
-    //////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////
-	
+
 	glBindTexture(GL_TEXTURE_2D, firstTex->texName);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 512, 0, GL_RGBA, GL_UNSIGNED_BYTE, texBitBuffer);
 	
