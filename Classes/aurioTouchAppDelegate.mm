@@ -923,7 +923,10 @@ static queue   _savedBuffer[32];
                 queue *q = &_savedBuffer[i];
                 float currentValue = queue_item_at_index(q, k);
                 
-                if (currentValue <= queue_item_at_index(q17, 2) && currentValue <= queue_item_at_index(q19, 3)) {
+                float minValue = fmin(queue_item_at_index(q17, 2), queue_item_at_index(q19, 3));
+                minValue = fmax(minValue, queue_item_at_index(q17, 0) * 0.7);
+                
+                if (currentValue <= minValue) {
                     
                     currentValue = 0.0;
                 }
