@@ -918,6 +918,8 @@ static queue   _savedBuffer[32];
         float minValue = fmin(queue_item_at_index(q17, 2), queue_item_at_index(q19, 3));
         minValue = fmax(minValue, queue_item_at_index(q17, 0) * 0.7);
         
+        float maxValue = minValue * 1.25;
+        
         printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f) ==================\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue);
         
         for (int i = 0; i<32; i++) {
@@ -927,7 +929,7 @@ static queue   _savedBuffer[32];
                 queue *q = &_savedBuffer[i];
                 float currentValue = queue_item_at_index(q, k);
                 
-                if (currentValue <= minValue) {
+                if (currentValue <= minValue && currentValue>=maxValue) {
                     
                     currentValue = 0.0;
                 }
