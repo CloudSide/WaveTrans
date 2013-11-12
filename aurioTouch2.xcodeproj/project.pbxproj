@@ -18,7 +18,7 @@
 		3FD001DF1829D8B900971B43 /* kiss_fastfir.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001D71829D8B900971B43 /* kiss_fastfir.c */; };
 		3FD001E01829D8B900971B43 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001D91829D8B900971B43 /* kiss_fft.c */; };
 		3FD001E11829D8B900971B43 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001DB1829D8B900971B43 /* kiss_fftr.c */; };
-		3FD001E21829D8B900971B43 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001DD1829D8B900971B43 /* rscode.c */; };
+		3FD001E21829D8B900971B43 /* rscode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001DD1829D8B900971B43 /* rscode.cpp */; };
 		3FD001E8182A1AC500971B43 /* queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001E7182A1AC500971B43 /* queue.cpp */; };
 		8250CD57145B602D00806437 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8250CD56145B602D00806437 /* Accelerate.framework */; };
 		A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */; };
@@ -63,10 +63,12 @@
 		3FD001DA1829D8B900971B43 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
 		3FD001DB1829D8B900971B43 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
 		3FD001DC1829D8B900971B43 /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
-		3FD001DD1829D8B900971B43 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		3FD001DD1829D8B900971B43 /* rscode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rscode.cpp; sourceTree = "<group>"; };
 		3FD001DE1829D8B900971B43 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
 		3FD001E6182A1AA100971B43 /* queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
 		3FD001E7182A1AC500971B43 /* queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = queue.cpp; sourceTree = "<group>"; };
+		3FD48FC41832371400091D85 /* aaa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aaa.c; sourceTree = "<group>"; };
+		3FD48FC51832371400091D85 /* aaa.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = aaa.php; sourceTree = "<group>"; };
 		8250CD55145B601A00806437 /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
 		8250CD56145B602D00806437 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
@@ -140,6 +142,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				3FD48FC41832371400091D85 /* aaa.c */,
+				3FD48FC51832371400091D85 /* aaa.php */,
 				3FD001D01829D82500971B43 /* Default-568h@2x.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -160,7 +164,7 @@
 				3FD001D31829D89E00971B43 /* bb_freq_util.h */,
 				3FD001D21829D89E00971B43 /* bb_freq_util.cpp */,
 				3FD001DE1829D8B900971B43 /* rscode.h */,
-				3FD001DD1829D8B900971B43 /* rscode.c */,
+				3FD001DD1829D8B900971B43 /* rscode.cpp */,
 				A10A0BFE0DEDDFD000E5A482 /* fft */,
 				F74ADD0E0DDA24AA0046BEC2 /* iPublicUtility */,
 				F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */,
@@ -331,7 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				3FD001E21829D8B900971B43 /* rscode.c in Sources */,
+				3FD001E21829D8B900971B43 /* rscode.cpp in Sources */,
 				3FD001E01829D8B900971B43 /* kiss_fft.c in Sources */,
 				1D3623260D0F684500981E51 /* aurioTouchAppDelegate.mm in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
