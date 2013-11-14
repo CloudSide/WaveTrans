@@ -22,6 +22,8 @@
 #include <string.h>
 #include "_kiss_fft_guts.h"
 
+#include "queue.h"
+
 
 #define PI                      3.1415926535897932384626433832795028841971               //定义圆周率值
 #define SAMPLE_RATE             44100                                                    //采样频率
@@ -89,6 +91,18 @@ int post_process_2(bb_item_group *src, int src_len, bb_item_group *result, int r
 
 void _medianfilter(const element* signal, element* result, int N);
 
+////////// V2.0
+
+void generate_data(queue *que, int que_length, int *res, int res_length, float minValue, float maxValue);
+
+int array_search(int num, int a[], int array_length);
+
+int isset(int num);
+
+void unset(int *num);
+
 #endif /* BBSDK_bb_freq_util_h */
+
+
 
 

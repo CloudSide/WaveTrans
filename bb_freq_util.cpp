@@ -1081,3 +1081,206 @@ void _medianfilter(const element* signal, element* result, int N)
 	
 	result[0] = signal[0];
 }
+
+
+////////////////// V2.0
+
+int array_search(int num, int a[], int array_length) {
+	
+	if (array_length <= 0 || a == NULL) {
+		return -2; // 数据异常
+	}
+	
+	for (int i=0; i<array_length; i++) {
+		
+		if (num == a[i]) {
+			return i;
+		}
+	}
+	
+	return -1; // 没找到
+}
+
+int isset(int num) {
+	
+	if (num != -1) {
+		return 1;
+	}else {
+		return 0;
+	}
+}
+
+void unset(int *num) {
+	
+	if (num != NULL) {
+		*num = -1;
+	}
+}
+
+void generate_data(queue *que, int que_length, int *res, int res_length, float minValue, float maxValue) {
+    
+    float data[20][32] = {0};
+    
+    
+    for (int i = 0; i<32; i++) {
+        
+        for (int k = 0; k<20; k++) {
+            
+            queue *q = &que[i];
+            float currentValue = queue_item_at_index(q, k);
+            
+            if (currentValue <= minValue || currentValue >= maxValue) {
+                
+                currentValue = 0.0;
+            }
+            
+            data[k][i] = currentValue;
+            
+            //printf("%d,%d,%.4f]", i, k, currentValue);
+        }
+    }
+    
+    /////////////////////////
+    
+    int sortData[20][4];
+	float sortValue[20][4];
+	
+	for (int i=0; i<4; i++) {
+		for (int j=0; j<20; j++) {
+			sortData[j][i] = -1;
+			sortValue[j][i] = -1;
+		}
+	}
+	
+	for (int i=0; i<20; i++) {
+		for (int k=0; k<4; k++) {
+			
+			int tmp = -1;
+			float tmpData = 0;
+			int aa = 0;
+			
+			for (int j=0; j<32; j++) {
+                
+				if (data[i][j] > tmpData && data[i][j] != 0) {
+					tmp = j;
+					tmpData = data[i][j];
+					aa = 1;
+				}
+			}
+			
+			if	(aa == 1) {
+				
+				sortValue[i][k] = data[i][tmp];
+				data[i][tmp] = 0;
+				sortData[i][k] = tmp;
+				aa = 0;
+			}
+		}
+	}
+    
+	
+	int resultArray[20] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+	
+	printf("   ");
+	for (int i=0; i<20; i++) {
+		
+		int tmp[3] = {-1,-1,-1};
+		
+		for (int j=0; j<3; j++) {
+			
+			int key = -1;
+			
+			if (sortData[i][j] != -1 && i<19 && (key = array_search(sortData[i][j], sortData[i+1], 4)) >= 0) {
+				
+				if (sortValue[i][j] < sortValue[i+1][key]) {
+					
+					if (!isset(tmp[2])) {
+						
+						tmp[2] = sortData[i][j];
+						
+						if (i > 0 && i < 17 &&
+                            array_search(tmp[2], sortData[i - 1], 4) >= 0 &&
+                            array_search(tmp[2], sortData[i + 1], 4) >= 0 &&
+                            array_search(tmp[2], sortData[i + 2], 4) >= 0 &&
+                            resultArray[i] == tmp[2]) {
+							
+							unset(&tmp[2]);
+						}
+					}
+					
+				}else if (sortValue[i][j] > sortValue[i+1][key]) {
+					
+					if (!isset(tmp[1])) {
+						
+						tmp[1] = sortData[i][j];
+					}
+					
+				}else if (sortValue[i][j] == sortValue[i+1][key]) {
+					
+					if (!isset(tmp[2]) && resultArray[i] != sortData[i][j]) {
+						
+						tmp[2] = sortData[i][j];
+					}
+				}
+				
+			}else if (sortData[i][j] != -1) {
+				
+				if (!isset(tmp[0]) && i > 0) {
+					
+					if (array_search(sortData[i][j], sortData[i-1], 4) == -1 && j < 2) {
+						
+						tmp[0] = sortData[i][j];
+						
+					}else if (array_search(sortData[i][j], sortData[i-1], 4) >= 0 && resultArray[i-1] != sortData[i][j] && j < 2) {
+						
+						tmp[0] = sortData[i][j];
+					}
+				}
+			}
+		}
+		
+		if (isset(tmp[1]) && !isset(tmp[2]) && isset(resultArray[i])) {
+			
+			resultArray[i+1] = tmp[1];
+			unset(&tmp[1]);
+		}
+		
+		if (isset(tmp[1]) && !isset(resultArray[i])) {
+			
+			resultArray[i] = tmp[1];
+			unset(&tmp[1]);
+		}
+		
+		if (isset(tmp[0]) && !isset(resultArray[i])) {
+			
+			resultArray[i] = tmp[0];
+			unset(&tmp[0]);
+		}
+        
+		if (isset(tmp[2]) && !isset(resultArray[i])) {
+			
+			resultArray[i] = tmp[2];
+			unset(&tmp[2]);
+		}
+        
+		if (!isset(resultArray[i])) {
+			
+			resultArray[i] = sortData[i][0];
+			
+			if (resultArray[i] == -1) {
+				
+				resultArray[i] = 0;
+			}
+		}
+		
+		
+		if (isset(tmp[2]) && !isset(resultArray[i+1])) {
+			
+			resultArray[i+1] = tmp[2];
+			unset(&tmp[2]);
+		}
+		
+		printf("%02d ", resultArray[i]);
+	}
+    
+}

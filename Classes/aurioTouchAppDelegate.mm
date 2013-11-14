@@ -922,6 +922,13 @@ static queue   _savedBuffer[32];
         
         printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f) ==================\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue);
         
+        int res[20];
+        
+        generate_data(_savedBuffer, 32, res, 20, minValue, maxValue);
+        
+        //generate_data(queue que[], int que_length, int **res);
+        
+        /*
         for (int i = 0; i<32; i++) {
             
             for (int k = 0; k<20; k++) {
@@ -937,6 +944,7 @@ static queue   _savedBuffer[32];
                 printf("%d,%d,%.4f]", i, k, currentValue);
             }
         }
+         */
         
         printf("\n================  end  ==================\n");
     }
