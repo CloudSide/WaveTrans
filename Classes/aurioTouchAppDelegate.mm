@@ -920,6 +920,10 @@ static queue   _savedBuffer[32];
         
         float maxValue = fmax(queue_item_at_index(q17, 0), queue_item_at_index(q19, 1)) * 1.85;
         
+        minValue = 0.0;
+        maxValue = 1.0;
+        
+        
         printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f) ==================\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue);
         
         int res[20];

@@ -1136,7 +1136,7 @@ void generate_data(queue *que, int que_length, int *res, int res_length, float m
             
             data[k][i] = currentValue;
             
-            //printf("%d,%d,%.4f]", i, k, currentValue);
+            printf("%d,%d,%.4f]", i, k, currentValue);
         }
     }
     
