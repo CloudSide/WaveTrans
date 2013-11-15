@@ -916,18 +916,113 @@ static queue   _savedBuffer[32];
         
         
         float minValue = fmin(queue_item_at_index(q17, 2), queue_item_at_index(q19, 3));
-        minValue = fmax(minValue, queue_item_at_index(q17, 0) * 0.56);
+        minValue = fmax(minValue, queue_item_at_index(q17, 0) * 0.7);
+        
+//        float minValue_17 = fmin(queue_item_at_index(q17, 0), queue_item_at_index(q17, 1));
+//        float minValue_19 = fmin(queue_item_at_index(q19, 1), queue_item_at_index(q19, 2));
+//        
+//        minValue = fmin(minValue_17,minValue_19) * 0.75;
+        
         
         float maxValue = fmax(queue_item_at_index(q17, 0), queue_item_at_index(q19, 1)) * 1.85;
         
-        printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f) ==================\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue);
+//        float maxValue_17 = fmax(queue_item_at_index(q17, 0), queue_item_at_index(q17, 1));
+//        float maxValue_19 = fmax(queue_item_at_index(q19, 1), queue_item_at_index(q19, 2));
+//        
+//        maxValue = fmax(maxValue_17,maxValue_19) * 1.1;
         
+        printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f), (maxValue=%f) ==================\n\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue, maxValue);
+        
+//        minValue = 0;
+//        maxValue = 1;
+
         int res[20];
+        int rrr[20];
+        generate_data(_savedBuffer, 32, res, rrr, 20, minValue, maxValue);
         
-        generate_data(_savedBuffer, 32, res, 20, minValue, maxValue);
+        for (int i=0; i<20; i++) {
+            printf("%02d ", res[i]);
+        }
         
-        //generate_data(queue que[], int que_length, int **res);
+        for (int i=0; i<10; i++) {
+            
+            int temp;
+            
+            temp = rrr[i];
+            rrr[i] = rrr[19-i];
+            rrr[19-i] = temp;
+        }
         
+        printf("\n");
+        
+        for (int i=0; i<20; i++) {
+            printf("%02d ", rrr[i]);
+        }
+        
+        printf("\n");
+        
+        
+        //////////////  RS
+        
+        int temp[18];
+        for (int k = 2; k < 20; k++) {
+            
+            printf("~~~~~~~ %02d :17 19 ", k);
+            
+            for (int i=2, j=0; i<20; i++, j++) {
+                
+                if (i <= k) {
+                    temp[j] = res[i];
+                }else {
+                    temp[j] = rrr[i];
+                }
+                
+                printf("%02d ", temp[j]);
+            }
+            
+            printf(" ~~~~~~~ ");
+            
+            RS *rs = init_rs(RS_SYMSIZE, RS_GFPOLY, RS_FCR, RS_PRIM, RS_NROOTS, RS_PAD);
+            int eras_pos[RS_TOTAL_LEN] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            
+            unsigned char data1[RS_TOTAL_LEN];
+            
+            for (int i=0; i<RS_TOTAL_LEN; i++) {
+                data1[i] = temp[i];
+            }
+            
+            int count = decode_rs_char(rs, data1, eras_pos, 0);
+            
+            /////////////////
+            
+            printf("17 19 ");
+            for (int i=0; i<18; i++) {
+                printf("%02d ", data1[i]);
+            }
+            printf("    %d\n", count);
+        }
+        
+        /*
+        RS *rs = init_rs(RS_SYMSIZE, RS_GFPOLY, RS_FCR, RS_PRIM, RS_NROOTS, RS_PAD);
+        int eras_pos[RS_TOTAL_LEN] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        
+        unsigned char data1[RS_TOTAL_LEN];
+        
+        for (int i=0; i<RS_TOTAL_LEN; i++) {
+            data1[i] = res[i+2];
+        }
+        
+        int count = decode_rs_char(rs, data1, eras_pos, 0);
+        
+        /////////////////
+        
+        printf("17 19 ");
+        for (int i=0; i<18; i++) {
+            printf("%02d ", data1[i]);
+        }
+        printf("    %d\n", count);
+         */
+
         /*
         for (int i = 0; i<32; i++) {
             
@@ -947,6 +1042,8 @@ static queue   _savedBuffer[32];
          */
         
         printf("\n================  end  ==================\n");
+        
+        //printf("\n");
     }
     
     /*

@@ -1117,30 +1117,161 @@ void unset(int *num) {
 	}
 }
 
-void generate_data(queue *que, int que_length, int *res, int res_length, float minValue, float maxValue) {
+int partions(float l[],int low,int high)
+{
+	int prvotkey=l[low];
+	l[0]=l[low];
+	while (low<high)
+	{
+        while (low<high&&l[high]>=prvotkey)
+            --high;
+        l[low]=l[high];
+        while (low<high&&l[low]<=prvotkey)
+            ++low;
+        l[high]=l[low];
+	}
+    
+	l[low]=l[0];
+	return low;
+}
+
+void qsort(float l[],int low,int high)
+{
+	int prvotloc;
+	if(low<high)
+	{
+        prvotloc=partions(l,low,high);    //将第一次排序的结果作为枢轴
+        qsort(l,low,prvotloc-1); //递归调用排序 由low 到prvotloc-1
+        qsort(l,prvotloc+1,high); //递归调用排序 由 prvotloc+1到 high
+        
+	}
+}
+
+void quicksort(float l[],int n)
+{
+	qsort(l,1,n); //第一个作为枢轴 ，从第一个排到第n个
+}
+
+void generate_data(queue *que, int que_length, int *res, int *rrr, int res_length, float minValue, float maxValue) {
     
     float data[20][32] = {0};
     
+    int type = 0;
     
-    for (int i = 0; i<32; i++) {
+    if (type == 1) {
         
-        for (int k = 0; k<20; k++) {
+        int counter = 0;
+        int while_counter = 0;
+        
+        float step;
+        
+        if (minValue >= 0.5) {
+            step = 1 - minValue;
+        }else {
+            step = minValue;
+        }
+        
+        float thresh_hold = minValue;
+        
+        while ((counter > 70 || counter < 40) && while_counter < 10) {
             
-            queue *q = &que[i];
-            float currentValue = queue_item_at_index(q, k);
-            
-            if (currentValue <= minValue || currentValue >= maxValue) {
+            if (counter > 70) {
                 
-                currentValue = 0.0;
+                step = step / 2;
+                thresh_hold = thresh_hold + step;
+                
+            }else if (counter < 40 && thresh_hold < 0.1){
+                
+                step = step / 2;
+                thresh_hold = thresh_hold - step;
             }
             
-            data[k][i] = currentValue;
+            counter = 0;
+            while_counter++;
             
-            //printf("%d,%d,%.4f]", i, k, currentValue);
+            //printf("\n~~~~~~~~~~~~~~ %d ~~~~~~~~~~~~~~~~\n", while_counter);
+            for (int i = 0; i<32; i++) {
+                
+                for (int k = 0; k<20; k++) {
+                    
+                    queue *q = &que[i];
+                    float currentValue = queue_item_at_index(q, k);
+                    
+                    if (currentValue <= thresh_hold) {
+                        currentValue = 0.0;
+                    }else {
+                        counter++;
+                    }
+                    
+                    data[k][i] = currentValue;
+                    
+                    //printf("%d,%d,%.4f]", i, k, currentValue);
+                }
+            }
+        }
+    }else if (type == 0) {
+        
+        
+        for (int i = 0; i<32; i++) {
+            
+            for (int k = 0; k<20; k++) {
+                
+                queue *q = &que[i];
+                float currentValue = queue_item_at_index(q, k);
+                
+                if (currentValue < 0 || currentValue > 1) {
+                    currentValue = 0.0;
+                }
+                
+                data[k][i] = currentValue;
+                
+                //printf("%d,%d,%.4f]", i, k, currentValue);
+            }
+        }
+    }else if (type == 2) {
+        
+        int counter = 0;
+        
+        float step = 0.01;
+        float thresh_hold = minValue;
+        
+        while ((counter > 70 || counter < 40) && thresh_hold < 1) {
+            
+            if (counter > 70) {
+                thresh_hold += step;
+            }else {
+                thresh_hold -= step;
+            }
+            
+            
+            counter = 0;
+            
+            for (int i = 0; i<32; i++) {
+                
+                for (int k = 0; k<20; k++) {
+                    
+                    queue *q = &que[i];
+                    float currentValue = queue_item_at_index(q, k);
+                    
+                    if (currentValue < thresh_hold) {
+                        currentValue = 0.0;
+                    }else {
+                        counter++;
+                    }
+                    
+                    data[k][i] = currentValue;
+                }
+            }
         }
     }
     
+
     /////////////////////////
+    
+    float tempValue[80];
+    for (int i=0; i<80; i++) {
+        tempValue[i] = -1;
+    }
     
     int sortData[20][4];
 	float sortValue[20][4];
@@ -1151,7 +1282,7 @@ void generate_data(queue *que, int que_length, int *res, int res_length, float m
 			sortValue[j][i] = -1;
 		}
 	}
-	
+    
 	for (int i=0; i<20; i++) {
 		for (int k=0; k<4; k++) {
 			
@@ -1178,10 +1309,60 @@ void generate_data(queue *que, int que_length, int *res, int res_length, float m
 		}
 	}
     
+    // 加阈值
+    /*
+    for (int i=0; i<20; i++) {
+        for (int j=0; j<4; j++) {
+            
+            tempValue[j * 20 + i] = sortValue[i][j];
+        }
+    }
+    
+    quicksort(tempValue, 80);
+    
+    float thresh_hold = fmin(tempValue[39], minValue);
+    
+    for (int i=0; i<20; i++) {
+        for (int j=0; j<4; j++) {
+            
+            if (sortValue[i][j] < thresh_hold) {
+                sortValue[i][j] = -1;
+                sortData[i][j] = -1;
+            }
+            
+        }
+    }
+     */
+    //
+
+    if (minValue < 0.3) {
+        
+    }else if (minValue > 0.6) {
+        for (int i=0; i<20; i++) {
+            for (int j=2; j<4; j++) {
+                
+                sortValue[i][j] = -1;
+                sortData[i][j] = -1;
+                
+            }
+        }
+    }else {
+        for (int i=0; i<20; i++) {
+            for (int j=3; j<4; j++) {
+                
+                sortValue[i][j] = -1;
+                sortData[i][j] = -1;
+                
+            }
+        }
+    }
+    
 	
-	int resultArray[20] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    for (int i=0; i<res_length; i++) {
+        res[i] = -1;
+    }
 	
-	printf("   ");
+	//printf("\n\n\n   ");
 	for (int i=0; i<20; i++) {
 		
 		int tmp[3] = {-1,-1,-1};
@@ -1202,7 +1383,7 @@ void generate_data(queue *que, int que_length, int *res, int res_length, float m
                             array_search(tmp[2], sortData[i - 1], 4) >= 0 &&
                             array_search(tmp[2], sortData[i + 1], 4) >= 0 &&
                             array_search(tmp[2], sortData[i + 2], 4) >= 0 &&
-                            resultArray[i] == tmp[2]) {
+                            res[i] == tmp[2]) {
 							
 							unset(&tmp[2]);
 						}
@@ -1217,7 +1398,7 @@ void generate_data(queue *que, int que_length, int *res, int res_length, float m
 					
 				}else if (sortValue[i][j] == sortValue[i+1][key]) {
 					
-					if (!isset(tmp[2]) && resultArray[i] != sortData[i][j]) {
+					if (!isset(tmp[2]) && res[i] != sortData[i][j]) {
 						
 						tmp[2] = sortData[i][j];
 					}
@@ -1231,7 +1412,7 @@ void generate_data(queue *que, int que_length, int *res, int res_length, float m
 						
 						tmp[0] = sortData[i][j];
 						
-					}else if (array_search(sortData[i][j], sortData[i-1], 4) >= 0 && resultArray[i-1] != sortData[i][j] && j < 2) {
+					}else if (array_search(sortData[i][j], sortData[i-1], 4) >= 0 && res[i-1] != sortData[i][j] && j < 2) {
 						
 						tmp[0] = sortData[i][j];
 					}
@@ -1239,48 +1420,202 @@ void generate_data(queue *que, int que_length, int *res, int res_length, float m
 			}
 		}
 		
-		if (isset(tmp[1]) && !isset(tmp[2]) && isset(resultArray[i])) {
+		if (isset(tmp[1]) && !isset(tmp[2]) && isset(res[i])) {
 			
-			resultArray[i+1] = tmp[1];
+			res[i+1] = tmp[1];
 			unset(&tmp[1]);
 		}
 		
-		if (isset(tmp[1]) && !isset(resultArray[i])) {
+		if (isset(tmp[1]) && !isset(res[i])) {
 			
-			resultArray[i] = tmp[1];
+			res[i] = tmp[1];
 			unset(&tmp[1]);
 		}
 		
-		if (isset(tmp[0]) && !isset(resultArray[i])) {
+		if (isset(tmp[0]) && !isset(res[i])) {
 			
-			resultArray[i] = tmp[0];
+			res[i] = tmp[0];
 			unset(&tmp[0]);
 		}
         
-		if (isset(tmp[2]) && !isset(resultArray[i])) {
+		if (isset(tmp[2]) && !isset(res[i])) {
 			
-			resultArray[i] = tmp[2];
+			res[i] = tmp[2];
 			unset(&tmp[2]);
 		}
         
-		if (!isset(resultArray[i])) {
+		if (!isset(res[i])) {
 			
-			resultArray[i] = sortData[i][0];
+			res[i] = sortData[i][0];
 			
-			if (resultArray[i] == -1) {
+			if (res[i] == -1) {
 				
-				resultArray[i] = 0;
+				res[i] = 0;
 			}
 		}
 		
 		
-		if (isset(tmp[2]) && !isset(resultArray[i+1])) {
+		if (isset(tmp[2]) && !isset(res[i+1])) {
 			
-			resultArray[i+1] = tmp[2];
+			res[i+1] = tmp[2];
 			unset(&tmp[2]);
 		}
 		
-		printf("%02d ", resultArray[i]);
+		//printf("%02d ", resultArray[i]);
 	}
     
+/////////////////////////////////////////////////
+
+    for (int i=0; i<res_length; i++) {
+        rrr[i] = -1;
+    }
+    
+    int sortData2[20][4];
+    float sortValue2[20][4];
+    
+    for (int i=0; i<20; i++) {
+        for (int j=0; j<4; j++) {
+            
+            sortValue2[i][j] = sortValue[19-i][j];
+            sortData2[i][j] = sortData[19-i][j];
+            
+        }
+    }
+    
+    for (int i=0; i<20; i++) {
+		
+		int tmp[3] = {-1,-1,-1};
+		
+		for (int j=0; j<3; j++) {
+			
+			int key = -1;
+			
+			if (sortData2[i][j] != -1 && i<19 && (key = array_search(sortData2[i][j], sortData2[i+1], 4)) >= 0) {
+				
+				if (sortValue2[i][j] < sortValue2[i+1][key]) {
+					
+					if (!isset(tmp[2])) {
+						
+						tmp[2] = sortData2[i][j];
+						
+						if (i > 0 && i < 17 &&
+                            array_search(tmp[2], sortData2[i - 1], 4) >= 0 &&
+                            array_search(tmp[2], sortData2[i + 1], 4) >= 0 &&
+                            array_search(tmp[2], sortData2[i + 2], 4) >= 0 &&
+                            rrr[i] == tmp[2]) {
+							
+							unset(&tmp[2]);
+						}
+					}
+					
+				}else if (sortValue2[i][j] > sortValue2[i+1][key]) {
+					
+					if (!isset(tmp[1])) {
+						
+						tmp[1] = sortData2[i][j];
+					}
+					
+				}else if (sortValue2[i][j] == sortValue2[i+1][key]) {
+					
+					if (!isset(tmp[2]) && rrr[i] != sortData2[i][j]) {
+						
+						tmp[2] = sortData2[i][j];
+					}
+				}
+				
+			}else if (sortData2[i][j] != -1) {
+				
+				if (!isset(tmp[0]) && i > 0) {
+					
+					if (array_search(sortData2[i][j], sortData2[i-1], 4) == -1 && j < 2) {
+						
+						tmp[0] = sortData2[i][j];
+						
+					}else if (array_search(sortData2[i][j], sortData2[i-1], 4) >= 0 && rrr[i-1] != sortData2[i][j] && j < 2) {
+						
+						tmp[0] = sortData2[i][j];
+					}
+				}
+			}
+		}
+		
+		if (isset(tmp[1]) && !isset(tmp[2]) && isset(rrr[i])) {
+			
+			rrr[i+1] = tmp[1];
+			unset(&tmp[1]);
+		}
+		
+		if (isset(tmp[1]) && !isset(rrr[i])) {
+			
+			rrr[i] = tmp[1];
+			unset(&tmp[1]);
+		}
+		
+		if (isset(tmp[0]) && !isset(rrr[i])) {
+			
+			rrr[i] = tmp[0];
+			unset(&tmp[0]);
+		}
+        
+		if (isset(tmp[2]) && !isset(rrr[i])) {
+			
+			rrr[i] = tmp[2];
+			unset(&tmp[2]);
+		}
+        
+		if (!isset(rrr[i])) {
+			
+			rrr[i] = sortData2[i][0];
+			
+			if (rrr[i] == -1) {
+				
+				rrr[i] = 0;
+			}
+		}
+		
+		
+		if (isset(tmp[2]) && !isset(rrr[i+1])) {
+			
+			rrr[i+1] = tmp[2];
+			unset(&tmp[2]);
+		}
+	}
+    
+    
+///////////////////////////////////////////////////
+    
+    //printf("\n\n");
+    
+    //printf("thresh_hold: %f\n\n", thresh_hold);
+    
+    // 打印排序数据
+    
+    for (int i=0; i<4; i++) {
+		
+		printf("%d: ", i);
+		for (int j=0; j<20; j++) {
+			if (sortData[j][i] != -1) {
+				printf("%2d ", sortData[j][i]);
+			}else {
+				printf("   ");
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+	
+	for (int i=0; i<4; i++) {
+        
+        printf("%d: ", i);
+        for (int j=0; j<20; j++) {
+            if (sortValue[j][i] != -1) {
+                printf("%.4f  ", sortValue[j][i]);
+            }else {
+                printf("        ");
+            }
+        }
+        printf("\n");
+    }
+    
+    printf("\n");
 }

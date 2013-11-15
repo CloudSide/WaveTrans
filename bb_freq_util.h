@@ -93,13 +93,19 @@ void _medianfilter(const element* signal, element* result, int N);
 
 ////////// V2.0
 
-void generate_data(queue *que, int que_length, int *res, int res_length, float minValue, float maxValue);
+void generate_data(queue *que, int que_length, int *res, int *rrr, int res_length, float minValue, float maxValue);
 
 int array_search(int num, int a[], int array_length);
 
 int isset(int num);
 
 void unset(int *num);
+
+int partions(float l[],int low,int high);
+
+void qsort(float l[],int low,int high);
+
+void quicksort(float l[],int n);
 
 #endif /* BBSDK_bb_freq_util_h */
 
