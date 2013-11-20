@@ -16,13 +16,13 @@ struct _bb_item_group {
 
 
 /*
-static struct _freq_range {
-	
-	unsigned int start;
-	unsigned int end;
-	
-} freq_range[32];
-*/
+ static struct _freq_range {
+ 
+ unsigned int start;
+ unsigned int end;
+ 
+ } freq_range[32];
+ */
 
 
 void freq_init() {
@@ -33,10 +33,10 @@ void freq_init() {
 		
 		return;
 	}
-
+    
     
 #if 1
-
+    
 	printf("----------------------\n");
 	
 	int i, len;
@@ -45,7 +45,7 @@ void freq_init() {
 		
 		unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
 		frequencies[i] = freq;
-    
+        
 	}
     
 #endif
@@ -59,28 +59,28 @@ void freq_init() {
 int freq_to_num(unsigned int f, int *n) {
 	
     /*
-    frequencies[0] = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, 0));
-    frequencies[31] = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, 31));
-    
-    
-    if (n != NULL &&
-        f >= frequencies[0]-BB_THRESHOLD*pow(BB_SEMITONE, 0) &&
-        f <= frequencies[31]+BB_THRESHOLD*pow(BB_SEMITONE, 31)) {
-        
-        unsigned int i;
-
-        for (i=0; i<32; i++) {
-            
-            unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
-            frequencies[i] = freq;
-            
-            if (abs(frequencies[i] - f) <= BB_THRESHOLD*pow(BB_SEMITONE, i)) {
-            //if (abs(frequencies[i] - f) <= BB_THRESHOLD) {
-                *n = i;
-                return 0;
-            }
-        }
-    }
+     frequencies[0] = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, 0));
+     frequencies[31] = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, 31));
+     
+     
+     if (n != NULL &&
+     f >= frequencies[0]-BB_THRESHOLD*pow(BB_SEMITONE, 0) &&
+     f <= frequencies[31]+BB_THRESHOLD*pow(BB_SEMITONE, 31)) {
+     
+     unsigned int i;
+     
+     for (i=0; i<32; i++) {
+     
+     unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
+     frequencies[i] = freq;
+     
+     if (abs(frequencies[i] - f) <= BB_THRESHOLD*pow(BB_SEMITONE, i)) {
+     //if (abs(frequencies[i] - f) <= BB_THRESHOLD) {
+     *n = i;
+     return 0;
+     }
+     }
+     }
      */
     
     freq_init();
@@ -95,28 +95,28 @@ int freq_to_num(unsigned int f, int *n) {
         for (i=0; i<32; i++) {
             
             if (abs(frequencies[i] - f) <= BB_THRESHOLD) {
-
+                
                 *n = i;
                 return 0;
             }
         }
     }
-     
+    
 	
     /*
-	if (n!=NULL && f>freq_range[0].start && f<freq_range[31].end) {
-        
-		unsigned int i;
-        
-		for (i=0; i<32; i++) {
-            
-			if (f>freq_range[i].start && f<freq_range[i].end) {
-				
-				*n = i;
-				return 0;
-			}
-		}		
-	}
+     if (n!=NULL && f>freq_range[0].start && f<freq_range[31].end) {
+     
+     unsigned int i;
+     
+     for (i=0; i<32; i++) {
+     
+     if (f>freq_range[i].start && f<freq_range[i].end) {
+     
+     *n = i;
+     return 0;
+     }
+     }
+     }
      */
 	
 	return -1;
@@ -130,7 +130,7 @@ int num_to_char(int n, char *c) {
 		
 		return 0;
 	}
-		
+    
 	return -1;
 }
 
@@ -145,7 +145,7 @@ int char_to_num(char c, unsigned int *n) {
 		*n = c - 48;
 		
 		return 0;
-	
+        
 	} else if (c>=97 && c<=118) {
 		
 		*n = c - 87;
@@ -196,7 +196,7 @@ int vote(int *src, int src_len, int *result) {
 		
 		return -1;
 	}
-		
+    
 	int i;
 	int map[32] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	int max_value = 0;
@@ -223,7 +223,7 @@ int vote(int *src, int src_len, int *result) {
 	}
 	
 	*result = max_key;
-
+    
 	return max_value;
 }
 
@@ -307,43 +307,43 @@ int statistics(int *src, int src_len, int *result, int res_len) {
     bb_item_group a[32*3]; // include -1
     bb_item_group b[32*3]; // without -1
     bb_item_group c[32*3];
-        
+    
     int i;
     int step = 0;
     
 	int stat = set_group(src, src_len, a, 32) == 0 &&
-               ++step &&
-               process_group(a, 32) == 0 &&
-               ++step &&
-               get_group_data(a, 32, src, src_len) == 0 &&
-               ++step &&
-               set_group(src, src_len, b, 32) == 0 &&
-               ++step &&
-               post_process(b, 32, c, 32) == 0 &&
-               ++step;
+    ++step &&
+    process_group(a, 32) == 0 &&
+    ++step &&
+    get_group_data(a, 32, src, src_len) == 0 &&
+    ++step &&
+    set_group(src, src_len, b, 32) == 0 &&
+    ++step &&
+    post_process(b, 32, c, 32) == 0 &&
+    ++step;
     
     /*
-    printf("a:\n");
-    
-    for (i=0; i<32; i++) {
-        
-        printf("%d->%d\n", a[i].item, a[i].count);
-    }
-    
-    printf("b:\n");
-    
-    for (i=0; i<32; i++) {
-        
-        printf("%d->%d\n", b[i].item, b[i].count);
-    }
-    
-    printf("c:\n");
-    
-    for (i=0; i<32; i++) {
-        
-        printf("%d->%d\n", b[i].item, b[i].count);
-    }
-    */
+     printf("a:\n");
+     
+     for (i=0; i<32; i++) {
+     
+     printf("%d->%d\n", a[i].item, a[i].count);
+     }
+     
+     printf("b:\n");
+     
+     for (i=0; i<32; i++) {
+     
+     printf("%d->%d\n", b[i].item, b[i].count);
+     }
+     
+     printf("c:\n");
+     
+     for (i=0; i<32; i++) {
+     
+     printf("%d->%d\n", b[i].item, b[i].count);
+     }
+     */
 	
     if (stat) {
         
@@ -522,7 +522,7 @@ int process_group(bb_item_group *src, int src_len) {
 }
 
 int get_group_data(bb_item_group *src, int src_len, int *result, int res_len) {
-	   
+    
 	if (src==NULL || result==NULL || res_len <= 0 || src_len <= 0) {
         
 		return -1;
@@ -676,7 +676,7 @@ int decode_sound(short *src, int fft_number)
     }
     
     // 计算fft
-
+    
     int length_buff_per_turn = fft_number / 2;
     int res_temp[5] = {-1,-1,-1,-1,-1};
     int freq = 0;
@@ -686,7 +686,7 @@ int decode_sound(short *src, int fft_number)
     
     freq = fft((src+fft_number/8 + fft_number *3 / 4 / 8 * 1), length_buff_per_turn);
     freq_to_num(freq, res_temp + 1);
-        
+    
     freq = fft((src+fft_number/8 + fft_number *3 / 4 / 8 * 2), length_buff_per_turn);
     freq_to_num(freq, res_temp + 2);
     
@@ -696,8 +696,8 @@ int decode_sound(short *src, int fft_number)
     freq = fft((src+fft_number/8 + fft_number *3 / 4 / 8 * 4), length_buff_per_turn);
     freq_to_num(freq, res_temp + 4);
     
-//    freq = fft((src), length_buff_per_turn * 2);
-//    freq_to_num(freq, res_temp + 5);
+    //    freq = fft((src), length_buff_per_turn * 2);
+    //    freq_to_num(freq, res_temp + 5);
     
     
     int sound_freq = 0;
@@ -708,17 +708,17 @@ int decode_sound(short *src, int fft_number)
     }
     
     /*
-    if (sound_freq > 0) {
+     if (sound_freq > 0) {
      
-        int a = -1;
-        freq_to_num(sound_freq, &a);
-        printf("----%d---  %d\n", sound_freq, a);
-    }
+     int a = -1;
+     freq_to_num(sound_freq, &a);
+     printf("----%d---  %d\n", sound_freq, a);
+     }
      */
     
     //freq_init();
-//    int num[1] = {-1};
-//    freq_to_num(sound_freq, num);
+    //    int num[1] = {-1};
+    //    freq_to_num(sound_freq, num);
     
     return sound_freq;
 }
@@ -744,18 +744,18 @@ int fft(void *src_data, int num)
         in_data[i].r = (double)((unsigned char *)src_data)[i];
         in_data[i].i = 0;
     }
-
+    
     /*
-    size_t nfft;
-    
-    kiss_fastfir_cfg fastfir_cfg = kiss_fastfir_alloc(in_data, num, &nfft, NULL, NULL);
-    
-    size_t offset;
-    kiss_fft_cpx outbuf[BB_MAX_FFT_SIZE];
-    
-    size_t nffir = kiss_fastfir(fastfir_cfg, in_data, outbuf, num, &offset);
-    
-    KISS_FFT_FREE(fastfir_cfg);
+     size_t nfft;
+     
+     kiss_fastfir_cfg fastfir_cfg = kiss_fastfir_alloc(in_data, num, &nfft, NULL, NULL);
+     
+     size_t offset;
+     kiss_fft_cpx outbuf[BB_MAX_FFT_SIZE];
+     
+     size_t nffir = kiss_fastfir(fastfir_cfg, in_data, outbuf, num, &offset);
+     
+     KISS_FFT_FREE(fastfir_cfg);
      */
     
     
@@ -785,7 +785,7 @@ int fft(void *src_data, int num)
             
             float thresh_min = 0;
             float thresh_max = 5500000;
-
+            
             if (out_data_item < thresh_min || out_data_item > thresh_max) {
                 
                 continue;
@@ -800,7 +800,7 @@ int fft(void *src_data, int num)
         
         float a = bowl[i]/ bowl_count[i];
         
-
+        
         if (a > maxFreq)
         {
             maxFreq = a;
@@ -822,87 +822,87 @@ int fft(void *src_data, int num)
     KISS_FFT_FREE(fft_cfg);
     kiss_fft_cleanup();
     
-//    for (i=1; i<size*4/5; i++)
-//    {
-//        
-//        
-//        float ff;
-//        float fff = (44100 / 2.0) * i / (size / 2);
-//        
-//        int n;
-//        
-//        if (freq_to_num(fff, &n) == -1) {
-//            
-//            continue;
-//        
-//        } else {
-//        
-//            ff = 19000;
-//            
-//            if (n >= 13) {
-//                
-//                ff = 14500;
-//            
-//            } /*else if (n >= 20) {
-//                
-//                ff = 12400;
-//            }*/
-//        }
-//        
-//        
-//        
-//        double out_data_item = sqrt(pow(out_data[i].r, 2) + pow(out_data[i].i, 2));
-//    
-//        //printf("%f\n", out_data_item);
-//        
-//        if (out_data_item > maxFreq && out_data_item > ff)
-//        {
-//            maxFreq = out_data_item;
-//            maxIndx = i;
-//        }
-//        else if (out_data_item == maxFreq)
-//        {
-//            maxEqual++;
-//            
-//            if (maxFreq > 0.0)
-//            {
-//            }
-//        }
-//        else
-//        {
-//        }
-//    }
-//
+    //    for (i=1; i<size*4/5; i++)
+    //    {
+    //
+    //
+    //        float ff;
+    //        float fff = (44100 / 2.0) * i / (size / 2);
+    //
+    //        int n;
+    //
+    //        if (freq_to_num(fff, &n) == -1) {
+    //
+    //            continue;
+    //
+    //        } else {
+    //
+    //            ff = 19000;
+    //
+    //            if (n >= 13) {
+    //
+    //                ff = 14500;
+    //
+    //            } /*else if (n >= 20) {
+    //
+    //                ff = 12400;
+    //            }*/
+    //        }
+    //
+    //
+    //
+    //        double out_data_item = sqrt(pow(out_data[i].r, 2) + pow(out_data[i].i, 2));
+    //
+    //        //printf("%f\n", out_data_item);
+    //
+    //        if (out_data_item > maxFreq && out_data_item > ff)
+    //        {
+    //            maxFreq = out_data_item;
+    //            maxIndx = i;
+    //        }
+    //        else if (out_data_item == maxFreq)
+    //        {
+    //            maxEqual++;
+    //
+    //            if (maxFreq > 0.0)
+    //            {
+    //            }
+    //        }
+    //        else
+    //        {
+    //        }
+    //    }
+    //
     
     ////
     
     if (maxFreq == 0) {
         return 0;
     }
-
+    
     
     //double tmpFreq = (44100 / 2.0) * maxIndx / (size / 2);
     unsigned int intFreq;
     num_to_freq(maxIndx, &intFreq);
     
-//    for (int i=0; i<32; i++) {
-//        printf("%f ~ %d \n", bowl[i], i);
-//    }
+    //    for (int i=0; i<32; i++) {
+    //        printf("%f ~ %d \n", bowl[i], i);
+    //    }
     
     //printf("---%d\n", intFreq);
     
     /*
-    if (intFreq > 40000 || 1) {
-        
-        printf("-----------------------------------------");
-        for (i=0; i<num; i++) {
-            
-            double out_data_item = sqrt(pow(out_data[i].r, 2) + pow(out_data[i].i, 2));
-            printf("%f---%d\n", out_data_item, i);
-        }
-        
-        int aaaaaaa = 5;
-    }
+     if (intFreq > 40000 || 1) {
+     
+     printf("-----------------------------------------");
+     for (i=0; i<num; i++) {
+     
+     double out_data_item = sqrt(pow(out_data[i].r, 2) + pow(out_data[i].i, 2));
+     printf("%f---%d\n", out_data_item, i);
+     }
+     
+     int aaaaaaa = 5;
+     }
      */
     
     return intFreq;
@@ -921,7 +921,7 @@ int statistics_2(int *src, int src_len, int *result, int res_len) {
     // Littlebox-XXOO
     
     bb_item_group a[32*3];
-//    bb_item_group b[32*3];
+    //    bb_item_group b[32*3];
     bb_item_group c[32*3];
     
     int i;
@@ -975,7 +975,7 @@ int process_group_2(bb_item_group *src, int src_len) {
 	}
 	
 	int i;
-        
+    
     for (i=1; i<src_len-2; i++) {
         
         if (src[i].count != 0 && src[i].count == 1 && src[i+1].count == 1 && src[i+2].count == 1) {
@@ -1101,7 +1101,16 @@ int array_search(int num, int a[], int array_length) {
 	return -1; // 没找到
 }
 
-int isset(int num) {
+int isset_struct(struct_tmp tmp_x) {
+	
+	if (tmp_x.num != -1) {
+		return 1;
+	}else {
+		return 0;
+	}
+}
+
+int isset_num(int num) {
 	
 	if (num != -1) {
 		return 1;
@@ -1110,11 +1119,14 @@ int isset(int num) {
 	}
 }
 
-void unset(int *num) {
+void unset(struct_tmp *const tmp_x) {
 	
-	if (num != NULL) {
-		*num = -1;
-	}
+	tmp_x->num = -1;
+	tmp_x->m = -1;
+	tmp_x->r = -1;
+	tmp_x->r_ = -1;
+	tmp_x->l = -1;
+	tmp_x->l_ = -1;
 }
 
 int partions(float l[],int low,int high)
@@ -1243,7 +1255,6 @@ void generate_data(queue *que, int que_length, int *res, int *rrr, int res_lengt
                 thresh_hold -= step;
             }
             
-            
             counter = 0;
             
             for (int i = 0; i<32; i++) {
@@ -1262,10 +1273,11 @@ void generate_data(queue *que, int que_length, int *res, int *rrr, int res_lengt
                     data[k][i] = currentValue;
                 }
             }
+            //printf("%d,%d,%.4f]", i, k, currentValue);
         }
     }
     
-
+    
     /////////////////////////
     
     float tempValue[80];
@@ -1311,30 +1323,30 @@ void generate_data(queue *que, int que_length, int *res, int *rrr, int res_lengt
     
     // 加阈值
     /*
-    for (int i=0; i<20; i++) {
-        for (int j=0; j<4; j++) {
-            
-            tempValue[j * 20 + i] = sortValue[i][j];
-        }
-    }
-    
-    quicksort(tempValue, 80);
-    
-    float thresh_hold = fmin(tempValue[39], minValue);
-    
-    for (int i=0; i<20; i++) {
-        for (int j=0; j<4; j++) {
-            
-            if (sortValue[i][j] < thresh_hold) {
-                sortValue[i][j] = -1;
-                sortData[i][j] = -1;
-            }
-            
-        }
-    }
+     for (int i=0; i<20; i++) {
+     for (int j=0; j<4; j++) {
+     
+     tempValue[j * 20 + i] = sortValue[i][j];
+     }
+     }
+     
+     quicksort(tempValue, 80);
+     
+     float thresh_hold = fmin(tempValue[39], minValue);
+     
+     for (int i=0; i<20; i++) {
+     for (int j=0; j<4; j++) {
+     
+     if (sortValue[i][j] < thresh_hold) {
+     sortValue[i][j] = -1;
+     sortData[i][j] = -1;
+     }
+     
+     }
+     }
      */
     //
-
+    
     if (minValue < 0.3) {
         
     }else if (minValue > 0.6) {
@@ -1365,107 +1377,130 @@ void generate_data(queue *que, int que_length, int *res, int *rrr, int res_lengt
 	//printf("\n\n\n   ");
 	for (int i=0; i<20; i++) {
 		
-		int tmp[3] = {-1,-1,-1};
+		struct_tmp tmp_1; tmp_1.num = -1; tmp_1.m = -1; tmp_1.r = -1; tmp_1.r_ = -1; tmp_1.l = -1; tmp_1.l_ = -1;
+		struct_tmp tmp_2; tmp_2.num = -1; tmp_2.m = -1; tmp_2.r = -1; tmp_2.r_ = -1; tmp_2.l = -1; tmp_2.l_ = -1;
+		struct_tmp tmp_3; tmp_3.num = -1; tmp_3.m = -1; tmp_3.r = -1; tmp_3.r_ = -1; tmp_3.l = -1; tmp_3.l_ = -1;
 		
-		for (int j=0; j<3; j++) {
+		for (int j=0; j<4; j++) {
 			
 			int key = -1;
+			int key_ = -1;
 			
 			if (sortData[i][j] != -1 && i<19 && (key = array_search(sortData[i][j], sortData[i+1], 4)) >= 0) {
 				
-				if (sortValue[i][j] < sortValue[i+1][key]) {
+				if (i < 18 && (key_ = array_search(sortData[i][j], sortData[i+2], 4)) >= 0) {
 					
-					if (!isset(tmp[2])) {
+					if (!isset_struct(tmp_3)) {
 						
-						tmp[2] = sortData[i][j];
+						if (i > 0 && res[i-1] == sortData[i][j]) {} else {
+                            
+							tmp_3.num = sortData[i][j];
+							tmp_3.m = j;
+							tmp_3.r = key;
+							tmp_3.r_ = key_;
+						}
 						
-						if (i > 0 && i < 17 &&
-                            array_search(tmp[2], sortData[i - 1], 4) >= 0 &&
-                            array_search(tmp[2], sortData[i + 1], 4) >= 0 &&
-                            array_search(tmp[2], sortData[i + 2], 4) >= 0 &&
-                            res[i] == tmp[2]) {
+                        
+					}else {
+						
+						int count_1 = tmp_3.m + tmp_3.r + tmp_3.r_;
+						int count_2 = j + key + key_;
+						
+						if (count_2 < count_1) {
 							
-							unset(&tmp[2]);
+							if (i > 0 && res[i-1] == sortData[i][j]) {} else {
+                                
+								tmp_3.num = sortData[i][j];
+								tmp_3.m = j;
+								tmp_3.r = key;
+								tmp_3.r_ = key_;
+							}
 						}
 					}
+				}else {
 					
-				}else if (sortValue[i][j] > sortValue[i+1][key]) {
-					
-					if (!isset(tmp[1])) {
+					if (!isset_struct(tmp_2)) {
 						
-						tmp[1] = sortData[i][j];
-					}
-					
-				}else if (sortValue[i][j] == sortValue[i+1][key]) {
-					
-					if (!isset(tmp[2]) && res[i] != sortData[i][j]) {
+						if (i > 0 && res[i-1] == sortData[i][j]) {} else {
+							
+							tmp_2.num = sortData[i][j];
+							tmp_2.m = j;
+							tmp_2.r = key;
+						}
+                        
+					}else {
 						
-						tmp[2] = sortData[i][j];
+						int count_1 = tmp_2.m + tmp_2.r;
+						int count_2 = j + key;
+						
+						if (count_2 < count_1) {
+							
+							if (i > 0 && res[i-1] == sortData[i][j]) {} else {
+								
+								tmp_2.num = sortData[i][j];
+								tmp_2.m = j;
+								tmp_2.r = key;
+							}
+						}
 					}
 				}
 				
 			}else if (sortData[i][j] != -1) {
 				
-				if (!isset(tmp[0]) && i > 0) {
+				if (i == 0 || (i > 0 && res[i-1] != sortData[i][j])) {
 					
-					if (array_search(sortData[i][j], sortData[i-1], 4) == -1 && j < 2) {
+					if (!isset_struct(tmp_1)) {
 						
-						tmp[0] = sortData[i][j];
-						
-					}else if (array_search(sortData[i][j], sortData[i-1], 4) >= 0 && res[i-1] != sortData[i][j] && j < 2) {
-						
-						tmp[0] = sortData[i][j];
+						tmp_1.num = sortData[i][j];
+						tmp_1.m = j;
 					}
 				}
 			}
 		}
 		
-		if (isset(tmp[1]) && !isset(tmp[2]) && isset(res[i])) {
+		if (isset_struct(tmp_1) && isset_struct(tmp_2)) {
 			
-			res[i+1] = tmp[1];
-			unset(&tmp[1]);
+			if ((tmp_1.m < tmp_2.m) && (tmp_1.m < tmp_2.r)) {
+				
+				float quotient_m = sortValue[i][tmp_1.m] / sortValue[i][tmp_2.m];
+				float quotient_r = sortValue[i][tmp_1.m] / sortValue[i+1][tmp_2.r];
+				
+				if (quotient_m > 1.6 && quotient_r > 1.6) {
+					
+					unset(&tmp_2);
+				}
+			}
 		}
 		
-		if (isset(tmp[1]) && !isset(res[i])) {
+		if (isset_struct(tmp_2) && !isset_num(res[i])) {
 			
-			res[i] = tmp[1];
-			unset(&tmp[1]);
+			res[i] = tmp_2.num;
 		}
 		
-		if (isset(tmp[0]) && !isset(res[i])) {
+		if (isset_struct(tmp_3) && !isset_num(res[i])) {
 			
-			res[i] = tmp[0];
-			unset(&tmp[0]);
+			res[i] = tmp_3.num;
 		}
-        
-		if (isset(tmp[2]) && !isset(res[i])) {
+		
+		if (isset_struct(tmp_1) && !isset_num(res[i])) {
 			
-			res[i] = tmp[2];
-			unset(&tmp[2]);
+			res[i] = tmp_1.num;
 		}
-        
-		if (!isset(res[i])) {
+		
+		if (!isset_num(res[i])) {
 			
 			res[i] = sortData[i][0];
 			
 			if (res[i] == -1) {
-				
 				res[i] = 0;
 			}
-		}
-		
-		
-		if (isset(tmp[2]) && !isset(res[i+1])) {
-			
-			res[i+1] = tmp[2];
-			unset(&tmp[2]);
 		}
 		
 		//printf("%02d ", resultArray[i]);
 	}
     
-/////////////////////////////////////////////////
-
+    /////////////////////////////////////////////////
+    
     for (int i=0; i<res_length; i++) {
         rrr[i] = -1;
     }
@@ -1482,107 +1517,137 @@ void generate_data(queue *que, int que_length, int *res, int *rrr, int res_lengt
         }
     }
     
-    for (int i=0; i<20; i++) {
+    for (int i=19; i>-1; i--) {
 		
-		int tmp[3] = {-1,-1,-1};
+		struct_tmp tmp_1; tmp_1.num = -1; tmp_1.m = -1; tmp_1.r = -1; tmp_1.r_ = -1; tmp_1.l = -1; tmp_1.l_ = -1;
+		struct_tmp tmp_2; tmp_2.num = -1; tmp_2.m = -1; tmp_2.r = -1; tmp_2.r_ = -1; tmp_2.l = -1; tmp_2.l_ = -1;
+		struct_tmp tmp_3; tmp_3.num = -1; tmp_3.m = -1; tmp_3.r = -1; tmp_3.r_ = -1; tmp_3.l = -1; tmp_3.l_ = -1;
 		
-		for (int j=0; j<3; j++) {
+		for (int j=0; j<4; j++) {
 			
 			int key = -1;
+			int key_ = -1;
 			
-			if (sortData2[i][j] != -1 && i<19 && (key = array_search(sortData2[i][j], sortData2[i+1], 4)) >= 0) {
+			if (sortData[i][j] != -1 && i > 0 && (key = array_search(sortData[i][j], sortData[i-1], 4)) >= 0) {
 				
-				if (sortValue2[i][j] < sortValue2[i+1][key]) {
+				if (i > 1 && (key_ = array_search(sortData[i][j], sortData[i-2], 4)) >= 0) {
 					
-					if (!isset(tmp[2])) {
+					if (!isset_struct(tmp_3)) {
 						
-						tmp[2] = sortData2[i][j];
+						if (i < 19 && rrr[i+1] == sortData[i][j]) {} else {
+                            
+							tmp_3.num = sortData[i][j];
+							tmp_3.m = j;
+							tmp_3.l = key;
+							tmp_3.l_ = key_;
+						}
 						
-						if (i > 0 && i < 17 &&
-                            array_search(tmp[2], sortData2[i - 1], 4) >= 0 &&
-                            array_search(tmp[2], sortData2[i + 1], 4) >= 0 &&
-                            array_search(tmp[2], sortData2[i + 2], 4) >= 0 &&
-                            rrr[i] == tmp[2]) {
+                        
+					}else {
+						
+						int count_1 = tmp_3.m + tmp_3.l + tmp_3.l_;
+						int count_2 = j + key + key_;
+						
+						if (count_2 < count_1) {
 							
-							unset(&tmp[2]);
+							if (i < 19 && rrr[i+1] == sortData[i][j]) {} else {
+                                
+								tmp_3.num = sortData[i][j];
+								tmp_3.m = j;
+								tmp_3.l = key;
+								tmp_3.l_ = key_;
+							}
 						}
 					}
+				}else {
 					
-				}else if (sortValue2[i][j] > sortValue2[i+1][key]) {
-					
-					if (!isset(tmp[1])) {
+					if (!isset_struct(tmp_2)) {
 						
-						tmp[1] = sortData2[i][j];
-					}
-					
-				}else if (sortValue2[i][j] == sortValue2[i+1][key]) {
-					
-					if (!isset(tmp[2]) && rrr[i] != sortData2[i][j]) {
+						if (i < 19 && rrr[i+1] == sortData[i][j]) {} else {
+							
+							tmp_2.num = sortData[i][j];
+							tmp_2.m = j;
+							tmp_2.l = key;
+						}
+                        
+					}else {
 						
-						tmp[2] = sortData2[i][j];
+						int count_1 = tmp_2.m + tmp_2.l;
+						int count_2 = j + key;
+						
+						if (count_2 < count_1) {
+							
+							if (i < 19 && rrr[i+1] == sortData[i][j]) {} else {
+								
+								tmp_2.num = sortData[i][j];
+								tmp_2.m = j;
+								tmp_2.l = key;
+							}
+						}
 					}
 				}
 				
-			}else if (sortData2[i][j] != -1) {
+			}else if (sortData[i][j] != -1) {
 				
-				if (!isset(tmp[0]) && i > 0) {
+				if (i == 19 || (i < 19 && rrr[i+1] != sortData[i][j])) {
 					
-					if (array_search(sortData2[i][j], sortData2[i-1], 4) == -1 && j < 2) {
+					if (!isset_struct(tmp_1)) {
 						
-						tmp[0] = sortData2[i][j];
-						
-					}else if (array_search(sortData2[i][j], sortData2[i-1], 4) >= 0 && rrr[i-1] != sortData2[i][j] && j < 2) {
-						
-						tmp[0] = sortData2[i][j];
+						tmp_1.num = sortData[i][j];
+						tmp_1.m = j;
 					}
 				}
 			}
 		}
 		
-		if (isset(tmp[1]) && !isset(tmp[2]) && isset(rrr[i])) {
+		if (isset_struct(tmp_1) && isset_struct(tmp_2)) {
 			
-			rrr[i+1] = tmp[1];
-			unset(&tmp[1]);
+			if ((tmp_1.m < tmp_2.m) && (tmp_1.m < tmp_2.l)) {
+				
+				float quotient_m = sortValue[i][tmp_1.m] / sortValue[i][tmp_2.m];
+				float quotient_l = sortValue[i][tmp_1.m] / sortValue[i-1][tmp_2.l];
+				
+				if (quotient_m > 1.6 && quotient_l > 1.6) {
+					
+					unset(&tmp_2);
+				}
+			}
 		}
 		
-		if (isset(tmp[1]) && !isset(rrr[i])) {
+		if (isset_struct(tmp_2) && !isset_num(rrr[i])) {
 			
-			rrr[i] = tmp[1];
-			unset(&tmp[1]);
+			rrr[i] = tmp_2.num;
 		}
 		
-		if (isset(tmp[0]) && !isset(rrr[i])) {
+		if (isset_struct(tmp_3) && !isset_num(rrr[i])) {
 			
-			rrr[i] = tmp[0];
-			unset(&tmp[0]);
+			rrr[i] = tmp_3.num;
 		}
-        
-		if (isset(tmp[2]) && !isset(rrr[i])) {
+		
+		if (isset_struct(tmp_1) && !isset_num(rrr[i])) {
 			
-			rrr[i] = tmp[2];
-			unset(&tmp[2]);
+			rrr[i] = tmp_1.num;
 		}
-        
-		if (!isset(rrr[i])) {
+		
+		if (!isset_num(rrr[i])) {
 			
-			rrr[i] = sortData2[i][0];
+			rrr[i] = sortData[i][0];
 			
 			if (rrr[i] == -1) {
-				
 				rrr[i] = 0;
 			}
 		}
-		
-		
-		if (isset(tmp[2]) && !isset(rrr[i+1])) {
-			
-			rrr[i+1] = tmp[2];
-			unset(&tmp[2]);
-		}
 	}
     
+    for (int i=0; i<10; i++) {
+        int t;
+        t = rrr[i];
+        rrr[i] = rrr[19-i];
+        rrr[19-i] = t;
+    }
     
-///////////////////////////////////////////////////
+    
+    ///////////////////////////////////////////////////
     
     //printf("\n\n");
     
@@ -1590,32 +1655,34 @@ void generate_data(queue *que, int que_length, int *res, int *rrr, int res_lengt
     
     // 打印排序数据
     
-    for (int i=0; i<4; i++) {
-		
-		printf("%d: ", i);
-		for (int j=0; j<20; j++) {
-			if (sortData[j][i] != -1) {
-				printf("%2d ", sortData[j][i]);
-			}else {
-				printf("   ");
-			}
-		}
-		printf("\n");
-	}
-	printf("\n");
-	
-	for (int i=0; i<4; i++) {
-        
-        printf("%d: ", i);
-        for (int j=0; j<20; j++) {
-            if (sortValue[j][i] != -1) {
-                printf("%.4f  ", sortValue[j][i]);
-            }else {
-                printf("        ");
-            }
-        }
-        printf("\n");
-    }
-    
-    printf("\n");
+    /*
+     for (int i=0; i<4; i++) {
+     
+     printf("%d: ", i);
+     for (int j=0; j<20; j++) {
+     if (sortData[j][i] != -1) {
+     printf("%2d ", sortData[j][i]);
+     }else {
+     printf("   ");
+     }
+     }
+     printf("\n");
+     }
+     printf("\n");
+     
+     for (int i=0; i<4; i++) {
+     
+     printf("%d: ", i);
+     for (int j=0; j<20; j++) {
+     if (sortValue[j][i] != -1) {
+     printf("%.4f  ", sortValue[j][i]);
+     }else {
+     printf("        ");
+     }
+     }
+     printf("\n");
+     }
+     
+     printf("\n");
+     */
 }

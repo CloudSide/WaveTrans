@@ -926,19 +926,19 @@ static queue   _savedBuffer[32];
         
         float maxValue = fmax(queue_item_at_index(q17, 0), queue_item_at_index(q19, 1)) * 1.85;
         
-//        float maxValue_17 = fmax(queue_item_at_index(q17, 0), queue_item_at_index(q17, 1));
-//        float maxValue_19 = fmax(queue_item_at_index(q19, 1), queue_item_at_index(q19, 2));
-//        
-//        maxValue = fmax(maxValue_17,maxValue_19) * 1.1;
+//        minValue = 0.0;
+//        maxValue = 1.0;
         
-        printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f), (maxValue=%f) ==================\n\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue, maxValue);
-        
-//        minValue = 0;
-//        maxValue = 1;
 
         int res[20];
         int rrr[20];
         generate_data(_savedBuffer, 32, res, rrr, 20, minValue, maxValue);
+        
+        if (res[0] != 17 || res[1] != 19) {
+            return;
+        }
+        
+        printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f) ==================\n\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue);
         
         for (int i=0; i<20; i++) {
             printf("%02d ", res[i]);
@@ -959,12 +959,22 @@ static queue   _savedBuffer[32];
             printf("%02d ", rrr[i]);
         }
         
-        printf("\n");
+        printf("\n\n");
         
         
         //////////////  RS
         
         int temp[18];
+        int result[18][18];
+        int counter = 0;
+        
+        for (int i=0; i<18; i++) {
+            for (int j=0; j<18; j++) {
+                
+                result[i][j] = -1;
+            }
+        }
+        
         for (int k = 2; k < 20; k++) {
             
             printf("~~~~~~~ %02d :17 19 ", k);
@@ -995,11 +1005,46 @@ static queue   _savedBuffer[32];
             
             /////////////////
             
+            if (count >= 0) {
+                
+                for (int m = 0; m<18; m++) {
+                    
+                    result[m][counter] = data1[m];
+                }
+                
+                counter++;
+            }
+            
             printf("17 19 ");
             for (int i=0; i<18; i++) {
                 printf("%02d ", data1[i]);
             }
             printf("    %d\n", count);
+        }
+        
+        int temp_vote[18] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        int final_result[20] = {17, 19, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        
+        for (int i=0; i<18; i++) {
+            
+            for (int j=0; j<18; j++) {
+                
+                temp_vote[j] = result[i][j];
+            }
+            
+            vote(temp_vote, 18, &final_result[i+2]);
+        }
+        
+        printf("\n ================== final result ================== \n\n");
+        
+        printf("17-19-00-30-19-13-05-22-12-10-02-02-27-00-20-08-09-21-26-29-\n");
+        
+        if (counter == 0) {
+            printf("fail!");
+        }else {
+            for (int i=0; i<20; i++) {
+                printf("%02d ", final_result[i]);
+            }
         }
         
         /*
@@ -1041,7 +1086,7 @@ static queue   _savedBuffer[32];
         }
          */
         
-        printf("\n================  end  ==================\n");
+        printf("\n\n================  end  ==================\n");
         
         //printf("\n");
     }

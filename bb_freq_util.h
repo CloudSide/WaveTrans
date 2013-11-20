@@ -43,6 +43,16 @@ typedef struct _bb_item_group bb_item_group;
 
 typedef float element;
 
+typedef struct {
+	
+	int num;
+	int m;
+	int r;
+	int r_;
+	int l;
+	int l_;
+} struct_tmp;
+
 //void freq_init();
 
 int freq_to_num(unsigned int f, int *n);
@@ -97,9 +107,11 @@ void generate_data(queue *que, int que_length, int *res, int *rrr, int res_lengt
 
 int array_search(int num, int a[], int array_length);
 
-int isset(int num);
+int isset_struct(struct_tmp tmp_x);
 
-void unset(int *num);
+int isset_num(int num);
+
+void unset(struct_tmp *const tmp_x);
 
 int partions(float l[],int low,int high);
 
