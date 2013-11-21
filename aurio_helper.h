@@ -52,7 +52,7 @@
 
 #include "CAStreamBasicDescription.h"
 
-#define kNumDrawBuffers 12
+#define kNumDrawBuffers 4
 #define kDefaultDrawSamples 1024
 #define kMinDrawSamples 64
 #define kMaxDrawSamples 4096

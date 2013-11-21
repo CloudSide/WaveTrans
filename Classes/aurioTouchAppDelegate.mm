@@ -72,6 +72,8 @@ GLfloat colorLevels[] = {
 @synthesize mute;
 @synthesize inputProc;
 
+@synthesize request = _request;
+
 #pragma mark-
 
 CGPathRef CreateRoundedRectPath(CGRect RECT, CGFloat cornerRadius)
@@ -281,6 +283,11 @@ static OSStatus	PerformThru(
 			data_ptr += 4;
 		}
 		drawBufferIdx += inNumberFrames;
+        
+        if (THIS->fftBufferManager == NULL) return noErr;
+		
+		if (THIS->fftBufferManager->NeedsNewAudioData())
+			THIS->fftBufferManager->GrabAudioData(ioData);
 	}
 	
 	else if ((THIS->displayMode == aurioTouchDisplayModeSpectrum) || (THIS->displayMode == aurioTouchDisplayModeOscilloscopeFFT))
@@ -298,13 +305,15 @@ static OSStatus	PerformThru(
 #pragma mark-
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
-{	
+{
+    _isListenning = YES;
+    
 	// Turn off the idle timer, since this app doesn't rely on constant touch input
 	application.idleTimerDisabled = YES;
 	
 	// mute should be on at launch
 	self.mute = YES;
-	displayMode = aurioTouchDisplayModeSpectrum;
+	displayMode = aurioTouchDisplayModeOscilloscopeWaveform;
 	
 	// Initialize our remote i/o unit
 	
@@ -668,14 +677,15 @@ static OSStatus	PerformThru(
 	
 	glPushMatrix();
 	
-	glTranslatef(0., 480., 0.);
-	glRotatef(-90., 0., 0., 1.);
+	glTranslatef(0., 0., 0.);
+	glRotatef(0., 0., 0., 1.);
 	
 	
 	glEnable(GL_TEXTURE_2D);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
+    /*
 	{
 		// Draw our background oscilloscope screen
 		const GLfloat vertices[] = {
@@ -733,62 +743,103 @@ static OSStatus	PerformThru(
 		glPopMatrix();
 		
 	}
+	*/
 	
 	
-	
-	if (displayMode == aurioTouchDisplayModeOscilloscopeFFT)
-	{			
-		if (fftBufferManager->HasNewAudioData())
-		{
-			if (fftBufferManager->ComputeFFT(l_fftData))
+//	if (displayMode == aurioTouchDisplayModeOscilloscopeFFT)
+//	{			
+		if (_isListenning == YES && fftBufferManager->HasNewAudioData()) {
+            
+			if (fftBufferManager->ComputeFFT(l_fftData)) {
+                
 				[self setFFTData:l_fftData length:fftBufferManager->GetNumberFrames() / 2];
+                
+                int i;
+                for (i=0; i<32; i++) {
+                    
+                    unsigned int freq;
+                    int fftIdx;
+                    
+                    num_to_freq(i, &freq);
+                    fftIdx = freq / (drawFormat.mSampleRate / 2.0) * fftLength;
+                    
+                    double fftIdx_i, fftIdx_f;
+                    fftIdx_f = modf(fftIdx, &fftIdx_i);
+                    
+                    SInt8 fft_l, fft_r;
+                    CGFloat fft_l_fl, fft_r_fl;
+                    CGFloat interpVal;
+                    
+                    fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
+                    fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
+                    fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
+                    fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
+                    interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
+                    
+                    interpVal = sqrt(CLAMP(0., interpVal, 1.));
+                    
+                    //////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////
+                    [self helper:fftIdx interpVal:interpVal timeSlice:6];///////////
+                    //////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////
+                    
+                }
+                
+                //////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////
+                [self helperResultWithTimeSlice:6];///////////////////////////////
+                //////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////
+            }
 			else
 				hasNewFFTData = NO;
 		}
         
-		if (hasNewFFTData)
-		{
-            
-			int y, maxY;
-			maxY = drawBufferLen;
-			for (y=0; y<maxY; y++)
-			{
-				CGFloat yFract = (CGFloat)y / (CGFloat)(maxY - 1);
-				CGFloat fftIdx = yFract * ((CGFloat)fftLength);
-				
-				double fftIdx_i, fftIdx_f;
-				fftIdx_f = modf(fftIdx, &fftIdx_i);
-				
-				SInt8 fft_l, fft_r;
-				CGFloat fft_l_fl, fft_r_fl;
-				CGFloat interpVal;
-				
-				fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
-				fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
-				fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
-				fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
-				interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
-				
-				interpVal = CLAMP(0., interpVal, 1.);
-                
-				drawBuffers[0][y] = (interpVal * 120);
-				
-			}
-			cycleOscilloscopeLines();
-			
-		}
-		
-	}
+//		if (hasNewFFTData)
+//		{
+//            
+//			int y, maxY;
+//			maxY = drawBufferLen;
+//			for (y=0; y<maxY; y++)
+//			{
+//				CGFloat yFract = (CGFloat)y / (CGFloat)(maxY - 1);
+//				CGFloat fftIdx = yFract * ((CGFloat)fftLength);
+//				
+//				double fftIdx_i, fftIdx_f;
+//				fftIdx_f = modf(fftIdx, &fftIdx_i);
+//				
+//				SInt8 fft_l, fft_r;
+//				CGFloat fft_l_fl, fft_r_fl;
+//				CGFloat interpVal;
+//				
+//				fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
+//				fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
+//				fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
+//				fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
+//				interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
+//				
+//				interpVal = CLAMP(0., interpVal, 1.);
+//                
+//				drawBuffers[0][y] = (interpVal * 120);
+//				
+//			}
+//			cycleOscilloscopeLines();
+//			
+//		}
+//		
+//	}
 	
 	
 	
 	GLfloat *oscilLine_ptr;
-	GLfloat max = drawBufferLen;
+	GLfloat max = drawBufferLen / 4 * self.view.frame.size.width / 320;
 	SInt8 *drawBuffer_ptr;
 	
 	// Alloc an array for our oscilloscope line vertices
 	if (resetOscilLine) {
-		oscilLine = (GLfloat*)realloc(oscilLine, drawBufferLen * 2 * sizeof(GLfloat));
+		oscilLine = (GLfloat*)realloc(oscilLine, drawBufferLen * 2 * sizeof(GLfloat) / 4 * self.view.frame.size.width / 320);
 		resetOscilLine = NO;
 	}
 	
@@ -796,15 +847,15 @@ static OSStatus	PerformThru(
 	
 	// Translate to the left side and vertical center of the screen, and scale so that the screen coordinates
 	// go from 0 to 1 along the X, and -1 to 1 along the Y
-	glTranslatef(17., 182., 0.);
-	glScalef(448., 116., 1.);
+	glTranslatef(0., self.view.frame.size.height / 2.0, 0.);
+	glScalef(self.view.frame.size.width, self.view.frame.size.height, 1.);
 	
 	// Set up some GL state for our oscilloscope lines
 	glDisable(GL_TEXTURE_2D);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisable(GL_LINE_SMOOTH);
-	glLineWidth(2.);
+	glLineWidth(0.01);
 	
 	int drawBuffer_i;
 	// Draw a line for each stored line in our buffer (the lines are stored and fade over time)
@@ -820,7 +871,19 @@ static OSStatus	PerformThru(
 		for (i=0.; i<max; i=i+1.)
 		{
 			*oscilLine_ptr++ = i/max;
-			*oscilLine_ptr++ = (Float32)(*drawBuffer_ptr++) / 128.;
+            
+            if (abs((int)(*drawBuffer_ptr)) < self.view.frame.size.height / 3.0) {
+                
+                *oscilLine_ptr++ = (Float32)(*drawBuffer_ptr) / 64.;
+                
+            }else {
+                
+                *oscilLine_ptr++ = (Float32)(*drawBuffer_ptr) / 256.;
+            }
+            
+            //NSLog(@"%f", (Float32)(*drawBuffer_ptr));
+            
+            drawBuffer_ptr += 4;
 		}
 		
 		// If we're drawing the newest line, draw it in solid green. Otherwise, draw it in a faded green.
@@ -833,7 +896,7 @@ static OSStatus	PerformThru(
 		glVertexPointer(2, GL_FLOAT, 0, oscilLine);
 		
 		// and draw the line.
-		glDrawArrays(GL_LINE_STRIP, 0, drawBufferLen);
+		glDrawArrays(GL_LINE_STRIP, 0, drawBufferLen / 4 * self.view.frame.size.width / 320);
 		
 	}
 	
@@ -936,6 +999,8 @@ static queue   _savedBuffer[32];
         
         if (res[0] != 17 || res[1] != 19) {
             return;
+        }else {
+            _isListenning = NO;
         }
         
         printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f) ==================\n\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue);
@@ -1037,14 +1102,38 @@ static queue   _savedBuffer[32];
         
         printf("\n ================== final result ================== \n\n");
         
-        printf("17-19-00-30-19-13-05-22-12-10-02-02-27-00-20-08-09-21-26-29-\n");
+        //printf("17-19-00-30-19-13-05-22-12-10-02-02-27-00-20-08-09-21-26-29-\n");
         
         if (counter == 0) {
+            
             printf("fail!");
+            
         }else {
+            
+            NSMutableString *string = [NSMutableString stringWithFormat:@""];
+            
             for (int i=0; i<20; i++) {
+                
                 printf("%02d ", final_result[i]);
+                
+                if (i>=2 && i<=11) {
+                    
+                    char res_char;
+                    num_to_char(final_result[i], &res_char);
+                    
+                    //[string ]
+                }
+                
             }
+            
+            //请求
+            
+            //NSMutableString *string = [NSString stringWithFormat:@""];
+            
+            NSURL *url = [NSURL URLWithString:@"http://rest.sinaapp.com/?c=rest&a=get&code="];
+            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+            [request setDelegate:self];
+            [request startAsynchronous];
         }
         
         /*
@@ -1090,74 +1179,6 @@ static queue   _savedBuffer[32];
         
         //printf("\n");
     }
-    
-    /*
-    for (int i = 0; i<32; i++) {
-        
-        for (int k = 0; k<100; k++) {
-            
-            queue *q = &_savedBuffer[i];
-            float currentValue = queue_item_at_index(q, k);
-            
-            printf("%d,%d,%.4f]", i, k, currentValue);
-            
-            if (currentValue == 0) {
-                continue;
-            }
-            
-            bool top = false;
-            bool bottom = false;
-            
-            for (int j = i-1; j > i - 2 && j >= 0; j--) {
-                
-                queue *q = &_savedBuffer[j];
-                float tmp = queue_item_at_index(q, k);
-                
-                if (currentValue < tmp) {
-                    top = false;
-                    break;
-                }else {
-                    top = true;
-                }
-            }
-            
-            for (int j = i+1; j < i + 2 && j < 32; j++) {
-                
-                queue *q = &_savedBuffer[j];
-                float tmp = queue_item_at_index(q, k);
-                
-                if (currentValue < tmp) {
-                    bottom = false;
-                    break;
-                }else {
-                    bottom = true;
-                }
-            }
-            
-            if (top && bottom) {
-                
-                maxTable[k][i] = 1;
-            }
-        }
-    }
-    
-    for (int i=31; i >= 0; i--) {
-        
-        printf("%2d ----------", i);
-        
-        for (int k=0; k<100; k++) {
-            
-            if (maxTable[k][i]==0) {
-                printf("  ");
-            }else
-                printf("%d ", maxTable[k][i]);
-            maxTable[k][i] = 0;
-        }
-        printf("---------- %2d \n", i);
-    }
-     */
-    
-    //NSLog(@"\n===================================");
 }
 
 
@@ -1351,6 +1372,7 @@ static queue   _savedBuffer[32];
 	// If we're if waveform mode and not currently in a pinch event, and we've got two touches, start a pinch event
 	if ((!pinchEvent) && ([[event allTouches] count] == 2) && (self.displayMode == aurioTouchDisplayModeOscilloscopeWaveform))
 	{
+        return;
 		pinchEvent = event;
 		NSArray *t = [[event allTouches] allObjects];
 		lastPinchDist = fabs([[t objectAtIndex:0] locationInView:view].x - [[t objectAtIndex:1] locationInView:view].x);
@@ -1365,6 +1387,7 @@ static queue   _savedBuffer[32];
 	// If we are in a pinch event...
 	if ((event == pinchEvent) && ([[event allTouches] count] == 2))
 	{
+        return;
 		CGFloat thisPinchDist, pinchDiff;
 		NSArray *t = [[event allTouches] allObjects];
 		thisPinchDist = fabs([[t objectAtIndex:0] locationInView:view].x - [[t objectAtIndex:1] locationInView:view].x);
@@ -1428,6 +1451,22 @@ static queue   _savedBuffer[32];
 			return;
 		}
 	}
+}
+
+#pragma mark - ASIHTTPRequestDelegate
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    // Use when fetching text data
+    NSString *responseString = [request responseString];
+    
+    // Use when fetching binary data
+    NSData *responseData = [request responseData];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error = [request error];
 }
 
 @end

@@ -193,7 +193,7 @@
 	glMatrixMode(GL_MODELVIEW);
 	
 	// Clears the view with black
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	///glEnableClientState(GL_TEXTURE_COORD_ARRAY);

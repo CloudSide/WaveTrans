@@ -61,6 +61,8 @@
 #import "bb_header.h"
 #import "queue.h"
 
+#import "ASIHTTPRequest.h"
+
 #define SPECTRUM_BAR_WIDTH 4
 
 #ifndef CLAMP
@@ -83,7 +85,7 @@ inline double linearInterp(double valA, double valB, double fract)
 	return valA + ((valB - valA) * fract);
 }
 
-@interface aurioTouchAppDelegate : NSObject <UIApplicationDelegate, EAGLViewDelegate> {
+@interface aurioTouchAppDelegate : NSObject <UIApplicationDelegate, EAGLViewDelegate, ASIHTTPRequestDelegate> {
 	IBOutlet UIWindow*			window;
 	IBOutlet EAGLView*			view;
 	
@@ -132,6 +134,8 @@ inline double linearInterp(double valA, double valB, double fract)
     
 	GLfloat*					oscilLine;
 	BOOL						resetOscilLine;
+    
+    BOOL                        _isListenning;
 }
 
 @property (nonatomic, retain)	UIWindow*				window;
@@ -145,6 +149,8 @@ inline double linearInterp(double valA, double valB, double fract)
 @property (nonatomic, assign)	BOOL					unitHasBeenCreated;
 @property (nonatomic, assign)	BOOL					mute;
 @property (nonatomic, assign)	AURenderCallbackStruct	inputProc;
+
+@property (nonatomic, retain)   ASIHTTPRequest *request;
 
 @end
 
