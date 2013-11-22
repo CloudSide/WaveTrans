@@ -53,6 +53,7 @@
 
 #import "MetadataReceive.h"
 #import "VdiskJSON.h"
+#import "RootViewController.h"
 
 @implementation aurioTouchAppDelegate
 
@@ -322,12 +323,12 @@ static OSStatus	PerformThru(
 - (void)__applicationDidFinishLaunching:(UIApplication *)application
 {
     
-    self.view = [[[EAGLView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    self.view = [[[EAGLView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280.0, 64.0)] autorelease];
     
-    UIViewController *c = [[[UIViewController alloc] init] autorelease];
-    self.window.rootViewController = c;
-    [c.view setBackgroundColor:[UIColor greenColor]];
-    [c.view addSubview:self.view];
+    RootViewController *rootViewController = [[[RootViewController alloc] init] autorelease];
+    self.window.rootViewController = rootViewController;
+    [rootViewController.view setBackgroundColor:[UIColor clearColor]];
+    [rootViewController.view addSubview:self.view];
     
     
     _isListenning = YES;
