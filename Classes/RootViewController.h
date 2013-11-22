@@ -14,4 +14,6 @@
 
 @property (nonatomic,retain) AVAudioPlayer *audioPlayer;
 
+@property (nonatomic, retain) NSData *pcmData;
+
 @end

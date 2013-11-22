@@ -154,7 +154,7 @@ inline double linearInterp(double valA, double valB, double fract)
 
 + (aurioTouchAppDelegate *)sharedAppDelegate;
 
-- (void)setListenState
+- (void)setListenning:(BOOL)state;
 
 @end
 

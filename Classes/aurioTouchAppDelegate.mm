@@ -1541,4 +1541,9 @@ static queue   _savedBuffer[32];
     return (aurioTouchAppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
+- (void)setListenning:(BOOL)state {
+    
+    _isListenning = state;
+}
+
 @end
