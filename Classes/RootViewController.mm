@@ -71,7 +71,7 @@
 {
     [[aurioTouchAppDelegate sharedAppDelegate] setListenning:NO];
     
-    self.pcmData = [PCMRender renderChirpData:@"0123456789abcdefghijklmnopqrstuv"];
+    self.pcmData = [PCMRender renderChirpData:@"hjs2tmj3qom9fa75v472"];
     
     NSError *error;
     
