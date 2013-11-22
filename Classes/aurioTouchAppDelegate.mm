@@ -51,6 +51,9 @@
 #import "AudioUnit/AudioUnit.h"
 #import "CAXException.h"
 
+#import "MetadataReceive.h"
+#import "VdiskJSON.h"
+
 @implementation aurioTouchAppDelegate
 
 // value, a, r, g, b
@@ -1121,7 +1124,7 @@ static queue   _savedBuffer[32];
                     char res_char;
                     num_to_char(final_result[i], &res_char);
                     
-                    //[string ]
+                    [string appendFormat:@"%c", res_char];
                 }
                 
             }
@@ -1129,8 +1132,9 @@ static queue   _savedBuffer[32];
             //请求
             
             //NSMutableString *string = [NSString stringWithFormat:@""];
+            NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", string];
             
-            NSURL *url = [NSURL URLWithString:@"http://rest.sinaapp.com/?c=rest&a=get&code="];
+            NSURL *url = [NSURL URLWithString:urlString];
             ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
             [request setDelegate:self];
             [request startAsynchronous];
@@ -1455,18 +1459,40 @@ static queue   _savedBuffer[32];
 
 #pragma mark - ASIHTTPRequestDelegate
 
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    // Use when fetching text data
-    NSString *responseString = [request responseString];
+- (void)requestFinished:(ASIHTTPRequest *)request {
     
-    // Use when fetching binary data
-    NSData *responseData = [request responseData];
+    if ([request responseStatusCode] != 200) {
+        
+        NSLog(@"Error: listen error!");
+        
+    }else {
+        
+        NSDictionary *dict = [[request responseString] JSONValue];
+        
+        if ([dict isKindOfClass:[NSDictionary class]]) {
+            
+            MetadataReceive *metadataReceive = [[MetadataReceive alloc] initWithDictionary:dict];
+            
+            NSLog(@"%@", metadataReceive.code);
+            NSLog(@"%@", metadataReceive.sha1);
+            NSLog(@"%@", metadataReceive.type);
+            NSLog(@"%@", metadataReceive.ctime);
+            NSLog(@"%@", metadataReceive.content);
+            NSLog(@"%@", metadataReceive.size);
+            
+        }else {
+            
+            NSLog(@"Error: return format error!");
+        }
+    }
+    
+    _isListenning = YES;
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    
     NSError *error = [request error];
+    NSLog(@"%@", error);
 }
 
 @end

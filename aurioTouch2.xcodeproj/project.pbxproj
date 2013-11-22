@@ -40,6 +40,13 @@
 		ADB16D1C183E337900115067 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB16D1B183E337900115067 /* SystemConfiguration.framework */; };
 		ADB16D1E183E338600115067 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB16D1D183E338600115067 /* MobileCoreServices.framework */; };
 		ADB16D20183E33AB00115067 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB16D1F183E33AB00115067 /* libz.dylib */; };
+		ADB16D23183F0BAA00115067 /* MetadataReceive.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D22183F0BAA00115067 /* MetadataReceive.m */; };
+		ADB16D32183F115200115067 /* NSObject+VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D27183F115200115067 /* NSObject+VdiskJSON.m */; };
+		ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D29183F115200115067 /* NSString+VdiskJSON.m */; };
+		ADB16D34183F115200115067 /* VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2B183F115200115067 /* VdiskJSON.m */; };
+		ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2D183F115200115067 /* VdiskJsonBase.m */; };
+		ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2F183F115200115067 /* VdiskJsonParser.m */; };
+		ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D31183F115200115067 /* VdiskJsonWriter.m */; };
 		F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */; };
 		F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */; };
 		F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD150DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp */; };
@@ -121,6 +128,20 @@
 		ADB16D1B183E337900115067 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ADB16D1D183E338600115067 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		ADB16D1F183E33AB00115067 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		ADB16D21183F0BAA00115067 /* MetadataReceive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetadataReceive.h; sourceTree = "<group>"; };
+		ADB16D22183F0BAA00115067 /* MetadataReceive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetadataReceive.m; sourceTree = "<group>"; };
+		ADB16D26183F115200115067 /* NSObject+VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VdiskJSON.h"; sourceTree = "<group>"; };
+		ADB16D27183F115200115067 /* NSObject+VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VdiskJSON.m"; sourceTree = "<group>"; };
+		ADB16D28183F115200115067 /* NSString+VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VdiskJSON.h"; sourceTree = "<group>"; };
+		ADB16D29183F115200115067 /* NSString+VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VdiskJSON.m"; sourceTree = "<group>"; };
+		ADB16D2A183F115200115067 /* VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJSON.h; sourceTree = "<group>"; };
+		ADB16D2B183F115200115067 /* VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJSON.m; sourceTree = "<group>"; };
+		ADB16D2C183F115200115067 /* VdiskJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonBase.h; sourceTree = "<group>"; };
+		ADB16D2D183F115200115067 /* VdiskJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonBase.m; sourceTree = "<group>"; };
+		ADB16D2E183F115200115067 /* VdiskJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonParser.h; sourceTree = "<group>"; };
+		ADB16D2F183F115200115067 /* VdiskJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonParser.m; sourceTree = "<group>"; };
+		ADB16D30183F115200115067 /* VdiskJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonWriter.h; sourceTree = "<group>"; };
+		ADB16D31183F115200115067 /* VdiskJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonWriter.m; sourceTree = "<group>"; };
 		F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aurio_helper.cpp; sourceTree = "<group>"; };
 		F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurio_helper.h; sourceTree = "<group>"; };
 		F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
@@ -164,6 +185,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				ADB16D25183F115200115067 /* JSON */,
 				ADB16CF9183E31FE00115067 /* ASIHTTPRequest */,
 				A16C46DD0DE37EC400F4A0B3 /* EAGLView.h */,
 				A16C46DC0DE37EC400F4A0B3 /* EAGLView.m */,
@@ -171,6 +193,8 @@
 				A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */,
 				1D3623240D0F684500981E51 /* aurioTouchAppDelegate.h */,
 				1D3623250D0F684500981E51 /* aurioTouchAppDelegate.mm */,
+				ADB16D21183F0BAA00115067 /* MetadataReceive.h */,
+				ADB16D22183F0BAA00115067 /* MetadataReceive.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -303,6 +327,25 @@
 			path = ASIHTTPRequest;
 			sourceTree = "<group>";
 		};
+		ADB16D25183F115200115067 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				ADB16D26183F115200115067 /* NSObject+VdiskJSON.h */,
+				ADB16D27183F115200115067 /* NSObject+VdiskJSON.m */,
+				ADB16D28183F115200115067 /* NSString+VdiskJSON.h */,
+				ADB16D29183F115200115067 /* NSString+VdiskJSON.m */,
+				ADB16D2A183F115200115067 /* VdiskJSON.h */,
+				ADB16D2B183F115200115067 /* VdiskJSON.m */,
+				ADB16D2C183F115200115067 /* VdiskJsonBase.h */,
+				ADB16D2D183F115200115067 /* VdiskJsonBase.m */,
+				ADB16D2E183F115200115067 /* VdiskJsonParser.h */,
+				ADB16D2F183F115200115067 /* VdiskJsonParser.m */,
+				ADB16D30183F115200115067 /* VdiskJsonWriter.h */,
+				ADB16D31183F115200115067 /* VdiskJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		F74ADD0E0DDA24AA0046BEC2 /* iPublicUtility */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,19 +459,26 @@
 				3FD001E21829D8B900971B43 /* rscode.cpp in Sources */,
 				ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */,
 				3FD001E01829D8B900971B43 /* kiss_fft.c in Sources */,
+				ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */,
 				1D3623260D0F684500981E51 /* aurioTouchAppDelegate.mm in Sources */,
 				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
+				ADB16D23183F0BAA00115067 /* MetadataReceive.m in Sources */,
+				ADB16D32183F115200115067 /* NSObject+VdiskJSON.m in Sources */,
+				ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */,
 				ADB16D17183E31FE00115067 /* ASINetworkQueue.m in Sources */,
 				3FD001D41829D89E00971B43 /* bb_freq_util.cpp in Sources */,
 				F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */,
 				ADB16D10183E31FE00115067 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD1C0DDA24AA0046BEC2 /* CAXException.cpp in Sources */,
+				ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */,
+				ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */,
 				A16C46DE0DE37EC400F4A0B3 /* EAGLView.m in Sources */,
 				3FD001DF1829D8B900971B43 /* kiss_fastfir.c in Sources */,
 				A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */,
 				ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */,
 				ADB16D18183E31FE00115067 /* Reachability.m in Sources */,
+				ADB16D34183F115200115067 /* VdiskJSON.m in Sources */,
 				3FD001E8182A1AC500971B43 /* queue.cpp in Sources */,
 				ADB16D15183E31FE00115067 /* ASIHTTPRequest.m in Sources */,
 				F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */,
