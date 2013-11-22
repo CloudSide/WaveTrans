@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* aurioTouchAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* aurioTouchAppDelegate.mm */; };
+		1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.mm */; };
 		1D3623EC0D0F72F000981E51 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */; };
 		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -67,13 +67,13 @@
 		0765F5860DF0DC28006468E4 /* rad2fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rad2fft.c; sourceTree = "<group>"; };
 		0765F5870DF0DC28006468E4 /* rad2fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rad2fft.h; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* aurioTouchAppDelegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = aurioTouchAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* aurioTouchAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = aurioTouchAppDelegate.mm; sourceTree = "<group>"; };
+		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = AppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* aurioTouch2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aurioTouch2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* WaveTrans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaveTrans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* aurioTouch2_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurioTouch2_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* WaveTrans_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTrans_Prefix.pch; sourceTree = "<group>"; };
 		3FD001D01829D82500971B43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		3FD001D21829D89E00971B43 /* bb_freq_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bb_freq_util.cpp; sourceTree = "<group>"; };
 		3FD001D31829D89E00971B43 /* bb_freq_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bb_freq_util.h; sourceTree = "<group>"; };
@@ -202,8 +202,8 @@
 				A16C46DC0DE37EC400F4A0B3 /* EAGLView.m */,
 				A10A0C0D0DEDE20700E5A482 /* FFTBufferManager.h */,
 				A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */,
-				1D3623240D0F684500981E51 /* aurioTouchAppDelegate.h */,
-				1D3623250D0F684500981E51 /* aurioTouchAppDelegate.mm */,
+				1D3623240D0F684500981E51 /* AppDelegate.h */,
+				1D3623250D0F684500981E51 /* AppDelegate.mm */,
 				ADB16D21183F0BAA00115067 /* MetadataReceive.h */,
 				ADB16D22183F0BAA00115067 /* MetadataReceive.m */,
 				ADF1D0D8183F47FE000BF5B5 /* RootViewController.h */,
@@ -215,7 +215,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* aurioTouch2.app */,
+				1D6058910D05DD3D006BFB54 /* WaveTrans.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,7 +248,7 @@
 				F74ADD0E0DDA24AA0046BEC2 /* iPublicUtility */,
 				F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */,
 				F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */,
-				32CA4F630368D1EE00C91783 /* aurioTouch2_Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* WaveTrans_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.mm */,
 			);
 			name = "Other Sources";
@@ -417,9 +417,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* aurioTouch2 */ = {
+		1D6058900D05DD3D006BFB54 /* WaveTrans */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "aurioTouch2" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "WaveTrans" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -429,9 +429,9 @@
 			);
 			dependencies = (
 			);
-			name = aurioTouch2;
+			name = WaveTrans;
 			productName = aurioTouch;
-			productReference = 1D6058910D05DD3D006BFB54 /* aurioTouch2.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* WaveTrans.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -442,7 +442,7 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "aurioTouch2" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WaveTrans" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -456,7 +456,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* aurioTouch2 */,
+				1D6058900D05DD3D006BFB54 /* WaveTrans */,
 			);
 		};
 /* End PBXProject section */
@@ -492,7 +492,7 @@
 				3FD001E01829D8B900971B43 /* kiss_fft.c in Sources */,
 				ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */,
 				ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */,
-				1D3623260D0F684500981E51 /* aurioTouchAppDelegate.mm in Sources */,
+				1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */,
 				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
@@ -531,10 +531,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = aurioTouch2_Prefix.pch;
+				GCC_PREFIX_HEADER = WaveTrans_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = aurioTouch2;
+				PRODUCT_NAME = WaveTrans;
 			};
 			name = Debug;
 		};
@@ -543,10 +543,10 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = aurioTouch2_Prefix.pch;
+				GCC_PREFIX_HEADER = WaveTrans_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = aurioTouch2;
+				PRODUCT_NAME = WaveTrans;
 			};
 			name = Release;
 		};
@@ -579,7 +579,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "aurioTouch2" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "WaveTrans" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -588,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "aurioTouch2" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WaveTrans" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

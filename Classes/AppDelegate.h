@@ -85,7 +85,7 @@ inline double linearInterp(double valA, double valB, double fract)
 	return valA + ((valB - valA) * fract);
 }
 
-@interface aurioTouchAppDelegate : NSObject <UIApplicationDelegate, EAGLViewDelegate, ASIHTTPRequestDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate, EAGLViewDelegate, ASIHTTPRequestDelegate> {
     UIWindow*			window;
     EAGLView*			view;
 	
@@ -152,7 +152,7 @@ inline double linearInterp(double valA, double valB, double fract)
 
 @property (nonatomic, retain)   ASIHTTPRequest *request;
 
-+ (aurioTouchAppDelegate *)sharedAppDelegate;
++ (AppDelegate *)sharedAppDelegate;
 
 - (void)setListenning:(BOOL)state;
 

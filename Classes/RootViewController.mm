@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 #import "PCMRender.h"
 
-#import "aurioTouchAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface RootViewController ()
 
@@ -69,7 +69,7 @@
 
 - (void)playAction:(id)sender
 {
-    [[aurioTouchAppDelegate sharedAppDelegate] setListenning:NO];
+    [[AppDelegate sharedAppDelegate] setListenning:NO];
     
     self.pcmData = [PCMRender renderChirpData:@"hjs2tmj3qom9fa75v472"];
     
@@ -100,25 +100,25 @@
 /* audioPlayerDidFinishPlaying:successfully: is called when a sound has finished playing. This method is NOT called if the player is stopped due to an interruption. */
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    [[aurioTouchAppDelegate sharedAppDelegate] setListenning:YES];
+    [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
 /* if an error occurs while decoding it will be reported to the delegate. */
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error
 {
-    [[aurioTouchAppDelegate sharedAppDelegate] setListenning:YES];
+    [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
 /* audioPlayerBeginInterruption: is called when the audio session has been interrupted while the player was playing. The player will have been paused. */
 - (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player
 {
-    [[aurioTouchAppDelegate sharedAppDelegate] setListenning:YES];
+    [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
 /* audioPlayerEndInterruption: is called when the preferred method, audioPlayerEndInterruption:withFlags:, is not implemented. */
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player
 {
-    [[aurioTouchAppDelegate sharedAppDelegate] setListenning:YES];
+    [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
 @end
