@@ -47,6 +47,9 @@
 		ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2F183F115200115067 /* VdiskJsonParser.m */; };
 		ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D31183F115200115067 /* VdiskJsonWriter.m */; };
 		ADF1D0DA183F47FE000BF5B5 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0D9183F47FE000BF5B5 /* RootViewController.m */; };
+		ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0DD183F58BE000BF5B5 /* PCMRender.m */; };
+		ADF1D0E1183F58BE000BF5B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0DF183F58BE000BF5B5 /* ViewController.m */; };
+		ADF1D0E3183F5B16000BF5B5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */; };
 		F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */; };
 		F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */; };
 		F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD150DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp */; };
@@ -143,6 +146,11 @@
 		ADB16D31183F115200115067 /* VdiskJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonWriter.m; sourceTree = "<group>"; };
 		ADF1D0D8183F47FE000BF5B5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		ADF1D0D9183F47FE000BF5B5 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		ADF1D0DC183F58BE000BF5B5 /* PCMRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMRender.h; sourceTree = "<group>"; };
+		ADF1D0DD183F58BE000BF5B5 /* PCMRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMRender.m; sourceTree = "<group>"; };
+		ADF1D0DE183F58BE000BF5B5 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		ADF1D0DF183F58BE000BF5B5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aurio_helper.cpp; sourceTree = "<group>"; };
 		F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurio_helper.h; sourceTree = "<group>"; };
 		F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
@@ -166,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADF1D0E3183F5B16000BF5B5 /* AVFoundation.framework in Frameworks */,
 				ADB16D20183E33AB00115067 /* libz.dylib in Frameworks */,
 				ADB16D1E183E338600115067 /* MobileCoreServices.framework in Frameworks */,
 				ADB16D1C183E337900115067 /* SystemConfiguration.framework in Frameworks */,
@@ -186,6 +195,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				ADF1D0DB183F58BE000BF5B5 /* PlayPCM */,
 				ADB16D25183F115200115067 /* JSON */,
 				ADB16CF9183E31FE00115067 /* ASIHTTPRequest */,
 				A16C46DD0DE37EC400F4A0B3 /* EAGLView.h */,
@@ -260,6 +270,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */,
 				ADB16D1F183E33AB00115067 /* libz.dylib */,
 				ADB16D1D183E338600115067 /* MobileCoreServices.framework */,
 				ADB16D1B183E337900115067 /* SystemConfiguration.framework */,
@@ -346,6 +357,17 @@
 				ADB16D31183F115200115067 /* VdiskJsonWriter.m */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		ADF1D0DB183F58BE000BF5B5 /* PlayPCM */ = {
+			isa = PBXGroup;
+			children = (
+				ADF1D0DC183F58BE000BF5B5 /* PCMRender.h */,
+				ADF1D0DD183F58BE000BF5B5 /* PCMRender.m */,
+				ADF1D0DE183F58BE000BF5B5 /* ViewController.h */,
+				ADF1D0DF183F58BE000BF5B5 /* ViewController.m */,
+			);
+			path = PlayPCM;
 			sourceTree = "<group>";
 		};
 		F74ADD0E0DDA24AA0046BEC2 /* iPublicUtility */ = {
@@ -461,6 +483,7 @@
 				ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */,
 				3FD001E01829D8B900971B43 /* kiss_fft.c in Sources */,
 				ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */,
+				ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */,
 				1D3623260D0F684500981E51 /* aurioTouchAppDelegate.mm in Sources */,
 				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.m in Sources */,
@@ -481,6 +504,7 @@
 				ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */,
 				ADB16D18183E31FE00115067 /* Reachability.m in Sources */,
 				ADB16D34183F115200115067 /* VdiskJSON.m in Sources */,
+				ADF1D0E1183F58BE000BF5B5 /* ViewController.m in Sources */,
 				3FD001E8182A1AC500971B43 /* queue.cpp in Sources */,
 				ADB16D15183E31FE00115067 /* ASIHTTPRequest.m in Sources */,
 				F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */,

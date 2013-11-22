@@ -1,60 +1,37 @@
 //
-//  RootViewController.m
-//  aurioTouch2
+//  ViewController.m
+//  PlayPCM
 //
-//  Created by Littlebox222 on 13-11-22.
-//
+//  Created by hanchao on 13-11-21.
+//  Copyright (c) 2013年 hanchao. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "ViewController.h"
+
 #import <stdio.h>
+
 #import "PCMRender.h"
 
-@interface RootViewController ()
+@interface ViewController ()
+
+@property (nonatomic,assign) NSInteger freqNum;
 
 @end
 
-@implementation RootViewController
-
-@synthesize audioPlayer = _audioPlayer;
-
-- (void)dealloc {
-    
-    [_audioPlayer release];
-    
-    [super dealloc];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation ViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    
-#ifdef __IPHONE_7_0
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-        
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-#endif
-    
-    
-    UIButton *playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    playButton.frame = CGRectMake(150, 350, 80, 40);
-    playButton.backgroundColor = [UIColor redColor];
-    playButton.titleLabel.text = @"play";
-    [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:playButton];
+	// Do any additional setup after loading the view, typically from a nib.
 }
+
+-(IBAction)sliderEvent:(UISlider *)slider
+{
+    self.freqNum = (NSInteger)slider.value;
+	self.freqlabel.text = [NSString stringWithFormat:@"%d",(NSInteger)slider.value];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -62,22 +39,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)playAction:(id)sender
+-(IBAction)playAction:(id)sender
 {
     NSData *pcmData = [PCMRender renderChirpData:@"abcdefghijklmnopqrstuv"];
     
     NSError *error;
-    self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:pcmData
-                                                     error:&error] autorelease];
-    
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:pcmData
+                                                     error:&error];
+
     if (error) {
         NSLog(@"error....%@",[error localizedDescription]);
     }else{
         self.audioPlayer.delegate = self;
         [self.audioPlayer prepareToPlay];
     }
-    
+
     [self.audioPlayer play];
+    
+    
+    
 }
 
 #pragma mark - AVAudioPlayerDelegate <NSObject>
@@ -105,5 +85,4 @@
 {
     
 }
-
 @end

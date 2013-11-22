@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface RootViewController : UIViewController
+@pro
+
+@interface RootViewController : UIViewController <AVAudioPlayerDelegate>
+
+@property (nonatomic,retain) AVAudioPlayer *audioPlayer;
 
 @end

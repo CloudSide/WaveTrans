@@ -1517,4 +1517,13 @@ static queue   _savedBuffer[32];
     NSLog(@"%@", error);
 }
 
+
+#pragma mark -
+
+
++ (aurioTouchAppDelegate *)sharedAppDelegate {
+    
+    return (aurioTouchAppDelegate *)[UIApplication sharedApplication].delegate;
+}
+
 @end

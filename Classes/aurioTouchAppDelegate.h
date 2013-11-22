@@ -152,5 +152,9 @@ inline double linearInterp(double valA, double valB, double fract)
 
 @property (nonatomic, retain)   ASIHTTPRequest *request;
 
++ (aurioTouchAppDelegate *)sharedAppDelegate;
+
+//- ()
+
 @end
 
