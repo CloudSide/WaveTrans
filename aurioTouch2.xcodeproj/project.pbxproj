@@ -12,6 +12,7 @@
 		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		3FB3B6A4183F5DB400AD3792 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB3B6A3183F5DB400AD3792 /* AVFoundation.framework */; };
 		3FD001D11829D82500971B43 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD001D01829D82500971B43 /* Default-568h@2x.png */; };
 		3FD001D41829D89E00971B43 /* bb_freq_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001D21829D89E00971B43 /* bb_freq_util.cpp */; };
 		3FD001DF1829D8B900971B43 /* kiss_fastfir.c in Sources */ = {isa = PBXBuildFile; fileRef = 3FD001D71829D8B900971B43 /* kiss_fastfir.c */; };
@@ -71,6 +72,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* aurioTouch2_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurioTouch2_Prefix.pch; sourceTree = "<group>"; };
+		3FB3B6A3183F5DB400AD3792 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3FD001D01829D82500971B43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3FD001D21829D89E00971B43 /* bb_freq_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bb_freq_util.cpp; sourceTree = "<group>"; };
 		3FD001D31829D89E00971B43 /* bb_freq_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bb_freq_util.h; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FB3B6A4183F5DB400AD3792 /* AVFoundation.framework in Frameworks */,
 				ADB16D20183E33AB00115067 /* libz.dylib in Frameworks */,
 				ADB16D1E183E338600115067 /* MobileCoreServices.framework in Frameworks */,
 				ADB16D1C183E337900115067 /* SystemConfiguration.framework in Frameworks */,
@@ -260,6 +263,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FB3B6A3183F5DB400AD3792 /* AVFoundation.framework */,
 				ADB16D1F183E33AB00115067 /* libz.dylib */,
 				ADB16D1D183E338600115067 /* MobileCoreServices.framework */,
 				ADB16D1B183E337900115067 /* SystemConfiguration.framework */,

@@ -54,6 +54,7 @@
 #import "MetadataReceive.h"
 #import "VdiskJSON.h"
 #import "RootViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation aurioTouchAppDelegate
 
@@ -330,9 +331,23 @@ static OSStatus	PerformThru(
     [rootViewController.view setBackgroundColor:[UIColor clearColor]];
     [rootViewController.view addSubview:self.view];
     
-    
     _isListenning = YES;
     
+#ifdef __IPHONE_7_0
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+            
+            if (!granted) {
+            
+                UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"没有开启麦克风" message:@"请到[设置]->[隐私]->[麦克风]中开启" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
+                [alertView show];
+            }
+            
+        }];
+    }
+#endif
+
 	// Turn off the idle timer, since this app doesn't rely on constant touch input
 	application.idleTimerDisabled = YES;
 	
