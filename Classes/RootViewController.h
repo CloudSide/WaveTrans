@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@pro
 
 @interface RootViewController : UIViewController <AVAudioPlayerDelegate>
 
