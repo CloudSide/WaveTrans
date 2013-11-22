@@ -74,7 +74,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* aurioTouch2_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurioTouch2_Prefix.pch; sourceTree = "<group>"; };
-		3FD001D01829D82500971B43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3FD001D01829D82500971B43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		3FD001D21829D89E00971B43 /* bb_freq_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bb_freq_util.cpp; sourceTree = "<group>"; };
 		3FD001D31829D89E00971B43 /* bb_freq_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bb_freq_util.h; sourceTree = "<group>"; };
 		3FD001D51829D8B900971B43 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
@@ -223,9 +223,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				3FD48FC41832371400091D85 /* aaa.c */,
-				3FD48FC51832371400091D85 /* aaa.php */,
-				3FD001D01829D82500971B43 /* Default-568h@2x.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -238,6 +235,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				32AEE7A8183F7F8B00C37BC5 /* temp_code */,
 				3FD001D61829D8B900971B43 /* bb_header.h */,
 				3FF42C37182A3A310008CFC7 /* kiss_fft */,
 				3FD001E6182A1AA100971B43 /* queue.h */,
@@ -284,6 +282,15 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		32AEE7A8183F7F8B00C37BC5 /* temp_code */ = {
+			isa = PBXGroup;
+			children = (
+				3FD48FC41832371400091D85 /* aaa.c */,
+				3FD48FC51832371400091D85 /* aaa.php */,
+			);
+			name = temp_code;
 			sourceTree = "<group>";
 		};
 		3FF42C37182A3A310008CFC7 /* kiss_fft */ = {
@@ -396,6 +403,7 @@
 		F7D3FD800FD49094003CBAE4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3FD001D01829D82500971B43 /* Default-568h@2x.png */,
 				F7CF73120EB126740099AA71 /* fft_off.png */,
 				F7CF73130EB126740099AA71 /* fft_on.png */,
 				F7CF73140EB126740099AA71 /* mute_off.png */,
