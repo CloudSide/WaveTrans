@@ -1528,6 +1528,7 @@ static queue   _savedBuffer[32];
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     
+    _isListenning = YES;
     NSError *error = [request error];
     NSLog(@"%@", error);
 }
