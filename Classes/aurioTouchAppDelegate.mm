@@ -485,7 +485,7 @@ static OSStatus	PerformThru(
 	
 	// Create the text view which shows the size of our oscilloscope window as we pinch/zoom
 	sampleSizeText = [[UILabel alloc] initWithFrame:CGRectMake(-62, 0, 234, 234)];
-	sampleSizeText.textAlignment = UITextAlignmentCenter;
+	sampleSizeText.textAlignment = NSTextAlignmentCenter;
 	sampleSizeText.textColor = [UIColor whiteColor];
 	sampleSizeText.text = @"0000 ms";
 	sampleSizeText.font = [UIFont boldSystemFontOfSize:36.];
