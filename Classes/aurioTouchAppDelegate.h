@@ -86,8 +86,8 @@ inline double linearInterp(double valA, double valB, double fract)
 }
 
 @interface aurioTouchAppDelegate : NSObject <UIApplicationDelegate, EAGLViewDelegate, ASIHTTPRequestDelegate> {
-	IBOutlet UIWindow*			window;
-	IBOutlet EAGLView*			view;
+    UIWindow*			window;
+    EAGLView*			view;
 	
 	UIImageView*				sampleSizeOverlay;
 	UILabel*					sampleSizeText;

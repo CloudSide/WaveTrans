@@ -78,6 +78,35 @@
 }
 
 
+- (id)initWithFrame:(CGRect)frame
+{
+	if((self = [super initWithFrame:frame])) {
+		// Get the layer
+		CAEAGLLayer *eaglLayer = (CAEAGLLayer*) self.layer;
+		
+		eaglLayer.opaque = YES;
+		
+		eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
+										[NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
+		
+		
+		context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+		
+		if(!context || ![EAGLContext setCurrentContext:context] || ![self createFramebuffer]) {
+			[self release];
+			return nil;
+		}
+		
+		animationInterval = 1.0 / 60.0;
+		
+		[self setupView];
+		[self drawView];
+	}
+	
+	return self;
+}
+
+/*
 //The GL view is stored in the nib file. When it's unarchived it's sent -initWithCoder:
 - (id)initWithCoder:(NSCoder*)coder
 {
@@ -106,6 +135,7 @@
 	
 	return self;
 }
+ */
 
 
 - (void)layoutSubviews

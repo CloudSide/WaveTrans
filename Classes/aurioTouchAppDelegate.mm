@@ -307,8 +307,29 @@ static OSStatus	PerformThru(
 
 #pragma mark-
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    
+    [self __applicationDidFinishLaunching:application];
+    
+    [self.window makeKeyAndVisible];
+    
+    return YES;
+}
+
+
+- (void)__applicationDidFinishLaunching:(UIApplication *)application
 {
+    
+    self.view = [[[EAGLView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    
+    UIViewController *c = [[[UIViewController alloc] init] autorelease];
+    self.window.rootViewController = c;
+    [c.view setBackgroundColor:[UIColor greenColor]];
+    [c.view addSubview:self.view];
+    
+    
     _isListenning = YES;
     
 	// Turn off the idle timer, since this app doesn't rely on constant touch input
