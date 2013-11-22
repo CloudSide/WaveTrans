@@ -373,7 +373,9 @@ static OSStatus	PerformThru(
 		XThrowIfError(AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(audioCategory), &audioCategory), "couldn't set audio category");
 		XThrowIfError(AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, propListener, self), "couldn't set property listener");
         
-		Float32 preferredBufferSize = .0872;
+		//Float32 preferredBufferSize = .0872;
+        Float32 preferredBufferSize = .0873;
+
 		XThrowIfError(AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(preferredBufferSize), &preferredBufferSize), "couldn't set i/o buffer duration");
 		
 		UInt32 size = sizeof(hwSampleRate);
@@ -1037,11 +1039,13 @@ static queue   _savedBuffer[32];
         int rrr[20];
         generate_data(_savedBuffer, 32, res, rrr, 20, minValue, maxValue);
         
+        /*
         if (res[0] != 17 || res[1] != 19) {
             return;
         }else {
             _isListenning = NO;
         }
+         */
         
         printf("\n================= start:(19[0]=%f), (17[2]=%f), (19[3]=%f), (17[0]*0.7=%f), (minValue=%f) ==================\n\n", queue_item_at_index(q19, 0), queue_item_at_index(q17, 2), queue_item_at_index(q19, 3), queue_item_at_index(q17, 0) * 0.7, minValue);
         
@@ -1165,6 +1169,8 @@ static queue   _savedBuffer[32];
                 }
                 
             }
+            
+            _isListenning = NO;
             
             //请求
             
