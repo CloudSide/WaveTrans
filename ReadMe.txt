@@ -1,25 +1,13 @@
-
-aurioTouch2
+WaveTrans
 
 ===========================================================================
-DESCRIPTION:
+Let's teach the machines to sing
 
-aurioTouch2 is a newer version of the aurioTouch sample. aurioTouch2 uses the Accelerate framework for the FFT (fast fourteen transform) routines. The audio chain is now also entirely in 32 bit floating point which is the native input and output format from iPhone 4/iOS 5.0 onwards.
+Try 声波传输!  --- 用声音传输数据
 
-aurioTouch2 demonstrates use of the remote i/o audio unit for handling audio input and output. The application can display the input audio in one of the forms, a regular time domain waveform, a frequency domain waveform (computed by performing a fast fourier transform on the incoming signal), and a sonogram view (a view displaying the frequency content of a signal over time, with the color signaling relative power, the y axis being frequency and the x as time). Tap the sonogram button to switch to a sonogram view, tap anywhere on the screen to return to the oscilloscope. Tap the FFT button to perform and display the input data after an FFT transform. Pinch in the oscilloscope view to expand and contract the scale for the x axis.
+   采用仿生学技术，利用声音实现文件的快速传输。采用跨平台的技术，实现手机与PC之间，或者手机之间的图片、文字、链接的传输, 以及设备间配对等。一键操作，2秒钟搞定。
 
-The code in aurioTouch2 uses the remote i/o audio unit (AURemoteIO) for input and output of audio, and OpenGL for display of the input waveform. The application also uses Audio Session Services to manage route changes (as described in Core Audio Overview).
-
-This application shows how to:
-
-	* Set up the remote i/o audio unit for input and output.
-	* Use OpenGL for graphical display of audio waveforms.
-	* Use touch events such as tapping and pinching for user interaction
-	* Use Audio Session Services to handle route changes and reconfigure the unit in response.
-	* Use Audio Session Services to set an audio session category for concurrent input and output.
-	* Use Audio Session Services to play simple alert sounds.
-	
-aurioTouch2 does not demonstrate how to handle interruptions. 
+   同时社交功能实现了微博互粉、近距离广播、电子名片交换等功能, 将来可以实现开放协议的便捷电子支付功能。
 
 
 ===========================================================================
