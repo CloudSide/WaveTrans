@@ -75,8 +75,8 @@ aurio_helper.h
 
 Helper functions for manipulating the remote i/o audio unit, responsible for setting up the remote i/o.
 
-aurioTouchAppDelegate.h
-aurioTouchAppDelegate.mm
+AppDelegate.h
+AppDelegate.mm
 
 
 The application delegate for the aurioTouch2 app, responsible for handling touch events and drawing.
@@ -105,5 +105,4 @@ CAStreamBasicDescription.h
 
 A helper class for AudioStreamBasicDescription handling and manipulation.
 
-================================================================================
-Copyright (C) 2008-2011 Apple Inc. All rights reserved.
+
