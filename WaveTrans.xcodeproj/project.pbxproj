@@ -19,10 +19,11 @@
 		32B1BDE51840F58900FFC32D /* queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE31840F58900FFC32D /* queue.cpp */; };
 		32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE71840F59400FFC32D /* rscode.cpp */; };
 		3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16CFB183E31FE00115067 /* ASIAuthenticationDialog.m */; };
-		3FD001D11829D82500971B43 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD001D01829D82500971B43 /* Default-568h@2x.png */; };
+		3FC75CF2184302A6006C84F5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF1184302A6006C84F5 /* Info.plist */; };
+		3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */; };
+		3FC75CF7184302B0006C84F5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF5184302B0006C84F5 /* icon.png */; };
 		8250CD57145B602D00806437 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8250CD56145B602D00806437 /* Accelerate.framework */; };
 		A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */; };
-		A15CFB1D0DE4A8C600FB5D08 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A15CFB1C0DE4A8C600FB5D08 /* icon.png */; };
 		A16C46DE0DE37EC400F4A0B3 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C46DC0DE37EC400F4A0B3 /* EAGLView.m */; };
 		A16C47120DE37F9E00F4A0B3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C47110DE37F9E00F4A0B3 /* OpenGLES.framework */; };
 		A16C473F0DE3801700F4A0B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C473E0DE3801700F4A0B3 /* QuartzCore.framework */; };
@@ -80,15 +81,15 @@
 		32B1BDE71840F59400FFC32D /* rscode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rscode.cpp; sourceTree = "<group>"; };
 		32B1BDE81840F59400FFC32D /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* WaveTrans_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTrans_Prefix.pch; sourceTree = "<group>"; };
-		3FD001D01829D82500971B43 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
+		3FC75CF1184302A6006C84F5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3FC75CF5184302B0006C84F5 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		8250CD55145B601A00806437 /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
 		8250CD56145B602D00806437 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		A10A0C070DEDDFD000E5A482 /* SpectrumAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpectrumAnalysis.cpp; sourceTree = "<group>"; };
 		A10A0C080DEDDFD000E5A482 /* SpectrumAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpectrumAnalysis.h; sourceTree = "<group>"; };
 		A10A0C0D0DEDE20700E5A482 /* FFTBufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTBufferManager.h; sourceTree = "<group>"; };
 		A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTBufferManager.cpp; sourceTree = "<group>"; };
-		A15CFB1C0DE4A8C600FB5D08 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		A16C46DC0DE37EC400F4A0B3 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = SOURCE_ROOT; };
 		A16C46DD0DE37EC400F4A0B3 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = SOURCE_ROOT; };
 		A16C47110DE37F9E00F4A0B3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -235,9 +236,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F7D3FD800FD49094003CBAE4 /* images */,
-				A15CFB1C0DE4A8C600FB5D08 /* icon.png */,
-				8D1107310486CEB800E47090 /* Info.plist */,
+				3FC75CF3184302B0006C84F5 /* Images */,
+				3FC75CF1184302A6006C84F5 /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -311,6 +311,15 @@
 			);
 			name = unused;
 			sourceTree = "<group>";
+		};
+		3FC75CF3184302B0006C84F5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */,
+				3FC75CF5184302B0006C84F5 /* icon.png */,
+			);
+			path = Images;
+			sourceTree = SOURCE_ROOT;
 		};
 		A10A0BFE0DEDDFD000E5A482 /* fft */ = {
 			isa = PBXGroup;
@@ -396,14 +405,6 @@
 			path = iPublicUtility;
 			sourceTree = "<group>";
 		};
-		F7D3FD800FD49094003CBAE4 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				3FD001D01829D82500971B43 /* Default-568h@2x.png */,
-			);
-			path = images;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -456,8 +457,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A15CFB1D0DE4A8C600FB5D08 /* icon.png in Resources */,
-				3FD001D11829D82500971B43 /* Default-568h@2x.png in Resources */,
+				3FC75CF2184302A6006C84F5 /* Info.plist in Resources */,
+				3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */,
+				3FC75CF7184302B0006C84F5 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
