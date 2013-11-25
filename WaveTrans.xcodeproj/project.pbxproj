@@ -18,6 +18,7 @@
 		32B1BDE11840F57A00FFC32D /* bb_freq_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDDE1840F57A00FFC32D /* bb_freq_util.cpp */; };
 		32B1BDE51840F58900FFC32D /* queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE31840F58900FFC32D /* queue.cpp */; };
 		32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE71840F59400FFC32D /* rscode.cpp */; };
+		3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16CFB183E31FE00115067 /* ASIAuthenticationDialog.m */; };
 		3FD001D11829D82500971B43 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD001D01829D82500971B43 /* Default-568h@2x.png */; };
 		8250CD57145B602D00806437 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8250CD56145B602D00806437 /* Accelerate.framework */; };
 		A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */; };
@@ -26,7 +27,6 @@
 		A16C47120DE37F9E00F4A0B3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C47110DE37F9E00F4A0B3 /* OpenGLES.framework */; };
 		A16C473F0DE3801700F4A0B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C473E0DE3801700F4A0B3 /* QuartzCore.framework */; };
 		A16C48360DE389CB00F4A0B3 /* oscilloscope.png in Resources */ = {isa = PBXBuildFile; fileRef = A16C48350DE389CB00F4A0B3 /* oscilloscope.png */; };
-		ADB16D10183E31FE00115067 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16CFB183E31FE00115067 /* ASIAuthenticationDialog.m */; };
 		ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16CFE183E31FE00115067 /* ASIDataCompressor.m */; };
 		ADB16D12183E31FE00115067 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D00183E31FE00115067 /* ASIDataDecompressor.m */; };
 		ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D02183E31FE00115067 /* ASIDownloadCache.m */; };
@@ -507,13 +507,13 @@
 				1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */,
 				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
+				3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
 				ADB16D23183F0BAA00115067 /* MetadataReceive.m in Sources */,
 				ADB16D32183F115200115067 /* NSObject+VdiskJSON.m in Sources */,
 				ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */,
 				ADB16D17183E31FE00115067 /* ASINetworkQueue.m in Sources */,
 				F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */,
-				ADB16D10183E31FE00115067 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD1C0DDA24AA0046BEC2 /* CAXException.cpp in Sources */,
 				ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */,
 				32B1BDDB1840F55900FFC32D /* kiss_fft.c in Sources */,
