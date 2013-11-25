@@ -26,5 +26,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSString *)humanReadableSize:(unsigned long long)length;
+- (NSString *)cachePath:(BOOL)create;
 
 @end

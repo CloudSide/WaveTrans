@@ -57,6 +57,57 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     return nil;
 }
 
+
+- (NSString *)documentsPath {
+    
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	
+	if ([paths count] > 0) {
+		
+		return [paths objectAtIndex:0];
+	}
+	
+	return [NSHomeDirectory() stringByAppendingString:@"/Documents"];
+}
+
+- (BOOL)createDirectory:(NSString *)path {
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *fullPath = [[self documentsPath] stringByAppendingFormat:@"/%@", path];
+    BOOL isDir = NO;
+    BOOL isExists = [fileManager fileExistsAtPath:fullPath isDirectory:&isDir];
+    
+    if (!(isExists && isDir)) {
+        
+        return  [fileManager createDirectoryAtPath:fullPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+    } else {
+        
+        return YES;
+    }
+}
+
+
+- (NSString *)cachePath:(BOOL)create { //如果文件所在目录不存在，create参数判断是否创建
+    
+    if ([self.type isEqualToString:@"file"] && self.sha1 != nil && [self.sha1 isKindOfClass:[NSString class]] && ![self.sha1 isEqualToString:@""]) {
+        
+        NSString *theUserCachePath = [NSString stringWithFormat:@"cache/files/%@", self.sha1];
+        
+        if (create) {
+            
+            [self createDirectory:theUserCachePath];
+        }
+        
+        NSString *theFileCachePath = [theUserCachePath stringByAppendingFormat:@"/%@", self.filename];
+        NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:theFileCachePath];
+        
+        return cachePath;
+    }
+	
+	return nil;
+}
+
 - (NSString *)filename {
 
     if (self.fileURL) {
@@ -147,5 +198,67 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     
     return self;
 }
+
+- (BOOL)isEqual:(id)object {
+    
+    if (object == self) return YES;
+    if (![object isKindOfClass:[MetadataReceive class]]) return NO;
+    
+    MetadataReceive *other = (MetadataReceive *)object;
+   
+    if ([other.type isEqualToString:self.type] && [other.sha1 isEqualToString:self.sha1] && [other.code isEqualToString:self.code] && other.totalBytes == self.totalBytes) {
+        
+        if ([self.type isEqualToString:@"file"]) {
+            
+            if ([self.filename isEqualToString:other.filename]) {
+                
+                return YES;
+            
+            } else {
+            
+                return NO;
+            }
+            
+        } else {
+        
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+
+
+
+#pragma mark NSCoding methods
+
+- (id)initWithCoder:(NSCoder *)coder {
+    
+    if ((self = [super init])) {
+        
+        _totalBytes = [coder decodeInt64ForKey:@"totalBytes"];
+        _content = [[coder decodeObjectForKey:@"content"] retain];
+        _code = [[coder decodeObjectForKey:@"code"] retain];
+        _sha1 = [[coder decodeObjectForKey:@"sha1"] retain];
+        _type = [[coder decodeObjectForKey:@"type"] retain];
+        _ctime = [[coder decodeObjectForKey:@"ctime"] retain];
+        
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [coder encodeInt64:_totalBytes forKey:@"totalBytes"];
+    [coder encodeObject:_content forKey:@"content"];
+    [coder encodeObject:_code forKey:@"code"];
+    [coder encodeObject:_sha1 forKey:@"sha1"];
+    [coder encodeObject:_type forKey:@"type"];
+    [coder encodeObject:_ctime forKey:@"ctime"];
+}
+
+
 
 @end
