@@ -17,7 +17,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, ReceiveRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
-
+    
+    BOOL _cancelled;
 }
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
@@ -31,6 +32,13 @@
 @synthesize audioPlayer = _audioPlayer;
 @synthesize pcmData = _pcmData;
 @synthesize request = _request;
+
+- (NSString *)filePath: (NSString* )fileName {
+    
+    NSString *filePath  = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"cache/files/%@", fileName]];
+    
+    return filePath;
+}
 
 - (void)dealloc {
     
@@ -127,6 +135,7 @@
     [self.audioPlayer play];
 }
 
+
 #pragma mark - UIActionSheetDelegate Method
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -147,6 +156,7 @@
             
         case 1://From album
             picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.mediaTypes = [[[NSArray alloc] initWithObjects:@"public.image", @"public.movie", nil] autorelease];
             [self presentViewController:picker animated:YES completion:^{}];
             break;
             
@@ -162,23 +172,83 @@
     
     [UIApplication sharedApplication].statusBarHidden = NO;
     
-//    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-//    NSData *data;
-    
     ALAssetsLibrary *assetLibrary=[[[ALAssetsLibrary alloc] init] autorelease];
     
     [assetLibrary assetForURL:[info valueForKey:UIImagePickerControllerReferenceURL] resultBlock:^(ALAsset *asset) {
         
         ALAssetRepresentation *rep = [asset defaultRepresentation];
-        Byte *buffer = (Byte*)malloc(rep.size);
-        NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
-        NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         
-        //[data writeToFile:photoFile atomically:YES];
-    
+        NSString *mediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", rep.filename]];
+        
+        NSLog(@"%@", mediaFile);
+
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        [fileManager removeItemAtPath:mediaFile error:nil];
+        
+        //
+            
+        NSMutableData *emptyData = [[NSMutableData alloc] initWithLength:0];
+        [fileManager createFileAtPath:mediaFile contents:emptyData attributes:nil];
+        [emptyData release];
+        
+        NSFileHandle *theFileHandle = [NSFileHandle fileHandleForWritingAtPath:mediaFile];
+        
+        unsigned long long offset = 0;
+        unsigned long long length;
+        
+        long long theItemSize = [[asset defaultRepresentation] size];
+        
+        long long bufferLength = 16384;
+        
+        if (theItemSize > 262144) {
+            
+            bufferLength = 262144;
+            
+        } else if (theItemSize > 65536) {
+            
+            bufferLength = 65536;
+        }
+        
+        NSError *err = nil;
+        uint8_t *buffer = (uint8_t *)malloc(bufferLength);
+        
+        while ((length = [[asset defaultRepresentation] getBytes:buffer fromOffset:offset length:bufferLength error:&err]) > 0 && err == nil) {
+            
+            NSData *data = [[NSData alloc] initWithBytes:buffer length:length];
+            [theFileHandle writeData:data];
+            [data release];
+            offset += length;
+        }
+        
+        free(buffer);
+        [theFileHandle closeFile];
+        
+        
+        NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)mediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
+        
+
+        
+        //WaveTransMetadata *metadata
+        
+//        
+//        if (![fileManager fileExistsAtPath:cachePath]) {
+//            
+//        }
+//        [fileManager moveItemAtPath:mediaFile toPath:[self filePath:[NSString stringWithFormat:@"%@/%@", sha1, rep.filename]] error:nil];
+//        
+//        [self uploadRequestWithFileName:cachePath];
+        
+        //}else {
+            
+        //    [self uploadRequestWithFileName:cachePath];
+        //}
+        
     } failureBlock:^(NSError *err) {
         
         NSLog(@"Error: %@",[err localizedDescription]);
+        
+        return;
     }];
     
 }
@@ -223,6 +293,19 @@
     [_request startAsynchronous];
 }
 
+- (void)uploadRequestWithFileName:(NSString *)string {
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/post&type=file"];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    [_request clearDelegatesAndCancel];
+    [_request appendPostDataFromFile:string];
+    [_request setRequestMethod:@"POST"];
+    self.request = [ASIFormDataRequest requestWithURL:url];
+    [_request setDelegate:self];
+    [_request startAsynchronous];
+}
 
 #pragma mark - ASIHTTPRequestDelegate
 
