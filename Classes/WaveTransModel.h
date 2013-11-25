@@ -10,21 +10,13 @@
 #import "Database.h"
 #import "WaveTransMetadata.h"
 
-@interface WaveTransModel : NSObject {
-    
-    Database *_database;
-}
+@interface WaveTransModel : NSObject
 
 
-- (NSError *)lastError;
-- (int)lastErrorCode;
-- (NSString *)lastErrorMessage;
-
-
-- (NSMutableArray *)metadataList;
-- (unsigned long long)insertOrReplaceMetadata:(WaveTransMetadata *)metadata;
-- (BOOL)deleteMetadata:(WaveTransMetadata *)metadata;
-- (BOOL)existMetadata:(WaveTransMetadata *)metadata;
++ (NSMutableArray *)metadataList;
++ (unsigned long long)insertOrReplaceMetadata:(WaveTransMetadata *)metadata;
++ (BOOL)deleteMetadata:(WaveTransMetadata *)metadata;
++ (BOOL)existMetadata:(WaveTransMetadata *)metadata;
 
 
 @end

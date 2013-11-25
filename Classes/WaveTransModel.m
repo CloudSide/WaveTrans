@@ -8,8 +8,68 @@
 
 #import "WaveTransModel.h"
 
+@interface WaveTransModel () {
+    
+    Database *_database;
+}
+
+- (NSError *)lastError;
+- (int)lastErrorCode;
+- (NSString *)lastErrorMessage;
+
+- (NSMutableArray *)metadataList;
+- (unsigned long long)insertOrReplaceMetadata:(WaveTransMetadata *)metadata;
+- (BOOL)deleteMetadata:(WaveTransMetadata *)metadata;
+- (BOOL)existMetadata:(WaveTransMetadata *)metadata;
+
+@end
+
 
 @implementation WaveTransModel
+
+
++ (NSMutableArray *)metadataList {
+    
+    WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
+    NSMutableArray *metadataList = [waveTransModel metadataList];
+    [waveTransModel release];
+
+    return metadataList;
+}
+
++ (unsigned long long)insertOrReplaceMetadata:(WaveTransMetadata *)metadata {
+
+    WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
+    unsigned long long result = [waveTransModel insertOrReplaceMetadata:metadata];
+    [waveTransModel release];
+    
+    return result;
+}
+
++ (BOOL)deleteMetadata:(WaveTransMetadata *)metadata {
+    
+    WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
+    BOOL result = [waveTransModel deleteMetadata:metadata];
+    [waveTransModel release];
+    
+    return result;
+}
+
++ (BOOL)existMetadata:(WaveTransMetadata *)metadata {
+    
+    WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
+    BOOL result = [waveTransModel existMetadata:metadata];
+    [waveTransModel release];
+    
+    return result;
+}
+
+
+
+
+
+#pragma mark - implementation
+
 
 
 
