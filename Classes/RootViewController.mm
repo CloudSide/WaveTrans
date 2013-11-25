@@ -13,8 +13,10 @@
 #import "VdiskJSON.h"
 #import "ASIFormDataRequest.h"
 #import "AppDelegate.h"
+#import "MBProgressHUD.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
-@interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, ReceiveRequestDelegate> {
+@interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, ReceiveRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
 
 }
 
@@ -74,8 +76,8 @@
     albumButton.frame = CGRectMake(50, 350, 80, 40);
     albumButton.backgroundColor = [UIColor redColor];
     albumButton.titleLabel.text = @"album";
-    [albumButton addTarget:self action:@selector(openAlbum:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:playButton];
+    [albumButton addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:albumButton];
     
     self.pcmData = [[[NSData alloc] init] autorelease];
 }
@@ -88,7 +90,12 @@
 
 - (void)openAlbum {
     
-    
+    UIActionSheet *chooseImageSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"Cancel"
+                                                    destructiveButtonTitle:nil
+                                                         otherButtonTitles:@"Camera",@"Photo library", nil];
+    [chooseImageSheet showInView:self.view];
 }
 
 - (void)playAction:(id)sender
@@ -118,6 +125,62 @@
     }
     
     [self.audioPlayer play];
+}
+
+#pragma mark - UIActionSheetDelegate Method
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerController * picker = [[[UIImagePickerController alloc] init] autorelease];
+    picker.delegate = self;
+    
+    switch (buttonIndex) {
+        case 0://Take picture
+            
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                
+            }else{
+                NSLog(@"模拟器无法打开相机");
+            }
+            [self presentViewController:picker animated:YES completion:^{}];
+            break;
+            
+        case 1://From album
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:picker animated:YES completion:^{}];
+            break;
+            
+        default:
+            
+            break;
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    
+//    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+//    NSData *data;
+    
+    ALAssetsLibrary *assetLibrary=[[[ALAssetsLibrary alloc] init] autorelease];
+    
+    [assetLibrary assetForURL:[info valueForKey:UIImagePickerControllerReferenceURL] resultBlock:^(ALAsset *asset) {
+        
+        ALAssetRepresentation *rep = [asset defaultRepresentation];
+        Byte *buffer = (Byte*)malloc(rep.size);
+        NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+        
+        //[data writeToFile:photoFile atomically:YES];
+    
+    } failureBlock:^(NSError *err) {
+        
+        NSLog(@"Error: %@",[err localizedDescription]);
+    }];
+    
 }
 
 #pragma mark - AVAudioPlayerDelegate <NSObject>
