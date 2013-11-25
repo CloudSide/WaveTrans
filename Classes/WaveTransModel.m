@@ -233,8 +233,6 @@
 }
 
 
-
-
 - (BOOL)deleteMetadata:(WaveTransMetadata *)metadata {
 	
     if ([metadata isKindOfClass:[WaveTransMetadata class]]) {
