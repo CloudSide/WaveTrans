@@ -48,7 +48,6 @@
 		ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D31183F115200115067 /* VdiskJsonWriter.m */; };
 		ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0D9183F47FE000BF5B5 /* RootViewController.mm */; };
 		ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0DD183F58BE000BF5B5 /* PCMRender.m */; };
-		ADF1D0E1183F58BE000BF5B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0DF183F58BE000BF5B5 /* ViewController.m */; };
 		ADF1D0E3183F5B16000BF5B5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */; };
 		F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */; };
 		F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */; };
@@ -319,6 +318,15 @@
 			path = rscode;
 			sourceTree = "<group>";
 		};
+		3FC75CEE1842F462006C84F5 /* unused */ = {
+			isa = PBXGroup;
+			children = (
+				ADF1D0DE183F58BE000BF5B5 /* ViewController.h */,
+				ADF1D0DF183F58BE000BF5B5 /* ViewController.m */,
+			);
+			name = unused;
+			sourceTree = "<group>";
+		};
 		A10A0BFE0DEDDFD000E5A482 /* fft */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,10 +389,9 @@
 		ADF1D0DB183F58BE000BF5B5 /* PlayPCM */ = {
 			isa = PBXGroup;
 			children = (
+				3FC75CEE1842F462006C84F5 /* unused */,
 				ADF1D0DC183F58BE000BF5B5 /* PCMRender.h */,
 				ADF1D0DD183F58BE000BF5B5 /* PCMRender.m */,
-				ADF1D0DE183F58BE000BF5B5 /* ViewController.h */,
-				ADF1D0DF183F58BE000BF5B5 /* ViewController.m */,
 			);
 			path = PlayPCM;
 			sourceTree = "<group>";
@@ -524,7 +531,6 @@
 				ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */,
 				ADB16D18183E31FE00115067 /* Reachability.m in Sources */,
 				ADB16D34183F115200115067 /* VdiskJSON.m in Sources */,
-				ADF1D0E1183F58BE000BF5B5 /* ViewController.m in Sources */,
 				ADB16D15183E31FE00115067 /* ASIHTTPRequest.m in Sources */,
 				F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */,
 				32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */,
