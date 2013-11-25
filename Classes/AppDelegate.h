@@ -61,13 +61,13 @@
 #import "bb_header.h"
 #import "queue.h"
 
-#import "ASIHTTPRequest.h"
-
 #define SPECTRUM_BAR_WIDTH 4
 
 #ifndef CLAMP
 #define CLAMP(min,x,max) (x < min ? min : (x > max ? max : x))
 #endif
+
+@protocol ReceiveRequestDelegate;
 
 typedef enum aurioTouchDisplayMode {
 	aurioTouchDisplayModeOscilloscopeWaveform, 
@@ -85,7 +85,7 @@ inline double linearInterp(double valA, double valB, double fract)
 	return valA + ((valB - valA) * fract);
 }
 
-@interface AppDelegate : NSObject <UIApplicationDelegate, EAGLViewDelegate, ASIHTTPRequestDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate, EAGLViewDelegate> {
     UIWindow*			window;
     EAGLView*			view;
 	
@@ -150,11 +150,17 @@ inline double linearInterp(double valA, double valB, double fract)
 @property (nonatomic, assign)	BOOL					mute;
 @property (nonatomic, assign)	AURenderCallbackStruct	inputProc;
 
-@property (nonatomic, retain)   ASIHTTPRequest *request;
+@property (nonatomic, assign)   id<ReceiveRequestDelegate> receiveRequestDelegate;
 
 + (AppDelegate *)sharedAppDelegate;
 
 - (void)setListenning:(BOOL)state;
+
+@end
+
+@protocol ReceiveRequestDelegate <NSObject>
+
+- (void)receiveRequestWithString:(NSString *)string;
 
 @end
 

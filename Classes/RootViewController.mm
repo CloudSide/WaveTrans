@@ -8,10 +8,19 @@
 
 #import "RootViewController.h"
 #import "PCMRender.h"
-
+#import "AppDelegate.h"
+#import "MetadataReceive.h"
+#import "VdiskJSON.h"
+#import "ASIFormDataRequest.h"
 #import "AppDelegate.h"
 
-@interface RootViewController ()
+@interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, ReceiveRequestDelegate> {
+
+}
+
+@property (nonatomic, retain) ASIFormDataRequest *request;
+@property (nonatomic,retain) AVAudioPlayer *audioPlayer;
+@property (nonatomic, retain) NSData *pcmData;
 
 @end
 
@@ -19,11 +28,15 @@
 
 @synthesize audioPlayer = _audioPlayer;
 @synthesize pcmData = _pcmData;
+@synthesize request = _request;
 
 - (void)dealloc {
     
     [_audioPlayer release];
     [_pcmData release];
+    
+    [_request clearDelegatesAndCancel];
+    [_request release];
     
     [super dealloc];
 }
@@ -55,7 +68,13 @@
     playButton.backgroundColor = [UIColor redColor];
     playButton.titleLabel.text = @"play";
     [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:playButton];
     
+    UIButton *albumButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    albumButton.frame = CGRectMake(50, 350, 80, 40);
+    albumButton.backgroundColor = [UIColor redColor];
+    albumButton.titleLabel.text = @"album";
+    [albumButton addTarget:self action:@selector(openAlbum:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:playButton];
     
     self.pcmData = [[[NSData alloc] init] autorelease];
@@ -66,6 +85,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void)playAction:(id)sender
 {
@@ -88,6 +108,7 @@
     if (error) {
         NSLog(@"error....%@",[error localizedDescription]);
     }else{
+        
         self.audioPlayer.delegate = self;
         [self.audioPlayer prepareToPlay];
     }
@@ -119,6 +140,60 @@
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player
 {
     [[AppDelegate sharedAppDelegate] setListenning:YES];
+}
+
+#pragma mark - ReceiveRequestDelegate <NSObject>
+
+- (void)receiveRequestWithString:(NSString *)string {
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", string];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    [_request clearDelegatesAndCancel];
+    self.request = [ASIHTTPRequest requestWithURL:url];
+    [_request setDelegate:self];
+    [_request startAsynchronous];
+}
+
+
+#pragma mark - ASIHTTPRequestDelegate
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    
+    if ([request responseStatusCode] != 200) {
+        
+        NSLog(@"Error: listen error!");
+        
+    }else {
+        
+        NSDictionary *dict = [[request responseString] JSONValue];
+        
+        if ([dict isKindOfClass:[NSDictionary class]]) {
+            
+            MetadataReceive *metadataReceive = [[MetadataReceive alloc] initWithDictionary:dict];
+            
+            NSLog(@"%@", metadataReceive.code);
+            NSLog(@"%@", metadataReceive.sha1);
+            NSLog(@"%@", metadataReceive.type);
+            NSLog(@"%@", metadataReceive.ctime);
+            NSLog(@"%@", metadataReceive.content);
+            NSLog(@"%@", metadataReceive.size);
+            
+        }else {
+            
+            NSLog(@"Error: return format error!");
+        }
+    }
+    
+    [[AppDelegate sharedAppDelegate] setListenning:YES];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    
+    [[AppDelegate sharedAppDelegate] setListenning:YES];
+    NSError *error = [request error];
+    NSLog(@"%@", error);
 }
 
 @end

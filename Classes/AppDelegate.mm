@@ -50,9 +50,6 @@
 #import "AppDelegate.h"
 #import "AudioUnit/AudioUnit.h"
 #import "CAXException.h"
-
-#import "MetadataReceive.h"
-#import "VdiskJSON.h"
 #import "RootViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -77,7 +74,7 @@ GLfloat colorLevels[] = {
 @synthesize mute;
 @synthesize inputProc;
 
-@synthesize request = _request;
+@synthesize receiveRequestDelegate = _receiveRequestDelegate;
 
 #pragma mark-
 
@@ -543,6 +540,8 @@ static OSStatus	PerformThru(
 	[window release];
 	
 	free(oscilLine);
+    
+    _receiveRequestDelegate = nil;
     
 	[super dealloc];
 }
@@ -1174,13 +1173,10 @@ static queue   _savedBuffer[32];
             
             //请求
             
-            //NSMutableString *string = [NSString stringWithFormat:@""];
-            NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", string];
-            
-            NSURL *url = [NSURL URLWithString:urlString];
-            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-            [request setDelegate:self];
-            [request startAsynchronous];
+            if (self.receiveRequestDelegate != nil && [self.receiveRequestDelegate respondsToSelector:@selector(receiveRequestWithString:)]) {
+                
+                [self.receiveRequestDelegate receiveRequestWithString:string];
+            }
         }
         
         /*
@@ -1499,46 +1495,6 @@ static queue   _savedBuffer[32];
 		}
 	}
 }
-
-#pragma mark - ASIHTTPRequestDelegate
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    
-    if ([request responseStatusCode] != 200) {
-        
-        NSLog(@"Error: listen error!");
-        
-    }else {
-        
-        NSDictionary *dict = [[request responseString] JSONValue];
-        
-        if ([dict isKindOfClass:[NSDictionary class]]) {
-            
-            MetadataReceive *metadataReceive = [[MetadataReceive alloc] initWithDictionary:dict];
-            
-            NSLog(@"%@", metadataReceive.code);
-            NSLog(@"%@", metadataReceive.sha1);
-            NSLog(@"%@", metadataReceive.type);
-            NSLog(@"%@", metadataReceive.ctime);
-            NSLog(@"%@", metadataReceive.content);
-            NSLog(@"%@", metadataReceive.size);
-            
-        }else {
-            
-            NSLog(@"Error: return format error!");
-        }
-    }
-    
-    _isListenning = YES;
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    
-    _isListenning = YES;
-    NSError *error = [request error];
-    NSLog(@"%@", error);
-}
-
 
 #pragma mark -
 

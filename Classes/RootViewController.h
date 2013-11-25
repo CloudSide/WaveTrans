@@ -10,10 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-@interface RootViewController : UIViewController <AVAudioPlayerDelegate>
+@interface RootViewController : UIViewController
 
-@property (nonatomic,retain) AVAudioPlayer *audioPlayer;
-
-@property (nonatomic, retain) NSData *pcmData;
 
 @end
