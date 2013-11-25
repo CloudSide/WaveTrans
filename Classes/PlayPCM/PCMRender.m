@@ -194,8 +194,8 @@ void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int f
 }
 
 
-+(NSData *)renderChirpData:(NSString *)serializeStr
-{
++ (NSData *)renderChirpData:(NSString *)serializeStr {
+
     if (serializeStr && serializeStr.length > 0) {
     
         /*

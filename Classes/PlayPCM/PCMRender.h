@@ -10,6 +10,6 @@
 
 @interface PCMRender : NSObject
 
-+(NSData *)renderChirpData:(NSString *)serializeStr;
++ (NSData *)renderChirpData:(NSString *)serializeStr;
 
 @end
