@@ -135,6 +135,11 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     }
 }
 
+- (BOOL)hasCache {
+    
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self cachePath:NO]];
+}
+
 
 - (NSString *)cachePath:(BOOL)create { //如果文件所在目录不存在，create参数判断是否创建
     

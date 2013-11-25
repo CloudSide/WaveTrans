@@ -24,8 +24,19 @@
 @property (nonatomic, readonly) NSString *filename;
 @property (nonatomic, readonly) NSURL *fileURL;
 @property (nonatomic, readonly) NSString *reader;
+@property (nonatomic, readonly) BOOL hasCache;
+
+/*
+ code
+ sha1
+ type
+ content
+ size
+ ctime
+ */
 
 - (id)initWithDictionary:(NSDictionary *)dict;
+
 + (NSString *)humanReadableSize:(unsigned long long)length;
 - (NSString *)cachePath:(BOOL)create;
 + (NSString *)codeWithSha1:(NSString *)sha1;
