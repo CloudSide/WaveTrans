@@ -21,6 +21,42 @@
 
 static NSDictionary *kSharedFileExtNameDictionary = nil;
 
++ (NSString *)codeWithSha1:(NSString *)sha1 {
+
+    if ([sha1 length] != 40) {
+        
+        return nil;
+    }
+    
+    unsigned int codeInt[20];
+    
+    for (int i=0; i<40; i+=2) {
+        
+        unsigned int hexAsInt;
+        [[NSScanner scannerWithString:[sha1 substringWithRange:NSMakeRange(i, 2)]] scanHexInt:&hexAsInt];
+        codeInt[i/2] = hexAsInt;
+    }
+    
+    NSMutableArray *codes = [NSMutableArray array];
+    
+    for (int i = 0; i < 10; i++) {
+        
+        unsigned int n1 = codeInt[i];
+        unsigned int n2 = codeInt[19-i];
+        NSString *n3 = [NSString stringWithFormat:@"%06d", ((n1 * n1) + (n2 * n2))];
+        n3 = [n3 substringWithRange:NSMakeRange(1, 4)];
+        
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        unsigned int n4 = [[formatter numberFromString:n3] unsignedIntValue];
+        unsigned int n5 = n4 % 32;
+        char n6;
+        num_to_char(n5, &n6);
+        [codes addObject:[NSString stringWithFormat:@"%c", n6]];
+    }
+    
+    return [codes componentsJoinedByString:@""];
+}
+
 
 + (NSDictionary *)sharedFileExtNameDictionary {
     
@@ -47,6 +83,16 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 	}
 	
 	return @"0 Bytes";
+}
+
+- (NSString *)code {
+
+    if (_code == nil && _sha1 != nil && [_sha1 isKindOfClass:[NSString class]]) {
+        
+        _code = [[WaveTransMetadata codeWithSha1:_sha1] retain];
+    }
+    
+    return _code;
 }
 
 - (NSURL *)fileURL {
@@ -293,12 +339,12 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     
-    [coder encodeInt64:_totalBytes forKey:@"totalBytes"];
-    [coder encodeObject:_content forKey:@"content"];
-    [coder encodeObject:_code forKey:@"code"];
-    [coder encodeObject:_sha1 forKey:@"sha1"];
-    [coder encodeObject:_type forKey:@"type"];
-    [coder encodeObject:_ctime forKey:@"ctime"];
+    [coder encodeInt64:self.totalBytes forKey:@"totalBytes"];
+    [coder encodeObject:self.content forKey:@"content"];
+    [coder encodeObject:self.code forKey:@"code"];
+    [coder encodeObject:self.sha1 forKey:@"sha1"];
+    [coder encodeObject:self.type forKey:@"type"];
+    [coder encodeObject:self.ctime forKey:@"ctime"];
 }
 
 
