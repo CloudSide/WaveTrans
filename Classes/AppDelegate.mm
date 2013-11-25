@@ -449,6 +449,7 @@ static OSStatus	PerformThru(
 	// Enable multi touch so we can handle pinch and zoom in the oscilloscope
 	view.multipleTouchEnabled = YES;
 	
+    
 	// Set up our overlay view that pops up when we are pinching/zooming the oscilloscope
 	UIImage *img_ui = nil;
 	{
@@ -609,6 +610,7 @@ static OSStatus	PerformThru(
 
 - (void)setupViewForOscilloscope
 {
+    return; // 下面这些图被删了，所以log会报一堆错
 	CGImageRef img;
 	
 	// Load our GL textures
