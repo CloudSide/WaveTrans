@@ -15,7 +15,7 @@
 @property (nonatomic, retain, readwrite) NSString *sha1;
 @property (nonatomic, retain, readwrite) NSString *type;
 @property (nonatomic, retain, readwrite) NSDate *ctime;
-@property (nonatomic, retain, readwrite) NSString *content;
+@property (nonatomic, retain) NSString *content;
 @property (nonatomic, readonly) NSString *size;
 @property (nonatomic, readwrite) long long totalBytes;
 @property (nonatomic, retain, readwrite) NSString *rsCode;
@@ -40,5 +40,6 @@
 + (NSString *)humanReadableSize:(unsigned long long)length;
 - (NSString *)cachePath:(BOOL)create;
 + (NSString *)codeWithSha1:(NSString *)sha1;
+
 
 @end
