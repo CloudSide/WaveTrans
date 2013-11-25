@@ -54,8 +54,10 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
-        // Custom initialization
+        
+        [[AppDelegate sharedAppDelegate] setReceiveRequestDelegate:self];
     }
     return self;
 }
