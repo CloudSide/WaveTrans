@@ -6,11 +6,11 @@
 //
 //
 
-#import "MetadataReceive.h"
+#import "WaveTransMetadata.h"
 #import "rscode.h"
 #import "bb_freq_util.h"
 
-@implementation MetadataReceive
+@implementation WaveTransMetadata
 
 @synthesize code = _code;
 @synthesize sha1 = _sha1;
@@ -177,7 +177,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 
 - (NSString *)size {
 
-    return [MetadataReceive humanReadableSize:self.totalBytes];
+    return [WaveTransMetadata humanReadableSize:self.totalBytes];
 }
 
 - (NSString *)reader {
@@ -190,18 +190,18 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
         
         NSString *extName = [[nameItems lastObject] lowercaseString];
         
-        if ([[[MetadataReceive sharedFileExtNameDictionary] objectForKey:extName] isKindOfClass:[NSDictionary class]]) {
+        if ([[[WaveTransMetadata sharedFileExtNameDictionary] objectForKey:extName] isKindOfClass:[NSDictionary class]]) {
             
-            reader = [[[MetadataReceive sharedFileExtNameDictionary] objectForKey:extName] objectForKey:@"reader"];
+            reader = [[[WaveTransMetadata sharedFileExtNameDictionary] objectForKey:extName] objectForKey:@"reader"];
             
         } else {
             
-            reader = [[[MetadataReceive sharedFileExtNameDictionary] objectForKey:@"other"] objectForKey:@"reader"];
+            reader = [[[WaveTransMetadata sharedFileExtNameDictionary] objectForKey:@"other"] objectForKey:@"reader"];
         }
         
     } else {
         
-        reader = [[[MetadataReceive sharedFileExtNameDictionary] objectForKey:@"other"] objectForKey:@"reader"];
+        reader = [[[WaveTransMetadata sharedFileExtNameDictionary] objectForKey:@"other"] objectForKey:@"reader"];
     }
     
     return reader;
@@ -244,9 +244,9 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 - (BOOL)isEqual:(id)object {
     
     if (object == self) return YES;
-    if (![object isKindOfClass:[MetadataReceive class]]) return NO;
+    if (![object isKindOfClass:[WaveTransMetadata class]]) return NO;
     
-    MetadataReceive *other = (MetadataReceive *)object;
+    WaveTransMetadata *other = (WaveTransMetadata *)object;
    
     if ([other.type isEqualToString:self.type] && [other.sha1 isEqualToString:self.sha1] && [other.code isEqualToString:self.code] && other.totalBytes == self.totalBytes) {
         

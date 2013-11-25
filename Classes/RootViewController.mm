@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 #import "PCMRender.h"
 #import "AppDelegate.h"
-#import "MetadataReceive.h"
+#import "WaveTransMetadata.h"
 #import "VdiskJSON.h"
 #import "ASIFormDataRequest.h"
 #import "AppDelegate.h"
@@ -175,7 +175,7 @@
         
         if ([dict isKindOfClass:[NSDictionary class]]) {
             
-            MetadataReceive *metadataReceive = [[MetadataReceive alloc] initWithDictionary:dict];
+            WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
             
             NSLog(@"%@", metadataReceive.code);
             NSLog(@"%@", metadataReceive.sha1);

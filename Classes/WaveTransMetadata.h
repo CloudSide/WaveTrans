@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MetadataReceive : NSObject
+@interface WaveTransMetadata : NSObject
 
 @property (nonatomic, retain, readwrite) NSString *code;
 @property (nonatomic, retain, readwrite) NSString *sha1;
