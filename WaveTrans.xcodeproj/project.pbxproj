@@ -18,6 +18,14 @@
 		32B1BDE11840F57A00FFC32D /* bb_freq_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDDE1840F57A00FFC32D /* bb_freq_util.cpp */; };
 		32B1BDE51840F58900FFC32D /* queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE31840F58900FFC32D /* queue.cpp */; };
 		32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE71840F59400FFC32D /* rscode.cpp */; };
+		3F4E4F8C184355D5006D7205 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F82184355D5006D7205 /* FMDatabase.m */; };
+		3F4E4F8D184355D5006D7205 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F84184355D5006D7205 /* FMDatabaseAdditions.m */; };
+		3F4E4F8E184355D5006D7205 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F86184355D5006D7205 /* FMDatabasePool.m */; };
+		3F4E4F8F184355D5006D7205 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F88184355D5006D7205 /* FMDatabaseQueue.m */; };
+		3F4E4F91184355D5006D7205 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F8B184355D5006D7205 /* FMResultSet.m */; };
+		3F4E4F93184355EE006D7205 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4E4F92184355EE006D7205 /* libsqlite3.dylib */; };
+		3F4E4F96184360AD006D7205 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F95184360AD006D7205 /* Database.m */; };
+		3F4E4F9918436439006D7205 /* WaveTransModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F9818436439006D7205 /* WaveTransModel.m */; };
 		3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA69696184323DF00B6FFDE /* VdiskBase64.m */; };
 		3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FA696991843247C00B6FFDE /* Images.xcassets */; };
 		3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CFD18431DB0006C84F5 /* FileExt.plist */; };
@@ -86,6 +94,22 @@
 		32B1BDE71840F59400FFC32D /* rscode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rscode.cpp; sourceTree = "<group>"; };
 		32B1BDE81840F59400FFC32D /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* WaveTrans_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTrans_Prefix.pch; sourceTree = "<group>"; };
+		3F4E4F81184355D5006D7205 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		3F4E4F82184355D5006D7205 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		3F4E4F83184355D5006D7205 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		3F4E4F84184355D5006D7205 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		3F4E4F85184355D5006D7205 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		3F4E4F86184355D5006D7205 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		3F4E4F87184355D5006D7205 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		3F4E4F88184355D5006D7205 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		3F4E4F89184355D5006D7205 /* fmdb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmdb.m; sourceTree = "<group>"; };
+		3F4E4F8A184355D5006D7205 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		3F4E4F8B184355D5006D7205 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		3F4E4F92184355EE006D7205 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		3F4E4F94184360AD006D7205 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		3F4E4F95184360AD006D7205 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		3F4E4F9718436439006D7205 /* WaveTransModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTransModel.h; sourceTree = "<group>"; };
+		3F4E4F9818436439006D7205 /* WaveTransModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveTransModel.m; sourceTree = "<group>"; };
 		3FA69695184323DF00B6FFDE /* VdiskBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
 		3FA69696184323DF00B6FFDE /* VdiskBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskBase64.m; sourceTree = "<group>"; };
 		3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
@@ -173,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F4E4F93184355EE006D7205 /* libsqlite3.dylib in Frameworks */,
 				3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */,
 				ADF1D0E3183F5B16000BF5B5 /* AVFoundation.framework in Frameworks */,
 				ADB16D20183E33AB00115067 /* libz.dylib in Frameworks */,
@@ -195,10 +220,15 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3F4E4F80184355D5006D7205 /* FMDB */,
 				ADBE4A2B18432EF700B8E6A3 /* MBProgressHUD */,
 				3FA69694184323DF00B6FFDE /* VdiskBase64 */,
 				3FC75CFF1843236D006C84F5 /* VdiskUtil.h */,
 				3FC75D001843236D006C84F5 /* VdiskUtil.m */,
+				3F4E4F9718436439006D7205 /* WaveTransModel.h */,
+				3F4E4F9818436439006D7205 /* WaveTransModel.m */,
+				3F4E4F94184360AD006D7205 /* Database.h */,
+				3F4E4F95184360AD006D7205 /* Database.m */,
 				ADF1D0DB183F58BE000BF5B5 /* PlayPCM */,
 				ADB16D25183F115200115067 /* JSON */,
 				ADB16CF9183E31FE00115067 /* ASIHTTPRequest */,
@@ -267,6 +297,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F4E4F92184355EE006D7205 /* libsqlite3.dylib */,
 				3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */,
 				ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */,
 				ADB16D1F183E33AB00115067 /* libz.dylib */,
@@ -324,6 +355,24 @@
 				32B1BDE81840F59400FFC32D /* rscode.h */,
 			);
 			path = rscode;
+			sourceTree = "<group>";
+		};
+		3F4E4F80184355D5006D7205 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				3F4E4F81184355D5006D7205 /* FMDatabase.h */,
+				3F4E4F82184355D5006D7205 /* FMDatabase.m */,
+				3F4E4F83184355D5006D7205 /* FMDatabaseAdditions.h */,
+				3F4E4F84184355D5006D7205 /* FMDatabaseAdditions.m */,
+				3F4E4F85184355D5006D7205 /* FMDatabasePool.h */,
+				3F4E4F86184355D5006D7205 /* FMDatabasePool.m */,
+				3F4E4F87184355D5006D7205 /* FMDatabaseQueue.h */,
+				3F4E4F88184355D5006D7205 /* FMDatabaseQueue.m */,
+				3F4E4F89184355D5006D7205 /* fmdb.m */,
+				3F4E4F8A184355D5006D7205 /* FMResultSet.h */,
+				3F4E4F8B184355D5006D7205 /* FMResultSet.m */,
+			);
+			path = FMDB;
 			sourceTree = "<group>";
 		};
 		3FA69694184323DF00B6FFDE /* VdiskBase64 */ = {
@@ -516,22 +565,28 @@
 				32B1BDDA1840F55900FFC32D /* kiss_fastfir.c in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
 				ADB16D12183E31FE00115067 /* ASIDataDecompressor.m in Sources */,
+				3F4E4F8C184355D5006D7205 /* FMDatabase.m in Sources */,
 				ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */,
 				32B1BDDC1840F55900FFC32D /* kiss_fftr.c in Sources */,
+				3F4E4F8D184355D5006D7205 /* FMDatabaseAdditions.m in Sources */,
 				ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */,
 				ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */,
 				3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */,
 				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
 				3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */,
+				3F4E4F9918436439006D7205 /* WaveTransModel.m in Sources */,
+				3F4E4F96184360AD006D7205 /* Database.m in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
 				3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
 				ADB16D23183F0BAA00115067 /* WaveTransMetadata.mm in Sources */,
+				3F4E4F8F184355D5006D7205 /* FMDatabaseQueue.m in Sources */,
 				ADB16D32183F115200115067 /* NSObject+VdiskJSON.m in Sources */,
 				ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */,
 				ADB16D17183E31FE00115067 /* ASINetworkQueue.m in Sources */,
 				F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */,
+				3F4E4F8E184355D5006D7205 /* FMDatabasePool.m in Sources */,
 				F74ADD1C0DDA24AA0046BEC2 /* CAXException.cpp in Sources */,
 				ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */,
 				32B1BDDB1840F55900FFC32D /* kiss_fft.c in Sources */,
@@ -546,6 +601,7 @@
 				ADB16D15183E31FE00115067 /* ASIHTTPRequest.m in Sources */,
 				F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */,
 				32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */,
+				3F4E4F91184355D5006D7205 /* FMResultSet.m in Sources */,
 				ADB16D16183E31FE00115067 /* ASIInputStream.m in Sources */,
 				32B1BDE51840F58900FFC32D /* queue.cpp in Sources */,
 			);
