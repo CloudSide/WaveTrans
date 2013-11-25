@@ -16,7 +16,7 @@
 #import "MBProgressHUD.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, ReceiveRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
+@interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
     
     BOOL _cancelled;
 }
@@ -57,7 +57,7 @@
     
     if (self) {
         
-        [[AppDelegate sharedAppDelegate] setReceiveRequestDelegate:self];
+        [[AppDelegate sharedAppDelegate] setGetWaveTransMetadataDelegate:self];
     }
     return self;
 }
@@ -74,13 +74,14 @@
     }
 #endif
     
-    
+    /*
     UIButton *playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     playButton.frame = CGRectMake(150, 350, 80, 40);
     playButton.backgroundColor = [UIColor redColor];
     playButton.titleLabel.text = @"play";
     [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:playButton];
+     */
     
     UIButton *albumButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     albumButton.frame = CGRectMake(50, 350, 80, 40);
@@ -99,7 +100,9 @@
 }
 
 - (void)openAlbum {
+    
     [[AppDelegate sharedAppDelegate] setListenning:NO];
+    
     UIActionSheet *chooseImageSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                                   delegate:self
                                                          cancelButtonTitle:@"Cancel"
@@ -108,11 +111,50 @@
     [chooseImageSheet showInView:self.view];
 }
 
+/*
 - (void)playAction:(id)sender
 {
     [[AppDelegate sharedAppDelegate] setListenning:NO];
     
     self.pcmData = [PCMRender renderChirpData:@"hjs2tmj3qom9fa75v472"];
+    
+    NSError *error;
+    
+    if (self.audioPlayer != nil) {
+        
+        [self.audioPlayer prepareToPlay];
+        
+    }else {
+        
+        self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:self.pcmData error:&error] autorelease];
+    }
+    
+    
+    if (error) {
+        NSLog(@"error....%@",[error localizedDescription]);
+    }else{
+        
+        self.audioPlayer.delegate = self;
+        [self.audioPlayer prepareToPlay];
+    }
+    
+    [self.audioPlayer play];
+}
+ */
+
+- (void)playWithMetadata:(WaveTransMetadata *)metadata
+{
+    [[AppDelegate sharedAppDelegate] setListenning:NO];
+    
+    if (metadata == nil || metadata.sha1 == nil) {
+        
+        //TODO:数据错误，发声失败
+        
+        return;
+    }
+    
+    // 测试直接用[WaveTransMetadata codeWithSha1:metadata.sha1]获取code发声
+    self.pcmData = [PCMRender renderChirpData:[WaveTransMetadata codeWithSha1:metadata.sha1]];
     
     NSError *error;
     
@@ -164,6 +206,8 @@
             
         default:
             
+            // 取消时重新开启监听
+            [[AppDelegate sharedAppDelegate] setListenning:YES];
             break;
     }
 }
@@ -171,7 +215,6 @@
 #pragma mark - UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
     [UIApplication sharedApplication].statusBarHidden = NO;
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
@@ -181,21 +224,14 @@
         
         ALAssetsLibrary *assetLibrary=[[[ALAssetsLibrary alloc] init] autorelease];
         
-        NSLog(@"%@", (NSURL *)[info valueForKey:UIImagePickerControllerReferenceURL]);
-        
         [assetLibrary assetForURL:(NSURL *)[info valueForKey:UIImagePickerControllerReferenceURL] resultBlock:^(ALAsset *asset) {
             
             ALAssetRepresentation *rep = [asset defaultRepresentation];
             
             NSString *mediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", rep.filename]];
             
-            NSLog(@"%@", mediaFile);
-            
             NSFileManager *fileManager = [NSFileManager defaultManager];
-            
             [fileManager removeItemAtPath:mediaFile error:nil];
-            
-            
             
             if (![fileManager createDirectoryAtPath:[mediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
                 
@@ -255,9 +291,22 @@
             
             NSLog(@"%@", cachePath);
             
-            if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:nil]) {
+            NSError *error;
+            if ([fileManager fileExistsAtPath:cachePath]) {
                 
-                [self uploadRequestWithFilePath:metadata];
+                // 如果有缓存，直接发声
+                //[self playWithMetadata:metadata];
+                
+            }else if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
+                
+                // 如果没有，上传，收到code后发声
+                [self uploadRequestWithMetadata:metadata];
+                
+            }else {
+                
+                // 没有缓存且移动文件失败，报错
+                // TODO:错误提示
+                NSLog(@"move file error: %@", error);
             }
             
         } failureBlock:^(NSError *err) {
@@ -308,9 +357,9 @@
     [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
-#pragma mark - ReceiveRequestDelegate <NSObject>
+#pragma mark - GetWaveTransMetadataDelegate <NSObject>
 
-- (void)receiveRequestWithString:(NSString *)string {
+- (void)getWaveTransMetadataWithString:(NSString *)string {
     
     NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", string];
     
@@ -319,10 +368,11 @@
     [_request clearDelegatesAndCancel];
     self.request = [ASIHTTPRequest requestWithURL:url];
     [_request setDelegate:self];
+    [_request setDownloadProgressDelegate:self];
     [_request startAsynchronous];
 }
 
-- (void)uploadRequestWithFilePath:(WaveTransMetadata *)metadata {
+- (void)uploadRequestWithMetadata:(WaveTransMetadata *)metadata {
     
     NSURL *url = [NSURL URLWithString:@"http://rest.sinaapp.com/api/post"];
     
@@ -337,23 +387,9 @@
     [_request addFile:[metadata cachePath:NO] forKey:@"file"];
     [_request addPostValue:metadata.type forKey:@"type"];
     
+    [_request setUploadProgressDelegate:self];
+    
     [_request startAsynchronous];
-}
-
-- (void)uploadRequestWithURL:(NSURL *)url {
-    
-    /*
-    NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/post&type=file"];
-    
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    [_request clearDelegatesAndCancel];
-    [_request appendPostDataFromFile:string];
-    [_request setRequestMethod:@"POST"];
-    self.request = [ASIFormDataRequest requestWithURL:url];
-    [_request setDelegate:self];
-    [_request startAsynchronous];
-     */
 }
 
 #pragma mark - ASIHTTPRequestDelegate
@@ -363,18 +399,42 @@
     if ([request responseStatusCode] != 200) {
         
         NSLog(@"Error: listen error!");
+        [[AppDelegate sharedAppDelegate] setListenning:YES];
         
-    }else {
+    }else if ([[request requestMethod] isEqualToString:@"POST"]){
         
-        NSLog(@"%@", [request responseString]);
+        // 上传结束后获取返回的数据，之后发声
         
         NSDictionary *dict = [[request responseString] JSONValue];
         
         if ([dict isKindOfClass:[NSDictionary class]]) {
             
-            //WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
+            WaveTransMetadata *metadata = [[WaveTransMetadata alloc] initWithDictionary:dict];
             
-            WaveTransMetadata *metadataReceive = [_request.userInfo objectForKey:@"metadata"];
+            //WaveTransMetadata *metadataReceive = [_request.userInfo objectForKey:@"metadata"];
+            
+            NSLog(@"%@", metadata.code);
+            NSLog(@"%@", metadata.sha1);
+            NSLog(@"%@", metadata.type);
+            NSLog(@"%@", metadata.ctime);
+            NSLog(@"%@", metadata.content);
+            NSLog(@"%@", metadata.size);
+            
+            //[self playWithMetadata:metadata];
+            
+        }else {
+            
+            NSLog(@"Error: return format error!");
+            [[AppDelegate sharedAppDelegate] setListenning:YES];
+            
+        }
+    }else if ([[request requestMethod] isEqualToString:@"GET"]) {
+        
+        NSDictionary *dict = [[request responseString] JSONValue];
+        
+        if ([dict isKindOfClass:[NSDictionary class]]) {
+            
+            WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
             
             NSLog(@"%@", metadataReceive.code);
             NSLog(@"%@", metadataReceive.sha1);
@@ -382,14 +442,14 @@
             NSLog(@"%@", metadataReceive.ctime);
             NSLog(@"%@", metadataReceive.content);
             NSLog(@"%@", metadataReceive.size);
+            [[AppDelegate sharedAppDelegate] setListenning:YES];
             
         }else {
             
             NSLog(@"Error: return format error!");
+            [[AppDelegate sharedAppDelegate] setListenning:YES];
         }
     }
-    
-    [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
@@ -397,6 +457,11 @@
     [[AppDelegate sharedAppDelegate] setListenning:YES];
     NSError *error = [request error];
     NSLog(@"%@", error);
+}
+
+- (void)setProgress:(float)newProgress {
+    
+    NSLog(@"%.2f%% ", newProgress * 100);
 }
 
 @end

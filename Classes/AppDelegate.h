@@ -67,7 +67,7 @@
 #define CLAMP(min,x,max) (x < min ? min : (x > max ? max : x))
 #endif
 
-@protocol ReceiveRequestDelegate;
+@protocol GetWaveTransMetadataDelegate;
 
 typedef enum aurioTouchDisplayMode {
 	aurioTouchDisplayModeOscilloscopeWaveform, 
@@ -150,7 +150,7 @@ inline double linearInterp(double valA, double valB, double fract)
 @property (nonatomic, assign)	BOOL					mute;
 @property (nonatomic, assign)	AURenderCallbackStruct	inputProc;
 
-@property (nonatomic, assign)   id<ReceiveRequestDelegate> receiveRequestDelegate;
+@property (nonatomic, assign)   id<GetWaveTransMetadataDelegate> getWaveTransMetadataDelegate;
 
 + (AppDelegate *)sharedAppDelegate;
 
@@ -158,9 +158,9 @@ inline double linearInterp(double valA, double valB, double fract)
 
 @end
 
-@protocol ReceiveRequestDelegate <NSObject>
+@protocol GetWaveTransMetadataDelegate <NSObject>
 
-- (void)receiveRequestWithString:(NSString *)string;
+- (void)getWaveTransMetadataWithString:(NSString *)string;
 
 @end
 

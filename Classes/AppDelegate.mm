@@ -74,7 +74,7 @@ GLfloat colorLevels[] = {
 @synthesize mute;
 @synthesize inputProc;
 
-@synthesize receiveRequestDelegate = _receiveRequestDelegate;
+@synthesize getWaveTransMetadataDelegate = _getWaveTransMetadataDelegate;
 
 #pragma mark-
 
@@ -542,7 +542,7 @@ static OSStatus	PerformThru(
 	
 	free(oscilLine);
     
-    _receiveRequestDelegate = nil;
+    _getWaveTransMetadataDelegate = nil;
     
 	[super dealloc];
 }
@@ -1178,9 +1178,9 @@ static queue   _savedBuffer[32];
             
             //请求
             
-            if (self.receiveRequestDelegate != nil && [self.receiveRequestDelegate respondsToSelector:@selector(receiveRequestWithString:)]) {
+            if (self.getWaveTransMetadataDelegate != nil && [self.getWaveTransMetadataDelegate respondsToSelector:@selector(getWaveTransMetadataWithString:)]) {
                 
-                [self.receiveRequestDelegate receiveRequestWithString:string];
+                [self.getWaveTransMetadataDelegate getWaveTransMetadataWithString:string];
             }
         }
         
