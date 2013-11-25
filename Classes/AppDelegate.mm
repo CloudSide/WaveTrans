@@ -610,7 +610,9 @@ static OSStatus	PerformThru(
 
 - (void)setupViewForOscilloscope
 {
-    return; // 下面这些图被删了，所以log会报一堆错
+    // 下面这些图被删了，所以log会报一堆错
+    
+    /*
 	CGImageRef img;
 	
 	// Load our GL textures
@@ -632,6 +634,7 @@ static OSStatus	PerformThru(
     
 	img = [UIImage imageNamed:@"sonogram.png"].CGImage;
 	[self createGLTexture:&sonoTexture fromCGImage:img];
+     */
     
 	initted_oscilloscope = YES;
 }
