@@ -18,10 +18,14 @@
 		32B1BDE11840F57A00FFC32D /* bb_freq_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDDE1840F57A00FFC32D /* bb_freq_util.cpp */; };
 		32B1BDE51840F58900FFC32D /* queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE31840F58900FFC32D /* queue.cpp */; };
 		32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 32B1BDE71840F59400FFC32D /* rscode.cpp */; };
+		3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA69696184323DF00B6FFDE /* VdiskBase64.m */; };
+		3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FA696991843247C00B6FFDE /* Images.xcassets */; };
+		3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CFD18431DB0006C84F5 /* FileExt.plist */; };
+		3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */; };
 		3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16CFB183E31FE00115067 /* ASIAuthenticationDialog.m */; };
-		3FC75CF2184302A6006C84F5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF1184302A6006C84F5 /* Info.plist */; };
 		3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */; };
 		3FC75CF7184302B0006C84F5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF5184302B0006C84F5 /* icon.png */; };
+		3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC75D001843236D006C84F5 /* VdiskUtil.m */; };
 		8250CD57145B602D00806437 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8250CD56145B602D00806437 /* Accelerate.framework */; };
 		A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */; };
 		A16C46DE0DE37EC400F4A0B3 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C46DC0DE37EC400F4A0B3 /* EAGLView.m */; };
@@ -81,9 +85,17 @@
 		32B1BDE71840F59400FFC32D /* rscode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rscode.cpp; sourceTree = "<group>"; };
 		32B1BDE81840F59400FFC32D /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* WaveTrans_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTrans_Prefix.pch; sourceTree = "<group>"; };
+		3FA69695184323DF00B6FFDE /* VdiskBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
+		3FA69696184323DF00B6FFDE /* VdiskBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskBase64.m; sourceTree = "<group>"; };
+		3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
+		3FA696991843247C00B6FFDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WaveTrans/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3FC75CF1184302A6006C84F5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3FC75CF5184302B0006C84F5 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		3FC75CFD18431DB0006C84F5 /* FileExt.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FileExt.plist; sourceTree = SOURCE_ROOT; };
+		3FC75CFF1843236D006C84F5 /* VdiskUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskUtil.h; sourceTree = "<group>"; };
+		3FC75D001843236D006C84F5 /* VdiskUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskUtil.m; sourceTree = "<group>"; };
 		8250CD55145B601A00806437 /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
 		8250CD56145B602D00806437 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A10A0C070DEDDFD000E5A482 /* SpectrumAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpectrumAnalysis.cpp; sourceTree = "<group>"; };
@@ -158,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */,
 				ADF1D0E3183F5B16000BF5B5 /* AVFoundation.framework in Frameworks */,
 				ADB16D20183E33AB00115067 /* libz.dylib in Frameworks */,
 				ADB16D1E183E338600115067 /* MobileCoreServices.framework in Frameworks */,
@@ -179,6 +192,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3FA69694184323DF00B6FFDE /* VdiskBase64 */,
+				3FC75CFF1843236D006C84F5 /* VdiskUtil.h */,
+				3FC75D001843236D006C84F5 /* VdiskUtil.m */,
 				ADF1D0DB183F58BE000BF5B5 /* PlayPCM */,
 				ADB16D25183F115200115067 /* JSON */,
 				ADB16CF9183E31FE00115067 /* ASIHTTPRequest */,
@@ -236,6 +252,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3FA696991843247C00B6FFDE /* Images.xcassets */,
+				3FC75CFD18431DB0006C84F5 /* FileExt.plist */,
 				3FC75CF3184302B0006C84F5 /* Images */,
 				3FC75CF1184302A6006C84F5 /* Info.plist */,
 			);
@@ -245,6 +263,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */,
 				ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */,
 				ADB16D1F183E33AB00115067 /* libz.dylib */,
 				ADB16D1D183E338600115067 /* MobileCoreServices.framework */,
@@ -303,6 +322,16 @@
 			path = rscode;
 			sourceTree = "<group>";
 		};
+		3FA69694184323DF00B6FFDE /* VdiskBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				3FA69695184323DF00B6FFDE /* VdiskBase64.h */,
+				3FA69696184323DF00B6FFDE /* VdiskBase64.m */,
+				3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */,
+			);
+			path = VdiskBase64;
+			sourceTree = "<group>";
+		};
 		3FC75CEE1842F462006C84F5 /* unused */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,8 +344,8 @@
 		3FC75CF3184302B0006C84F5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */,
 				3FC75CF5184302B0006C84F5 /* icon.png */,
+				3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */,
 			);
 			path = Images;
 			sourceTree = SOURCE_ROOT;
@@ -457,7 +486,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FC75CF2184302A6006C84F5 /* Info.plist in Resources */,
+				3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */,
+				3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */,
 				3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */,
 				3FC75CF7184302B0006C84F5 /* icon.png in Resources */,
 			);
@@ -478,7 +508,9 @@
 				ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */,
 				ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */,
+				3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */,
 				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
+				3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
 				3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
@@ -511,6 +543,8 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -525,6 +559,8 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WaveTrans_Prefix.pch;
