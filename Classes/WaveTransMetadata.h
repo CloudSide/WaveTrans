@@ -35,6 +35,10 @@
  ctime
  */
 
+
+- (void)setFilename:(NSString *)filename;
+
+
 - (id)initWithDictionary:(NSDictionary *)dict;
 
 + (NSString *)humanReadableSize:(unsigned long long)length;

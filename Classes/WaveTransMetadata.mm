@@ -17,6 +17,7 @@
 @synthesize type = _type;
 @synthesize ctime = _ctime;
 @synthesize content = _content;
+@synthesize filename = _filename;
 
 
 static NSDictionary *kSharedFileExtNameDictionary = nil;
@@ -201,7 +202,23 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     return nil;
 }
 
+- (void)setFilename:(NSString *)filename {
+
+    if (_filename) {
+        
+        [_filename release];
+        _filename = nil;
+    }
+    
+    _filename = [filename copy];
+}
+
 - (NSString *)filename {
+    
+    if (_filename) {
+        
+        return _filename;
+    }
 
     if (self.fileURL) {
         
@@ -266,6 +283,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     [_type release];
     [_ctime release];
     [_content release];
+    [_filename release];
     
     [super dealloc];
 }
@@ -276,10 +294,10 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
         
         @try {
             
-            self.code = [NSString stringWithFormat:@"%@", [dict objectForKey:@"code"]];
-            self.sha1 = [NSString stringWithFormat:@"%@", [dict objectForKey:@"sha1"]];
-            self.type = [NSString stringWithFormat:@"%@", [dict objectForKey:@"type"]];
-            self.content = [NSString stringWithFormat:@"%@", [dict objectForKey:@"content"]];
+            self.code = [dict objectForKey:@"code"];
+            self.sha1 = [dict objectForKey:@"sha1"];
+            self.type = [dict objectForKey:@"type"];
+            self.content = [dict objectForKey:@"content"];
             self.totalBytes = [[NSString stringWithFormat:@"%@", [dict objectForKey:@"size"]] longLongValue];
             self.ctime = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"ctime"] doubleValue]];
         

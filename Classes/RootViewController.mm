@@ -97,7 +97,7 @@
 }
 
 - (void)openAlbum {
-    
+    [[AppDelegate sharedAppDelegate] setListenning:NO];
     UIActionSheet *chooseImageSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                                   delegate:self
                                                          cancelButtonTitle:@"Cancel"
@@ -248,7 +248,10 @@
                                                                                             @"ctime":[NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]}] autorelease];
             
             
-            NSString *cachePath = [metadata cachePath:NO];
+            [metadata setFilename:rep.filename];
+            NSString *cachePath = [metadata cachePath:YES];
+            
+            NSLog(@"%@", cachePath);
             
             if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:nil]) {
                 
@@ -257,6 +260,9 @@
             
         } failureBlock:^(NSError *err) {
             
+            
+            //TODO:提示错误
+            
             NSLog(@"Error: %@",[err localizedDescription]);
             
             return;
@@ -264,8 +270,13 @@
         
     }else if ([mediaType isEqualToString:@"public.media"]) {
         
+        //TODO:拷贝视频
+        
+        
+        /*
         NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
         [self uploadRequestWithURL:url];
+         */
     }
 }
 
@@ -319,6 +330,7 @@
     
     [_request setDelegate:self];
     [_request setRequestMethod:@"POST"];
+    _request.userInfo = @{@"metadata" : metadata};
     
     [_request addFile:[metadata cachePath:NO] forKey:@"file"];
     [_request addPostValue:metadata.type forKey:@"type"];
@@ -352,11 +364,15 @@
         
     }else {
         
+        NSLog(@"%@", [request responseString]);
+        
         NSDictionary *dict = [[request responseString] JSONValue];
         
         if ([dict isKindOfClass:[NSDictionary class]]) {
             
-            WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
+            //WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
+            
+            WaveTransMetadata *metadataReceive = [_request.userInfo objectForKey:@"metadata"];
             
             NSLog(@"%@", metadataReceive.code);
             NSLog(@"%@", metadataReceive.sha1);
