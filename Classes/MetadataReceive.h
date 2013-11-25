@@ -18,6 +18,7 @@
 @property (nonatomic, retain, readwrite) NSString *content;
 @property (nonatomic, readonly) NSString *size;
 @property (nonatomic, readwrite) long long totalBytes;
+@property (nonatomic, retain, readwrite) NSString *rsCode;
 
 //file
 @property (nonatomic, readonly) NSString *filename;

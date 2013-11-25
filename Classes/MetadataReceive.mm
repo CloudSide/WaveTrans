@@ -7,6 +7,8 @@
 //
 
 #import "MetadataReceive.h"
+#import "rscode.h"
+#import "bb_freq_util.h"
 
 @implementation MetadataReceive
 
@@ -106,6 +108,46 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     }
 	
 	return nil;
+}
+
+- (NSString *)rsCode {
+
+    if (self.code && [self.code isKindOfClass:[NSString class]] && [self.code length] == 10) {
+        
+        const char *src = [self.code UTF8String];
+        
+        unsigned char data[RS_TOTAL_LEN];
+        
+        for (int i=0; i<RS_TOTAL_LEN; i++) {
+            
+            if (i < RS_DATA_LEN) {
+                
+                char_to_num(src[i], (unsigned int *)(data+i));
+                
+            } else {
+                
+                data[i] = 0;
+            }
+        }
+        
+        unsigned char *code = data + RS_DATA_LEN;
+        
+        RS *rs = init_rs(RS_SYMSIZE, RS_GFPOLY, RS_FCR, RS_PRIM, RS_NROOTS, RS_PAD);
+        encode_rs_char(rs, data, code);
+        
+        char rs_code[RS_TOTAL_LEN+1];
+        
+        for (int i=0; i<RS_TOTAL_LEN; i++) {
+            
+            num_to_char(code[i], &(rs_code[i]));
+        }
+        
+        rs_code[RS_TOTAL_LEN] = '\0';
+        
+        return [NSString stringWithUTF8String:rs_code];
+    }
+    
+    return nil;
 }
 
 - (NSString *)filename {
