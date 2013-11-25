@@ -10,13 +10,15 @@
 
 @interface MetadataReceive : NSObject
 
-@property (nonatomic, retain) NSString *code;
-@property (nonatomic, retain) NSString *sha1;
-@property (nonatomic, retain) NSString *type;
-@property (nonatomic, retain) NSDate *ctime;
-@property (nonatomic, retain) NSString *content;
-@property (nonatomic, retain) NSString *size;
+@property (nonatomic, retain, readwrite) NSString *code;
+@property (nonatomic, retain, readwrite) NSString *sha1;
+@property (nonatomic, retain, readwrite) NSString *type;
+@property (nonatomic, retain, readwrite) NSDate *ctime;
+@property (nonatomic, retain, readwrite) NSString *content;
+@property (nonatomic, retain, readwrite) NSString *size;
+@property (nonatomic, readwrite) long long totalBytes;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
++ (NSString *)humanReadableSize:(unsigned long long)length;
 
 @end

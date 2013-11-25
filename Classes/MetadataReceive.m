@@ -16,6 +16,25 @@
 @synthesize ctime = _ctime;
 @synthesize content = _content;
 
+
++ (NSString *)humanReadableSize:(unsigned long long)length {
+	
+	NSArray *filesizename = [NSArray arrayWithObjects:@" Bytes", @" KB", @" MB", @" GB", @" TB", @" PB", @" EB", @" ZB", @" YB", nil];
+	
+	if (length > 0) {
+		
+		int i = floor(log2(length) / 10);
+        if (i > 8) i = 8;
+		double s = length / pow(1024, i);
+        
+		return [NSString stringWithFormat:@"%.2f%@", s, [filesizename objectAtIndex:i]];
+	}
+	
+	return @"0 Bytes";
+}
+
+
+
 - (void)dealloc {
     
     [_code release];
@@ -23,6 +42,7 @@
     [_type release];
     [_ctime release];
     [_content release];
+    [_size release];
     
     [super dealloc];
 }
@@ -37,11 +57,12 @@
             self.sha1 = [NSString stringWithFormat:@"%@", [dict objectForKey:@"sha1"]];
             self.type = [NSString stringWithFormat:@"%@", [dict objectForKey:@"type"]];
             self.content = [NSString stringWithFormat:@"%@", [dict objectForKey:@"content"]];
-            self.size = [NSString stringWithFormat:@"%@", [dict objectForKey:@"size"]];
+            self.totalBytes = [[NSString stringWithFormat:@"%@", [dict objectForKey:@"size"]] longLongValue];
+            self.size = [MetadataReceive humanReadableSize:self.totalBytes];
             self.ctime = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"ctime"] doubleValue]];
         
-        }
-        @catch (NSException *exception) {
+        
+        } @catch (NSException *exception) {
             
             NSLog(@"%@", exception);
         }
