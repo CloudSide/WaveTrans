@@ -44,6 +44,11 @@
 }
 
 - (void)setImageURL:(NSURL *)aURL {
+    
+    if ([imageURL.absoluteString isEqualToString:aURL.absoluteString]) {
+        return;
+    }
+    
 	if(imageURL) {
 		[[EGOImageLoader sharedImageLoader] removeObserver:self forURL:imageURL];
 		[imageURL release];
