@@ -26,6 +26,8 @@
 @property (nonatomic, readonly) NSString *reader;
 @property (nonatomic, readonly) BOOL hasCache;
 
+@property (nonatomic, assign) BOOL uploaded;
+
 /*
  code
  sha1
