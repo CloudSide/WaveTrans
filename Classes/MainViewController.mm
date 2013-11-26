@@ -493,7 +493,7 @@
             
             metadataReceive.uploaded = YES;
             
-            [metadataReceive ]
+            
             
             [metadataReceive save];
             
@@ -517,6 +517,9 @@
 - (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes {
     
     NSLog(@"download : %llu/%llu", request.totalBytesRead, request.contentLength);
+    
+    
+    
 }
 - (void)request:(ASIHTTPRequest *)request didSendBytes:(long long)bytes {
     
