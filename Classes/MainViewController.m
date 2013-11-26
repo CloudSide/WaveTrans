@@ -52,6 +52,7 @@
             [wt save];
             [wt release];
         }
+        self.metadataList = [WaveTransModel metadataList];
     }
     
     self.mTableView = [[UITableView alloc] initWithFrame:self.view.frame];
