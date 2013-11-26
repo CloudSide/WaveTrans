@@ -41,6 +41,19 @@
     
     self.metadataList = [WaveTransModel metadataList];
     
+    if (self.metadataList.count ==0) {
+        
+        for (int i = 0; i<10; i++) {
+            WaveTransMetadata *wt = [[WaveTransMetadata alloc] initWithSha1:[NSString stringWithFormat:@"356a192b7913b04c54574d18c28d46e6395428a%d",i]
+                                                                       type:@"file"
+                                                                    content:@"http://sdfsdf"
+                                                                       size:1212
+                                                                   filename:@"av.avi"];
+            [wt save];
+            [wt release];
+        }
+    }
+    
     self.mTableView = [[UITableView alloc] initWithFrame:self.view.frame];
     self.mTableView.delegate = self;
     self.mTableView.dataSource = self;
