@@ -437,8 +437,6 @@
         
     }else if ([[request.userInfo objectForKey:@"apiName"] isEqualToString:@"api/post"]){
         
-        // 上传结束后获取返回的数据，之后发声
-        
         NSDictionary *dict = [[request responseString] JSONValue];
         
         if ([dict isKindOfClass:[NSDictionary class]]) {
@@ -455,6 +453,9 @@
             NSLog(@"%@", metadata.size);
             
             //[self playWithMetadata:metadata];
+            
+            WaveTransMetadata *metadataReceive = [request.userInfo objectForKey:@"metadata"];
+            [metadataReceive setUploaded:YES];
             
         }else {
             
