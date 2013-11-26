@@ -153,7 +153,7 @@
     }
     
     // 测试直接用[WaveTransMetadata codeWithSha1:metadata.sha1]获取code发声
-    self.pcmData = [PCMRender renderChirpData:[WaveTransMetadata codeWithSha1:metadata.sha1]];
+    self.pcmData = [PCMRender renderChirpData:metadata.rsCode];
     
     NSError *error;
     
@@ -214,7 +214,7 @@
 #pragma mark - UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [UIApplication sharedApplication].statusBarHidden = NO;
+    //[UIApplication sharedApplication].statusBarHidden = NO;
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     
