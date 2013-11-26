@@ -18,7 +18,6 @@
 
 @interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
     
-    BOOL _cancelled;
 }
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
