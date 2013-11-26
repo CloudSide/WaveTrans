@@ -19,6 +19,7 @@
 @synthesize ctime = _ctime;
 @synthesize content = _content;
 @synthesize filename = _filename;
+@synthesize uploaded = _uploaded;
 
 
 static NSDictionary *kSharedFileExtNameDictionary = nil;
@@ -243,7 +244,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
             
         }
         
-        return [dict objectForKey:@"fn"];
+        return _filename = [[dict objectForKey:@"fn"] copy];
         
     }
     
@@ -377,6 +378,8 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
         _sha1 = [[coder decodeObjectForKey:@"sha1"] retain];
         _type = [[coder decodeObjectForKey:@"type"] retain];
         _ctime = [[coder decodeObjectForKey:@"ctime"] retain];
+        _uploaded = [coder decodeBoolForKey:@"uploaded"];
+        _filename = [[coder decodeObjectForKey:@"filename"] retain];
         
     }
     
@@ -386,11 +389,13 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 - (void)encodeWithCoder:(NSCoder *)coder {
     
     [coder encodeInt64:self.totalBytes forKey:@"totalBytes"];
+    [coder encodeBool:self.uploaded forKey:@"uploaded"];
     [coder encodeObject:self.content forKey:@"content"];
     [coder encodeObject:self.code forKey:@"code"];
     [coder encodeObject:self.sha1 forKey:@"sha1"];
     [coder encodeObject:self.type forKey:@"type"];
     [coder encodeObject:self.ctime forKey:@"ctime"];
+    [coder encodeObject:self.filename forKey:@"filename"];
 }
 
 

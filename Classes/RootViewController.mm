@@ -15,10 +15,10 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "WaveTransModel.h"
 
 @interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
     
-    BOOL _cancelled;
 }
 
 //@property (nonatomic, retain) ASIFormDataRequest *request;
@@ -152,7 +152,7 @@
     }
     
     // 测试直接用[WaveTransMetadata codeWithSha1:metadata.sha1]获取code发声
-    self.pcmData = [PCMRender renderChirpData:[WaveTransMetadata codeWithSha1:metadata.sha1]];
+    self.pcmData = [PCMRender renderChirpData:metadata.rsCode];
     
     NSError *error;
     
@@ -208,11 +208,13 @@
 }
 
 #pragma mark - UIImagePickerControllerDelegate
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [UIApplication sharedApplication].statusBarHidden = NO;
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    //[UIApplication sharedApplication].statusBarHidden = NO;
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if ([mediaType isEqualToString:@"public.image"]) {
         
@@ -224,15 +226,20 @@
             
             NSString *mediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", rep.filename]];
             
-            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
             [fileManager removeItemAtPath:mediaFile error:nil];
             
             if (![fileManager createDirectoryAtPath:[mediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
                 
                 //TODO:提示错误
+                
+                [picker dismissViewControllerAnimated:YES completion:^{
+                    
+                    
+                }];
+                
                 return;
             }
-            
             
             
             NSMutableData *emptyData = [[NSMutableData alloc] initWithLength:0];
@@ -274,29 +281,42 @@
             
             NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)mediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
             
+            /*
             WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithDictionary:@{ @"sha1":sha1,
                                                                                             @"type":@"file",
                                                                                             @"size":[NSString stringWithFormat:@"%llu", theItemSize],
                                                                                             @"ctime":[NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]}] autorelease];
-            
-            
+             
             [metadata setFilename:rep.filename];
+             */
+            
+            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:theItemSize filename:rep.filename] autorelease];
+            metadata.uploaded = NO;
             NSString *cachePath = [metadata cachePath:YES];
             
             NSLog(@"%@", cachePath);
             
             NSError *error;
-            if ([fileManager fileExistsAtPath:cachePath]) {
+            
+            if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
                 
-                // 如果有缓存，直接发声
-                //[self playWithMetadata:metadata];
+                WaveTransMetadata *md = [WaveTransModel metadata:metadata];
                 
-            }else if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
+                if (md != nil && !md.uploaded) {
+                    
+                    [self uploadRequestWithMetadata:md];
                 
-                // 如果没有，上传，收到code后发声
-                [self uploadRequestWithMetadata:metadata];
+                } else if (md == nil) {
                 
-            }else {
+                    [metadata save];
+                    [self uploadRequestWithMetadata:metadata];
+                
+                } else {
+                
+                    [metadata save];
+                }
+                
+            } else {
                 
                 // 没有缓存且移动文件失败，报错
                 // TODO:错误提示
@@ -310,19 +330,24 @@
             
             NSLog(@"Error: %@",[err localizedDescription]);
             
-            return;
         }];
         
-    }else if ([mediaType isEqualToString:@"public.media"]) {
+    } else if ([mediaType isEqualToString:@"public.movie"]) {
         
         //TODO:拷贝视频
         
-        
         /*
+         
         NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
         [self uploadRequestWithURL:url];
+         
          */
     }
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+        
+    }];
 }
 
 #pragma mark - AVAudioPlayerDelegate <NSObject>
