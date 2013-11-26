@@ -26,6 +26,8 @@
 		3F4E4F93184355EE006D7205 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4E4F92184355EE006D7205 /* libsqlite3.dylib */; };
 		3F4E4F96184360AD006D7205 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F95184360AD006D7205 /* Database.m */; };
 		3F4E4F9918436439006D7205 /* WaveTransModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F9818436439006D7205 /* WaveTransModel.m */; };
+		3F4E4F9D18449341006D7205 /* DDHTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F9C18449341006D7205 /* DDHTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F4E4FA2184493EA006D7205 /* TextEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */; };
 		3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA69696184323DF00B6FFDE /* VdiskBase64.m */; };
 		3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FA696991843247C00B6FFDE /* Images.xcassets */; };
 		3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CFD18431DB0006C84F5 /* FileExt.plist */; };
@@ -140,6 +142,10 @@
 		3F4E4F95184360AD006D7205 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		3F4E4F9718436439006D7205 /* WaveTransModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTransModel.h; sourceTree = "<group>"; };
 		3F4E4F9818436439006D7205 /* WaveTransModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveTransModel.m; sourceTree = "<group>"; };
+		3F4E4F9B18449341006D7205 /* DDHTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHTextView.h; sourceTree = "<group>"; };
+		3F4E4F9C18449341006D7205 /* DDHTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHTextView.m; sourceTree = "<group>"; };
+		3F4E4FA0184493EA006D7205 /* TextEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEditorViewController.h; sourceTree = "<group>"; };
+		3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextEditorViewController.m; sourceTree = "<group>"; };
 		3FA69695184323DF00B6FFDE /* VdiskBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
 		3FA69696184323DF00B6FFDE /* VdiskBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskBase64.m; sourceTree = "<group>"; };
 		3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
@@ -291,6 +297,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3F4E4F9B18449341006D7205 /* DDHTextView.h */,
+				3F4E4F9C18449341006D7205 /* DDHTextView.m */,
 				C15BAFB618444E0C00690D74 /* view */,
 				3F4E4F80184355D5006D7205 /* FMDB */,
 				ADBE4A2B18432EF700B8E6A3 /* MBProgressHUD */,
@@ -316,6 +324,8 @@
 				ADF1D0D9183F47FE000BF5B5 /* RootViewController.mm */,
 				C15BAFB318444D6900690D74 /* MainViewController.h */,
 				C15BAFB418444D6900690D74 /* MainViewController.m */,
+				3F4E4FA0184493EA006D7205 /* TextEditorViewController.h */,
+				3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -731,6 +741,8 @@
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
 				3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
+				3F4E4FA2184493EA006D7205 /* TextEditorViewController.m in Sources */,
+				3F4E4F9D18449341006D7205 /* DDHTextView.m in Sources */,
 				ADB16D23183F0BAA00115067 /* WaveTransMetadata.mm in Sources */,
 				3F4E4F8F184355D5006D7205 /* FMDatabaseQueue.m in Sources */,
 				ADB16D32183F115200115067 /* NSObject+VdiskJSON.m in Sources */,
