@@ -190,6 +190,11 @@
 
 - (unsigned long long)insertOrReplaceMetadata:(WaveTransMetadata *)metadata {
     
+    if (metadata.content == nil) {
+        
+        metadata.content = @"";
+    }
+    
     if ([self existMetadata:metadata]) {
         
         if ([metadata isKindOfClass:[WaveTransMetadata class]]) {

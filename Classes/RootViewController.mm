@@ -224,7 +224,26 @@
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if ([mediaType isEqualToString:@"public.image"]) {
+    if ([mediaType isEqualToString:@"public.image"] && ![info valueForKey:UIImagePickerControllerReferenceURL]) {
+        
+        UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
+        
+        NSData *imgData = UIImagePNGRepresentation(capturedImage);
+        
+        NSString *fileName = [NSString stringWithFormat:@"%lu.png", (long)[[NSDate date] timeIntervalSince1970]];
+        
+        NSString *sha1 = [imgData SHA1EncodedString];
+        
+        WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:[imgData length] filename:fileName] autorelease];
+        metadata.uploaded = NO;
+        
+        if ([imgData writeToFile:[metadata cachePath:YES] atomically:YES]) {
+            
+            [metadata save];
+            [self uploadRequestWithMetadata:metadata];
+        }
+        
+    } else if ([mediaType isEqualToString:@"public.image"] && [info valueForKey:UIImagePickerControllerReferenceURL]) {
         
         ALAssetsLibrary *assetLibrary=[[[ALAssetsLibrary alloc] init] autorelease];
         
@@ -232,12 +251,12 @@
             
             ALAssetRepresentation *rep = [asset defaultRepresentation];
             
-            NSString *mediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", rep.filename]];
+            NSString *tmpMediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", rep.filename]];
             
             
-            [fileManager removeItemAtPath:mediaFile error:nil];
+            [fileManager removeItemAtPath:tmpMediaFile error:nil];
             
-            if (![fileManager createDirectoryAtPath:[mediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
+            if (![fileManager createDirectoryAtPath:[tmpMediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
                 
                 //TODO:提示错误
                 
@@ -251,10 +270,10 @@
             
             
             NSMutableData *emptyData = [[NSMutableData alloc] initWithLength:0];
-            [fileManager createFileAtPath:mediaFile contents:emptyData attributes:nil];
+            [fileManager createFileAtPath:tmpMediaFile contents:emptyData attributes:nil];
             [emptyData release];
             
-            NSFileHandle *theFileHandle = [NSFileHandle fileHandleForWritingAtPath:mediaFile];
+            NSFileHandle *theFileHandle = [NSFileHandle fileHandleForWritingAtPath:tmpMediaFile];
             
             unsigned long long offset = 0;
             unsigned long long length;
@@ -286,50 +305,7 @@
             free(buffer);
             [theFileHandle closeFile];
             
-            
-            NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)mediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
-            
-            /*
-            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithDictionary:@{ @"sha1":sha1,
-                                                                                            @"type":@"file",
-                                                                                            @"size":[NSString stringWithFormat:@"%llu", theItemSize],
-                                                                                            @"ctime":[NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]}] autorelease];
-             
-            [metadata setFilename:rep.filename];
-             */
-            
-            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:theItemSize filename:rep.filename] autorelease];
-            metadata.uploaded = NO;
-            NSString *cachePath = [metadata cachePath:YES];
-            
-            NSLog(@"%@", cachePath);
-            
-            NSError *error;
-            
-            if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
-                
-                WaveTransMetadata *md = [WaveTransModel metadata:metadata];
-                
-                if (md != nil && !md.uploaded) {
-                    
-                    [self uploadRequestWithMetadata:md];
-                
-                } else if (md == nil) {
-                
-                    [metadata save];
-                    [self uploadRequestWithMetadata:metadata];
-                
-                } else {
-                
-                    [metadata save];
-                }
-                
-            } else {
-                
-                // 没有缓存且移动文件失败，报错
-                // TODO:错误提示
-                NSLog(@"move file error: %@", error);
-            }
+            [self prepareToUploadWithTmpPath:tmpMediaFile fileName:rep.filename fileManager:fileManager];
             
         } failureBlock:^(NSError *err) {
             
@@ -345,10 +321,11 @@
         //TODO:拷贝视频
         
         NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
-        NSString *movieName = [url lastPathComponent];
-        NSString *mediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", movieName]];
         
-        if (![fileManager createDirectoryAtPath:[mediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
+        NSString *movieName = [url lastPathComponent];
+        NSString *tmpMediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", movieName]];
+        
+        if (![fileManager createDirectoryAtPath:[tmpMediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
             
             //TODO:提示错误
             
@@ -360,67 +337,63 @@
             return;
         }
         
-        if ([fileManager moveItemAtURL:url toURL:[NSURL URLWithString:mediaFile] error:nil]) {
+        NSError *err;
+        
+        if ([fileManager moveItemAtURL:url toURL:[NSURL fileURLWithPath:tmpMediaFile] error:&err]) {
             
-            NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)mediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
-            
-            NSString *fileSize;
-            [url getResourceValue:&fileSize forKey:NSURLFileSizeKey error:nil];
-            
-            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:[fileSize longLongValue] filename:movieName] autorelease];
-            metadata.uploaded = NO;
-            
-            NSString *cachePath = [metadata cachePath:YES];
-            NSLog(@"%@", cachePath);
-            
-            NSError *error;
-            
-            if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
-                
-                WaveTransMetadata *meta = [WaveTransModel metadata:metadata];
-                
-                if (meta != nil && !meta.uploaded) {
-                    
-                    [self uploadRequestWithMetadata:meta];
-                    
-                } else if (meta == nil) {
-                    
-                    [metadata save];
-                    [self uploadRequestWithMetadata:metadata];
-                    
-                } else {
-                    
-                    [metadata save];
-                }
-            } else {
-                
-                // TODO:错误提示
-                NSLog(@"move file error: %@", error);
-            }
+            [self prepareToUploadWithTmpPath:tmpMediaFile fileName:movieName fileManager:fileManager];
             
         } else {
             
             // TODO:错误提示
+            
+            NSLog(@"error: %@", err);
         }
-        
-        
-        
-        
-        
-        
-        
-        /*
-         
-        NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
-        [self uploadRequestWithURL:url];
-         
-         */
     }
     
     [picker dismissViewControllerAnimated:YES completion:^{
         
         
     }];
+}
+
+- (void)prepareToUploadWithTmpPath:(NSString *)tmpMediaFile fileName:(NSString *)fileName fileManager:(NSFileManager *)fileManager {
+
+    NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)tmpMediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
+    
+    unsigned long long fileSize = [[fileManager attributesOfItemAtPath:tmpMediaFile error:nil] fileSize];
+    
+    
+    WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:fileSize filename:fileName] autorelease];
+    metadata.uploaded = NO;
+    
+    NSString *cachePath = [metadata cachePath:YES];
+    NSLog(@"%@", cachePath);
+    
+    NSError *error;
+    
+    if ([fileManager moveItemAtPath:tmpMediaFile toPath:cachePath error:&error]) {
+        
+        WaveTransMetadata *meta = [WaveTransModel metadata:metadata];
+        
+        if (meta != nil && !meta.uploaded) {
+            
+            [self uploadRequestWithMetadata:meta];
+            
+        } else if (meta == nil) {
+            
+            [metadata save];
+            [self uploadRequestWithMetadata:metadata];
+            
+        } else {
+            
+            [metadata save];
+        }
+    } else {
+        
+        // TODO:错误提示
+        NSLog(@"move file error: %@", error);
+    }
 }
 
 #pragma mark - AVAudioPlayerDelegate <NSObject>
@@ -553,13 +526,11 @@
 
 - (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes {
     
-    WaveTransMetadata *metadata = [request.userInfo objectForKey:@"metadata"];
-    NSLog(@"download : %llu/%llu", request.totalBytesRead, metadata.totalBytes);
+    NSLog(@"download : %llu/%llu", request.totalBytesRead, request.contentLength);
 }
 - (void)request:(ASIHTTPRequest *)request didSendBytes:(long long)bytes {
     
-    WaveTransMetadata *metadata = [request.userInfo objectForKey:@"metadata"];
-    NSLog(@"upload : %llu/%llu", request.totalBytesSent, metadata.totalBytes);
+    NSLog(@"upload : %llu/%llu", request.totalBytesSent, request.postLength);
 }
 
 @end
