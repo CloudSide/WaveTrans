@@ -244,7 +244,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
             
         }
         
-        return [dict objectForKey:@"fn"];
+        return _filename = [[dict objectForKey:@"fn"] copy];
         
     }
     
