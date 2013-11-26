@@ -317,6 +317,22 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     return self;
 }
 
+- (id)initWithSha1:(NSString *)sha1 type:(NSString *)type content:(NSString *)content size:(unsigned long long )size filename:(NSString *)filename {
+
+    if (self = [super init]) {
+        
+        _sha1 = [sha1 copy];
+        _type = [type copy];
+        _content = [content copy];
+        _totalBytes = size;
+        _ctime = [[NSDate date] retain];
+        _filename = [filename copy];
+        _code = [[WaveTransMetadata codeWithSha1:_sha1] copy];
+    }
+    
+    return self;
+}
+
 - (BOOL)isEqual:(id)object {
     
     if (object == self) return YES;
