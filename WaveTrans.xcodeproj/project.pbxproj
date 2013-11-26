@@ -28,6 +28,7 @@
 		3F4E4F9918436439006D7205 /* WaveTransModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F9818436439006D7205 /* WaveTransModel.m */; };
 		3F4E4F9D18449341006D7205 /* DDHTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F9C18449341006D7205 /* DDHTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		3F4E4FA2184493EA006D7205 /* TextEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */; };
+		3F4E4FA31844BDEC006D7205 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFB418444D6900690D74 /* MainViewController.mm */; };
 		3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA69696184323DF00B6FFDE /* VdiskBase64.m */; };
 		3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FA696991843247C00B6FFDE /* Images.xcassets */; };
 		3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CFD18431DB0006C84F5 /* FileExt.plist */; };
@@ -68,7 +69,6 @@
 		C140F03D18449F7100083B9B /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F03818449F7100083B9B /* EGOImageLoader.m */; };
 		C140F03E18449F7100083B9B /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F03B18449F7100083B9B /* EGOImageView.m */; };
 		C140F0411844A21400083B9B /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0401844A21400083B9B /* EGOCache.m */; };
-		C15BAFB518444D6900690D74 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFB418444D6900690D74 /* MainViewController.m */; };
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
 		C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBA18444E0C00690D74 /* MainTableViewCell.m */; };
@@ -231,7 +231,7 @@
 		C140F03F1844A21400083B9B /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
 		C140F0401844A21400083B9B /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		C15BAFB318444D6900690D74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		C15BAFB418444D6900690D74 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		C15BAFB418444D6900690D74 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		C15BAFB718444E0C00690D74 /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
 		C15BAFB818444E0C00690D74 /* BinaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BinaryCell.xib; sourceTree = "<group>"; };
 		C15BAFB918444E0C00690D74 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 				ADF1D0D8183F47FE000BF5B5 /* RootViewController.h */,
 				ADF1D0D9183F47FE000BF5B5 /* RootViewController.mm */,
 				C15BAFB318444D6900690D74 /* MainViewController.h */,
-				C15BAFB418444D6900690D74 /* MainViewController.m */,
+				C15BAFB418444D6900690D74 /* MainViewController.mm */,
 				3F4E4FA0184493EA006D7205 /* TextEditorViewController.h */,
 				3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */,
 			);
@@ -816,8 +816,8 @@
 				C15BB01D184482EE00690D74 /* PureTextCell.m in Sources */,
 				C15BAFF218444F6900690D74 /* PhotoCell.m in Sources */,
 				F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */,
-				C15BAFB518444D6900690D74 /* MainViewController.m in Sources */,
 				3F4E4F8E184355D5006D7205 /* FMDatabasePool.m in Sources */,
+				3F4E4FA31844BDEC006D7205 /* MainViewController.mm in Sources */,
 				F74ADD1C0DDA24AA0046BEC2 /* CAXException.cpp in Sources */,
 				C140F03C18449F7100083B9B /* EGOImageLoadConnection.m in Sources */,
 				ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */,
