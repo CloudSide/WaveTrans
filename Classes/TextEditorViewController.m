@@ -8,8 +8,12 @@
 
 #import "TextEditorViewController.h"
 #import "DDHTextView.h"
+#import "WaveTransMetadata.h"
 
-@interface TextEditorViewController ()
+@interface TextEditorViewController () {
+
+    DDHTextView *_textView;
+}
 
 @end
 
@@ -26,25 +30,24 @@
 
 - (void)loadView
 {
-    [super loadView];
     
     CGRect frame = [[UIScreen mainScreen] applicationFrame];
     
     UIView *contentView = [[UIView alloc] initWithFrame:frame];
     
-    DDHTextView *textView = [[[DDHTextView alloc] init] autorelease];
-    textView.translatesAutoresizingMaskIntoConstraints = NO;
-    textView.backgroundColor = [UIColor colorWithWhite:0.95f alpha:1.0f];
-    textView.text = @"欢迎使用声波传输";
-    [contentView addSubview:textView];
+    _textView = [[DDHTextView alloc] init];
+    _textView.translatesAutoresizingMaskIntoConstraints = NO;
+    _textView.backgroundColor = [UIColor colorWithWhite:0.95f alpha:1.0f];
+    _textView.text = @"欢迎使用声波传输";
+    [contentView addSubview:_textView];
     
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(textView);
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[textView]|" options:0 metrics:nil views:viewsDictionary]];
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(-15)-[textView(200)]" options:0 metrics:nil views:viewsDictionary]];
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_textView);
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[_textView]|" options:0 metrics:nil views:viewsDictionary]];
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(8)-[_textView(200)]" options:0 metrics:nil views:viewsDictionary]];
     
     [contentView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     
-    [self.view addSubview:contentView];
+    self.view = [contentView autorelease];
 }
 
 - (void)close {
@@ -56,6 +59,12 @@
 
 
 - (void)ok {
+    
+    NSString *content = [_textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    WaveTransMetadata *md = [[[WaveTransMetadata alloc] initWithSha1:[content SHA1EncodedString] type:@"text" content:content size:[content lengthOfBytesUsingEncoding:NSUTF8StringEncoding] filename:nil] autorelease];
+    [md setUploaded:NO];
+    [md save];
     
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
@@ -84,6 +93,13 @@
     
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+ 
+    [_textView release];
+    
+    [super dealloc];
 }
 
 @end
