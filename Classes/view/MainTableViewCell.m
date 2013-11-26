@@ -64,9 +64,6 @@
         
         [self.delegate performSelector:@selector(playWithMetadata:) withObject:self.metadata];
     }
-    
-    
-    
 }
 
 -(void)setDownloadProgress:(CGFloat)downloadProgress
@@ -126,7 +123,9 @@
 #pragma mark - MainViewControllerDelegate
 -(void)updateDownloadProgress:(CGFloat)progress byMetadata:(WaveTransMetadata *)metadata
 {
-    //TODO:
+    if ([self.metadata isEqual:metadata]) {
+        self.downloadProgress = progress;
+    }
 }
 
 @end
