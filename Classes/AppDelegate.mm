@@ -52,6 +52,7 @@
 #import "CAXException.h"
 #import "RootViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "WaveTransMetadata.h"
 
 @implementation AppDelegate
 
@@ -1180,7 +1181,13 @@ static queue   _savedBuffer[32];
             
             if (self.getWaveTransMetadataDelegate != nil && [self.getWaveTransMetadataDelegate respondsToSelector:@selector(getWaveTransMetadataWithString:)]) {
                 
-                [self.getWaveTransMetadataDelegate getWaveTransMetadataWithString:string];
+                WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithDictionary:@{@"code":string}] autorelease];
+                
+                [self.getWaveTransMetadataDelegate getWaveTransMetadata:metadata];
+                
+            }else {
+                
+                _isListenning = YES;
             }
         }
         

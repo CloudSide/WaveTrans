@@ -21,9 +21,10 @@
     BOOL _cancelled;
 }
 
-@property (nonatomic, retain) ASIFormDataRequest *request;
+//@property (nonatomic, retain) ASIFormDataRequest *request;
 @property (nonatomic,retain) AVAudioPlayer *audioPlayer;
 @property (nonatomic, retain) NSData *pcmData;
+
 
 @end
 
@@ -31,7 +32,7 @@
 
 @synthesize audioPlayer = _audioPlayer;
 @synthesize pcmData = _pcmData;
-@synthesize request = _request;
+//@synthesize request = _request;
 
 - (NSString *)filePath: (NSString* )fileName {
     
@@ -44,9 +45,8 @@
     
     [_audioPlayer release];
     [_pcmData release];
-    
-    [_request clearDelegatesAndCancel];
-    [_request release];
+
+    [[ASIHTTPRequest sharedQueue] cancelAllOperations];
     
     [super dealloc];
 }
@@ -100,8 +100,6 @@
 }
 
 - (void)openAlbum {
-    
-    [[AppDelegate sharedAppDelegate] setListenning:NO];
     
     UIActionSheet *chooseImageSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                                   delegate:self
@@ -205,9 +203,6 @@
             break;
             
         default:
-            
-            // 取消时重新开启监听
-            [[AppDelegate sharedAppDelegate] setListenning:YES];
             break;
     }
 }
@@ -218,7 +213,6 @@
     [UIApplication sharedApplication].statusBarHidden = NO;
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    
     
     if ([mediaType isEqualToString:@"public.image"]) {
         
@@ -359,37 +353,33 @@
 
 #pragma mark - GetWaveTransMetadataDelegate <NSObject>
 
-- (void)getWaveTransMetadataWithString:(NSString *)string {
+- (void)getWaveTransMetadata:(WaveTransMetadata *)metadata {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", string];
+    NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", metadata.code];
     
     NSURL *url = [NSURL URLWithString:urlString];
     
-    [_request clearDelegatesAndCancel];
-    self.request = [ASIHTTPRequest requestWithURL:url];
-    [_request setDelegate:self];
-    [_request setDownloadProgressDelegate:self];
-    [_request startAsynchronous];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setDelegate:self];
+    [request setDownloadProgressDelegate:self];
+    request.userInfo = @{@"metadata" : metadata, @"apiName":@"api/get"};
+    [request startAsynchronous];
 }
 
 - (void)uploadRequestWithMetadata:(WaveTransMetadata *)metadata {
     
     NSURL *url = [NSURL URLWithString:@"http://rest.sinaapp.com/api/post"];
-    
-    [_request clearDelegatesAndCancel];
 
-    self.request = [ASIFormDataRequest requestWithURL:url];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     
-    [_request setDelegate:self];
-    [_request setRequestMethod:@"POST"];
-    _request.userInfo = @{@"metadata" : metadata};
+    [request setDelegate:self];
+    [request setRequestMethod:@"POST"];
+    request.userInfo = @{@"metadata" : metadata, @"apiName":@"api/post"};
     
-    [_request addFile:[metadata cachePath:NO] forKey:@"file"];
-    [_request addPostValue:metadata.type forKey:@"type"];
-    
-    [_request setUploadProgressDelegate:self];
-    
-    [_request startAsynchronous];
+    [request addFile:[metadata cachePath:NO] forKey:@"file"];
+    [request addPostValue:metadata.type forKey:@"type"];
+    [request setUploadProgressDelegate:self];
+    [request startAsynchronous];
 }
 
 #pragma mark - ASIHTTPRequestDelegate
@@ -401,7 +391,7 @@
         NSLog(@"Error: listen error!");
         [[AppDelegate sharedAppDelegate] setListenning:YES];
         
-    }else if ([[request requestMethod] isEqualToString:@"POST"]){
+    }else if ([[request.userInfo objectForKey:@"apiName"] isEqualToString:@"api/post"]){
         
         // 上传结束后获取返回的数据，之后发声
         
@@ -428,7 +418,7 @@
             [[AppDelegate sharedAppDelegate] setListenning:YES];
             
         }
-    }else if ([[request requestMethod] isEqualToString:@"GET"]) {
+    }else if ([[request.userInfo objectForKey:@"apiName"] isEqualToString:@"api/get"]) {
         
         NSDictionary *dict = [[request responseString] JSONValue];
         
@@ -459,9 +449,15 @@
     NSLog(@"%@", error);
 }
 
-- (void)setProgress:(float)newProgress {
+- (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes {
     
-    NSLog(@"%.2f%% ", newProgress * 100);
+    WaveTransMetadata *metadata = [request.userInfo objectForKey:@"metadata"];
+    NSLog(@"download : %llu/%llu", request.totalBytesRead, metadata.totalBytes);
+}
+- (void)request:(ASIHTTPRequest *)request didSendBytes:(long long)bytes {
+    
+    WaveTransMetadata *metadata = [request.userInfo objectForKey:@"metadata"];
+    NSLog(@"upload : %llu/%llu", request.totalBytesSent, metadata.totalBytes);
 }
 
 @end

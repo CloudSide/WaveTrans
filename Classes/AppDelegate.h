@@ -67,6 +67,8 @@
 #define CLAMP(min,x,max) (x < min ? min : (x > max ? max : x))
 #endif
 
+@class WaveTransMetadata;
+
 @protocol GetWaveTransMetadataDelegate;
 
 typedef enum aurioTouchDisplayMode {
@@ -160,7 +162,7 @@ inline double linearInterp(double valA, double valB, double fract)
 
 @protocol GetWaveTransMetadataDelegate <NSObject>
 
-- (void)getWaveTransMetadataWithString:(NSString *)string;
+- (void)getWaveTransMetadata:(WaveTransMetadata *)metadata;
 
 @end
 
