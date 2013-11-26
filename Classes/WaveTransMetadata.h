@@ -40,7 +40,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 
-- (id)initWithSha1:(NSString *)sha1 type:(NSString *)type content:(NSString *)content size:(unsigned long long)size;
+- (id)initWithSha1:(NSString *)sha1 type:(NSString *)type content:(NSString *)content size:(unsigned long long )size filename:(NSString *)filename;
 
 + (NSString *)humanReadableSize:(unsigned long long)length;
 - (NSString *)cachePath:(BOOL)create;
