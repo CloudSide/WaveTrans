@@ -212,12 +212,10 @@
 }
 
 #pragma mark - UIImagePickerControllerDelegate
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     //[UIApplication sharedApplication].statusBarHidden = NO;
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    
     
     if ([mediaType isEqualToString:@"public.image"]) {
         
@@ -329,14 +327,15 @@
             return;
         }];
         
-    }else if ([mediaType isEqualToString:@"public.media"]) {
+    } else if ([mediaType isEqualToString:@"public.movie"]) {
         
         //TODO:拷贝视频
         
-        
         /*
+         
         NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
         [self uploadRequestWithURL:url];
+         
          */
     }
     
