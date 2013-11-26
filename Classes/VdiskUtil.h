@@ -22,6 +22,7 @@
 @interface NSData (VdiskEncode)
 
 - (NSString *)MD5EncodedString;
+- (NSString *)SHA1EncodedString;
 - (NSData *)HMACSHA1EncodedDataWithKey:(NSString *)key;
 - (NSString *)base64EncodedString;
 + (NSData *)dataFromBase64String:(NSString *)aString;
@@ -32,6 +33,7 @@
 @interface NSString (VdiskEncode)
 
 - (NSString *)MD5EncodedString;
+- (NSString *)SHA1EncodedString;
 - (NSData *)HMACSHA1EncodedDataWithKey:(NSString *)key;
 - (NSString *)base64EncodedString;
 - (NSString *)URLEncodedString;
