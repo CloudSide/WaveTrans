@@ -66,6 +66,8 @@
     [md setUploaded:NO];
     [md save];
     
+    //TODO:上传
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
