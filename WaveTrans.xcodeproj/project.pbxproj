@@ -66,7 +66,7 @@
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
 		C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBA18444E0C00690D74 /* MainTableViewCell.m */; };
-		C15BAFC618444E0C00690D74 /* MSCMoreOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBD18444E0C00690D74 /* MSCMoreOptionTableViewCell.m */; };
+		C15BAFC618444E0C00690D74 /* MSCMoreOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBD18444E0C00690D74 /* MSCMoreOptionTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C15BAFC718444E0C00690D74 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFBE18444E0C00690D74 /* PhotoCell.xib */; };
 		C15BAFC818444E0C00690D74 /* TableViewCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFC018444E0C00690D74 /* TableViewCellFactory.m */; };
 		C15BAFC918444E0C00690D74 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFC118444E0C00690D74 /* TextCell.xib */; };

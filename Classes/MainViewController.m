@@ -79,7 +79,7 @@
 {
     WaveTransMetadata *wt =[self.metadataList objectAtIndex:indexPath.row];
     
-    MainTableViewCell *cell = [TableViewCellFactory getTableViewCellByCellType:wt.metaDataFileType
+    MainTableViewCell *cell = [TableViewCellFactory getTableViewCellByCellType:wt.reader
                                                                      tableView:tableView owner:self];
     
     return cell;
