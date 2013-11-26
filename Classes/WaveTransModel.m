@@ -21,6 +21,7 @@
 - (unsigned long long)insertOrReplaceMetadata:(WaveTransMetadata *)metadata;
 - (BOOL)deleteMetadata:(WaveTransMetadata *)metadata;
 - (BOOL)existMetadata:(WaveTransMetadata *)metadata;
+- (WaveTransMetadata *)metadata:(WaveTransMetadata *)metadata;
 
 @end
 
@@ -50,6 +51,15 @@
     
     WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
     BOOL result = [waveTransModel deleteMetadata:metadata];
+    [waveTransModel release];
+    
+    return result;
+}
+
++ (WaveTransMetadata *)metadata:(WaveTransMetadata *)metadata {
+    
+    WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
+    WaveTransMetadata *result = [waveTransModel metadata:metadata];
     [waveTransModel release];
     
     return result;
@@ -233,6 +243,24 @@
     }
     
     return NO;
+}
+
+- (WaveTransMetadata *)metadata:(WaveTransMetadata *)metadata {
+
+    if ([metadata isKindOfClass:[WaveTransMetadata class]]) {
+        
+        NSMutableArray *arr = [self selectWithSQL:[NSString stringWithFormat:@"select object from 'wave_trans_info' where sha1='%@' and type='%@' limit 1", metadata.sha1, metadata.type] withParameterDictionary:nil];
+        
+        if ([arr count] > 0) {
+            
+            if ([arr[0] isKindOfClass:[WaveTransMetadata class]]) {
+                
+                return arr[0];
+            }
+        }
+    }
+    
+    return nil;
 }
 
 

@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "WaveTransModel.h"
 
 @interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
     
@@ -217,6 +218,9 @@
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
     if ([mediaType isEqualToString:@"public.image"]) {
         
         ALAssetsLibrary *assetLibrary=[[[ALAssetsLibrary alloc] init] autorelease];
@@ -227,7 +231,7 @@
             
             NSString *mediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", rep.filename]];
             
-            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
             [fileManager removeItemAtPath:mediaFile error:nil];
             
             if (![fileManager createDirectoryAtPath:[mediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
@@ -241,7 +245,6 @@
                 
                 return;
             }
-            
             
             
             NSMutableData *emptyData = [[NSMutableData alloc] initWithLength:0];
@@ -300,15 +303,23 @@
             
             NSError *error;
             
-            if ([fileManager fileExistsAtPath:cachePath]) {
+            if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
                 
-                // 如果有缓存，直接发声
-                //[self playWithMetadata:metadata];
+                WaveTransMetadata *md = [WaveTransModel metadata:metadata];
                 
-            } else if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
+                if (md != nil && !md.uploaded) {
+                    
+                    [self uploadRequestWithMetadata:md];
                 
-                // 如果没有，上传，收到code后发声
-                [self uploadRequestWithMetadata:metadata];
+                } else if (md == nil) {
+                
+                    [metadata save];
+                    [self uploadRequestWithMetadata:metadata];
+                
+                } else {
+                
+                    [metadata save];
+                }
                 
             } else {
                 
@@ -324,7 +335,6 @@
             
             NSLog(@"Error: %@",[err localizedDescription]);
             
-            return;
         }];
         
     } else if ([mediaType isEqualToString:@"public.movie"]) {

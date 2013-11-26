@@ -17,6 +17,6 @@
 + (unsigned long long)insertOrReplaceMetadata:(WaveTransMetadata *)metadata;
 + (BOOL)deleteMetadata:(WaveTransMetadata *)metadata;
 + (BOOL)existMetadata:(WaveTransMetadata *)metadata;
-
++ (WaveTransMetadata *)metadata:(WaveTransMetadata *)metadata;
 
 @end
