@@ -439,7 +439,6 @@
     if ([request responseStatusCode] != 200) {
         
         NSLog(@"Error: listen error!");
-        [[AppDelegate sharedAppDelegate] setListenning:YES];
         
     }else if ([[request.userInfo objectForKey:@"apiName"] isEqualToString:@"api/post"]){
         
@@ -471,8 +470,6 @@
         }else {
             
             NSLog(@"Error: return format error!");
-            [[AppDelegate sharedAppDelegate] setListenning:YES];
-            
         }
     }else if ([[request.userInfo objectForKey:@"apiName"] isEqualToString:@"api/get"]) {
         
@@ -492,6 +489,8 @@
             NSLog(@"%@", metadataReceive.size);
             
             metadataReceive.uploaded = YES;
+            [metadataReceive save];
+            [self refreshMetadataList];
             
             ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
             [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
@@ -501,23 +500,15 @@
             filerequest.userInfo = @{@"metadata":metadataReceive,@"is_download_file":@"YES"};
             [filerequest startAsynchronous];
             
-            [metadataReceive save];
-            
-            [self refreshMetadataList];
-            
-            [[AppDelegate sharedAppDelegate] setListenning:YES];
-            
         }else {
             
             NSLog(@"Error: return format error!");
-            [[AppDelegate sharedAppDelegate] setListenning:YES];
         }
     }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     
-    [[AppDelegate sharedAppDelegate] setListenning:YES];
     NSError *error = [request error];
     NSLog(@"%@", error);
 }
