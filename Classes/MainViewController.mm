@@ -1,12 +1,16 @@
 //
-//  RootViewController.m
-//  aurioTouch2
+//  MainViewController.m
+//  WaveTrans
 //
-//  Created by Littlebox222 on 13-11-22.
+//  Created by hanchao on 13-11-26.
 //
 //
 
-#import "RootViewController.h"
+#import "MainViewController.h"
+#import "MainTableViewCell.h"
+#import "TableViewCellFactory.h"
+#import "MSCMoreOptionTableViewCell.h"
+#import "WaveTransMetadata.h"
 #import "PCMRender.h"
 #import "AppDelegate.h"
 #import "WaveTransMetadata.h"
@@ -17,25 +21,25 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "WaveTransModel.h"
 #import "TextEditorViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
-    
-}
+#import "WaveTransModel.h"
 
-//@property (nonatomic, retain) ASIFormDataRequest *request;
-@property (nonatomic,retain) AVAudioPlayer *audioPlayer;
-@property (nonatomic, retain) NSData *pcmData;
 
+@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate>
+
+@property (nonatomic, retain) UITableView *mTableView;
+@property (nonatomic, retain) NSMutableArray *metadataList;
+@property (nonatomic, retain) AVAudioPlayer *audioPlayer;
 
 @end
 
-@implementation RootViewController
+@implementation MainViewController
 
 @synthesize audioPlayer = _audioPlayer;
-@synthesize pcmData = _pcmData;
-//@synthesize request = _request;
 
-- (NSString *)fileTmpPath: (NSString* )fileName {
+
+- (NSString *)fileTmpPath:(NSString *)fileName {
     
     NSString *filePath  = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"cache/files/%@", fileName]];
     
@@ -45,8 +49,7 @@
 - (void)dealloc {
     
     [_audioPlayer release];
-    [_pcmData release];
-
+    
     [[ASIHTTPRequest sharedQueue] cancelAllOperations];
     
     [super dealloc];
@@ -55,7 +58,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
     if (self) {
         
         [[AppDelegate sharedAppDelegate] setGetWaveTransMetadataDelegate:self];
@@ -66,7 +68,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	// Do any additional setup after loading the view.
+    
+    self.metadataList = [WaveTransModel metadataList];
+    
+//    if (self.metadataList.count ==0) {
+//        
+//        for (int i = 0; i<10; i++) {
+//            WaveTransMetadata *wt = [[WaveTransMetadata alloc] initWithSha1:[NSString stringWithFormat:@"356a192b7913b04c54574d18c28d46e6395428a%d",i]
+//                                                                       type:@"file"
+//                                                                    content:@"http://sdfsdf"
+//                                                                       size:1212
+//                                                                   filename:@"av.mp3"];
+//            [wt save];
+//            [wt release];
+//        }
+//        self.metadataList = [WaveTransModel metadataList];
+//    }
+    
+    
+    [self.view addSubview:[AppDelegate sharedAppDelegate].view];
+    
+    self.mTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f, [AppDelegate sharedAppDelegate].view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - [AppDelegate sharedAppDelegate].view.frame.size.height)] autorelease];
+    self.mTableView.delegate = self;
+    self.mTableView.dataSource = self;
+    [self.mTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    [self.view addSubview:self.mTableView];
+    
+    
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    //addButton.backgroundColor = [UIColor redColor];
+    [addButton setFrame:CGRectMake(320-50, 20.0, 50, 40)];
+    addButton.titleLabel.text = @"添加";
+    [addButton addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:addButton];
     
 #ifdef __IPHONE_7_0
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
@@ -75,30 +111,8 @@
     }
 #endif
     
-    /*
-    UIButton *playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    playButton.frame = CGRectMake(150, 350, 80, 40);
-    playButton.backgroundColor = [UIColor redColor];
-    playButton.titleLabel.text = @"play";
-    [playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:playButton];
-     */
-    
-    UIButton *albumButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    albumButton.frame = CGRectMake(50, 350, 80, 40);
-    albumButton.backgroundColor = [UIColor redColor];
-    albumButton.titleLabel.text = @"album";
-    [albumButton addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:albumButton];
-    
-    self.pcmData = [[[NSData alloc] init] autorelease];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void)openAlbum {
     
@@ -110,36 +124,6 @@
     [chooseImageSheet showInView:self.view];
 }
 
-/*
-- (void)playAction:(id)sender
-{
-    [[AppDelegate sharedAppDelegate] setListenning:NO];
-    
-    self.pcmData = [PCMRender renderChirpData:@"hjs2tmj3qom9fa75v472"];
-    
-    NSError *error;
-    
-    if (self.audioPlayer != nil) {
-        
-        [self.audioPlayer prepareToPlay];
-        
-    }else {
-        
-        self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:self.pcmData error:&error] autorelease];
-    }
-    
-    
-    if (error) {
-        NSLog(@"error....%@",[error localizedDescription]);
-    }else{
-        
-        self.audioPlayer.delegate = self;
-        [self.audioPlayer prepareToPlay];
-    }
-    
-    [self.audioPlayer play];
-}
- */
 
 - (void)playWithMetadata:(WaveTransMetadata *)metadata
 {
@@ -153,7 +137,7 @@
     }
     
     // 测试直接用[WaveTransMetadata codeWithSha1:metadata.sha1]获取code发声
-    self.pcmData = [PCMRender renderChirpData:metadata.rsCode];
+    NSData *pcmData = [PCMRender renderChirpData:metadata.rsCode];
     
     NSError *error;
     
@@ -163,7 +147,7 @@
         
     }else {
         
-        self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:self.pcmData error:&error] autorelease];
+        self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:pcmData error:&error] autorelease];
     }
     
     
@@ -179,48 +163,19 @@
 }
 
 
-#pragma mark - UIActionSheetDelegate Method
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)didReceiveMemoryWarning
 {
-    UIImagePickerController * picker = [[[UIImagePickerController alloc] init] autorelease];
-    picker.delegate = self;
-    
-    switch (buttonIndex) {
-        case 0://Take picture
-            
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                
-            }else{
-                NSLog(@"模拟器无法打开相机");
-            }
-            [self presentViewController:picker animated:YES completion:^{}];
-            break;
-            
-        case 1://From album
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            picker.mediaTypes = [[[NSArray alloc] initWithObjects:@"public.image", @"public.movie", nil] autorelease];
-            [self presentViewController:picker animated:YES completion:^{}];
-            break;
-        
-        case 2:
-        {
-            TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
-            [self presentViewController:navigationController animated:YES completion:^{}];
-        }
-            break;
-        default:
-            break;
-    }
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UIImagePickerControllerDelegate
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     //[UIApplication sharedApplication].statusBarHidden = NO;
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-
+    
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -358,7 +313,7 @@
 }
 
 - (void)prepareToUploadWithTmpPath:(NSString *)tmpMediaFile fileName:(NSString *)fileName fileManager:(NSFileManager *)fileManager {
-
+    
     NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)tmpMediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
     
     unsigned long long fileSize = [[fileManager attributesOfItemAtPath:tmpMediaFile error:nil] fileSize];
@@ -440,7 +395,7 @@
 - (void)uploadRequestWithMetadata:(WaveTransMetadata *)metadata {
     
     NSURL *url = [NSURL URLWithString:@"http://rest.sinaapp.com/api/post"];
-
+    
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     
     [request setDelegate:self];
@@ -531,6 +486,170 @@
 - (void)request:(ASIHTTPRequest *)request didSendBytes:(long long)bytes {
     
     NSLog(@"upload : %llu/%llu", request.totalBytesSent, request.postLength);
+}
+
+#pragma mark - UITableViewDataSource<NSObject>
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.metadataList.count;
+}
+
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 4;
+//}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Called when "DELETE" button is pushed.
+    NSLog(@"DELETE button pushed in row at: %@", indexPath.description);
+    //TODO:删除按钮
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WaveTransMetadata *wt =[self.metadataList objectAtIndex:indexPath.row];
+    
+    MainTableViewCell *cell = [TableViewCellFactory getTableViewCellByCellType:wt
+                                                                     tableView:tableView owner:self];
+    
+    return cell;
+}
+
+//-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    switch (section) {
+//        case 0:
+//        return @"今天";
+//        case 1:
+//        return @"昨天";
+//        case 2:
+//        return @"前天";
+//        case 3:
+//        return @"星期四";
+//    }
+//    
+//    return @"一周前";
+//}
+
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)] autorelease];
+//    header.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
+//    
+//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, 100, 20)];
+//    [header addSubview:titleLabel];
+//    
+//    switch (section) {
+//        case 0:
+//        titleLabel.text = @"今天";
+//        break;
+//        
+//        case 1:
+//        titleLabel.text = @"昨天";
+//        break;
+//        
+//        case 2:
+//        titleLabel.text = @"前天";
+//        break;
+//        
+//        case 3:
+//        titleLabel.text = @"星期四";
+//        break;
+//        
+//        //TODO:......
+//        
+//        default:
+//        titleLabel.text = @"一周以前";
+//        break;
+//    }
+//    
+//    return header;
+//}
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"Delete";
+}
+
+#pragma mark - MSCMoreOptionTableViewCellDelegate
+- (void)tableView:(UITableView *)tableView moreOptionButtonPressedInRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Called when "MORE" button is pushed.
+    NSLog(@"MORE button pushed in row at: %@", indexPath.description);
+    [self showMoreActionSheet:indexPath];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForMoreOptionButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"More";
+}
+
+-(UIColor *)tableView:(UITableView *)tableView backgroundColorForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [UIColor colorWithRed:0.18f green:0.67f blue:0.84f alpha:1.0f];
+}
+
+#pragma mark - actionSheet
+-(void)showMoreActionSheet:(NSIndexPath *)indexPath
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:@"删除"
+                                                    otherButtonTitles:@"用其他软件打开",@"分享",@"详细",nil];
+    
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+}
+
+#pragma mark - UIActionSheetDelegate <NSObject>
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerController * picker = [[[UIImagePickerController alloc] init] autorelease];
+    picker.delegate = self;
+    
+    switch (buttonIndex) {
+        case 0://Take picture
+            
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                
+            }else{
+                NSLog(@"模拟器无法打开相机");
+            }
+            [self presentViewController:picker animated:YES completion:^{}];
+            break;
+            
+        case 1://From album
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.mediaTypes = [[[NSArray alloc] initWithObjects:@"public.image", @"public.movie", nil] autorelease];
+            [self presentViewController:picker animated:YES completion:^{}];
+            break;
+            
+        case 2:
+        {
+            TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
+            [self presentViewController:navigationController animated:YES completion:^{}];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end
