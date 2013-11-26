@@ -64,6 +64,10 @@
 		ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0D9183F47FE000BF5B5 /* RootViewController.mm */; };
 		ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0DD183F58BE000BF5B5 /* PCMRender.m */; };
 		ADF1D0E3183F5B16000BF5B5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */; };
+		C140F03C18449F7100083B9B /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F03618449F7100083B9B /* EGOImageLoadConnection.m */; };
+		C140F03D18449F7100083B9B /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F03818449F7100083B9B /* EGOImageLoader.m */; };
+		C140F03E18449F7100083B9B /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F03B18449F7100083B9B /* EGOImageView.m */; };
+		C140F0411844A21400083B9B /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0401844A21400083B9B /* EGOCache.m */; };
 		C15BAFB518444D6900690D74 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFB418444D6900690D74 /* MainViewController.m */; };
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
@@ -94,6 +98,8 @@
 		C15BB012184478B400690D74 /* ContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BB011184478B400690D74 /* ContactsCell.xib */; };
 		C15BB01418447A8600690D74 /* WeiboCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BB01318447A8600690D74 /* WeiboCell.xib */; };
 		C15BB01718447A9000690D74 /* WeiboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BB01618447A9000690D74 /* WeiboCell.m */; };
+		C15BB01D184482EE00690D74 /* PureTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BB01C184482EE00690D74 /* PureTextCell.m */; };
+		C15BB01F184482FD00690D74 /* PureTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BB01E184482FD00690D74 /* PureTextCell.xib */; };
 		F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */; };
 		F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */; };
 		F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD150DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp */; };
@@ -216,6 +222,14 @@
 		ADF1D0DE183F58BE000BF5B5 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		ADF1D0DF183F58BE000BF5B5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ADF1D0E2183F5B16000BF5B5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C140F03518449F7100083B9B /* EGOImageLoadConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoadConnection.h; sourceTree = "<group>"; };
+		C140F03618449F7100083B9B /* EGOImageLoadConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoadConnection.m; sourceTree = "<group>"; };
+		C140F03718449F7100083B9B /* EGOImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoader.h; sourceTree = "<group>"; };
+		C140F03818449F7100083B9B /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
+		C140F03A18449F7100083B9B /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
+		C140F03B18449F7100083B9B /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		C140F03F1844A21400083B9B /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		C140F0401844A21400083B9B /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		C15BAFB318444D6900690D74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C15BAFB418444D6900690D74 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C15BAFB718444E0C00690D74 /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
@@ -257,6 +271,9 @@
 		C15BB01318447A8600690D74 /* WeiboCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboCell.xib; sourceTree = "<group>"; };
 		C15BB01518447A9000690D74 /* WeiboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboCell.h; sourceTree = "<group>"; };
 		C15BB01618447A9000690D74 /* WeiboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboCell.m; sourceTree = "<group>"; };
+		C15BB01B184482EE00690D74 /* PureTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureTextCell.h; sourceTree = "<group>"; };
+		C15BB01C184482EE00690D74 /* PureTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PureTextCell.m; sourceTree = "<group>"; };
+		C15BB01E184482FD00690D74 /* PureTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PureTextCell.xib; sourceTree = "<group>"; };
 		F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aurio_helper.cpp; sourceTree = "<group>"; };
 		F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurio_helper.h; sourceTree = "<group>"; };
 		F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
@@ -577,9 +594,49 @@
 			path = PlayPCM;
 			sourceTree = "<group>";
 		};
+		C140F03218449F7100083B9B /* EGOImageView */ = {
+			isa = PBXGroup;
+			children = (
+				C140F03318449F7100083B9B /* EGOCache */,
+				C140F03418449F7100083B9B /* EGOImageLoader */,
+				C140F03918449F7100083B9B /* EGOImageView */,
+			);
+			path = EGOImageView;
+			sourceTree = "<group>";
+		};
+		C140F03318449F7100083B9B /* EGOCache */ = {
+			isa = PBXGroup;
+			children = (
+				C140F03F1844A21400083B9B /* EGOCache.h */,
+				C140F0401844A21400083B9B /* EGOCache.m */,
+			);
+			path = EGOCache;
+			sourceTree = "<group>";
+		};
+		C140F03418449F7100083B9B /* EGOImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				C140F03518449F7100083B9B /* EGOImageLoadConnection.h */,
+				C140F03618449F7100083B9B /* EGOImageLoadConnection.m */,
+				C140F03718449F7100083B9B /* EGOImageLoader.h */,
+				C140F03818449F7100083B9B /* EGOImageLoader.m */,
+			);
+			path = EGOImageLoader;
+			sourceTree = "<group>";
+		};
+		C140F03918449F7100083B9B /* EGOImageView */ = {
+			isa = PBXGroup;
+			children = (
+				C140F03A18449F7100083B9B /* EGOImageView.h */,
+				C140F03B18449F7100083B9B /* EGOImageView.m */,
+			);
+			path = EGOImageView;
+			sourceTree = "<group>";
+		};
 		C15BAFB618444E0C00690D74 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				C140F03218449F7100083B9B /* EGOImageView */,
 				C15BAFBF18444E0C00690D74 /* TableViewCellFactory.h */,
 				C15BAFC018444E0C00690D74 /* TableViewCellFactory.m */,
 				C15BAFBB18444E0C00690D74 /* MSCMoreOptionTableViewCell */,
@@ -606,6 +663,9 @@
 				C15BB01518447A9000690D74 /* WeiboCell.h */,
 				C15BB01618447A9000690D74 /* WeiboCell.m */,
 				C15BB01318447A8600690D74 /* WeiboCell.xib */,
+				C15BB01B184482EE00690D74 /* PureTextCell.h */,
+				C15BB01C184482EE00690D74 /* PureTextCell.m */,
+				C15BB01E184482FD00690D74 /* PureTextCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -696,6 +756,7 @@
 				C15BAFCA18444E0C00690D74 /* VideoCell.xib in Resources */,
 				C15BB00D1844599F00690D74 /* tableview_sep_line.png in Resources */,
 				C15BB0041844599F00690D74 /* play_btn.png in Resources */,
+				C15BB01F184482FD00690D74 /* PureTextCell.xib in Resources */,
 				C15BB00A1844599F00690D74 /* arrow_left@2x.png in Resources */,
 				C15BB0091844599F00690D74 /* text_bg@2x.png in Resources */,
 				C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */,
@@ -719,6 +780,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C140F0411844A21400083B9B /* EGOCache.m in Sources */,
+				C140F03E18449F7100083B9B /* EGOImageView.m in Sources */,
 				32B1BDDA1840F55900FFC32D /* kiss_fastfir.c in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
 				ADB16D12183E31FE00115067 /* ASIDataDecompressor.m in Sources */,
@@ -727,6 +790,7 @@
 				ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */,
 				32B1BDDC1840F55900FFC32D /* kiss_fftr.c in Sources */,
 				3F4E4F8D184355D5006D7205 /* FMDatabaseAdditions.m in Sources */,
+				C140F03D18449F7100083B9B /* EGOImageLoader.m in Sources */,
 				ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */,
 				ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */,
@@ -749,11 +813,13 @@
 				ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */,
 				C15BAFC618444E0C00690D74 /* MSCMoreOptionTableViewCell.m in Sources */,
 				ADB16D17183E31FE00115067 /* ASINetworkQueue.m in Sources */,
+				C15BB01D184482EE00690D74 /* PureTextCell.m in Sources */,
 				C15BAFF218444F6900690D74 /* PhotoCell.m in Sources */,
 				F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */,
 				C15BAFB518444D6900690D74 /* MainViewController.m in Sources */,
 				3F4E4F8E184355D5006D7205 /* FMDatabasePool.m in Sources */,
 				F74ADD1C0DDA24AA0046BEC2 /* CAXException.cpp in Sources */,
+				C140F03C18449F7100083B9B /* EGOImageLoadConnection.m in Sources */,
 				ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */,
 				32B1BDDB1840F55900FFC32D /* kiss_fft.c in Sources */,
 				ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */,

@@ -7,7 +7,8 @@
 //
 
 #import "MainTableViewCell.h"
+#import "WaveTransMetadata.h"
 
-@interface BinaryCell : MainTableViewCell
+@interface BinaryCell :MainTableViewCell //<MainTableViewCellProtocol>
 
 @end

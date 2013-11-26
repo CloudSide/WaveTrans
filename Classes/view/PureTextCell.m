@@ -1,16 +1,16 @@
 //
-//  PhotoCell.m
+//  PureTextCell.m
 //  WaveTrans
 //
 //  Created by hanchao on 13-11-26.
 //
 //
 
-#import "PhotoCell.h"
-#import "EGOImageView.h"
+#import "PureTextCell.h"
+
 #import "WaveTransMetadata.h"
 
-@implementation PhotoCell
+@implementation PureTextCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,6 +19,11 @@
         // Initialization code
     }
     return self;
+}
+
+-(void)awakeFromNib
+{
+    self.pureTextParentView.layer.cornerRadius = 0.4f;
 }
 
 /*
@@ -34,12 +39,14 @@
 {
     super.metadata = metadata;
     
-    [self.photoImageView setImageURL:super.metadata.fileURL];
+    self.pureTextLabel.text = super.metadata.content;
 }
+
 
 -(void)dealloc
 {
-    self.photoImageView = nil;
+    self.pureTextLabel = nil;
+    self.pureTextParentView = nil;
     
     [super dealloc];
 }

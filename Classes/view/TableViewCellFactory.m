@@ -15,6 +15,8 @@
 #import "VideoCell.h"
 #import "WaveTransMetadata.h"
 
+#import "VdiskJSON.h"
+
 @implementation TableViewCellFactory
 
 +(id)getTableViewCellByCellType:(WaveTransMetadata *)metadata
@@ -39,7 +41,22 @@
     }else if ([metadata.type isEqualToString:@"url"]){
         //TODO:连接
     }else if ([metadata.type isEqualToString:@"text"]){
-        //TODO:字符串
+        
+        if(metadata.isJson){
+            NSDictionary *jsonDict = [metadata.content JSONValue];
+            
+            if ([[jsonDict allKeys] containsObject:@"wave_weibo_card"]) {//weibo
+                
+                identifier = @"WeiboCell";
+            }else{
+                //TODO:其他
+            }
+        }else{
+            //字符串
+            identifier = @"PureTextCell";
+            
+        }
+        
     }else{
         //TODO:unknow type!!!
     }
@@ -51,8 +68,11 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:owner options:nil]
                                             objectAtIndex:0];
-            cell.delegate = owner;
         }
+        
+        cell.delegate = owner;
+        
+        cell.metadata = metadata;
         
         return cell;
     }

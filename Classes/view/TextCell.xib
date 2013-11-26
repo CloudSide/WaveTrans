@@ -53,6 +53,12 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="createDateLabel" destination="qAi-vH-yEo" id="F2J-ds-XOg"/>
+                <outlet property="fileNameLabel" destination="RVs-Tk-TRd" id="dRx-9t-7ah"/>
+                <outlet property="receiveState" destination="PAW-9M-cES" id="e5A-eq-DrY"/>
+                <outlet property="sendBeepBtn" destination="XBf-J1-ykk" id="CJ0-tX-ODf"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

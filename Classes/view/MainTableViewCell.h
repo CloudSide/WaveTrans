@@ -10,6 +10,25 @@
 
 #import "MSCMoreOptionTableViewCell.h"
 
-@interface MainTableViewCell : MSCMoreOptionTableViewCell
+@class WaveTransMetadata;
+
+//@protocol MainTableViewCellProtocol <NSObject>
+//
+//@required
+//-(void)setMetadata:(WaveTransMetadata *)metadata;
+//
+//@end
+
+@interface MainTableViewCell : MSCMoreOptionTableViewCell //<MainTableViewCellProtocol>
+
+@property (nonatomic,retain) WaveTransMetadata *metadata;
+
+@property (nonatomic,retain) IBOutlet UILabel *fileNameLabel;
+@property (nonatomic,retain) IBOutlet UILabel *createDateLabel;
+@property (nonatomic,retain) IBOutlet UIButton *sendBeepBtn;
+@property (nonatomic,retain) IBOutlet UILabel *receiveState;
 
 @end
+
+
+

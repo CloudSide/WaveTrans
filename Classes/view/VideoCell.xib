@@ -54,12 +54,17 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="createDateLabel" destination="fq0-js-O69" id="EfB-2f-1eO"/>
+                <outlet property="receiveState" destination="7sN-4w-gYI" id="pZ5-D6-uXM"/>
+                <outlet property="sendBeepBtn" destination="7au-8L-AFV" id="7XQ-XB-JnJ"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="photo_cell_alpha_cover.png" width="30" height="30"/>
         <image name="play_beep.png" width="44" height="44"/>
         <image name="play_btn.png" width="44" height="44"/>
-        <image name="stockvault-autumn-foliage148211.jpg" width="3500" height="2333"/>
+        <image name="stockvault-autumn-foliage148211.jpg" width="44" height="44"/>
     </resources>
 </document>
