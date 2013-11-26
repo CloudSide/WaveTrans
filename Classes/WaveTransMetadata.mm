@@ -209,7 +209,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
         
         for (int i=0; i<RS_TOTAL_LEN; i++) {
             
-            num_to_char(code[i], &(rs_code[i]));
+            num_to_char(data[i], rs_code+i);
         }
         
         rs_code[RS_TOTAL_LEN] = '\0';

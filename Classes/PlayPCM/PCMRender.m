@@ -206,18 +206,27 @@ void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int f
         [serializeStr getCharacters:charArray];
         
         unsigned freqArray[serializeStr.length+2];//起始音17，19
-        memset(freqArray, 0, sizeof(freqArray));
+        //memset(freqArray, 0, sizeof(unsigned) * (serializeStr.length+2));
         
-        freqArray[0] = 17;//起始音17
-        freqArray[1] = 19;//起始音19
+        char_to_freq('h', freqArray);
+        char_to_freq('j', freqArray+1);
         
-        for (int i =0; i < serializeStr.length; i++) {
+        //freqArray[0] = 123;
+        //freqArray[1] = 321;
+        
+        for (int i=0; i<serializeStr.length; i++) {
             
-            unsigned int freq = 0;
-            char_to_freq(charArray[i], &freq);
-            freqArray[i+2] = freq;
-            
+            //unsigned int freq = 0;
+            char_to_freq(charArray[i], freqArray+i+2);
+            //freqArray[i+2] = freq;
         }
+        
+        /*
+        for (int i=0; i < 20; i++) {
+            
+            NSLog(@"%d", freqArray[i]);
+        }
+         */
         
         free(charArray);
         
@@ -240,7 +249,7 @@ void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int f
         NSMutableData *chirpData = [[NSMutableData alloc] initWithBytes:wavHeaderByteArray length:sizeof(wavHeaderByteArray)];
         [chirpData appendBytes:buffer length:sizeof(buffer)];
         
-        return chirpData;
+        return [chirpData autorelease];
         
     }
     

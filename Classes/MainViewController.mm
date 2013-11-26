@@ -139,23 +139,27 @@
     // 测试直接用[WaveTransMetadata codeWithSha1:metadata.sha1]获取code发声
     NSData *pcmData = [PCMRender renderChirpData:metadata.rsCode];
     
-    NSError *error;
+    NSLog(@"%@", metadata.rsCode);
     
-    if (self.audioPlayer != nil) {
-        
-        [self.audioPlayer prepareToPlay];
-        
-    }else {
-        
-        self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:pcmData error:&error] autorelease];
-    }
+    NSError *error = nil;
     
+    
+    self.audioPlayer = [[[AVAudioPlayer alloc] initWithData:pcmData error:&error] autorelease];
+    [self.audioPlayer setVolume:1.0];
     
     if (error) {
+       
         NSLog(@"error....%@",[error localizedDescription]);
-    }else{
+    
+    } else {
         
         self.audioPlayer.delegate = self;
+        
+        //UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
+        //AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
+        UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+        AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+        
         [self.audioPlayer prepareToPlay];
     }
     

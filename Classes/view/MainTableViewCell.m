@@ -55,6 +55,15 @@
 -(void)sendBeepAction:(id)sender
 {
     //TODO:send beep
+    
+    if ([self.delegate respondsToSelector:@selector(playWithMetadata:)]) {
+        
+        
+        [self.delegate performSelector:@selector(playWithMetadata:) withObject:self.metadata];
+    }
+    
+    
+    
 }
 
 -(void)setDownloadProgress:(CGFloat)downloadProgress
