@@ -493,9 +493,17 @@
             
             metadataReceive.uploaded = YES;
             
-            
+            ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
+            [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
+            [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadataReceive cachePath:NO]]];
+            filerequest.delegate = self;
+            filerequest.downloadProgressDelegate = self;
+            filerequest.userInfo = @{@"metadata":metadataReceive,@"is_download_file":@"YES"};
+            [filerequest startAsynchronous];
             
             [metadataReceive save];
+            
+            [self refreshMetadataList];
             
             [[AppDelegate sharedAppDelegate] setListenning:YES];
             
@@ -518,7 +526,15 @@
     
     NSLog(@"download : %llu/%llu", request.totalBytesRead, request.contentLength);
     
-    
+    if ([request.userInfo objectForKey:@"is_download_file"] != nil) {
+        
+        CGFloat progress = (CGFloat)request.totalBytesRead/request.contentLength;
+        
+        NSArray *visibleCells = [self.mTableView visibleCells];
+        for(MainTableViewCell *cell in visibleCells){
+            [cell updateDownloadProgress:progress byMetadata:[request.userInfo objectForKey:@"metadata"]];
+        }
+    }
     
 }
 - (void)request:(ASIHTTPRequest *)request didSendBytes:(long long)bytes {
