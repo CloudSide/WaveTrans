@@ -379,6 +379,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
         _type = [[coder decodeObjectForKey:@"type"] retain];
         _ctime = [[coder decodeObjectForKey:@"ctime"] retain];
         _uploaded = [coder decodeBoolForKey:@"uploaded"];
+        _filename = [[coder decodeObjectForKey:@"filename"] retain];
         
     }
     
@@ -394,6 +395,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     [coder encodeObject:self.sha1 forKey:@"sha1"];
     [coder encodeObject:self.type forKey:@"type"];
     [coder encodeObject:self.ctime forKey:@"ctime"];
+    [coder encodeObject:self.filename forKey:@"filename"];
 }
 
 
