@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "WaveTransModel.h"
+#import "TextEditorViewController.h"
 
 @interface RootViewController () <ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate> {
     
@@ -105,7 +106,7 @@
                                                                   delegate:self
                                                          cancelButtonTitle:@"Cancel"
                                                     destructiveButtonTitle:nil
-                                                         otherButtonTitles:@"Camera",@"Photo library", nil];
+                                                         otherButtonTitles:@"Camera",@"Photo library", @"Text", nil];
     [chooseImageSheet showInView:self.view];
 }
 
@@ -201,7 +202,14 @@
             picker.mediaTypes = [[[NSArray alloc] initWithObjects:@"public.image", @"public.movie", nil] autorelease];
             [self presentViewController:picker animated:YES completion:^{}];
             break;
-            
+        
+        case 2:
+        {
+            TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
+            [self presentViewController:navigationController animated:YES completion:^{}];
+        }
+            break;
         default:
             break;
     }
