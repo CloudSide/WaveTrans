@@ -10,10 +10,14 @@
 #import "DDHTextView.h"
 #import "WaveTransMetadata.h"
 
-@interface TextEditorViewController () {
+#import "RootViewController.h"
+
+@interface TextEditorViewController () <PostWaveTransMetadataDelegate> {
 
     DDHTextView *_textView;
 }
+
+@property (nonatomic, assign)   id<PostWaveTransMetadataDelegate> postWaveTransMetadataDelegate;
 
 @end
 
@@ -76,6 +80,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self setPostWaveTransMetadataDelegate:self];
     
     self.view.backgroundColor = [UIColor whiteColor];
     

@@ -228,9 +228,9 @@
         
         UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
         
-        NSData *imgData = UIImagePNGRepresentation(capturedImage);
+        NSData *imgData = UIImageJPEGRepresentation(capturedImage, 0.5);
         
-        NSString *fileName = [NSString stringWithFormat:@"%lu.png", (long)[[NSDate date] timeIntervalSince1970]];
+        NSString *fileName = [NSString stringWithFormat:@"%lu.jpg", (long)[[NSDate date] timeIntervalSince1970]];
         
         NSString *sha1 = [imgData SHA1EncodedString];
         
