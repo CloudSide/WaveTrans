@@ -9,15 +9,12 @@
 #import "TextEditorViewController.h"
 #import "DDHTextView.h"
 #import "WaveTransMetadata.h"
+#import "MainViewController.h"
 
-#import "RootViewController.h"
-
-@interface TextEditorViewController () <PostWaveTransMetadataDelegate> {
+@interface TextEditorViewController () {
 
     DDHTextView *_textView;
 }
-
-@property (nonatomic, assign)   id<PostWaveTransMetadataDelegate> postWaveTransMetadataDelegate;
 
 @end
 
@@ -72,6 +69,12 @@
     
     //TODO:上传
     
+    if (self.postWaveTransMetadataDelegate != nil && [self.postWaveTransMetadataDelegate respondsToSelector:@selector(postWaveTransMetadata:)]) {
+        
+        [self.postWaveTransMetadataDelegate postWaveTransMetadata:md];
+        
+    }
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
@@ -80,8 +83,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    [self setPostWaveTransMetadataDelegate:self];
     
     self.view.backgroundColor = [UIColor whiteColor];
     

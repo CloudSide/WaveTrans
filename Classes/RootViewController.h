@@ -17,10 +17,3 @@
 
 
 @end
-
-
-@protocol PostWaveTransMetadataDelegate <NSObject>
-
-- (void)postWaveTransMetadata:(WaveTransMetadata *)metadata;
-
-@end

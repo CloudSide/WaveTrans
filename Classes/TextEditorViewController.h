@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PostWaveTransMetadataDelegate;
+
 @interface TextEditorViewController : UIViewController
+
+@property (nonatomic, assign)   id<PostWaveTransMetadataDelegate> postWaveTransMetadataDelegate;
 
 @end

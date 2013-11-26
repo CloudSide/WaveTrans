@@ -26,7 +26,7 @@
 #import "WaveTransModel.h"
 
 
-@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate>
+@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate>
 
 @property (nonatomic, retain) UITableView *mTableView;
 @property (nonatomic, retain) NSMutableArray *metadataList;
@@ -392,19 +392,37 @@
     [request startAsynchronous];
 }
 
+
+#pragma mark - PostWaveTransMetadataDelegate <NSObject>
+
+- (void)postWaveTransMetadata:(WaveTransMetadata *)metadata {
+    
+    [self uploadRequestWithMetadata:metadata];
+}
+
+
 - (void)uploadRequestWithMetadata:(WaveTransMetadata *)metadata {
     
     NSURL *url = [NSURL URLWithString:@"http://rest.sinaapp.com/api/post"];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    
     [request setDelegate:self];
     [request setRequestMethod:@"POST"];
     request.userInfo = @{@"metadata" : metadata, @"apiName":@"api/post"};
-    
-    [request addFile:[metadata cachePath:NO] forKey:@"file"];
-    [request addPostValue:metadata.type forKey:@"type"];
     [request setUploadProgressDelegate:self];
+    
+    if ([metadata.type isEqualToString:@"file"]) {
+        
+        [request addFile:[metadata cachePath:NO] forKey:@"file"];
+        [request addPostValue:metadata.type forKey:@"type"];
+        
+    } else if ([metadata.type isEqualToString:@"text"] || [metadata.type isEqualToString:@"url"]) {
+        
+        [request addPostValue:metadata.type forKey:@"type"];
+        [request addPostValue:metadata.content forKey:@"content"];
+    }
+    
+    
     [request startAsynchronous];
 }
 
@@ -643,6 +661,7 @@
         case 2:
         {
             TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
+            textEditorViewController.postWaveTransMetadataDelegate = self;
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
             [self presentViewController:navigationController animated:YES completion:^{}];
         }

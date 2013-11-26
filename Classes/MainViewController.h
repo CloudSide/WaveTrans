@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class WaveTransMetadata;
+
 @interface MainViewController : UIViewController
+
+@end
+
+
+@protocol PostWaveTransMetadataDelegate <NSObject>
+
+- (void)postWaveTransMetadata:(WaveTransMetadata *)metadata;
 
 @end
