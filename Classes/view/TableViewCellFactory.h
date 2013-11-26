@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class MainTableViewCell;
+@class WaveTransMetadata;
 
 typedef NS_ENUM(NSInteger, MetaDataFileType) {
     MetaDataFileTypeBinary,        //二进制文件
@@ -21,8 +22,8 @@ typedef NS_ENUM(NSInteger, MetaDataFileType) {
 
 @interface TableViewCellFactory : NSObject
 
-+(id)getTableViewCellByCellType:(MetaDataFileType)tableViewCellType
-                                       tableView:(UITableView *)tableView
-                                           owner:(id)owner;
++(id)getTableViewCellByCellType:(WaveTransMetadata *)metadataReader
+                       tableView:(UITableView *)tableView
+                           owner:(id)owner;
 
 @end

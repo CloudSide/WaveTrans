@@ -13,39 +13,35 @@
 #import "PhotoCell.h"
 #import "AudioCell.h"
 #import "VideoCell.h"
+#import "WaveTransMetadata.h"
 
 @implementation TableViewCellFactory
 
-+(id)getTableViewCellByCellType:(MetaDataFileType)metaDataFileType
-                                       tableView:(UITableView *)tableView
-                                           owner:(id)owner
++(id)getTableViewCellByCellType:(WaveTransMetadata *)metadata
+                      tableView:(UITableView *)tableView
+                          owner:(id)owner
 {
     NSString *identifier = nil;
     
-    switch (metaDataFileType) {
+    if ([metadata.type isEqualToString:@"file"]) {//text | url | file
         
-        case MetaDataFileTypeBinary:
-        identifier = @"BinaryCell";
-        break;
-        
-        case MetaDataFileTypeText:
-        identifier = @"TextCell";
-        break;
-        
-        case MetaDataFileTypePhoto:
-        identifier = @"PhotoCell";
-        break;
-        
-        case MetaDataFileTypeAudio:
-        identifier = @"AudioCell";
-        break;
-        
-        case MetaDataFileTypeVideo:
-        identifier = @"VideoCell";
-        break;
-        
-        default:
-        break;
+        if ([metadata.reader isEqualToString:@"image"]) {
+            identifier = @"PhotoCell";
+        }else if ([metadata.reader isEqualToString:@"sound"]){
+            identifier = @"AudioCell";
+        }else if ([metadata.reader isEqualToString:@"video"]){
+            identifier = @"VideoCell";
+        }else if ([metadata.reader isEqualToString:@"txt"] || [metadata.reader isEqualToString:@"code"]){
+            identifier = @"TextCell";
+        }else {
+            identifier = @"BinaryCell";
+        }
+    }else if ([metadata.type isEqualToString:@"url"]){
+        //TODO:连接
+    }else if ([metadata.type isEqualToString:@"text"]){
+        //TODO:字符串
+    }else{
+        //TODO:unknow type!!!
     }
     
     if (identifier) {
