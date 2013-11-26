@@ -279,13 +279,17 @@
             
             NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)mediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
             
+            /*
             WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithDictionary:@{ @"sha1":sha1,
                                                                                             @"type":@"file",
                                                                                             @"size":[NSString stringWithFormat:@"%llu", theItemSize],
                                                                                             @"ctime":[NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]}] autorelease];
-            
-            
+             
             [metadata setFilename:rep.filename];
+             */
+            
+            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:theItemSize filename:rep.filename] autorelease];
+            metadata.uploaded = NO;
             NSString *cachePath = [metadata cachePath:YES];
             
             NSLog(@"%@", cachePath);
