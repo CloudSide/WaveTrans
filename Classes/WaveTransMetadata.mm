@@ -10,6 +10,7 @@
 #import "rscode.h"
 #import "bb_freq_util.h"
 #import "WaveTransModel.h"
+#import "VdiskJSON.h"
 
 @implementation WaveTransMetadata
 
@@ -93,6 +94,15 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     [WaveTransModel insertOrReplaceMetadata:self];
 }
 
+- (BOOL)isJson {
+
+    if ([self.type isEqualToString:@"text"] && self.content) {
+        
+        return !![self.content JSONValue];
+    }
+    
+    return NO;
+}
 
 - (NSString *)code {
 

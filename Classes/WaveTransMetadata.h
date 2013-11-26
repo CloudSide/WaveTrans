@@ -27,6 +27,7 @@
 @property (nonatomic, readonly) BOOL hasCache;
 
 @property (nonatomic, assign) BOOL uploaded;
+@property (nonatomic, readonly) BOOL isJson;
 
 /*
  code
