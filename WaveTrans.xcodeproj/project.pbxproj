@@ -69,14 +69,13 @@
 		C140F03D18449F7100083B9B /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F03818449F7100083B9B /* EGOImageLoader.m */; };
 		C140F03E18449F7100083B9B /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F03B18449F7100083B9B /* EGOImageView.m */; };
 		C140F0411844A21400083B9B /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0401844A21400083B9B /* EGOCache.m */; };
-<<<<<<< HEAD
+
 		C140F04E1844C71000083B9B /* quotes_l.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04A1844C71000083B9B /* quotes_l.png */; };
 		C140F04F1844C71000083B9B /* quotes_l@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04B1844C71000083B9B /* quotes_l@2x.png */; };
 		C140F0501844C71000083B9B /* quotes_r.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04C1844C71000083B9B /* quotes_r.png */; };
 		C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04D1844C71000083B9B /* quotes_r@2x.png */; };
 		C15BAFB518444D6900690D74 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFB418444D6900690D74 /* MainViewController.m */; };
-=======
->>>>>>> d9b1f4d5701d124c033d80727e2862ea3d5a2cf9
+
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
 		C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBA18444E0C00690D74 /* MainTableViewCell.m */; };

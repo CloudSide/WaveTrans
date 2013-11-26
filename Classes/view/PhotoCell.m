@@ -34,7 +34,7 @@
 {
     super.metadata = metadata;
     
-    [self.photoImageView setImageURL:super.metadata.fileURL];
+    [self.photoImageView setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://vdisk-thumb-1.wcdn.cn/frame.640x480/%@",[super.metadata.fileURL.absoluteString substringFromIndex:7]]]];
 }
 
 -(void)dealloc

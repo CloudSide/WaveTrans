@@ -62,6 +62,33 @@
     }
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+//    [super setSelected:selected animated:animated];
+//    
+//    // Configure the view for the selected state
+//    NSLog(@"set cell %d Selected: %d", indexPath.row, selected);
+//    if (selected) {
+//        _contentLbl.textColor = [UIColor whiteColor];
+//    }
+//    else {
+//        _contentLbl.textColor = [UIColor blackColor];
+//    }
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+//    [super setHighlighted:highlighted animated:animated];
+//    
+//    NSLog(@"set cell %d highlighted: %d", indexPath.row, highlighted);
+//    if (highlighted) {
+//        _contentLbl.textColor = [UIColor whiteColor];
+//    }
+//    else {
+//        _contentLbl.textColor = [UIColor blackColor];
+//    }
+}
+
 -(void)dealloc
 {
     self.metadata = nil;
