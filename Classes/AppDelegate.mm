@@ -326,13 +326,13 @@ static OSStatus	PerformThru(
     
     self.view = [[[EAGLView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280.0, 64.0)] autorelease];
     
-    RootViewController *rootViewController = [[[RootViewController alloc] init] autorelease];
-    self.window.rootViewController = rootViewController;
-    [rootViewController.view setBackgroundColor:[UIColor clearColor]];
-    [rootViewController.view addSubview:self.view];
+//    RootViewController *rootViewController = [[[RootViewController alloc] init] autorelease];
+//    self.window.rootViewController = rootViewController;
+//    [rootViewController.view setBackgroundColor:[UIColor clearColor]];
+//    [rootViewController.view addSubview:self.view];
     
-//    MainViewController *mMainViewController = [[[MainViewController alloc] init] autorelease];
-//    self.window.rootViewController = mMainViewController;
+    MainViewController *mMainViewController = [[[MainViewController alloc] init] autorelease];
+    self.window.rootViewController = mMainViewController;
     
     _isListenning = YES;
     

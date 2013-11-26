@@ -88,6 +88,10 @@
 		C15BB00B1844599F00690D74 /* arrow_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFFF1844599F00690D74 /* arrow_right@2x.png */; };
 		C15BB00C1844599F00690D74 /* tableview_sep_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C15BB0001844599F00690D74 /* tableview_sep_line@2x.png */; };
 		C15BB00D1844599F00690D74 /* tableview_sep_line.png in Resources */ = {isa = PBXBuildFile; fileRef = C15BB0011844599F00690D74 /* tableview_sep_line.png */; };
+		C15BB0101844789D00690D74 /* ContactsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BB00F1844789D00690D74 /* ContactsCell.m */; };
+		C15BB012184478B400690D74 /* ContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BB011184478B400690D74 /* ContactsCell.xib */; };
+		C15BB01418447A8600690D74 /* WeiboCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BB01318447A8600690D74 /* WeiboCell.xib */; };
+		C15BB01718447A9000690D74 /* WeiboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BB01618447A9000690D74 /* WeiboCell.m */; };
 		F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */; };
 		F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */; };
 		F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD150DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp */; };
@@ -241,6 +245,12 @@
 		C15BAFFF1844599F00690D74 /* arrow_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_right@2x.png"; sourceTree = "<group>"; };
 		C15BB0001844599F00690D74 /* tableview_sep_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tableview_sep_line@2x.png"; sourceTree = "<group>"; };
 		C15BB0011844599F00690D74 /* tableview_sep_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableview_sep_line.png; sourceTree = "<group>"; };
+		C15BB00E1844789C00690D74 /* ContactsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsCell.h; sourceTree = "<group>"; };
+		C15BB00F1844789D00690D74 /* ContactsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsCell.m; sourceTree = "<group>"; };
+		C15BB011184478B400690D74 /* ContactsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsCell.xib; sourceTree = "<group>"; };
+		C15BB01318447A8600690D74 /* WeiboCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboCell.xib; sourceTree = "<group>"; };
+		C15BB01518447A9000690D74 /* WeiboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboCell.h; sourceTree = "<group>"; };
+		C15BB01618447A9000690D74 /* WeiboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboCell.m; sourceTree = "<group>"; };
 		F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aurio_helper.cpp; sourceTree = "<group>"; };
 		F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurio_helper.h; sourceTree = "<group>"; };
 		F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
@@ -580,6 +590,12 @@
 				C15BAFE718444F0900690D74 /* AudioCell.h */,
 				C15BAFE818444F0900690D74 /* AudioCell.m */,
 				C15BAFB718444E0C00690D74 /* AudioCell.xib */,
+				C15BB00E1844789C00690D74 /* ContactsCell.h */,
+				C15BB00F1844789D00690D74 /* ContactsCell.m */,
+				C15BB011184478B400690D74 /* ContactsCell.xib */,
+				C15BB01518447A9000690D74 /* WeiboCell.h */,
+				C15BB01618447A9000690D74 /* WeiboCell.m */,
+				C15BB01318447A8600690D74 /* WeiboCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -662,8 +678,10 @@
 			files = (
 				3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */,
 				C15BB0051844599F00690D74 /* play_btn@2x.png in Resources */,
+				C15BB012184478B400690D74 /* ContactsCell.xib in Resources */,
 				3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */,
 				C15BAFC918444E0C00690D74 /* TextCell.xib in Resources */,
+				C15BB01418447A8600690D74 /* WeiboCell.xib in Resources */,
 				C15BB0071844599F00690D74 /* audio_bg.png in Resources */,
 				C15BAFCA18444E0C00690D74 /* VideoCell.xib in Resources */,
 				C15BB00D1844599F00690D74 /* tableview_sep_line.png in Resources */,
@@ -695,6 +713,7 @@
 				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
 				ADB16D12183E31FE00115067 /* ASIDataDecompressor.m in Sources */,
 				3F4E4F8C184355D5006D7205 /* FMDatabase.m in Sources */,
+				C15BB0101844789D00690D74 /* ContactsCell.m in Sources */,
 				ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */,
 				32B1BDDC1840F55900FFC32D /* kiss_fftr.c in Sources */,
 				3F4E4F8D184355D5006D7205 /* FMDatabaseAdditions.m in Sources */,
@@ -742,6 +761,7 @@
 				ADB16D16183E31FE00115067 /* ASIInputStream.m in Sources */,
 				C15BAFE918444F0900690D74 /* AudioCell.m in Sources */,
 				32B1BDE51840F58900FFC32D /* queue.cpp in Sources */,
+				C15BB01718447A9000690D74 /* WeiboCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

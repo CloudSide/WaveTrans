@@ -48,7 +48,7 @@
                                                                        type:@"file"
                                                                     content:@"http://sdfsdf"
                                                                        size:1212
-                                                                   filename:@"av.avi"];
+                                                                   filename:@"av.mp3"];
             [wt save];
             [wt release];
         }
