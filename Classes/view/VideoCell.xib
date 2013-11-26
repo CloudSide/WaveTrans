@@ -52,10 +52,16 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <view alpha="0.30000001192092896" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAd-NK-68e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="fq0-js-O69" id="EfB-2f-1eO"/>
+                <outlet property="progressView" destination="OAd-NK-68e" id="tsh-Dx-UKw"/>
                 <outlet property="receiveState" destination="7sN-4w-gYI" id="pZ5-D6-uXM"/>
                 <outlet property="sendBeepBtn" destination="7au-8L-AFV" id="7XQ-XB-JnJ"/>
             </connections>

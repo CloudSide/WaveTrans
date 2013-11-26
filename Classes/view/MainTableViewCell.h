@@ -23,10 +23,15 @@
 
 @property (nonatomic,retain) WaveTransMetadata *metadata;
 
+@property (nonatomic,assign) CGFloat downloadProgress;
+
 @property (nonatomic,retain) IBOutlet UILabel *fileNameLabel;
 @property (nonatomic,retain) IBOutlet UILabel *createDateLabel;
 @property (nonatomic,retain) IBOutlet UIButton *sendBeepBtn;
 @property (nonatomic,retain) IBOutlet UILabel *receiveState;
+
+@property (nonatomic,retain) IBOutlet UIView *sepraterView;
+@property (nonatomic,retain) IBOutlet UIView *progressView;
 
 @end
 

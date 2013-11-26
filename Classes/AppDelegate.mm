@@ -1184,7 +1184,7 @@ static queue   _savedBuffer[32];
             
             //请求
             
-            if (self.getWaveTransMetadataDelegate != nil && [self.getWaveTransMetadataDelegate respondsToSelector:@selector(getWaveTransMetadataWithString:)]) {
+            if (self.getWaveTransMetadataDelegate != nil && [self.getWaveTransMetadataDelegate respondsToSelector:@selector(getWaveTransMetadata:)]) {
                 
                 WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithDictionary:@{@"code":string}] autorelease];
                 

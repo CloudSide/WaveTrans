@@ -39,7 +39,8 @@
             identifier = @"BinaryCell";
         }
     }else if ([metadata.type isEqualToString:@"url"]){
-        //TODO:连接
+        //字符串
+        identifier = @"PureTextCell";
     }else if ([metadata.type isEqualToString:@"text"]){
         
         if(metadata.isJson){
@@ -73,6 +74,8 @@
         cell.delegate = owner;
         
         cell.metadata = metadata;
+        //TODO:test
+        cell.downloadProgress = 0.74f;
         
         return cell;
     }

@@ -27,6 +27,8 @@
 #pragma mark - private method
 -(void)initViews
 {
+    self.sepraterView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableview_sep_line"]];
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     
     [formatter setDateFormat:@"HH:mm:ss"];//y-MM-dd HH:mm:ss
@@ -35,11 +37,29 @@
     self.fileNameLabel.text = self.metadata.filename;
     [self.sendBeepBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [self.sendBeepBtn addTarget:self action:@selector(sendBeepAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (self.metadata.hasCache) {
+        self.progressView.hidden = YES;
+    }else{
+        self.progressView.hidden = NO;
+    }
 }
 
 -(void)sendBeepAction:(id)sender
 {
     //TODO:send beep
+}
+
+-(void)setDownloadProgress:(CGFloat)downloadProgress
+{
+    _downloadProgress = downloadProgress;
+    CGRect frame = self.progressView.frame;
+    frame.size.width = self.frame.size.width * (1-downloadProgress);
+    self.progressView.frame = frame;
+    
+    if (frame.size.width == 0) {
+        self.progressView.hidden = YES;
+    }
 }
 
 -(void)dealloc
@@ -50,6 +70,8 @@
     self.createDateLabel = nil;
     self.sendBeepBtn = nil;
     self.receiveState = nil;
+    
+    self.sepraterView = nil;
     
     
     [super dealloc];

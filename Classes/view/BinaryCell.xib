@@ -51,11 +51,17 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pdj-Wx-ivz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="4JW-f6-avp" id="v1u-NN-QM3"/>
                 <outlet property="fileNameLabel" destination="el1-EA-ln3" id="sIX-RF-3Ax"/>
+                <outlet property="progressView" destination="Pdj-Wx-ivz" id="AAd-tp-CM5"/>
                 <outlet property="receiveState" destination="4dU-k8-g19" id="IRG-E9-Jrl"/>
                 <outlet property="sendBeepBtn" destination="9G5-Jc-mut" id="xtL-Kh-MvH"/>
             </connections>

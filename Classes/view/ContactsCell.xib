@@ -52,12 +52,18 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pGx-yO-26u">
+                        <rect key="frame" x="0.0" y="98" width="320" height="2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="yRX-Pj-FeC" id="DaS-6e-Wbw"/>
                 <outlet property="receiveState" destination="zuC-7z-BIz" id="0Bk-SW-2cX"/>
                 <outlet property="sendBeepBtn" destination="SJI-qb-DhQ" id="aGF-88-0Yl"/>
+                <outlet property="sepraterView" destination="pGx-yO-26u" id="TpL-Ql-PSr"/>
             </connections>
         </tableViewCell>
     </objects>

@@ -47,15 +47,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.80024571572580661" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.95000000000000007" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MM9-SU-ELS">
+                        <rect key="frame" x="0.0" y="98" width="320" height="2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="tGF-9a-GrP" id="Sbb-cP-c1j"/>
                 <outlet property="pureTextLabel" destination="q9X-Ti-lqb" id="2Kh-SU-c7f"/>
+                <outlet property="pureTextParentView" destination="Vdu-ti-ZAD" id="9pK-od-nV4"/>
                 <outlet property="receiveState" destination="LCf-X0-iJt" id="wTq-0d-WKX"/>
                 <outlet property="sendBeepBtn" destination="Eoq-OE-UBx" id="m4n-dl-sao"/>
+                <outlet property="sepraterView" destination="MM9-SU-ELS" id="tNa-m5-haX"/>
             </connections>
         </tableViewCell>
     </objects>

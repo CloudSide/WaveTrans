@@ -53,12 +53,18 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwI-ja-hN6">
+                        <rect key="frame" x="0.0" y="98" width="320" height="2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="cKV-kT-R8C" id="9cB-DU-EGd"/>
                 <outlet property="receiveState" destination="MMl-r5-6lc" id="iOI-qi-oWg"/>
                 <outlet property="sendBeepBtn" destination="7i6-iq-VIJ" id="ASt-hJ-llp"/>
+                <outlet property="sepraterView" destination="xwI-ja-hN6" id="mZX-5j-dbf"/>
             </connections>
         </tableViewCell>
     </objects>
