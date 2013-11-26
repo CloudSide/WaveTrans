@@ -336,6 +336,71 @@
         
         //TODO:拷贝视频
         
+        NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
+        NSString *movieName = [url lastPathComponent];
+        NSString *mediaFile = [self filePath:[NSString stringWithFormat:@"%@.tmp", movieName]];
+        
+        if (![fileManager createDirectoryAtPath:[mediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
+            
+            //TODO:提示错误
+            
+            [picker dismissViewControllerAnimated:YES completion:^{
+                
+                
+            }];
+            
+            return;
+        }
+        
+        if ([fileManager moveItemAtURL:url toURL:[NSURL URLWithString:mediaFile] error:nil]) {
+            
+            NSString *sha1 = [VdiskUtil fileSHA1HashCreateWithPath:(CFStringRef)mediaFile ChunkSize:FileHashDefaultChunkSizeForReadingData];
+            
+            NSString *fileSize;
+            [url getResourceValue:&fileSize forKey:NSURLFileSizeKey error:nil];
+            
+            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:[fileSize longLongValue] filename:movieName] autorelease];
+            metadata.uploaded = NO;
+            
+            NSString *cachePath = [metadata cachePath:YES];
+            NSLog(@"%@", cachePath);
+            
+            NSError *error;
+            
+            if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
+                
+                WaveTransMetadata *meta = [WaveTransModel metadata:metadata];
+                
+                if (meta != nil && !meta.uploaded) {
+                    
+                    [self uploadRequestWithMetadata:meta];
+                    
+                } else if (meta == nil) {
+                    
+                    [metadata save];
+                    [self uploadRequestWithMetadata:metadata];
+                    
+                } else {
+                    
+                    [metadata save];
+                }
+            } else {
+                
+                // TODO:错误提示
+                NSLog(@"move file error: %@", error);
+            }
+            
+        } else {
+            
+            // TODO:错误提示
+        }
+        
+        
+        
+        
+        
+        
+        
         /*
          
         NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
@@ -447,7 +512,7 @@
         
         NSDictionary *dict = [[request responseString] JSONValue];
         
-        if ([dict isKindOfClass:[NSDictionary class]]) {
+        if ([dict isKindOfClass:[NSDictionary class]] && ![dict objectForKey:@"errno"]) {
             
             WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
             
@@ -457,6 +522,10 @@
             NSLog(@"%@", metadataReceive.ctime);
             NSLog(@"%@", metadataReceive.content);
             NSLog(@"%@", metadataReceive.size);
+            
+            metadataReceive.uploaded = YES;
+            [metadataReceive save];
+            
             [[AppDelegate sharedAppDelegate] setListenning:YES];
             
         }else {
