@@ -35,7 +35,7 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7CZ-hl-PDi">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7CZ-hl-PDi" customClass="EGOImageView">
                         <rect key="frame" x="20" y="25" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -62,6 +62,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="cKV-kT-R8C" id="9cB-DU-EGd"/>
+                <outlet property="descriptionLabel" destination="YHc-oV-Z5y" id="3fS-v1-06h"/>
+                <outlet property="headerImageView" destination="7CZ-hl-PDi" id="4Dn-fW-lbm"/>
+                <outlet property="nameLabel" destination="Nzq-Ev-XsP" id="sjQ-JT-MGi"/>
                 <outlet property="receiveState" destination="MMl-r5-6lc" id="iOI-qi-oWg"/>
                 <outlet property="sendBeepBtn" destination="7i6-iq-VIJ" id="ASt-hJ-llp"/>
                 <outlet property="sepraterView" destination="xwI-ja-hN6" id="mZX-5j-dbf"/>
