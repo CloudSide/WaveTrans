@@ -330,7 +330,7 @@ static OSStatus	PerformThru(
     
     _isListenning = YES;
     
-#ifdef __IPHONE_7_0
+#ifdef __IPHONE_8_0
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
         
         [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
