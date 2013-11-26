@@ -116,7 +116,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 
 - (NSURL *)fileURL {
 
-    if ([self.type isEqualToString:@"file"] && self.content != nil && [self.content isKindOfClass:[NSString class]]) {
+    if ([self.type isEqualToString:@"file"] && self.content != nil && [self.content isKindOfClass:[NSString class]] && [self.content length] > 12) {
         
         return [NSURL URLWithString:self.content];
     }
