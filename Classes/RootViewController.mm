@@ -235,6 +235,12 @@
             if (![fileManager createDirectoryAtPath:[mediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
                 
                 //TODO:提示错误
+                
+                [picker dismissViewControllerAnimated:YES completion:^{
+                    
+                    
+                }];
+                
                 return;
             }
             
@@ -295,17 +301,18 @@
             NSLog(@"%@", cachePath);
             
             NSError *error;
+            
             if ([fileManager fileExistsAtPath:cachePath]) {
                 
                 // 如果有缓存，直接发声
                 //[self playWithMetadata:metadata];
                 
-            }else if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
+            } else if ([fileManager moveItemAtPath:mediaFile toPath:cachePath error:&error]) {
                 
                 // 如果没有，上传，收到code后发声
                 [self uploadRequestWithMetadata:metadata];
                 
-            }else {
+            } else {
                 
                 // 没有缓存且移动文件失败，报错
                 // TODO:错误提示
@@ -332,6 +339,11 @@
         [self uploadRequestWithURL:url];
          */
     }
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+        
+    }];
 }
 
 #pragma mark - AVAudioPlayerDelegate <NSObject>
