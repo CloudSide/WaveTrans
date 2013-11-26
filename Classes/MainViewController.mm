@@ -445,7 +445,9 @@
         
         NSDictionary *dict = [[request responseString] JSONValue];
         
-        if ([dict isKindOfClass:[NSDictionary class]]) {
+        if ([dict isKindOfClass:[NSDictionary class]] && ![dict objectForKey:@"errno"]) {
+            
+            //上传成功
             
             WaveTransMetadata *metadata = [[WaveTransMetadata alloc] initWithDictionary:dict];
             
@@ -478,6 +480,8 @@
         
         if ([dict isKindOfClass:[NSDictionary class]] && ![dict objectForKey:@"errno"]) {
             
+            //接收成功
+            
             WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
             
             NSLog(@"%@", metadataReceive.code);
@@ -488,6 +492,9 @@
             NSLog(@"%@", metadataReceive.size);
             
             metadataReceive.uploaded = YES;
+            
+            [metadataReceive ]
+            
             [metadataReceive save];
             
             [[AppDelegate sharedAppDelegate] setListenning:YES];
