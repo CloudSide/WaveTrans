@@ -38,10 +38,13 @@
     [self.sendBeepBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [self.sendBeepBtn addTarget:self action:@selector(sendBeepAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    if (self.metadata.hasCache) {
-        self.progressView.hidden = YES;
-    }else{
-        self.progressView.hidden = NO;
+    if ([self.metadata.type isEqualToString:@"file"]) {
+
+        if (self.metadata.hasCache) {
+            self.progressView.hidden = YES;
+        }else{
+            self.progressView.hidden = NO;
+        }
     }
     
     if (!self.metadata.uploaded) {
@@ -118,6 +121,12 @@
     
     
     [super dealloc];
+}
+
+#pragma mark - MainViewControllerDelegate
+-(void)updateDownloadProgress:(CGFloat)progress byMetadata:(WaveTransMetadata *)metadata
+{
+    //TODO:
 }
 
 @end

@@ -462,6 +462,9 @@
             
             WaveTransMetadata *metadataReceive = [request.userInfo objectForKey:@"metadata"];
             [metadataReceive setUploaded:YES];
+            [metadataReceive save];
+            
+            [self refreshMetadataList];
             
         }else {
             
@@ -533,6 +536,10 @@
     // Called when "DELETE" button is pushed.
     NSLog(@"DELETE button pushed in row at: %@", indexPath.description);
     //TODO:删除按钮
+    
+    [WaveTransModel deleteMetadata:[self.metadataList objectAtIndex:indexPath.row]];
+    [self refreshMetadataList];
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -199,18 +199,23 @@
         
         if ([metadata isKindOfClass:[WaveTransMetadata class]]) {
             
-            [self queryWithSQL:@"UPDATE 'wave_trans_info' SET 'code' = :code, 'content' = :content, 'size' = :size, 'ctime' = :ctime, 'object' = :object WHERE  'sha1' = :sha1 and 'type' = :type limit 1"
-           parameterDictionary:@{
-                                 
-                                 @"code" : metadata.code,
-                                 @"content" : metadata.content,
-                                 @"size" : [NSString stringWithFormat:@"%llu", metadata.totalBytes],
-                                 @"ctime" : [NSString stringWithFormat:@"%f", [metadata.ctime timeIntervalSince1970]],
-                                 @"object" : [NSKeyedArchiver archivedDataWithRootObject:metadata],
-                                 @"sha1" : metadata.sha1,
-                                 @"type" : metadata.type
-                                 
-                                 }];
+            NSDictionary *dictParam = @{
+                                        
+                                        @"code" : metadata.code,
+                                        @"content" : metadata.content,
+                                        @"size" : [NSString stringWithFormat:@"%llu", metadata.totalBytes],
+                                        @"ctime" : [NSString stringWithFormat:@"%f", [metadata.ctime timeIntervalSince1970]],
+                                        @"object" : [NSKeyedArchiver archivedDataWithRootObject:metadata],
+                                        @"sha1" : metadata.sha1,
+                                        @"type" : metadata.type};
+            
+            
+            BOOL state = [self queryWithSQL:@"UPDATE 'wave_trans_info' SET 'code' = :code, 'content' = :content, 'size' = :size, 'ctime' = :ctime, 'object' = :object WHERE  'sha1' = :sha1 and 'type' = :type"
+           parameterDictionary:dictParam];
+            
+            
+            
+            NSLog(@"--1111111--%@----%d",dictParam,state);
             
         }
         
@@ -226,7 +231,7 @@
                                           @"size" : [NSString stringWithFormat:@"%llu", metadata.totalBytes],
                                           @"ctime" : [NSString stringWithFormat:@"%f", [metadata.ctime timeIntervalSince1970]],
                                           @"object" : [NSKeyedArchiver archivedDataWithRootObject:metadata]};
-        
+    NSLog(@"--insert  =======--%@----",parameterDictionary);
     return [self insertWithSQL:sql parameterDictionary:parameterDictionary];
 }
 

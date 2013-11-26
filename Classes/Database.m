@@ -62,12 +62,12 @@
         _dbPath = [[[self documentsPath] stringByAppendingFormat:@"/%@/userdata.sqlite", dbDirPath] retain];
         _database = [[FMDatabase alloc] initWithPath:_dbPath];
         
-        /* DEBUG
-         
+//        /* DEBUG
+        
         _database.traceExecution = YES;
         _database.logsErrors = YES;
          
-         */
+         
         
         [_database open];
     }

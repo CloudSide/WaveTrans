@@ -74,8 +74,8 @@
         cell.delegate = owner;
         
         cell.metadata = metadata;
-        //TODO:test
-        cell.downloadProgress = 0.74f;
+//        //TODO:test
+//        cell.downloadProgress = 0.74f;
         
         return cell;
     }

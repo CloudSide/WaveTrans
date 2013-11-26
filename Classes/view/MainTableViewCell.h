@@ -10,6 +10,8 @@
 
 #import "MSCMoreOptionTableViewCell.h"
 
+#import "MainViewController.h"
+
 @class WaveTransMetadata;
 
 //@protocol MainTableViewCellProtocol <NSObject>
@@ -19,7 +21,7 @@
 //
 //@end
 
-@interface MainTableViewCell : MSCMoreOptionTableViewCell //<MainTableViewCellProtocol>
+@interface MainTableViewCell : MSCMoreOptionTableViewCell <MainViewControllerDelegate>
 
 @property (nonatomic,retain) WaveTransMetadata *metadata;
 
