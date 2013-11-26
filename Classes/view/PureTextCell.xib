@@ -62,10 +62,16 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <view alpha="0.30000001192092896" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Gi-Uc-0SB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="tGF-9a-GrP" id="Sbb-cP-c1j"/>
+                <outlet property="progressView" destination="3Gi-Uc-0SB" id="ZXa-j6-52q"/>
                 <outlet property="pureTextLabel" destination="q9X-Ti-lqb" id="2Kh-SU-c7f"/>
                 <outlet property="pureTextParentView" destination="Vdu-ti-ZAD" id="9pK-od-nV4"/>
                 <outlet property="receiveState" destination="LCf-X0-iJt" id="wTq-0d-WKX"/>

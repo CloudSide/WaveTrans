@@ -397,6 +397,8 @@
 
 - (void)postWaveTransMetadata:(WaveTransMetadata *)metadata {
     
+    [self refreshMetadataList];
+    
     [self uploadRequestWithMetadata:metadata];
 }
 
@@ -670,6 +672,14 @@
         default:
             break;
     }
+}
+
+#pragma mark - private method
+//更新数据
+-(void)refreshMetadataList
+{
+    self.metadataList = [WaveTransModel metadataList];
+    [self.mTableView reloadData];
 }
 
 @end

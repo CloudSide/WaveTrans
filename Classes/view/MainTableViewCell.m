@@ -43,6 +43,13 @@
     }else{
         self.progressView.hidden = NO;
     }
+    
+    if (!self.metadata.uploaded) {
+        self.progressView.hidden = NO;
+        self.progressView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    }else{
+        self.progressView.hidden = YES;
+    }
 }
 
 -(void)sendBeepAction:(id)sender
