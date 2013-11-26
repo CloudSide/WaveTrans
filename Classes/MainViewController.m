@@ -12,6 +12,8 @@
 #import "MSCMoreOptionTableViewCell.h"
 #import "WaveTransMetadata.h"
 
+#import "WaveTransModel.h"
+
 
 @interface MainViewController ()<UITableViewDataSource,UITableViewDelegate,MSCMoreOptionTableViewCellDelegate,UIActionSheetDelegate>
 
@@ -37,7 +39,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.metadataList = [NSMutableArray array];
+    self.metadataList = [WaveTransModel metadataList];
     
     self.mTableView = [[UITableView alloc] initWithFrame:self.view.frame];
     self.mTableView.delegate = self;
@@ -60,10 +62,10 @@
     return self.metadataList.count;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 4;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 4;
+//}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
@@ -85,21 +87,21 @@
     return cell;
 }
 
--(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    switch (section) {
-        case 0:
-        return @"今天";
-        case 1:
-        return @"昨天";
-        case 2:
-        return @"前天";
-        case 3:
-        return @"星期四";
-    }
-    
-    return @"一周前";
-}
+//-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    switch (section) {
+//        case 0:
+//        return @"今天";
+//        case 1:
+//        return @"昨天";
+//        case 2:
+//        return @"前天";
+//        case 3:
+//        return @"星期四";
+//    }
+//    
+//    return @"一周前";
+//}
 
 
 #pragma mark - UITableViewDelegate
@@ -107,41 +109,41 @@
 {
     return 100;
 }
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)] autorelease];
-    header.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, 100, 20)];
-    [header addSubview:titleLabel];
-    
-    switch (section) {
-        case 0:
-        titleLabel.text = @"今天";
-        break;
-        
-        case 1:
-        titleLabel.text = @"昨天";
-        break;
-        
-        case 2:
-        titleLabel.text = @"前天";
-        break;
-        
-        case 3:
-        titleLabel.text = @"星期四";
-        break;
-        
-        //TODO:......
-        
-        default:
-        titleLabel.text = @"一周以前";
-        break;
-    }
-    
-    return header;
-}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)] autorelease];
+//    header.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
+//    
+//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, 100, 20)];
+//    [header addSubview:titleLabel];
+//    
+//    switch (section) {
+//        case 0:
+//        titleLabel.text = @"今天";
+//        break;
+//        
+//        case 1:
+//        titleLabel.text = @"昨天";
+//        break;
+//        
+//        case 2:
+//        titleLabel.text = @"前天";
+//        break;
+//        
+//        case 3:
+//        titleLabel.text = @"星期四";
+//        break;
+//        
+//        //TODO:......
+//        
+//        default:
+//        titleLabel.text = @"一周以前";
+//        break;
+//    }
+//    
+//    return header;
+//}
 
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
