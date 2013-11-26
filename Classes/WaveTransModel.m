@@ -225,7 +225,10 @@
         
         if ([arr count] > 0) {
             
-            return YES;
+            if ([arr[0] isKindOfClass:[WaveTransMetadata class]] /*&& [metadata isEqual:arr[0]]*/) {
+                
+                return YES;
+            }
         }
     }
     
