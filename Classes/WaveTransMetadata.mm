@@ -9,6 +9,7 @@
 #import "WaveTransMetadata.h"
 #import "rscode.h"
 #import "bb_freq_util.h"
+#import "WaveTransModel.h"
 
 @implementation WaveTransMetadata
 
@@ -85,6 +86,12 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 	
 	return @"0 Bytes";
 }
+
+- (void)save {
+
+    [WaveTransModel insertOrReplaceMetadata:self];
+}
+
 
 - (NSString *)code {
 

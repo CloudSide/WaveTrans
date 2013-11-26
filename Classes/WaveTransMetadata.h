@@ -45,5 +45,7 @@
 - (NSString *)cachePath:(BOOL)create;
 + (NSString *)codeWithSha1:(NSString *)sha1;
 
+- (void)save;
+
 
 @end
