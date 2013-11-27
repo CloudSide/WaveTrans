@@ -26,7 +26,6 @@
 #import "WaveTransModel.h"
 #import "PhotoCell.h"
 
-#import "PhotoViewerViewController.h"
 
 @interface UIActionSheet (userinfo)
 
