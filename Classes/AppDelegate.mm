@@ -76,6 +76,7 @@ GLfloat colorLevels[] = {
 @synthesize fftBufferManager;
 @synthesize mute;
 @synthesize inputProc;
+@synthesize interruption;
 
 @synthesize getWaveTransMetadataDelegate = _getWaveTransMetadataDelegate;
 
@@ -136,9 +137,14 @@ void rioInterruptionListener(void *inClientData, UInt32 inInterruption)
             // make sure we are again the active session
             XThrowIfError(AudioSessionSetActive(true), "couldn't set audio session active");
             XThrowIfError(AudioOutputUnitStart(THIS->rioUnit), "couldn't start unit");
+            
+            THIS->interruption = NO;
         }
         
         if (inInterruption == kAudioSessionBeginInterruption) {
+            
+            THIS->interruption = YES;
+            
             XThrowIfError(AudioOutputUnitStop(THIS->rioUnit), "couldn't stop unit");
         }
     } catch (CAXException e) {
@@ -320,65 +326,25 @@ static OSStatus	PerformThru(
     return YES;
 }
 
+- (void)setupListening {
 
-- (void)__applicationDidFinishLaunching:(UIApplication *)application
-{
-    
-    self.view = [[[EAGLView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 64.0)] autorelease];
-    
-//    RootViewController *rootViewController = [[[RootViewController alloc] init] autorelease];
-//    self.window.rootViewController = rootViewController;
-//    [rootViewController.view setBackgroundColor:[UIColor clearColor]];
-//    [rootViewController.view addSubview:self.view];
-    
-    MainViewController *mMainViewController = [[[MainViewController alloc] init] autorelease];
-    self.window.rootViewController = mMainViewController;
-    
-    _isListenning = YES;
-    
-#ifdef __IPHONE_8_0
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-        
-        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
-            
-            if (!granted) {
-            
-                UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"没有开启麦克风" message:@"请到[设置]->[隐私]->[麦克风]中开启" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
-                [alertView show];
-            }
-            
-        }];
-    }
-#endif
-
-	// Turn off the idle timer, since this app doesn't rely on constant touch input
-	application.idleTimerDisabled = YES;
-	
-	// mute should be on at launch
-	self.mute = YES;
-	displayMode = aurioTouchDisplayModeOscilloscopeWaveform;
-	
-	// Initialize our remote i/o unit
-	
-	inputProc.inputProc = PerformThru;
-	inputProc.inputProcRefCon = self;
     
 	CFURLRef url = NULL;
-	try {	
-//		url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFStringRef([[NSBundle mainBundle] pathForResource:@"button_press" ofType:@"caf"]), kCFURLPOSIXPathStyle, false);
-//		XThrowIfError(AudioServicesCreateSystemSoundID(url, &buttonPressSound), "couldn't create button tap alert sound");
-//		CFRelease(url);
+	try {
+        //		url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFStringRef([[NSBundle mainBundle] pathForResource:@"button_press" ofType:@"caf"]), kCFURLPOSIXPathStyle, false);
+        //		XThrowIfError(AudioServicesCreateSystemSoundID(url, &buttonPressSound), "couldn't create button tap alert sound");
+        //		CFRelease(url);
 		
 		// Initialize and configure the audio session
 		XThrowIfError(AudioSessionInitialize(NULL, NULL, rioInterruptionListener, self), "couldn't initialize audio session");
-        
+        self.interruption = NO;
 		UInt32 audioCategory = kAudioSessionCategory_PlayAndRecord;
 		XThrowIfError(AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(audioCategory), &audioCategory), "couldn't set audio category");
 		XThrowIfError(AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, propListener, self), "couldn't set property listener");
         
 		//Float32 preferredBufferSize = .0872;
         Float32 preferredBufferSize = .0873;
-
+        
 		XThrowIfError(AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(preferredBufferSize), &preferredBufferSize), "couldn't set i/o buffer duration");
 		
 		UInt32 size = sizeof(hwSampleRate);
@@ -448,6 +414,58 @@ static OSStatus	PerformThru(
         }
 		if (url) CFRelease(url);
 	}
+}
+
+
+- (void)__applicationDidFinishLaunching:(UIApplication *)application
+{
+    
+    self.view = [[[EAGLView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 64.0)] autorelease];
+    
+//    RootViewController *rootViewController = [[[RootViewController alloc] init] autorelease];
+//    self.window.rootViewController = rootViewController;
+//    [rootViewController.view setBackgroundColor:[UIColor clearColor]];
+//    [rootViewController.view addSubview:self.view];
+    
+    MainViewController *mMainViewController = [[[MainViewController alloc] init] autorelease];
+    self.window.rootViewController = mMainViewController;
+    
+    _isListenning = YES;
+    
+#ifdef __IPHONE_8_0
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        
+        [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+            
+            if (!granted) {
+            
+                UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"没有开启麦克风" message:@"请到[设置]->[隐私]->[麦克风]中开启" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
+                [alertView show];
+            }
+            
+        }];
+    }
+#endif
+
+	// Turn off the idle timer, since this app doesn't rely on constant touch input
+	application.idleTimerDisabled = YES;
+	
+	// mute should be on at launch
+	self.mute = YES;
+	displayMode = aurioTouchDisplayModeOscilloscopeWaveform;
+	
+	// Initialize our remote i/o unit
+	
+	inputProc.inputProc = PerformThru;
+	inputProc.inputProcRefCon = self;
+    
+    
+    
+    ////////
+    [self setupListening];
+    ////////
+    
+    
 	
 	// Set ourself as the delegate for the EAGLView so that we get drawing and touch events
 	view.delegate = self;
