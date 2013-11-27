@@ -8,6 +8,10 @@
 
 #import "MainTableViewCell.h"
 
+
+@class EGOImageView;
 @interface VideoCell : MainTableViewCell
+
+@property (nonatomic,retain) IBOutlet EGOImageView *screenshotImageView;
 
 @end
