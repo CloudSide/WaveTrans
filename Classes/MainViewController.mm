@@ -300,7 +300,15 @@
         
         if (![fileManager createDirectoryAtPath:[tmpMediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
             
-            //TODO:提示错误
+            //TODO:提示错误 V
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"视频路径创建失败"
+                                                                message:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+            [alertView show];
+            [alertView release];
             
             [picker dismissViewControllerAnimated:YES completion:^{
                 
@@ -318,7 +326,14 @@
             
         } else {
             
-            // TODO:错误提示
+            // TODO:错误提示 V
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"视频拷贝失败"
+                                                                message:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+            [alertView show];
+            [alertView release];
             
             NSLog(@"error: %@", err);
         }

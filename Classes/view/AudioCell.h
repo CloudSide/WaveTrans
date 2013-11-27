@@ -10,4 +10,6 @@
 
 @interface AudioCell : MainTableViewCell
 
+@property (nonatomic,retain) IBOutlet UIButton *playAudioBtn;
+
 @end

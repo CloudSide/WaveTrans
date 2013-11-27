@@ -8,7 +8,15 @@
 
 #import "AudioCell.h"
 
+
 @implementation AudioCell
+
+- (void)dealloc {
+    
+    self.playAudioBtn = nil;
+    
+    [super dealloc];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -17,6 +25,17 @@
         // Initialization code
     }
     return self;
+}
+
+- (void)awakeFromNib {
+    
+    [self.playAudioBtn addTarget:self action:@selector(playAudioAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)playAudioAction:(id)sender
+{
+    NSLog(@"=========================");
+    
 }
 
 /*

@@ -73,6 +73,7 @@
             <connections>
                 <outlet property="createDateLabel" destination="MfX-YH-Egc" id="kSr-mv-Don"/>
                 <outlet property="fileNameLabel" destination="3OW-Be-kcG" id="fUW-Is-68I"/>
+                <outlet property="playAudioBtn" destination="gEK-Kn-uKg" id="oxJ-iz-hYu"/>
                 <outlet property="progressView" destination="baq-xH-tNH" id="LH5-K8-TcG"/>
                 <outlet property="receiveState" destination="jwV-uS-t9i" id="eMD-Vz-tV0"/>
                 <outlet property="sendBeepBtn" destination="fcc-7f-Rdp" id="lNO-1u-1ez"/>

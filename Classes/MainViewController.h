@@ -16,7 +16,7 @@
 
 @protocol MainViewControllerDelegate <NSObject>
 //更新下载进度
--(void)updateDownloadProgress:(CGFloat)progress byMetadata:(WaveTransMetadata *)metadata;
+- (void)updateDownloadProgress:(CGFloat)progress byMetadata:(WaveTransMetadata *)metadata;
 
 @end
 

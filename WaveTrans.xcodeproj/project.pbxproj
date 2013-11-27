@@ -61,6 +61,7 @@
 		ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2D183F115200115067 /* VdiskJsonBase.m */; };
 		ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2F183F115200115067 /* VdiskJsonParser.m */; };
 		ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D31183F115200115067 /* VdiskJsonWriter.m */; };
+		ADB84CD01845C6D80021D9FF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB84CCF1845C6D80021D9FF /* MediaPlayer.framework */; };
 		ADBE4A2E18432EF700B8E6A3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE4A2D18432EF700B8E6A3 /* MBProgressHUD.m */; };
 		ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0D9183F47FE000BF5B5 /* RootViewController.mm */; };
 		ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0DD183F58BE000BF5B5 /* PCMRender.m */; };
@@ -219,6 +220,7 @@
 		ADB16D2F183F115200115067 /* VdiskJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonParser.m; sourceTree = "<group>"; };
 		ADB16D30183F115200115067 /* VdiskJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonWriter.h; sourceTree = "<group>"; };
 		ADB16D31183F115200115067 /* VdiskJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonWriter.m; sourceTree = "<group>"; };
+		ADB84CCF1845C6D80021D9FF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		ADBE4A2C18432EF700B8E6A3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		ADBE4A2D18432EF700B8E6A3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		ADF1D0D8183F47FE000BF5B5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB84CD01845C6D80021D9FF /* MediaPlayer.framework in Frameworks */,
 				32CECB021845003A00772F34 /* libsqlite3.0.dylib in Frameworks */,
 				3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */,
 				ADF1D0E3183F5B16000BF5B5 /* AVFoundation.framework in Frameworks */,
@@ -410,6 +413,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADB84CCF1845C6D80021D9FF /* MediaPlayer.framework */,
 				32CECB011845003A00772F34 /* libsqlite3.0.dylib */,
 				3F4E4F92184355EE006D7205 /* libsqlite3.dylib */,
 				3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */,
