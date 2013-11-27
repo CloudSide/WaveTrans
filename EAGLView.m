@@ -224,7 +224,7 @@
 	
 	// Clears the view with black
 
-	glClearColor(50.f/255.f, 240.f/255.f, 240.f/255.f, 1.0f);
+	glClearColor(46.f/255.f, 171.f/255.f, 215.f/255.f, 1.0f);
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	///glEnableClientState(GL_TEXTURE_COORD_ARRAY);
