@@ -396,6 +396,8 @@
     [request setDownloadProgressDelegate:self];
     request.userInfo = @{@"metadata" : metadata, @"apiName":@"api/get"};
     [request startAsynchronous];
+    
+    [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
 
