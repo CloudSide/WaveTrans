@@ -636,14 +636,15 @@ static OSStatus	PerformThru(
 {
     // 下面这些图被删了，所以log会报一堆错
     
-    /*
+    
 	CGImageRef img;
 	
 	// Load our GL textures
 	
-	img = [UIImage imageNamed:@"oscilloscope.png"].CGImage;
+	img = [UIImage imageNamed:@"top_bg.png"].CGImage;
 	[self createGLTexture:&bgTexture fromCGImage:img];
-	
+    
+	/*
 	img = [UIImage imageNamed:@"fft_off.png"].CGImage;
 	[self createGLTexture:&fftOffTexture fromCGImage:img];
 	
@@ -755,7 +756,7 @@ static OSStatus	PerformThru(
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
-    /*
+    
 	{
 		// Draw our background oscilloscope screen
 		const GLfloat vertices[] = {
@@ -779,7 +780,7 @@ static OSStatus	PerformThru(
 		
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	}
-	
+	/*
 	{
 		// Draw our buttons
 		const GLfloat vertices[] = {
