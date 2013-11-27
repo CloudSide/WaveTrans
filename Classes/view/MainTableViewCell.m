@@ -56,6 +56,9 @@
 //    }
     
     self.progressView.hidden = YES;
+    
+    [self initProgressView];
+    
 }
 
 -(void)sendBeepAction:(id)sender
@@ -69,18 +72,52 @@
     }
 }
 
+-(CALayer *)getProgressLayer{
+    
+    for (CALayer *layer in [self.progressView.layer sublayers]) {
+        if ([layer.name isEqualToString:@"progressLayer"]) {
+            return layer;
+        }
+    }
+    
+    return nil;
+}
+
+-(void)initProgressView
+{
+    if ([self getProgressLayer] == nil) {
+        self.progressView.userInteractionEnabled = YES;
+        self.progressView.backgroundColor = [UIColor clearColor];
+        self.progressView.alpha = 1;
+        CALayer *layer = [CALayer layer];
+        layer.frame = self.progressView.bounds;
+        layer.name = @"progressLayer";
+        layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor;
+        [self.progressView.layer addSublayer:layer];
+    }
+}
+
 -(void)setDownloadProgress:(CGFloat)downloadProgress
 {
     _downloadProgress = downloadProgress;
-    CGRect frame = self.progressView.frame;
-    frame.size.width = self.frame.size.width * (1-downloadProgress);
-    self.progressView.frame = frame;
     
-    if (frame.size.width == 0) {
+    CALayer *layer = [self getProgressLayer];
+    
+    if (layer!=nil) {
+        
+        CGRect frame = layer.frame;
+        frame.size.width = self.frame.size.width * (1-downloadProgress);
+        frame.origin.x = self.progressView.frame.size.width - frame.size.width;
+        layer.frame = frame;
+        
+    }
+    
+    if (downloadProgress==0) {
         self.progressView.hidden = YES;
     }else{
         self.progressView.hidden = NO;
     }
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

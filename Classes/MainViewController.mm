@@ -558,6 +558,8 @@
             
             NSLog(@"Error: return format error!");
         }
+    }else if ([[request.userInfo objectForKey:@"is_download_file"] isEqualToString:@"YES"]) {//下载文件完成
+        [self refreshMetadataList];
     }
 }
 
