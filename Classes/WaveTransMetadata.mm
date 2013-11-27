@@ -91,7 +91,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
 
 - (void)save {
 
-    self.ctime = [NSData data];
+    self.ctime = [NSDate date];
     [WaveTransModel insertOrReplaceMetadata:self];
 }
 
