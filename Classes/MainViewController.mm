@@ -124,9 +124,9 @@
     
     UIActionSheet *chooseImageSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                                   delegate:self
-                                                         cancelButtonTitle:@"Cancel"
+                                                         cancelButtonTitle:@"取消"
                                                     destructiveButtonTitle:nil
-                                                         otherButtonTitles:@"Camera",@"Photo library", @"Text", nil];
+                                                         otherButtonTitles:@"拍照", @"相册", @"文本", nil];
     [chooseImageSheet showInView:self.view];
     
     [chooseImageSheet release];
