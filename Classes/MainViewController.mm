@@ -54,7 +54,7 @@ static char actionSheetUserinfoKey;
 
 
 
-@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate>
+@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, retain) UITableView *mTableView;
 @property (nonatomic, retain) NSMutableArray *metadataList;
@@ -848,11 +848,59 @@ static char actionSheetUserinfoKey;
 }
 
 #pragma mark - private method
+
+/*
+- (UIDocumentInteractionController *)docControllerForFile:(NSURL *)fileURL {
+	
+	UIDocumentInteractionController *docController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    docController.delegate = self;
+    
+	return docController;
+}
+ */
+
+- (void)presentOptionsMenu:(WaveTransMetadata *)metadata {
+    
+    if ([metadata hasCache]) {
+        
+        UIDocumentInteractionController *docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:[metadata cachePath:NO]]];
+        
+        [docController setName:metadata.filename];
+        
+        
+        if (![docController presentPreviewAnimated:YES]) {
+            
+           
+        }
+        
+    } else {
+        
+        
+    }
+}
+
+
 //更新数据
 -(void)refreshMetadataList
 {
     self.metadataList = [WaveTransModel metadataList];
     [self.mTableView reloadData];
 }
+
+
+
+#pragma mark - UIDocumentInteractionController
+
+
+- (void)documentInteractionControllerWillPresentOpenInMenu:(UIDocumentInteractionController *)controller {
+    
+
+}
+
+- (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller {
+    
+
+}
+
 
 @end
