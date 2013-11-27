@@ -128,6 +128,8 @@
                                                     destructiveButtonTitle:nil
                                                          otherButtonTitles:@"Camera",@"Photo library", @"Text", nil];
     [chooseImageSheet showInView:self.view];
+    
+    [chooseImageSheet release];
 }
 
 
@@ -715,13 +717,13 @@
 }
 
 #pragma mark - actionSheet
--(void)showMoreActionSheet:(NSIndexPath *)indexPath
-{
+- (void)showMoreActionSheet:(NSIndexPath *)indexPath {
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
                                                destructiveButtonTitle:@"删除"
-                                                    otherButtonTitles:@"用其他软件打开",@"分享",@"详细",nil];
+                                                    otherButtonTitles:@"用其他应用打开", @"分享", @"详细", nil];
     
     [actionSheet showInView:self.view];
     [actionSheet release];
