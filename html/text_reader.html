@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>TXT阅读器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0; width=device-width; user-scalable=no;" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+   <script type="text/javascript" src="js/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+        
+    <style type="text/css">
+    
+    
+    	body {
+    		
+    		font:14px helvetica,verdana,san-serif;
+    		-webkit-text-size-adjust:none;
+    		overflow-x:hidden;
+    		background: rgb(240, 240, 240);
+    	}
+    	
+		body,dl,dd,form,p,ul,li,div {
+			
+			margin:0;
+			padding:0;
+		}
+	
+		table {
+			
+			border-collapse:collapse;
+			border-spacing:0;
+		}
+		
+		a { 
+			text-decoration:none;
+			color:#4e5980;
+			cursor:pointer;
+		}
+		
+		a:hover {
+			
+			text-decoration:none;
+		}
+		
+		li {
+			
+			list-style:none;
+		}
+		
+		fieldset, img {
+			
+			border: 0;
+		}
+		
+		body {
+    
+    		background-color: #F2F2F2;
+    		background-image: url("images/bg-v3.png");
+    		color: #2A2A2A;
+			font-size: 18px;
+            word-wrap: break-word;
+            word-break: break-all;
+		}
+		
+		.white_background {
+			
+			background: white;
+		}
+    
+    	.clearfix:after {
+    		
+    		content:'';
+    		display:block;
+    		height:0;
+    		clear:both;
+    	}
+    	
+		.clearfix {
+			
+			zoom:1;
+		}
+    
+    	.main_content {
+    	
+    		width: auto;
+    		height: auto;
+            /* padding-top: 6px; */
+    		/* border: solid 1px red; */
+			padding: 10px;
+    	}
+    	
+    	.main_content ul {
+    	
+    		width: 320px;
+    		height: auto;
+    		/*border: solid 1px blue;*/
+    		float: left;
+            margin-top: 20px;
+    	}
+    	
+    	.main_content li {
+    	
+    		float: left;
+    		/*width: 152px;*/
+    		width: 106px;
+    		/*padding: 5px 0;*/
+    		text-align: center;
+    		/*background: white;*/
+    		/*border: solid 1px rgb(220, 220, 220);*/
+    		padding: 12px 0;
+    		/*
+    		border-radius:4px;
+			-moz-border-radius:4px;
+			-webkit-border-radius:4px;
+			*/
+
+    	}
+		
+		#more_loading {
+            
+            width: 312px;
+            margin: 4px;
+    		height: 50px;
+            padding-top: 40px;
+            text-align: center;
+            color: rgb(150, 150, 150);
+            text-shadow:rgba(255, 255, 255, 0.496094) 0 1px 0;
+            font-size: 16px;
+        }
+    
+    </style>
+
+<script type="text/javascript">
+		        
+		function display_text(content) {
+			
+			//alert(content['text']);
+			$("#contentText").html("<pre>" + content["text"] + "</pre>");
+			
+		}
+        
+ </script>
+    
+</head>
+<body>
+
+    <div class="main_content clearfix" id="contentText">
+    	 	
+    </div> 
+    
+    <div class="clearfix height_5"></div>
+</body>
+</html>       

@@ -29,6 +29,8 @@
 		3F4E4F9D18449341006D7205 /* DDHTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4F9C18449341006D7205 /* DDHTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		3F4E4FA2184493EA006D7205 /* TextEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */; };
 		3F4E4FA31844BDEC006D7205 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFB418444D6900690D74 /* MainViewController.mm */; };
+		3F4E4FB018460F8D006D7205 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4FAF18460F8D006D7205 /* TextViewController.m */; };
+		3F4E5001184614C2006D7205 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 3F4E5000184614C2006D7205 /* html */; };
 		3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA69696184323DF00B6FFDE /* VdiskBase64.m */; };
 		3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FA696991843247C00B6FFDE /* Images.xcassets */; };
 		3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CFD18431DB0006C84F5 /* FileExt.plist */; };
@@ -159,6 +161,9 @@
 		3F4E4F9C18449341006D7205 /* DDHTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHTextView.m; sourceTree = "<group>"; };
 		3F4E4FA0184493EA006D7205 /* TextEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEditorViewController.h; sourceTree = "<group>"; };
 		3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextEditorViewController.m; sourceTree = "<group>"; };
+		3F4E4FAE18460F8D006D7205 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
+		3F4E4FAF18460F8D006D7205 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
+		3F4E5000184614C2006D7205 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = html; sourceTree = SOURCE_ROOT; };
 		3FA69695184323DF00B6FFDE /* VdiskBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
 		3FA69696184323DF00B6FFDE /* VdiskBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskBase64.m; sourceTree = "<group>"; };
 		3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
@@ -359,6 +364,8 @@
 				C15BAFB418444D6900690D74 /* MainViewController.mm */,
 				3F4E4FA0184493EA006D7205 /* TextEditorViewController.h */,
 				3F4E4FA1184493EA006D7205 /* TextEditorViewController.m */,
+				3F4E4FAE18460F8D006D7205 /* TextViewController.h */,
+				3F4E4FAF18460F8D006D7205 /* TextViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -403,6 +410,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3F4E5000184614C2006D7205 /* html */,
 				3FA696991843247C00B6FFDE /* Images.xcassets */,
 				3FC75CFD18431DB0006C84F5 /* FileExt.plist */,
 				3FC75CF3184302B0006C84F5 /* Images */,
@@ -797,6 +805,7 @@
 				C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */,
 				C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */,
 				3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */,
+				3F4E5001184614C2006D7205 /* html in Resources */,
 				C15BB0021844599F00690D74 /* play_beep.png in Resources */,
 				3FC75CF7184302B0006C84F5 /* icon.png in Resources */,
 				C15BB0061844599F00690D74 /* photo_cell_alpha_cover.png in Resources */,
@@ -832,6 +841,7 @@
 				C15BAFF518444F7A00690D74 /* BinaryCell.m in Sources */,
 				3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */,
 				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
+				3F4E4FB018460F8D006D7205 /* TextViewController.m in Sources */,
 				C15BAFC818444E0C00690D74 /* TableViewCellFactory.m in Sources */,
 				C15BAFEC18444F3B00690D74 /* VideoCell.m in Sources */,
 				3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */,

@@ -26,6 +26,7 @@
 #import "WaveTransModel.h"
 #import "CAXException.h"
 #import "PhotoCell.h"
+#import "TextViewController.h"
 
 @interface UIActionSheet (userinfo)
 
@@ -781,7 +782,7 @@ static char actionSheetUserinfoKey;
     
     WaveTransMetadata *metadata = [self.metadataList objectAtIndex:indexPath.row];
     
-    if ([metadata hasCache] && !metadata.uploaded) {//上传
+    if ([metadata.type isEqualToString:@"file"] && [metadata hasCache] && !metadata.uploaded) {//上传
         
         BOOL flag = YES;
         
@@ -801,7 +802,7 @@ static char actionSheetUserinfoKey;
             [self postWaveTransMetadata:metadata];
         }
         
-    } else if (![metadata hasCache] && metadata.uploaded){//下载
+    } else if ([metadata.type isEqualToString:@"file"] && ![metadata hasCache] && metadata.uploaded){//下载
         
         BOOL flag = YES;
         
@@ -866,18 +867,37 @@ static char actionSheetUserinfoKey;
 #pragma mark - actionSheet
 - (void)showMoreActionSheet:(NSIndexPath *)indexPath {
     
-    if (![_metadataList objectAtIndex:indexPath.row]) {
+    
+     WaveTransMetadata *md = [_metadataList objectAtIndex:indexPath.row];
+    
+    if (!md) {
         
         return;
     }
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:@"取消"
-                                               destructiveButtonTitle:@"删除"
-                                                    otherButtonTitles:@"用其他应用打开", @"分享"/*, @"详细"*/, nil];
     
-    actionSheet.userinfo = @{@"type" : @"more", @"metadata" : [_metadataList objectAtIndex:indexPath.row]};
+    UIActionSheet *actionSheet;
+    
+    if ([md.type isEqualToString:@"file"]) {
+        
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:@"取消"
+                                    destructiveButtonTitle:@"删除"
+                                         otherButtonTitles:@"打开", nil];
+    
+    
+    } else {
+    
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:@"取消"
+                                    destructiveButtonTitle:@"删除"
+                                         otherButtonTitles:@"复制", nil];
+    }
+    
+    
+    actionSheet.userinfo = @{@"type" : @"more", @"metadata" : md};
     
     [actionSheet showInView:self.view];
     [actionSheet release];
@@ -931,35 +951,73 @@ static char actionSheetUserinfoKey;
         if (md && [md isKindOfClass:[WaveTransMetadata class]]) {
             
             
-            switch (buttonIndex) {
-                case 0:
-                {
-                    NSLog(@"删除");
+            
+            if ([md.type isEqualToString:@"file"]) {
+                
+                
+                switch (buttonIndex) {
+                    case 0:
+                    {
+                        //NSLog(@"删除");
+                        [WaveTransModel deleteMetadata:md];
+                        [self refreshMetadataList];
+                    }
+                        break;
+                        
+                    case 1:
+                    {
+                        //NSLog(@"打开");
+                        [self presentOptionsMenu:md];
+                    }
+                        break;
+                        
+                    default:
+                        break;
                 }
-                    break;
-                    
-                case 1:
-                {
-                    NSLog(@"用其他应用打开");
-                    [self presentOptionsMenu:md];
+                
+                
+                
+            } else {
+                                
+                
+                switch (buttonIndex) {
+                    case 0:
+                    {
+                        //NSLog(@"删除");
+                        [WaveTransModel deleteMetadata:md];
+                        [self refreshMetadataList];
+                    }
+                        break;
+                        
+                    case 1:
+                    {
+                        //NSLog(@"复制");
+                        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                        [pasteboard setString:md.content];
+                    }
+                        break;
+                        
+                    default:
+                        break;
                 }
-                    break;
-                    
-                case 2:
-                {
-                    NSLog(@"分享");
-                }
-                    break;
-                    
-                case 3:
-                {
-                    NSLog(@"详细");
-                }
-                    break;
-                    
-                default:
-                    break;
+                
             }
+            
+            
+            
+        }
+    
+    } else if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"openURL"]) {
+    
+        switch (buttonIndex) {
+        case 0:
+            {
+                [[UIApplication sharedApplication] openURL:[actionSheet.userinfo objectForKey:@"url"]];
+            }
+            break;
+            
+        default:
+            break;
         }
     }
 }
@@ -975,6 +1033,15 @@ static char actionSheetUserinfoKey;
 	return docController;
 }
  */
+
+
+- (void)viewText:(WaveTransMetadata *)metadata {
+
+    TextViewController *textViewController = [[[TextViewController alloc] init] autorelease];
+    textViewController.contentText = metadata.content;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textViewController];
+    [self presentViewController:navigationController animated:YES completion:^{}];
+}
 
 - (void)presentOptionsMenu:(WaveTransMetadata *)metadata {
     
@@ -996,11 +1063,15 @@ static char actionSheetUserinfoKey;
                 actionSheet.userinfo = @{@"type" : @"openURL", @"url" : [NSURL URLWithString:[NSString stringWithFormat:@"http://rest.sinaapp.com/?a=weibo_user_info&code=%@", metadata.code]]};
                 [actionSheet showInView:self.view];
                 [actionSheet release];
+            
+            } else {
+            
+                [self viewText:metadata];
             }
             
         } else {
 
-            
+            [self viewText:metadata];
         }
         
         
