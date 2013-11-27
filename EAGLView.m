@@ -271,6 +271,7 @@
 	[super dealloc];
 }
 
+/*
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	if ([(id)delegate respondsToSelector:@selector(touchesBegan:withEvent:)])
@@ -288,7 +289,7 @@
 	if ([(id)delegate respondsToSelector:@selector(touchesEnded:withEvent:)])
 		[delegate touchesEnded:touches withEvent:event];
 }
-
+*/
 
 
 - (id <EAGLViewDelegate>)delegate { return delegate; }
