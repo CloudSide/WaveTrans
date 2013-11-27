@@ -388,7 +388,6 @@
 - (void)getWaveTransMetadata:(WaveTransMetadata *)metadata {
     
     NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", metadata.code];
-    
     NSURL *url = [NSURL URLWithString:urlString];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
