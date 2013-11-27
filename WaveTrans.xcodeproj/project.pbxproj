@@ -77,6 +77,7 @@
 		C140F0541845907100083B9B /* UIImage+UIImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0531845907100083B9B /* UIImage+UIImageScale.m */; };
 		C140F05F1845D5E900083B9B /* TileView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F05E1845D5E900083B9B /* TileView.m */; };
 		C140F0621845D60600083B9B /* BaseImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0611845D60600083B9B /* BaseImageView.m */; };
+		C140F0691845D70100083B9B /* PhotoViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0681845D70100083B9B /* PhotoViewerViewController.m */; };
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
 		C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBA18444E0C00690D74 /* MainTableViewCell.m */; };
@@ -250,6 +251,8 @@
 		C140F05E1845D5E900083B9B /* TileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileView.m; sourceTree = "<group>"; };
 		C140F0601845D60600083B9B /* BaseImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseImageView.h; sourceTree = "<group>"; };
 		C140F0611845D60600083B9B /* BaseImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseImageView.m; sourceTree = "<group>"; };
+		C140F0671845D70100083B9B /* PhotoViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerViewController.h; sourceTree = "<group>"; };
+		C140F0681845D70100083B9B /* PhotoViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerViewController.m; sourceTree = "<group>"; };
 		C15BAFB318444D6900690D74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C15BAFB418444D6900690D74 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		C15BAFB718444E0C00690D74 /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
@@ -335,6 +338,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C140F0661845D6E700083B9B /* Controller */,
 				3F4E4F9B18449341006D7205 /* DDHTextView.h */,
 				3F4E4F9C18449341006D7205 /* DDHTextView.m */,
 				C15BAFB618444E0C00690D74 /* view */,
@@ -673,6 +677,15 @@
 			path = Photos;
 			sourceTree = "<group>";
 		};
+		C140F0661845D6E700083B9B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C140F0671845D70100083B9B /* PhotoViewerViewController.h */,
+				C140F0681845D70100083B9B /* PhotoViewerViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C15BAFB618444E0C00690D74 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,6 +887,7 @@
 				A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */,
 				32B1BDE11840F57A00FFC32D /* bb_freq_util.cpp in Sources */,
 				ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */,
+				C140F0691845D70100083B9B /* PhotoViewerViewController.m in Sources */,
 				C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */,
 				ADBE4A2E18432EF700B8E6A3 /* MBProgressHUD.m in Sources */,
 				ADB16D18183E31FE00115067 /* Reachability.m in Sources */,
