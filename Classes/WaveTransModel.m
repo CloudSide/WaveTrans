@@ -29,6 +29,15 @@
 @implementation WaveTransModel
 
 
++ (WaveTransMetadata *)metadataWithCode:(NSString *)code {
+
+    WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
+    WaveTransMetadata *result = [waveTransModel metadataWithCode:code];
+    [waveTransModel release];
+    
+    return result;
+}
+
 + (NSMutableArray *)metadataList {
     
     WaveTransModel *waveTransModel = [[WaveTransModel alloc] init];
@@ -254,6 +263,26 @@
     
     return NO;
 }
+
+
+- (WaveTransMetadata *)metadataWithCode:(NSString *)code {
+    
+    if (code) {
+        
+        NSMutableArray *arr = [self selectWithSQL:[NSString stringWithFormat:@"select object from wave_trans_info where code='%@' limit 1", code] withParameterDictionary:nil];
+        
+        if ([arr count] > 0) {
+            
+            if ([arr[0] isKindOfClass:[WaveTransMetadata class]]) {
+                
+                return arr[0];
+            }
+        }
+    }
+    
+    return nil;
+}
+
 
 - (WaveTransMetadata *)metadata:(WaveTransMetadata *)metadata {
 

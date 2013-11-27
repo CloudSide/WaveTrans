@@ -18,5 +18,6 @@
 + (BOOL)deleteMetadata:(WaveTransMetadata *)metadata;
 + (BOOL)existMetadata:(WaveTransMetadata *)metadata;
 + (WaveTransMetadata *)metadata:(WaveTransMetadata *)metadata;
++ (WaveTransMetadata *)metadataWithCode:(NSString *)code;
 
 @end
