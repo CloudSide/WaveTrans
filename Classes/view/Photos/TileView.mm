@@ -176,7 +176,7 @@
 {
     NSBlockOperation *operation = [[[NSBlockOperation alloc] init] autorelease];
     __unsafe_unretained NSBlockOperation *weakOperation = operation;
-//    __block typeof(self) bself = self;
+    
     __block typeof(self.blockDelegate) bself = self.blockDelegate;
     
     UIImage *blockImage = image;

@@ -75,7 +75,7 @@
 		C140F0501844C71000083B9B /* quotes_r.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04C1844C71000083B9B /* quotes_r.png */; };
 		C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04D1844C71000083B9B /* quotes_r@2x.png */; };
 		C140F0541845907100083B9B /* UIImage+UIImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0531845907100083B9B /* UIImage+UIImageScale.m */; };
-		C140F05F1845D5E900083B9B /* TileView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F05E1845D5E900083B9B /* TileView.m */; };
+		C140F05F1845D5E900083B9B /* TileView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C140F05E1845D5E900083B9B /* TileView.mm */; };
 		C140F0621845D60600083B9B /* BaseImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0611845D60600083B9B /* BaseImageView.m */; };
 		C140F0691845D70100083B9B /* PhotoViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0681845D70100083B9B /* PhotoViewerViewController.m */; };
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
@@ -248,7 +248,7 @@
 		C140F0521845907100083B9B /* UIImage+UIImageScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageScale.h"; sourceTree = "<group>"; };
 		C140F0531845907100083B9B /* UIImage+UIImageScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageScale.m"; sourceTree = "<group>"; };
 		C140F05D1845D5E900083B9B /* TileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileView.h; sourceTree = "<group>"; };
-		C140F05E1845D5E900083B9B /* TileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileView.m; sourceTree = "<group>"; };
+		C140F05E1845D5E900083B9B /* TileView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TileView.mm; sourceTree = "<group>"; };
 		C140F0601845D60600083B9B /* BaseImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseImageView.h; sourceTree = "<group>"; };
 		C140F0611845D60600083B9B /* BaseImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseImageView.m; sourceTree = "<group>"; };
 		C140F0671845D70100083B9B /* PhotoViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerViewController.h; sourceTree = "<group>"; };
@@ -672,7 +672,7 @@
 				C140F0601845D60600083B9B /* BaseImageView.h */,
 				C140F0611845D60600083B9B /* BaseImageView.m */,
 				C140F05D1845D5E900083B9B /* TileView.h */,
-				C140F05E1845D5E900083B9B /* TileView.m */,
+				C140F05E1845D5E900083B9B /* TileView.mm */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -860,7 +860,7 @@
 				3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */,
 				3F4E4F9918436439006D7205 /* WaveTransModel.m in Sources */,
 				3F4E4F96184360AD006D7205 /* Database.m in Sources */,
-				C140F05F1845D5E900083B9B /* TileView.m in Sources */,
+				C140F05F1845D5E900083B9B /* TileView.mm in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
 				3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
