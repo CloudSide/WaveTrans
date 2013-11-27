@@ -570,6 +570,13 @@
 - (void)request:(ASIHTTPRequest *)request didSendBytes:(long long)bytes {
     
     NSLog(@"upload : %llu/%llu", request.totalBytesSent, request.postLength);
+    
+    CGFloat progress = (CGFloat)request.totalBytesSent/request.postLength;
+    
+    NSArray *visibleCells = [self.mTableView visibleCells];
+    for(MainTableViewCell *cell in visibleCells){
+        [cell updateDownloadProgress:progress byMetadata:[request.userInfo objectForKey:@"metadata"]];
+    }
 }
 
 #pragma mark - UITableViewDataSource<NSObject>

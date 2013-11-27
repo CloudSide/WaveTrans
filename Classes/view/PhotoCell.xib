@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yGb-I8-I8N" customClass="EGOImageView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photo_cell_alpha_cover.png" translatesAutoresizingMaskIntoConstraints="NO" id="2I6-MF-p8N">
@@ -44,11 +44,17 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26h-oz-KIB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="gVb-mD-Rez" id="yBP-BH-TUa"/>
                 <outlet property="photoImageView" destination="yGb-I8-I8N" id="LmG-8b-QLG"/>
+                <outlet property="progressView" destination="26h-oz-KIB" id="Qzk-OU-Mli"/>
                 <outlet property="receiveState" destination="Zdj-IL-N9a" id="SJL-MV-3Fq"/>
                 <outlet property="sendBeepBtn" destination="aQr-v0-av2" id="ix5-Kx-PVj"/>
             </connections>

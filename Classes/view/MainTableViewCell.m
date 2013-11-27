@@ -39,21 +39,23 @@
     [self.sendBeepBtn addTarget:self action:@selector(sendBeepAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    if ([self.metadata.type isEqualToString:@"file"]) {
-
-        if (self.metadata.hasCache) {
-            self.progressView.hidden = YES;
-        }else{
-            self.progressView.hidden = NO;
-        }
-    }else{
-        if (!self.metadata.uploaded) {
-            self.progressView.hidden = NO;
-            self.progressView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-        }else{
-            self.progressView.hidden = YES;
-        }
-    }
+//    if ([self.metadata.type isEqualToString:@"file"]) {
+//
+//        if (self.metadata.hasCache) {
+//            self.progressView.hidden = YES;
+//        }else{
+//            self.progressView.hidden = NO;
+//        }
+//    }else{
+//        if (!self.metadata.uploaded) {
+//            self.progressView.hidden = NO;
+//            self.progressView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+//        }else{
+//            self.progressView.hidden = YES;
+//        }
+//    }
+    
+    self.progressView.hidden = YES;
 }
 
 -(void)sendBeepAction:(id)sender
@@ -76,6 +78,8 @@
     
     if (frame.size.width == 0) {
         self.progressView.hidden = YES;
+    }else{
+        self.progressView.hidden = NO;
     }
 }
 
