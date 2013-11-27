@@ -42,6 +42,7 @@
     self.descriptionLabel.text = [jsonDict objectForKey:@"description"];
     
     self.headerImageView.imageURL = [NSURL URLWithString:[jsonDict objectForKey:@"avatar_large"]];
+    self.coverImageView.imageURL = [NSURL URLWithString:[jsonDict objectForKey:@"cover_image"]];
 }
 
 -(void)dealloc
@@ -49,6 +50,7 @@
     self.headerImageView = nil;
     self.nameLabel = nil;
     self.descriptionLabel = nil;
+    self.coverImageView = nil;
     
     [super dealloc];
 }

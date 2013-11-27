@@ -12,6 +12,7 @@
 
 @interface WeiboCell : MainTableViewCell
 
+@property (nonatomic,retain) IBOutlet EGOImageView *coverImageView;
 @property (nonatomic,retain) IBOutlet EGOImageView *headerImageView;
 @property (nonatomic,retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic,retain) IBOutlet UILabel *descriptionLabel;
