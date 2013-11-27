@@ -24,8 +24,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <objc/message.h>
 #import "WaveTransModel.h"
+#import "CAXException.h"
 #import "PhotoCell.h"
-
 
 @interface UIActionSheet (userinfo)
 
@@ -859,6 +859,7 @@ static char actionSheetUserinfoKey;
                 case 1:
                 {
                     NSLog(@"用其他应用打开");
+                    [self presentOptionsMenu:md];
                 }
                     break;
                     
@@ -898,7 +899,7 @@ static char actionSheetUserinfoKey;
     if ([metadata hasCache]) {
         
         UIDocumentInteractionController *docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:[metadata cachePath:NO]]];
-        
+        docController.delegate = self;
         [docController setName:metadata.filename];
         
         
@@ -925,6 +926,32 @@ static char actionSheetUserinfoKey;
 
 #pragma mark - UIDocumentInteractionController
 
+- (void)documentInteractionControllerWillBeginPreview:(UIDocumentInteractionController *)controller {
+
+}
+
+
+- (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller {
+    
+    if ([AppDelegate sharedAppDelegate].interruption) {
+        
+        try {
+            
+            AudioSessionSetActive(true);
+            AudioOutputUnitStart([AppDelegate sharedAppDelegate].rioUnit);
+            
+        } catch (CAXException e) {
+            
+            
+        }
+    }
+}
+
+
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
+
+    return self;
+}
 
 - (void)documentInteractionControllerWillPresentOpenInMenu:(UIDocumentInteractionController *)controller {
     

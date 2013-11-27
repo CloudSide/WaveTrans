@@ -7,6 +7,9 @@
 //
 
 #import "VideoCell.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "WaveTransMetadata.h"
+#import "EGOImageView.h"
 
 @implementation VideoCell
 
@@ -19,13 +22,36 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+-(void)setMetadata:(WaveTransMetadata *)metadata
 {
-    // Drawing code
+    super.metadata = metadata;
+    
+    NSString *screenshotFilePath = [NSString stringWithFormat:@"%@.screenshot",[super.metadata cachePath:NO]];
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    if (![fm fileExistsAtPath:screenshotFilePath]) {
+    
+        NSURL *mediaUrl = [NSURL fileURLWithPath:[super.metadata cachePath:NO]];
+        if (mediaUrl != nil) {
+            MPMoviePlayerController *mp = [[MPMoviePlayerController alloc] initWithContentURL:mediaUrl];
+            UIImage *image=[mp thumbnailImageAtTime:(NSTimeInterval)1 timeOption:MPMovieTimeOptionNearestKeyFrame];
+            [mp stop];
+            [mp release];
+            
+            [UIImagePNGRepresentation(image) writeToFile:screenshotFilePath atomically:YES];
+            
+        }
+    }
+    
+    self.screenshotImageView.imageURL = [NSURL fileURLWithPath:screenshotFilePath];
+
 }
-*/
+
+-(void)dealloc
+{
+    self.screenshotImageView = nil;
+    [super dealloc];
+}
 
 @end

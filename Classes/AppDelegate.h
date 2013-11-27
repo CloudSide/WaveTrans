@@ -114,6 +114,8 @@ inline double linearInterp(double valA, double valB, double fract)
 	aurioTouchDisplayMode		displayMode;
 	
 	BOOL						mute;
+    
+    BOOL                        interruption;
 	
 	SpectrumLinkedTexture*		firstTex;
 	FFTBufferManager*			fftBufferManager;
@@ -153,6 +155,7 @@ inline double linearInterp(double valA, double valB, double fract)
 @property (nonatomic, assign)	AURenderCallbackStruct	inputProc;
 
 @property (nonatomic, assign)   id<GetWaveTransMetadataDelegate> getWaveTransMetadataDelegate;
+@property (nonatomic, assign)   BOOL interruption;
 
 + (AppDelegate *)sharedAppDelegate;
 
