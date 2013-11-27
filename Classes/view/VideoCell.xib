@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stockvault-autumn-foliage148211.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="47E-WE-gko">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47E-WE-gko" customClass="EGOImageView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -63,6 +63,7 @@
                 <outlet property="createDateLabel" destination="fq0-js-O69" id="EfB-2f-1eO"/>
                 <outlet property="progressView" destination="OAd-NK-68e" id="tsh-Dx-UKw"/>
                 <outlet property="receiveState" destination="7sN-4w-gYI" id="pZ5-D6-uXM"/>
+                <outlet property="screenshotImageView" destination="47E-WE-gko" id="9pB-Ei-LD4"/>
                 <outlet property="sendBeepBtn" destination="7au-8L-AFV" id="7XQ-XB-JnJ"/>
             </connections>
         </tableViewCell>
@@ -71,6 +72,5 @@
         <image name="photo_cell_alpha_cover.png" width="30" height="30"/>
         <image name="play_beep.png" width="44" height="44"/>
         <image name="play_btn.png" width="44" height="44"/>
-        <image name="stockvault-autumn-foliage148211.jpg" width="44" height="44"/>
     </resources>
 </document>

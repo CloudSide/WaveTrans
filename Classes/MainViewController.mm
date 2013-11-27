@@ -25,6 +25,7 @@
 #import <objc/message.h>
 #import "WaveTransModel.h"
 #import "CAXException.h"
+#import "PhotoCell.h"
 
 @interface UIActionSheet (userinfo)
 
@@ -327,6 +328,14 @@ static char actionSheetUserinfoKey;
         
         //TODO:拷贝视频
         
+        self.hud = [[[MBProgressHUD alloc] initWithView:[[AppDelegate sharedAppDelegate] window]] autorelease];
+        [picker.view addSubview:_hud];
+        _hud.dimBackground = YES;
+        _hud.delegate = self;
+        _hud.labelText = @"正在处理...";
+        [_hud setHidden:NO];
+        [_hud show:YES];
+        
         NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
         
         NSString *movieName = [url lastPathComponent];
@@ -335,6 +344,11 @@ static char actionSheetUserinfoKey;
         if (![fileManager createDirectoryAtPath:[tmpMediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
             
             //TODO:提示错误 V
+            if (_hud != nil) {
+                
+                [_hud show:NO];
+                [_hud setHidden:YES];
+            }
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"视频路径创建失败"
                                                                 message:nil
@@ -343,6 +357,7 @@ static char actionSheetUserinfoKey;
                                                       otherButtonTitles:nil,nil];
             [alertView show];
             [alertView release];
+            
             
             [picker dismissViewControllerAnimated:YES completion:^{
                 
@@ -361,6 +376,13 @@ static char actionSheetUserinfoKey;
         } else {
             
             // TODO:错误提示 V
+            
+            if (_hud != nil) {
+                
+                [_hud show:NO];
+                [_hud setHidden:YES];
+            }
+            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"视频拷贝失败"
                                                                 message:nil
                                                                delegate:self
@@ -732,6 +754,14 @@ static char actionSheetUserinfoKey;
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"Delete";
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    
+}
+
+
 
 #pragma mark - MSCMoreOptionTableViewCellDelegate
 - (void)tableView:(UITableView *)tableView moreOptionButtonPressedInRowAtIndexPath:(NSIndexPath *)indexPath {
