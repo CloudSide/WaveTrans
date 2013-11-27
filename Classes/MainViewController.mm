@@ -22,8 +22,36 @@
 #import "WaveTransModel.h"
 #import "TextEditorViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import <objc/message.h>
 #import "WaveTransModel.h"
+
+@interface UIActionSheet (userinfo)
+
+@property (nonatomic, retain) NSDictionary *userinfo;
+
+@end
+
+@implementation UIActionSheet (userinfo)
+
+static char actionSheetUserinfoKey;
+
+- (NSDictionary *)userinfo {
+
+    return objc_getAssociatedObject(self, &actionSheetUserinfoKey);
+}
+
+- (void)setUserinfo:(NSDictionary *)userinfo {
+
+    objc_setAssociatedObject(self, &actionSheetUserinfoKey, userinfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
+@end
+
+
+
+#pragma mark -
+
 
 
 @interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate>
@@ -127,6 +155,8 @@
                                                          cancelButtonTitle:@"取消"
                                                     destructiveButtonTitle:nil
                                                          otherButtonTitles:@"拍照", @"相册", @"文本", nil];
+    chooseImageSheet.userinfo = @{@"type" : @"addFile"};
+    
     [chooseImageSheet showInView:self.view];
     
     [chooseImageSheet release];
@@ -720,11 +750,18 @@
 #pragma mark - actionSheet
 - (void)showMoreActionSheet:(NSIndexPath *)indexPath {
     
+    if (![_metadataList objectAtIndex:indexPath.row]) {
+        
+        return;
+    }
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
                                                destructiveButtonTitle:@"删除"
-                                                    otherButtonTitles:@"用其他应用打开", @"分享", @"详细", nil];
+                                                    otherButtonTitles:@"用其他应用打开", @"分享"/*, @"详细"*/, nil];
+    
+    actionSheet.userinfo = @{@"type" : @"more", @"metadata" : [_metadataList objectAtIndex:indexPath.row]};
     
     [actionSheet showInView:self.view];
     [actionSheet release];
@@ -734,37 +771,79 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    UIImagePickerController * picker = [[[UIImagePickerController alloc] init] autorelease];
-    picker.delegate = self;
     
-    switch (buttonIndex) {
-        case 0://Take picture
-            
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"addFile"]) {
+        
+        UIImagePickerController * picker = [[[UIImagePickerController alloc] init] autorelease];
+        picker.delegate = self;
+        
+        switch (buttonIndex) {
+            case 0://Take picture
                 
-            }else{
-                NSLog(@"模拟器无法打开相机");
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    
+                }else{
+                    NSLog(@"模拟器无法打开相机");
+                }
+                [self presentViewController:picker animated:YES completion:^{}];
+                break;
+                
+            case 1://From album
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.mediaTypes = [[[NSArray alloc] initWithObjects:@"public.image", @"public.movie", nil] autorelease];
+                [self presentViewController:picker animated:YES completion:^{}];
+                break;
+                
+            case 2:
+            {
+                TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
+                textEditorViewController.postWaveTransMetadataDelegate = self;
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
+                [self presentViewController:navigationController animated:YES completion:^{}];
             }
-            [self presentViewController:picker animated:YES completion:^{}];
-            break;
-            
-        case 1://From album
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            picker.mediaTypes = [[[NSArray alloc] initWithObjects:@"public.image", @"public.movie", nil] autorelease];
-            [self presentViewController:picker animated:YES completion:^{}];
-            break;
-            
-        case 2:
-        {
-            TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
-            textEditorViewController.postWaveTransMetadataDelegate = self;
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
-            [self presentViewController:navigationController animated:YES completion:^{}];
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
+    
+    
+    } else if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"more"]) {
+    
+        WaveTransMetadata *md = [actionSheet.userinfo objectForKey:@"metadata"];
+        
+        if (md && [md isKindOfClass:[WaveTransMetadata class]]) {
+            
+            
+            switch (buttonIndex) {
+                case 0:
+                {
+                    NSLog(@"删除");
+                }
+                    break;
+                    
+                case 1:
+                {
+                    NSLog(@"用其他应用打开");
+                }
+                    break;
+                    
+                case 2:
+                {
+                    NSLog(@"分享");
+                }
+                    break;
+                    
+                case 3:
+                {
+                    NSLog(@"详细");
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
     }
 }
 
