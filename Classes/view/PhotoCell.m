@@ -34,20 +34,11 @@
 {
     super.metadata = metadata;
     
-<<<<<<< HEAD
     if (super.metadata.fileURL!= nil && [super.metadata.fileURL.absoluteString hasPrefix:@"http://"]) {
         [self.photoImageView setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://vdisk-thumb-1.wcdn.cn/frame.640x480/%@",[super.metadata.fileURL.absoluteString substringFromIndex:7]]]];
     }else if([super.metadata hasCache]){
         [self.photoImageView setImage:[UIImage imageWithContentsOfFile:[super.metadata cachePath:NO]]];
-=======
-    if (metadata.fileURL) {
-        
-        [self.photoImageView setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://vdisk-thumb-1.wcdn.cn/frame.640x480/%@",[super.metadata.fileURL.absoluteString substringFromIndex:7]]]];
-    
-    } else if ([metadata hasCache]) {
-    
-        [self.photoImageView setImage:[UIImage imageWithContentsOfFile:[metadata cachePath:NO]]];
->>>>>>> 237714877c7236b06a8b33824cebd075ccb171d6
+
     }
 }
 
