@@ -130,6 +130,7 @@
     [chooseImageSheet showInView:self.view];
     
     [chooseImageSheet release];
+    
 }
 
 
