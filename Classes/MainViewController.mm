@@ -751,14 +751,16 @@ static char actionSheetUserinfoKey;
     return UITableViewCellEditingStyleDelete;
 }
 
+/*
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"Delete";
 }
+ */
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    WaveTransMetadata *md = [_metadataList objectAtIndex:indexPath.row];
+    [self presentOptionsMenu:md];
 }
 
 
@@ -771,10 +773,12 @@ static char actionSheetUserinfoKey;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForMoreOptionButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     return @"More";
 }
 
 -(UIColor *)tableView:(UITableView *)tableView backgroundColorForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     return [UIColor colorWithRed:0.18f green:0.67f blue:0.84f alpha:1.0f];
 }
 
@@ -893,21 +897,61 @@ static char actionSheetUserinfoKey;
 
 - (void)presentOptionsMenu:(WaveTransMetadata *)metadata {
     
-    if ([metadata hasCache]) {
-        
-        UIDocumentInteractionController *docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:[metadata cachePath:NO]]];
-        docController.delegate = self;
-        [docController setName:metadata.filename];
+    if ([metadata.type isEqualToString:@"text"]) {
         
         
-        if (![docController presentPreviewAnimated:YES]) {
+        if(metadata.isJson) {
             
-           
+            NSDictionary *jsonDict = [metadata.content JSONValue];
+            
+            if ([[jsonDict allKeys] containsObject:@"wave_weibo_card"]) {
+                
+                UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                         delegate:self
+                                                                cancelButtonTitle:@"取消"
+                                                           destructiveButtonTitle:nil
+                                                                otherButtonTitles:@"访问微博主页", nil];
+                
+                actionSheet.userinfo = @{@"type" : @"openURL", @"url" : [NSURL URLWithString:[NSString stringWithFormat:@"http://rest.sinaapp.com/?a=weibo_user_info&code=%@", metadata.code]]};
+                [actionSheet showInView:self.view];
+                [actionSheet release];
+            }
+            
+        } else {
+
+            
         }
         
-    } else {
         
+    } else if ([metadata.type isEqualToString:@"url"]) {
+    
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"取消"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"打开链接", nil];
         
+        actionSheet.userinfo = @{@"type" : @"openURL", @"url" : [NSURL URLWithString:metadata.content]};
+        [actionSheet showInView:self.view];
+        [actionSheet release];
+        
+    } else if ([metadata.type isEqualToString:@"file"]) {
+    
+        if ([metadata hasCache]) {
+            
+            UIDocumentInteractionController *docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:[metadata cachePath:NO]]];
+            docController.delegate = self;
+            [docController setName:metadata.filename];
+            
+            if (![docController presentPreviewAnimated:YES]) {
+                
+                
+            }
+            
+        } else {
+            
+            
+        }
     }
 }
 
