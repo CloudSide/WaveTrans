@@ -940,9 +940,9 @@ static OSStatus	PerformThru(
 		
 		// If we're drawing the newest line, draw it in solid green. Otherwise, draw it in a faded green.
 		if (drawBuffer_i == 0)
-			glColor4f(0., 1., 0., 1.);
+			glColor4f(1., 1., 1., 1.);
 		else
-			glColor4f(0., 1., 0., (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
+			glColor4f(1., 1., 1., (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
 		
 		// Set up vertex pointer,
 		glVertexPointer(2, GL_FLOAT, 0, oscilLine);
