@@ -991,9 +991,25 @@ static char actionSheetUserinfoKey;
                         
                     case 1:
                     {
+                        
+                        NSString *contentText = md.content;
+                        
+                        if ([md.type isEqualToString:@"text"]) {
+                            
+                            if (md.isJson) {
+                                
+                                NSDictionary *jsonDict = [md.content JSONValue];
+                                
+                                if ([[jsonDict allKeys] containsObject:@"wave_weibo_card"]) {
+                                    
+                                    contentText = [NSString stringWithFormat:@"http://rest.sinaapp.com/?a=weibo_user_info&code=%@", md.code];
+                                }
+                            }
+                        }
+                        
                         //NSLog(@"复制");
                         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-                        [pasteboard setString:md.content];
+                        [pasteboard setString:contentText];
                     }
                         break;
                         
