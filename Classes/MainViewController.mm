@@ -331,7 +331,9 @@
     
     NSError *error;
     
-    if ([fileManager moveItemAtPath:tmpMediaFile toPath:cachePath error:&error]) {
+    BOOL isDir;
+    
+    if (([fileManager fileExistsAtPath:cachePath isDirectory:&isDir] && !isDir) || [fileManager moveItemAtPath:tmpMediaFile toPath:cachePath error:&error]) {
         
         WaveTransMetadata *meta = [WaveTransModel metadata:metadata];
         
