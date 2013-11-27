@@ -34,7 +34,11 @@
 {
     super.metadata = metadata;
     
-    [self.photoImageView setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://vdisk-thumb-1.wcdn.cn/frame.640x480/%@",[super.metadata.fileURL.absoluteString substringFromIndex:7]]]];
+    if (super.metadata.fileURL!= nil && [super.metadata.fileURL.absoluteString hasPrefix:@"http://"]) {
+        [self.photoImageView setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://vdisk-thumb-1.wcdn.cn/frame.640x480/%@",[super.metadata.fileURL.absoluteString substringFromIndex:7]]]];
+    }else if([super.metadata hasCache]){
+        [self.photoImageView setImage:[UIImage imageWithContentsOfFile:[super.metadata cachePath:NO]]];
+    }
 }
 
 -(void)dealloc
