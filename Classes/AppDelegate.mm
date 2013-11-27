@@ -907,7 +907,7 @@ static OSStatus	PerformThru(
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisable(GL_LINE_SMOOTH);
-	glLineWidth(0.01);
+	glLineWidth(2.);
 	
 	int drawBuffer_i;
 	// Draw a line for each stored line in our buffer (the lines are stored and fade over time)
@@ -924,15 +924,18 @@ static OSStatus	PerformThru(
 		{
 			*oscilLine_ptr++ = i/max;
             
+            /*
             if (abs((int)(*drawBuffer_ptr)) < self.view.frame.size.height / 3.0) {
                 
                 *oscilLine_ptr++ = (Float32)(*drawBuffer_ptr) / 64.;
                 
-            }else {
+            } else {
                 
                 *oscilLine_ptr++ = (Float32)(*drawBuffer_ptr) / 256.;
             }
+             */
             
+            *oscilLine_ptr++ = (Float32)(*drawBuffer_ptr) / 128.;
             //NSLog(@"%f", (Float32)(*drawBuffer_ptr));
             
             drawBuffer_ptr += 4;
@@ -940,9 +943,9 @@ static OSStatus	PerformThru(
 		
 		// If we're drawing the newest line, draw it in solid green. Otherwise, draw it in a faded green.
 		if (drawBuffer_i == 0)
-			glColor4f(0., 1., 0., 1.);
+			glColor4f(1., 1., 1., 1.);
 		else
-			glColor4f(0., 1., 0., (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
+			glColor4f(1., 1., 1., (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
 		
 		// Set up vertex pointer,
 		glVertexPointer(2, GL_FLOAT, 0, oscilLine);
