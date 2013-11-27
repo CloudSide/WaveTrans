@@ -32,11 +32,14 @@
 @property (nonatomic, retain) NSMutableArray *metadataList;
 @property (nonatomic, retain) AVAudioPlayer *audioPlayer;
 
+@property (nonatomic, retain) MBProgressHUD *hud;
+
 @end
 
 @implementation MainViewController
 
 @synthesize audioPlayer = _audioPlayer;
+@synthesize hud = _hud;
 
 
 - (NSString *)fileTmpPath:(NSString *)fileName {
@@ -51,6 +54,9 @@
     [_audioPlayer release];
     
     [[ASIHTTPRequest sharedQueue] cancelAllOperations];
+    
+    _hud.delegate = nil;
+    [_hud release];
     
     [super dealloc];
 }
@@ -185,6 +191,14 @@
     
     if ([mediaType isEqualToString:@"public.image"] && ![info valueForKey:UIImagePickerControllerReferenceURL]) {
         
+        self.hud = [[[MBProgressHUD alloc] initWithView:[[AppDelegate sharedAppDelegate] window]] autorelease];
+        [picker.view addSubview:_hud];
+        _hud.dimBackground = YES;
+        _hud.delegate = self;
+        _hud.labelText = @"正在处理...";
+        [_hud setHidden:NO];
+        [_hud show:YES];
+        
         UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
         
         NSData *imgData = UIImageJPEGRepresentation(capturedImage, 0.5);
@@ -308,6 +322,12 @@
             
             NSLog(@"error: %@", err);
         }
+    }
+    
+    if (_hud != nil) {
+        
+        [_hud show:NO];
+        [_hud setHidden:YES];
     }
     
     [picker dismissViewControllerAnimated:YES completion:^{
