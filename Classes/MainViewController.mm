@@ -411,6 +411,8 @@
 
 - (void)uploadRequestWithMetadata:(WaveTransMetadata *)metadata {
     
+    [self refreshMetadataList];
+    
     NSURL *url = [NSURL URLWithString:@"http://rest.sinaapp.com/api/post"];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -494,13 +496,16 @@
             [metadataReceive save];
             [self refreshMetadataList];
             
-            ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
-            [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
-            [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadataReceive cachePath:NO]]];
-            filerequest.delegate = self;
-            filerequest.downloadProgressDelegate = self;
-            filerequest.userInfo = @{@"metadata":metadataReceive,@"is_download_file":@"YES"};
-            [filerequest startAsynchronous];
+            if ([metadataReceive.type isEqualToString:@"file"]) {
+                
+                ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
+                [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
+                [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadataReceive cachePath:NO]]];
+                filerequest.delegate = self;
+                filerequest.downloadProgressDelegate = self;
+                filerequest.userInfo = @{@"metadata":metadataReceive,@"is_download_file":@"YES"};
+                [filerequest startAsynchronous];
+            }
             
         }else {
             
