@@ -484,13 +484,19 @@ static char actionSheetUserinfoKey;
     
     WaveTransMetadata *md = [WaveTransModel metadataWithCode:metadata.code];
     
-    if (md && md.hasCache) {
+    if (md && [md.type isEqualToString:@"file"] && md.hasCache) {
         
         md.uploaded = YES;
         [md save];
         [self refreshMetadataList];
     
-    }else {
+    } else if (md && ![md.type isEqualToString:@"file"]) {
+        
+        md.uploaded = YES;
+        [md save];
+        [self refreshMetadataList];
+    
+    } else {
         
         NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", metadata.code];
         NSURL *url = [NSURL URLWithString:urlString];
