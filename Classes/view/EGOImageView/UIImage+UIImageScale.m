@@ -31,9 +31,15 @@
 
 
 -(UIImage*)scaleToSize:(CGSize)size  
-{ 
-    CGFloat width = CGImageGetWidth(self.CGImage); 
+{
+    CGFloat width = CGImageGetWidth(self.CGImage);
     CGFloat height = CGImageGetHeight(self.CGImage);
+    
+    if (!(self.imageOrientation == UIImageOrientationUp || self.imageOrientation == UIImageOrientationDown)){
+    
+        width = CGImageGetHeight(self.CGImage);
+        height = CGImageGetWidth(self.CGImage);
+    }
     
     float radio = 1;
     
@@ -46,12 +52,12 @@
     width = width*radio; 
     height = height*radio; 
     
-//    int xPos = (size.width - width)/2; 
-//    int yPos = (size.height-height)/2; 
+    int xPos = (size.width - width)/2;
+    int yPos = (size.height-height)/2; 
     
     
     
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
     
     
     [self drawInRect:CGRectMake(0, 0, width, height)];

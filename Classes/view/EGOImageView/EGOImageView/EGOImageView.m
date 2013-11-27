@@ -79,7 +79,7 @@
         
         NSString *thumb = [NSString stringWithFormat:@"%@.thumb",aURL.path];
         if ([fileManager fileExistsAtPath:thumb isDirectory:&isDir]) {
-            anImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:aURL]];
+            anImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:thumb]]];
         }else{
             UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:aURL]];
             CGFloat width = CGImageGetWidth(img.CGImage);
