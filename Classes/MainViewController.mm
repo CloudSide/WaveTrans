@@ -483,7 +483,7 @@ static char actionSheetUserinfoKey;
     
     WaveTransMetadata *md = [WaveTransModel metadataWithCode:metadata.code];
     
-    if (md) {
+    if (md && md.hasCache) {
         
         md.uploaded = YES;
         [md save];
@@ -605,6 +605,17 @@ static char actionSheetUserinfoKey;
             if ([metadataReceive.type isEqualToString:@"file"]) {
                 
                 ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
+                [filerequest setUseCookiePersistence:NO];
+                [filerequest setUseSessionPersistence:NO];
+                [filerequest setValidatesSecureCertificate:NO];
+                [filerequest setShouldRedirect:NO];
+                [filerequest setAllowCompressedResponse:YES];
+                [filerequest setShouldWaitToInflateCompressedResponses:NO];
+                [filerequest setShouldAttemptPersistentConnection:YES];
+                [filerequest setNumberOfTimesToRetryOnTimeout:3];
+                [filerequest setShouldAttemptPersistentConnection:YES];
+                [filerequest setTimeOutSeconds:16.0];
+                [filerequest setPersistentConnectionTimeoutSeconds:30.0];
                 [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
                 [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadataReceive cachePath:NO]]];
                 filerequest.delegate = self;
@@ -760,7 +771,63 @@ static char actionSheetUserinfoKey;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
+     *  若当前cell为未上传、下载完成的对象
+     */
     
+    NSArray *requestArray = [[ASIHTTPRequest sharedQueue] operations];
+    
+    
+    
+    WaveTransMetadata *metadata = [self.metadataList objectAtIndex:indexPath.row];
+    if ([metadata hasCache] && !metadata.uploaded) {//上传
+        
+        BOOL flag = YES;
+        for(ASIHTTPRequest *request in requestArray){
+            WaveTransMetadata *metadataReceive = [request.userInfo objectForKey:@"metadata"];
+            if ([metadataReceive isEqual:metadata]) {
+                flag = NO;
+                break;
+            }
+        }
+        
+        if (flag) {
+            [self postWaveTransMetadata:metadata];
+        }
+        
+    }else if(![metadata hasCache] && metadata.uploaded){//下载
+        
+        BOOL flag = YES;
+        for(ASIHTTPRequest *request in requestArray){
+            WaveTransMetadata *metadataReceive = [request.userInfo objectForKey:@"metadata"];
+            if ([metadataReceive isEqual:metadata] && [[request.userInfo objectForKey:@"is_download_file"] isEqualToString:@"YES"]) {
+                flag = NO;
+                break;
+            }
+        }
+        
+        if (flag) {
+            ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadata.fileURL];
+            [filerequest setUseCookiePersistence:NO];
+            [filerequest setUseSessionPersistence:NO];
+            [filerequest setValidatesSecureCertificate:NO];
+            [filerequest setShouldRedirect:NO];
+            [filerequest setAllowCompressedResponse:YES];
+            [filerequest setShouldWaitToInflateCompressedResponses:NO];
+            [filerequest setShouldAttemptPersistentConnection:YES];
+            [filerequest setNumberOfTimesToRetryOnTimeout:3];
+            [filerequest setShouldAttemptPersistentConnection:YES];
+            [filerequest setTimeOutSeconds:16.0];
+            [filerequest setPersistentConnectionTimeoutSeconds:30.0];
+            [filerequest setDownloadDestinationPath:[metadata cachePath:YES]];
+            [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadata cachePath:NO]]];
+            filerequest.delegate = self;
+            filerequest.downloadProgressDelegate = self;
+            filerequest.userInfo = @{@"metadata":metadata,@"is_download_file":@"YES"};
+            [filerequest startAsynchronous];
+        }
+        
+    }
     
 }
 
