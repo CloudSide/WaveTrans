@@ -39,26 +39,27 @@
     [self.sendBeepBtn addTarget:self action:@selector(sendBeepAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
-//    if ([self.metadata.type isEqualToString:@"file"]) {
-//
-//        if (self.metadata.hasCache) {
-//            self.progressView.hidden = YES;
-//        }else{
-//            self.progressView.hidden = NO;
-//        }
-//    }else{
-//        if (!self.metadata.uploaded) {
-//            self.progressView.hidden = NO;
-//            self.progressView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-//        }else{
-//            self.progressView.hidden = YES;
-//        }
-//    }
+    if ([self.metadata.type isEqualToString:@"file"]) {
+
+        if ((self.metadata.hasCache && !self.metadata.uploaded) || (!self.metadata.hasCache && self.metadata.uploaded)) {
+            self.progressView.hidden = NO;
+            self.progressView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        }else{
+            self.progressView.hidden = YES;
+        }
+    }else{
+        if (!self.metadata.uploaded) {
+            self.progressView.hidden = NO;
+            self.progressView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        }else{
+            self.progressView.hidden = YES;
+        }
+    }
     
-    self.progressView.hidden = YES;
+//    self.progressView.hidden = YES;
     
-    [self initProgressView];
-    
+    if ([self getProgressLayer]==nil)
+        [self initProgressView];
 }
 
 -(void)sendBeepAction:(id)sender
@@ -103,14 +104,13 @@
     
     CALayer *layer = [self getProgressLayer];
     
-    if (layer!=nil) {
-        
-        CGRect frame = layer.frame;
-        frame.size.width = self.frame.size.width * (1-downloadProgress);
-        frame.origin.x = self.progressView.frame.size.width - frame.size.width;
-        layer.frame = frame;
-        
-    }
+    if (layer==nil)
+        [self initProgressView];
+    
+    CGRect frame = layer.frame;
+    frame.size.width = self.frame.size.width * (1-downloadProgress);
+    frame.origin.x = self.progressView.frame.size.width - frame.size.width;
+    layer.frame = frame;
     
     if (downloadProgress==0) {
         self.progressView.hidden = YES;

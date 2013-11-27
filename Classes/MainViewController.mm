@@ -221,35 +221,43 @@ static char actionSheetUserinfoKey;
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    self.hud = [[[MBProgressHUD alloc] initWithView:[[AppDelegate sharedAppDelegate] window]] autorelease];
+    [picker.view addSubview:_hud];
+    _hud.dimBackground = YES;
+    _hud.delegate = self;
+    _hud.labelText = @"正在处理...";
+    [_hud setHidden:NO];
+    [_hud show:YES];
     
     if ([mediaType isEqualToString:@"public.image"] && ![info valueForKey:UIImagePickerControllerReferenceURL]) {
         
-        self.hud = [[[MBProgressHUD alloc] initWithView:[[AppDelegate sharedAppDelegate] window]] autorelease];
-        [picker.view addSubview:_hud];
-        _hud.dimBackground = YES;
-        _hud.delegate = self;
-        _hud.labelText = @"正在处理...";
-        [_hud setHidden:NO];
-        [_hud show:YES];
-        
-        UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
-        
-        NSData *imgData = UIImageJPEGRepresentation(capturedImage, 0.5);
-        
-        NSString *fileName = [NSString stringWithFormat:@"%lu.jpg", (long)[[NSDate date] timeIntervalSince1970]];
-        
-        NSString *sha1 = [imgData SHA1EncodedString];
-        
-        WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:[imgData length] filename:fileName] autorelease];
-        metadata.uploaded = NO;
-        
-        if ([imgData writeToFile:[metadata cachePath:YES] atomically:YES]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
-            [metadata save];
-            [self uploadRequestWithMetadata:metadata];
-        }
+            UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
+            
+            NSData *imgData = UIImageJPEGRepresentation(capturedImage, 0.5);
+            
+            NSString *fileName = [NSString stringWithFormat:@"%lu.jpg", (long)[[NSDate date] timeIntervalSince1970]];
+            
+            NSString *sha1 = [imgData SHA1EncodedString];
+            
+            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:sha1 type:@"file" content:nil size:[imgData length] filename:fileName] autorelease];
+            metadata.uploaded = NO;
+            
+            if ([imgData writeToFile:[metadata cachePath:YES] atomically:YES]) {
+                
+                [metadata save];
+                [self uploadRequestWithMetadata:metadata];
+            }
+            
+            if (_hud != nil) {
+                
+                [_hud show:NO];
+                [_hud setHidden:YES];
+            }
+        });
         
     } else if ([mediaType isEqualToString:@"public.image"] && [info valueForKey:UIImagePickerControllerReferenceURL]) {
         
@@ -328,14 +336,6 @@ static char actionSheetUserinfoKey;
         
         //TODO:拷贝视频
         
-        self.hud = [[[MBProgressHUD alloc] initWithView:[[AppDelegate sharedAppDelegate] window]] autorelease];
-        [picker.view addSubview:_hud];
-        _hud.dimBackground = YES;
-        _hud.delegate = self;
-        _hud.labelText = @"正在处理...";
-        [_hud setHidden:NO];
-        [_hud show:YES];
-        
         NSURL *url = [info valueForKey:UIImagePickerControllerMediaURL];
         
         NSString *movieName = [url lastPathComponent];
@@ -367,32 +367,35 @@ static char actionSheetUserinfoKey;
             return;
         }
         
-        NSError *err;
-        
-        if ([fileManager moveItemAtURL:url toURL:[NSURL fileURLWithPath:tmpMediaFile] error:&err]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
-            [self prepareToUploadWithTmpPath:tmpMediaFile fileName:movieName fileManager:fileManager];
+            NSError *err;
             
-        } else {
-            
-            // TODO:错误提示 V
+            if ([fileManager moveItemAtURL:url toURL:[NSURL fileURLWithPath:tmpMediaFile] error:&err]) {
+                
+                [self prepareToUploadWithTmpPath:tmpMediaFile fileName:movieName fileManager:fileManager];
+                
+            } else {
+                
+                // TODO:错误提示 V
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"视频拷贝失败"
+                                                                    message:nil
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil,nil];
+                [alertView show];
+                [alertView release];
+                
+                NSLog(@"error: %@", err);
+            }
             
             if (_hud != nil) {
                 
                 [_hud show:NO];
                 [_hud setHidden:YES];
             }
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"视频拷贝失败"
-                                                                message:nil
-                                                               delegate:self
-                                                      cancelButtonTitle:@"确定"
-                                                      otherButtonTitles:nil,nil];
-            [alertView show];
-            [alertView release];
-            
-            NSLog(@"error: %@", err);
-        }
+        });
     }
     
     if (_hud != nil) {
@@ -480,7 +483,7 @@ static char actionSheetUserinfoKey;
     
     WaveTransMetadata *md = [WaveTransModel metadataWithCode:metadata.code];
     
-    if (md) {
+    if (md && md.hasCache) {
         
         md.uploaded = YES;
         [md save];
@@ -602,6 +605,17 @@ static char actionSheetUserinfoKey;
             if ([metadataReceive.type isEqualToString:@"file"]) {
                 
                 ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
+                [filerequest setUseCookiePersistence:NO];
+                [filerequest setUseSessionPersistence:NO];
+                [filerequest setValidatesSecureCertificate:NO];
+                [filerequest setShouldRedirect:NO];
+                [filerequest setAllowCompressedResponse:YES];
+                [filerequest setShouldWaitToInflateCompressedResponses:NO];
+                [filerequest setShouldAttemptPersistentConnection:YES];
+                [filerequest setNumberOfTimesToRetryOnTimeout:3];
+                [filerequest setShouldAttemptPersistentConnection:YES];
+                [filerequest setTimeOutSeconds:16.0];
+                [filerequest setPersistentConnectionTimeoutSeconds:30.0];
                 [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
                 [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadataReceive cachePath:NO]]];
                 filerequest.delegate = self;
@@ -757,10 +771,77 @@ static char actionSheetUserinfoKey;
 }
  */
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    /*
+     *  若当前cell为未上传、下载完成的对象
+     */
     
-    WaveTransMetadata *md = [_metadataList objectAtIndex:indexPath.row];
-    [self presentOptionsMenu:md];
+    NSArray *requestArray = [[ASIHTTPRequest sharedQueue] operations];
+    
+    WaveTransMetadata *metadata = [self.metadataList objectAtIndex:indexPath.row];
+    
+    if ([metadata hasCache] && !metadata.uploaded) {//上传
+        
+        BOOL flag = YES;
+        
+        for(ASIHTTPRequest *request in requestArray) {
+            
+            WaveTransMetadata *metadataReceive = [request.userInfo objectForKey:@"metadata"];
+            
+            if ([metadataReceive isEqual:metadata]) {
+            
+                flag = NO;
+                break;
+            }
+        }
+        
+        if (flag) {
+            
+            [self postWaveTransMetadata:metadata];
+        }
+        
+    } else if (![metadata hasCache] && metadata.uploaded){//下载
+        
+        BOOL flag = YES;
+        
+        for(ASIHTTPRequest *request in requestArray){
+            
+            WaveTransMetadata *metadataReceive = [request.userInfo objectForKey:@"metadata"];
+            
+            if ([metadataReceive isEqual:metadata] && [[request.userInfo objectForKey:@"is_download_file"] isEqualToString:@"YES"]) {
+            
+                flag = NO;
+                break;
+            }
+        }
+        
+        if (flag) {
+            
+            ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadata.fileURL];
+            [filerequest setUseCookiePersistence:NO];
+            [filerequest setUseSessionPersistence:NO];
+            [filerequest setValidatesSecureCertificate:NO];
+            [filerequest setShouldRedirect:NO];
+            [filerequest setAllowCompressedResponse:YES];
+            [filerequest setShouldWaitToInflateCompressedResponses:NO];
+            [filerequest setShouldAttemptPersistentConnection:YES];
+            [filerequest setNumberOfTimesToRetryOnTimeout:3];
+            [filerequest setShouldAttemptPersistentConnection:YES];
+            [filerequest setTimeOutSeconds:16.0];
+            [filerequest setPersistentConnectionTimeoutSeconds:30.0];
+            [filerequest setDownloadDestinationPath:[metadata cachePath:YES]];
+            [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadata cachePath:NO]]];
+            filerequest.delegate = self;
+            filerequest.downloadProgressDelegate = self;
+            filerequest.userInfo = @{@"metadata":metadata,@"is_download_file":@"YES"};
+            [filerequest startAsynchronous];
+        }
+        
+    } else {
+    
+        [self presentOptionsMenu:metadata];
+    }
 }
 
 
