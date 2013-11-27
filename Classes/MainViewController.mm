@@ -407,14 +407,25 @@
 
 - (void)getWaveTransMetadata:(WaveTransMetadata *)metadata {
     
-    NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", metadata.code];
-    NSURL *url = [NSURL URLWithString:urlString];
+    WaveTransMetadata *md = [WaveTransModel metadataWithCode:metadata.code];
     
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request setDelegate:self];
-    [request setDownloadProgressDelegate:self];
-    request.userInfo = @{@"metadata" : metadata, @"apiName":@"api/get"};
-    [request startAsynchronous];
+    if (md) {
+        
+        md.uploaded = YES;
+        [md save];
+        [self refreshMetadataList];
+    
+    }else {
+        
+        NSString *urlString = [NSString stringWithFormat:@"http://rest.sinaapp.com/api/get&code=%@", metadata.code];
+        NSURL *url = [NSURL URLWithString:urlString];
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+        [request setDelegate:self];
+        [request setDownloadProgressDelegate:self];
+        request.userInfo = @{@"metadata" : metadata, @"apiName":@"api/get"};
+        [request startAsynchronous];
+    }
     
     [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
