@@ -73,6 +73,7 @@
 		C140F04F1844C71000083B9B /* quotes_l@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04B1844C71000083B9B /* quotes_l@2x.png */; };
 		C140F0501844C71000083B9B /* quotes_r.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04C1844C71000083B9B /* quotes_r.png */; };
 		C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04D1844C71000083B9B /* quotes_r@2x.png */; };
+		C140F0541845907100083B9B /* UIImage+UIImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0531845907100083B9B /* UIImage+UIImageScale.m */; };
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
 		C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBA18444E0C00690D74 /* MainTableViewCell.m */; };
@@ -239,6 +240,8 @@
 		C140F04B1844C71000083B9B /* quotes_l@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotes_l@2x.png"; sourceTree = "<group>"; };
 		C140F04C1844C71000083B9B /* quotes_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quotes_r.png; sourceTree = "<group>"; };
 		C140F04D1844C71000083B9B /* quotes_r@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotes_r@2x.png"; sourceTree = "<group>"; };
+		C140F0521845907100083B9B /* UIImage+UIImageScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageScale.h"; sourceTree = "<group>"; };
+		C140F0531845907100083B9B /* UIImage+UIImageScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageScale.m"; sourceTree = "<group>"; };
 		C15BAFB318444D6900690D74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C15BAFB418444D6900690D74 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		C15BAFB718444E0C00690D74 /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
@@ -611,6 +614,8 @@
 		C140F03218449F7100083B9B /* EGOImageView */ = {
 			isa = PBXGroup;
 			children = (
+				C140F0521845907100083B9B /* UIImage+UIImageScale.h */,
+				C140F0531845907100083B9B /* UIImage+UIImageScale.m */,
 				C140F03318449F7100083B9B /* EGOCache */,
 				C140F03418449F7100083B9B /* EGOImageLoader */,
 				C140F03918449F7100083B9B /* EGOImageView */,
@@ -839,6 +844,7 @@
 				F74ADD1C0DDA24AA0046BEC2 /* CAXException.cpp in Sources */,
 				C140F03C18449F7100083B9B /* EGOImageLoadConnection.m in Sources */,
 				ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */,
+				C140F0541845907100083B9B /* UIImage+UIImageScale.m in Sources */,
 				32B1BDDB1840F55900FFC32D /* kiss_fft.c in Sources */,
 				ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */,
 				A16C46DE0DE37EC400F4A0B3 /* EAGLView.m in Sources */,

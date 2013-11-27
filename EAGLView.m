@@ -223,6 +223,7 @@
 	glMatrixMode(GL_MODELVIEW);
 	
 	// Clears the view with black
+
 	glClearColor(50.f/255.f, 240.f/255.f, 240.f/255.f, 1.0f);
 	
 	glEnableClientState(GL_VERTEX_ARRAY);

@@ -82,6 +82,11 @@
 	if([self.delegate respondsToSelector:@selector(imageLoadConnectionDidFinishLoading:)]) {
 		[self.delegate imageLoadConnectionDidFinishLoading:self];
 	}
+    
+    if (_connection) {
+        [_connection release];
+        _connection = nil;
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -90,6 +95,11 @@
 	if([self.delegate respondsToSelector:@selector(imageLoadConnection:didFailWithError:)]) {
 		[self.delegate imageLoadConnection:self didFailWithError:error];
 	}
+    
+    if (_connection) {
+        [_connection release];
+        _connection = nil;
+    }
 }
 
 
@@ -101,7 +111,10 @@
 	[handlers release], handlers = nil;
 	#endif
 
-	[_connection release];
+	if (_connection) {
+        [_connection release];
+        _connection = nil;
+    }
 	[_imageURL release];
 	[_responseData release];
 	[super dealloc];
