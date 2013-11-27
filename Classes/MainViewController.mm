@@ -24,6 +24,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <objc/message.h>
 #import "WaveTransModel.h"
+#import "PhotoCell.h"
+
+#import "PhotoViewerViewController.h"
 
 @interface UIActionSheet (userinfo)
 
@@ -731,6 +734,14 @@ static char actionSheetUserinfoKey;
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"Delete";
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    
+}
+
+
 
 #pragma mark - MSCMoreOptionTableViewCellDelegate
 - (void)tableView:(UITableView *)tableView moreOptionButtonPressedInRowAtIndexPath:(NSIndexPath *)indexPath {

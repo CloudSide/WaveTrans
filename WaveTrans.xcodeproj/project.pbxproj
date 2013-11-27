@@ -75,9 +75,6 @@
 		C140F0501844C71000083B9B /* quotes_r.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04C1844C71000083B9B /* quotes_r.png */; };
 		C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04D1844C71000083B9B /* quotes_r@2x.png */; };
 		C140F0541845907100083B9B /* UIImage+UIImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0531845907100083B9B /* UIImage+UIImageScale.m */; };
-		C140F05F1845D5E900083B9B /* TileView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C140F05E1845D5E900083B9B /* TileView.mm */; };
-		C140F0621845D60600083B9B /* BaseImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0611845D60600083B9B /* BaseImageView.m */; };
-		C140F0691845D70100083B9B /* PhotoViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0681845D70100083B9B /* PhotoViewerViewController.m */; };
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
 		C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBA18444E0C00690D74 /* MainTableViewCell.m */; };
@@ -247,12 +244,6 @@
 		C140F04D1844C71000083B9B /* quotes_r@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotes_r@2x.png"; sourceTree = "<group>"; };
 		C140F0521845907100083B9B /* UIImage+UIImageScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageScale.h"; sourceTree = "<group>"; };
 		C140F0531845907100083B9B /* UIImage+UIImageScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageScale.m"; sourceTree = "<group>"; };
-		C140F05D1845D5E900083B9B /* TileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileView.h; sourceTree = "<group>"; };
-		C140F05E1845D5E900083B9B /* TileView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TileView.mm; sourceTree = "<group>"; };
-		C140F0601845D60600083B9B /* BaseImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseImageView.h; sourceTree = "<group>"; };
-		C140F0611845D60600083B9B /* BaseImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseImageView.m; sourceTree = "<group>"; };
-		C140F0671845D70100083B9B /* PhotoViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerViewController.h; sourceTree = "<group>"; };
-		C140F0681845D70100083B9B /* PhotoViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerViewController.m; sourceTree = "<group>"; };
 		C15BAFB318444D6900690D74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C15BAFB418444D6900690D74 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		C15BAFB718444E0C00690D74 /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
@@ -666,22 +657,9 @@
 			path = EGOImageView;
 			sourceTree = "<group>";
 		};
-		C140F05C1845D5E900083B9B /* Photos */ = {
-			isa = PBXGroup;
-			children = (
-				C140F0601845D60600083B9B /* BaseImageView.h */,
-				C140F0611845D60600083B9B /* BaseImageView.m */,
-				C140F05D1845D5E900083B9B /* TileView.h */,
-				C140F05E1845D5E900083B9B /* TileView.mm */,
-			);
-			path = Photos;
-			sourceTree = "<group>";
-		};
 		C140F0661845D6E700083B9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C140F0671845D70100083B9B /* PhotoViewerViewController.h */,
-				C140F0681845D70100083B9B /* PhotoViewerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -689,7 +667,6 @@
 		C15BAFB618444E0C00690D74 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				C140F05C1845D5E900083B9B /* Photos */,
 				C140F03218449F7100083B9B /* EGOImageView */,
 				C15BAFBF18444E0C00690D74 /* TableViewCellFactory.h */,
 				C15BAFC018444E0C00690D74 /* TableViewCellFactory.m */,
@@ -860,7 +837,6 @@
 				3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */,
 				3F4E4F9918436439006D7205 /* WaveTransModel.m in Sources */,
 				3F4E4F96184360AD006D7205 /* Database.m in Sources */,
-				C140F05F1845D5E900083B9B /* TileView.mm in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
 				3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
@@ -887,7 +863,6 @@
 				A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */,
 				32B1BDE11840F57A00FFC32D /* bb_freq_util.cpp in Sources */,
 				ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */,
-				C140F0691845D70100083B9B /* PhotoViewerViewController.m in Sources */,
 				C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */,
 				ADBE4A2E18432EF700B8E6A3 /* MBProgressHUD.m in Sources */,
 				ADB16D18183E31FE00115067 /* Reachability.m in Sources */,
@@ -897,7 +872,6 @@
 				32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */,
 				C15BAFEF18444F5100690D74 /* TextCell.m in Sources */,
 				3F4E4F91184355D5006D7205 /* FMResultSet.m in Sources */,
-				C140F0621845D60600083B9B /* BaseImageView.m in Sources */,
 				ADB16D16183E31FE00115067 /* ASIInputStream.m in Sources */,
 				C15BAFE918444F0900690D74 /* AudioCell.m in Sources */,
 				32B1BDE51840F58900FFC32D /* queue.cpp in Sources */,
