@@ -211,7 +211,7 @@
             
             
             /*BOOL state = */
-            [self queryWithSQL:@"UPDATE wave_trans_info SET code = :code, content = :content, size = :size, ctime = :ctime, object = :object WHERE  sha1 = :sha1 and type = :type"
+            [self queryWithSQL:@"UPDATE wave_trans_info SET code = :code, content = :content, size = :size, ctime = :ctime, object = :object WHERE  sha1 = :sha1 and type = :type;"
            parameterDictionary:dictParam];
             
             //NSLog(@"--1111111--%@----%d",dictParam,state);
