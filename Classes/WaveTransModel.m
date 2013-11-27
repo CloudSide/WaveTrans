@@ -210,19 +210,18 @@
                                         @"type" : metadata.type};
             
             
-            BOOL state = [self queryWithSQL:@"UPDATE 'wave_trans_info' SET 'code' = :code, 'content' = :content, 'size' = :size, 'ctime' = :ctime, 'object' = :object WHERE  'sha1' = :sha1 and 'type' = :type"
+            /*BOOL state = */
+            [self queryWithSQL:@"UPDATE wave_trans_info SET code = :code, content = :content, size = :size, ctime = :ctime, object = :object WHERE  sha1 = :sha1 and type = :type"
            parameterDictionary:dictParam];
             
-            
-            
-            NSLog(@"--1111111--%@----%d",dictParam,state);
+            //NSLog(@"--1111111--%@----%d",dictParam,state);
             
         }
         
         return 1;
     }
     
-	NSString *sql = @"INSERT INTO 'wave_trans_info' ('code','sha1','type','content','size','ctime','object') VALUES (:code,:sha1,:type,:content,:size,:ctime,:object);";
+	NSString *sql = @"INSERT INTO wave_trans_info (code,sha1,type,content,size,ctime,object) VALUES (:code,:sha1,:type,:content,:size,:ctime,:object);";
     
     NSDictionary *parameterDictionary = @{@"code" : metadata.code,
                                           @"sha1" : metadata.sha1,
@@ -231,7 +230,8 @@
                                           @"size" : [NSString stringWithFormat:@"%llu", metadata.totalBytes],
                                           @"ctime" : [NSString stringWithFormat:@"%f", [metadata.ctime timeIntervalSince1970]],
                                           @"object" : [NSKeyedArchiver archivedDataWithRootObject:metadata]};
-    NSLog(@"--insert  =======--%@----",parameterDictionary);
+    //NSLog(@"--insert  =======--%@----",parameterDictionary);
+    
     return [self insertWithSQL:sql parameterDictionary:parameterDictionary];
 }
 
@@ -241,7 +241,7 @@
 
     if ([metadata isKindOfClass:[WaveTransMetadata class]]) {
     
-        NSMutableArray *arr = [self selectWithSQL:[NSString stringWithFormat:@"select object from 'wave_trans_info' where sha1='%@' and type='%@' limit 1", metadata.sha1, metadata.type] withParameterDictionary:nil];
+        NSMutableArray *arr = [self selectWithSQL:[NSString stringWithFormat:@"select object from wave_trans_info where sha1='%@' and type='%@' limit 1", metadata.sha1, metadata.type] withParameterDictionary:nil];
         
         if ([arr count] > 0) {
             
@@ -259,7 +259,7 @@
 
     if ([metadata isKindOfClass:[WaveTransMetadata class]]) {
         
-        NSMutableArray *arr = [self selectWithSQL:[NSString stringWithFormat:@"select object from 'wave_trans_info' where sha1='%@' and type='%@' limit 1", metadata.sha1, metadata.type] withParameterDictionary:nil];
+        NSMutableArray *arr = [self selectWithSQL:[NSString stringWithFormat:@"select object from wave_trans_info where sha1='%@' and type='%@' limit 1", metadata.sha1, metadata.type] withParameterDictionary:nil];
         
         if ([arr count] > 0) {
             
@@ -278,7 +278,7 @@
 	
     if ([metadata isKindOfClass:[WaveTransMetadata class]]) {
         
-        return [self queryWithSQL:@"DELETE FROM 'wave_trans_info' WHERE sha1=:sha1 and type=:type"
+        return [self queryWithSQL:@"DELETE FROM wave_trans_info WHERE sha1=:sha1 and type=:type"
               parameterDictionary:@{@"sha1":metadata.sha1, @"type":metadata.type}] && [[NSFileManager defaultManager] removeItemAtPath:[[metadata cachePath:NO] stringByDeletingLastPathComponent] error:nil];
         
     }
