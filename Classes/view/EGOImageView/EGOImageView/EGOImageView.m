@@ -26,9 +26,20 @@
 
 #import "EGOImageView.h"
 #import "EGOImageLoader.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIImage+UIImageScale.h"
 
 @implementation EGOImageView
-@synthesize imageURL, placeholderImage, delegate;
+@synthesize imageURL, placeholderImage, delegate,needPlayAnim,rectSize,mNSTimer = _mNSTimer;
+
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"tile_default_img" ofType:@"png"];
+//    self.placeholderImage = [UIImage imageWithContentsOfFile:path];
+    
+//    self.placeholderImage = [UIImage imageNamed:@"tile_default_img"];
+}
 
 - (id)initWithPlaceholderImage:(UIImage*)anImage {
 	return [self initWithPlaceholderImage:anImage delegate:nil];	
@@ -38,17 +49,15 @@
 	if((self = [super initWithImage:anImage])) {
 		self.placeholderImage = anImage;
 		self.delegate = aDelegate;
+        
+//        self.clipsToBounds = YES; 
+//        self.contentMode = UIViewContentModeScaleAspectFill;
 	}
 	
 	return self;
 }
 
 - (void)setImageURL:(NSURL *)aURL {
-    
-    if ([imageURL.absoluteString isEqualToString:aURL.absoluteString]) {
-        return;
-    }
-    
 	if(imageURL) {
 		[[EGOImageLoader sharedImageLoader] removeObserver:self forURL:imageURL];
 		[imageURL release];
@@ -63,21 +72,50 @@
 		imageURL = [aURL retain];
 	}
 
-	[[EGOImageLoader sharedImageLoader] removeObserver:self];
-	UIImage* anImage = [[EGOImageLoader sharedImageLoader] imageForURL:aURL shouldLoadWithObserver:self];
-	
-	if(anImage) {
-		self.image = anImage;
-
-		// trigger the delegate callback if the image was found in the cache
-		if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:)]) {
-			[self.delegate imageViewLoadedImage:self];
-		}
-	} else {
-		self.image = self.placeholderImage;
-	}
+    UIImage* anImage;
+    if ([aURL.scheme isEqualToString:@"file"]) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL isDir = NO;
+        
+        NSString *thumb = [NSString stringWithFormat:@"%@.thumb",aURL.path];
+        if ([fileManager fileExistsAtPath:thumb isDirectory:&isDir]) {
+            anImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:aURL]];
+        }else{
+            UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:aURL]];
+            CGFloat width = CGImageGetWidth(img.CGImage);
+            CGFloat height = CGImageGetHeight(img.CGImage);
+            if(width*height > self.frame.size.width*2*self.frame.size.height*2*2){
+                img = [img scaleToSize:CGSizeMake(self.frame.size.width*2, self.frame.size.height*2)];
+                
+                [UIImagePNGRepresentation(img) writeToFile:thumb atomically:YES];
+                
+            }
+            
+            anImage = img;
+        }
+        
+    }else{
+        [[EGOImageLoader sharedImageLoader] removeObserver:self];
+        anImage = [[EGOImageLoader sharedImageLoader] imageForURL:aURL shouldLoadWithObserver:self];
+    }
+    
+    if(anImage) {
+        self.image = anImage;
+        rectSize = anImage.size;
+        
+        // trigger the delegate callback if the image was found in the cache
+        if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:)]) {
+            [self.delegate imageViewLoadedImage:self];
+        }
+    } else {
+        self.image = self.placeholderImage;
+    }
 }
 
+-(CGSize)returnSize
+{
+    return rectSize;
+}
 #pragma mark -
 #pragma mark Image loading
 
@@ -90,7 +128,11 @@
 	if(![[[notification userInfo] objectForKey:@"imageURL"] isEqual:self.imageURL]) return;
 
 	UIImage* anImage = [[notification userInfo] objectForKey:@"image"];
-	self.image = anImage;
+    
+    self.image = anImage;
+    
+//    [self playAnim];
+    
 	[self setNeedsDisplay];
 	
 	if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:)]) {
@@ -104,15 +146,70 @@
 	if([self.delegate respondsToSelector:@selector(imageViewFailedToLoadImage:error:)]) {
 		[self.delegate imageViewFailedToLoadImage:self error:[[notification userInfo] objectForKey:@"error"]];
 	}
+    
+    self.image = self.placeholderImage;
 }
 
 #pragma mark -
 - (void)dealloc {
 	[[EGOImageLoader sharedImageLoader] removeObserver:self];
-	self.delegate = nil;
 	self.imageURL = nil;
 	self.placeholderImage = nil;
+    self.image = nil;
+    [self.mNSTimer invalidate];
+    self.mNSTimer = nil;
     [super dealloc];
+}
+
+#pragma mark - touch method
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    UIView *coverView = [[UIView alloc] init];
+//    coverView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+//    coverView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.35];
+//    coverView.tag = 100;
+//    [self addSubview:coverView];
+//    [coverView release];
+
+    [super touchesBegan:touches withEvent:event];
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    
+    UIView *highlightDot = [[UIView alloc] initWithFrame:CGRectMake(point.x - 25
+                                                                    , point.y - 25
+                                                                    , 50, 50)];
+    highlightDot.clipsToBounds = YES;
+    
+    //    [highlightDot setBackgroundColor:[UIColor grayColor]];
+    [highlightDot setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"highlight_dot" ofType:@"png"]]]];
+    
+    
+    highlightDot.layer.cornerRadius = 10;
+    [self addSubview:highlightDot];
+    
+    [highlightDot release];
+    
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         highlightDot.alpha = 0;
+                     } completion:^(BOOL finished) {
+                         [highlightDot removeFromSuperview];
+                     }];
+    
+
+
+
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+//    UIView *coverView = [self viewWithTag:100];
+//    [coverView removeFromSuperview];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+//    UIView *coverView = [self viewWithTag:100];
+//    [coverView removeFromSuperview];
 }
 
 @end
