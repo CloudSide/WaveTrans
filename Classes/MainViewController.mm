@@ -102,6 +102,11 @@ static char actionSheetUserinfoKey;
     return self;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -143,6 +148,9 @@ static char actionSheetUserinfoKey;
     addButton.titleLabel.text = @"添加";
     [addButton addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addButton];
+    
+    
+    [self.mTableView setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:.8 alpha:1.]];
     
 #ifdef __IPHONE_7_0
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {

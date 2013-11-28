@@ -641,7 +641,7 @@ static OSStatus	PerformThru(
 	
 	// Load our GL textures
 	
-	img = [UIImage imageNamed:@"top_bg.png"].CGImage;
+	img = [UIImage imageNamed:@"top_gb.png"].CGImage;
 	[self createGLTexture:&bgTexture fromCGImage:img];
     
 	/*
@@ -761,9 +761,9 @@ static OSStatus	PerformThru(
 		// Draw our background oscilloscope screen
 		const GLfloat vertices[] = {
 			0., 0.,
-			512., 0., 
-			0.,  512.,
-			512.,  512.,
+			512., 0.,
+			0.,  64.,
+			512.,  64.,
 		};
 		const GLshort texCoords[] = {
 			0, 0,
@@ -962,9 +962,9 @@ static OSStatus	PerformThru(
 		
 		// If we're drawing the newest line, draw it in solid green. Otherwise, draw it in a faded green.
 		if (drawBuffer_i == 0)
-			glColor4f(1., 1., 1., 1.);
+			glColor4f(.8, .8, .8, 1.);
 		else
-			glColor4f(1., 1., 1., (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
+			glColor4f(.8, .8, .8, (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
 		
 		// Set up vertex pointer,
 		glVertexPointer(2, GL_FLOAT, 0, oscilLine);
