@@ -28,6 +28,7 @@
 #import "PhotoCell.h"
 #import "TextViewController.h"
 
+
 @interface UIActionSheet (userinfo)
 
 @property (nonatomic, retain) NSDictionary *userinfo;
@@ -541,11 +542,15 @@ static char actionSheetUserinfoKey;
     
     [self refreshMetadataList];
     
+    [self.mTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    
     [self uploadRequestWithMetadata:metadata];
 }
 
 
 - (void)uploadRequestWithMetadata:(WaveTransMetadata *)metadata {
+    
+    [self.mTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     
     [self refreshMetadataList];
     
@@ -632,26 +637,44 @@ static char actionSheetUserinfoKey;
             [metadataReceive save];
             [self refreshMetadataList];
             
+            //TODO:播放成功声音
+            
             if ([metadataReceive.type isEqualToString:@"file"]) {
                 
-                ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
-                [filerequest setUseCookiePersistence:NO];
-                [filerequest setUseSessionPersistence:NO];
-                [filerequest setValidatesSecureCertificate:NO];
-                [filerequest setShouldRedirect:NO];
-                [filerequest setAllowCompressedResponse:YES];
-                [filerequest setShouldWaitToInflateCompressedResponses:NO];
-                [filerequest setShouldAttemptPersistentConnection:YES];
-                [filerequest setNumberOfTimesToRetryOnTimeout:3];
-                [filerequest setShouldAttemptPersistentConnection:YES];
-                [filerequest setTimeOutSeconds:16.0];
-                [filerequest setPersistentConnectionTimeoutSeconds:30.0];
-                [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
-                [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadataReceive cachePath:NO]]];
-                filerequest.delegate = self;
-                filerequest.downloadProgressDelegate = self;
-                filerequest.userInfo = @{@"metadata":metadataReceive,@"is_download_file":@"YES"};
-                [filerequest startAsynchronous];
+                BOOL flag = YES;
+                
+                NSArray *requestArray = [[ASIHTTPRequest sharedQueue] operations];
+                for(ASIHTTPRequest *request in requestArray) {
+                    
+                    WaveTransMetadata *metadata = [request.userInfo objectForKey:@"metadata"];
+                    
+                    if ([metadataReceive isEqual:metadata]) {
+                        
+                        flag = NO;
+                        break;
+                    }
+                }
+                
+                if (flag) {
+                    ASIHTTPRequest *filerequest = [ASIHTTPRequest requestWithURL:metadataReceive.fileURL];
+                    [filerequest setUseCookiePersistence:NO];
+                    [filerequest setUseSessionPersistence:NO];
+                    [filerequest setValidatesSecureCertificate:NO];
+                    [filerequest setShouldRedirect:NO];
+                    [filerequest setAllowCompressedResponse:YES];
+                    [filerequest setShouldWaitToInflateCompressedResponses:NO];
+                    [filerequest setShouldAttemptPersistentConnection:YES];
+                    [filerequest setNumberOfTimesToRetryOnTimeout:3];
+                    [filerequest setShouldAttemptPersistentConnection:YES];
+                    [filerequest setTimeOutSeconds:16.0];
+                    [filerequest setPersistentConnectionTimeoutSeconds:30.0];
+                    [filerequest setDownloadDestinationPath:[metadataReceive cachePath:YES]];
+                    [filerequest setTemporaryFileDownloadPath:[NSString stringWithFormat:@"%@.tmp",[metadataReceive cachePath:NO]]];
+                    filerequest.delegate = self;
+                    filerequest.downloadProgressDelegate = self;
+                    filerequest.userInfo = @{@"metadata":metadataReceive,@"is_download_file":@"YES"};
+                    [filerequest startAsynchronous];
+                }
             }
             
         }else {
