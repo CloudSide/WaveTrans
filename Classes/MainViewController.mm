@@ -224,6 +224,7 @@ static char actionSheetUserinfoKey;
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
+    /*
     self.hud = [[[MBProgressHUD alloc] initWithView:[[AppDelegate sharedAppDelegate] window]] autorelease];
     [picker.view addSubview:_hud];
     _hud.dimBackground = YES;
@@ -231,10 +232,13 @@ static char actionSheetUserinfoKey;
     _hud.labelText = @"正在处理...";
     [_hud setHidden:NO];
     [_hud show:YES];
+     */
     
     if ([mediaType isEqualToString:@"public.image"] && ![info valueForKey:UIImagePickerControllerReferenceURL]) {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
             UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
             
@@ -253,11 +257,13 @@ static char actionSheetUserinfoKey;
                 [self uploadRequestWithMetadata:metadata];
             }
             
+            /*
             if (_hud != nil) {
                 
                 [_hud show:NO];
                 [_hud setHidden:YES];
             }
+             */
         });
         
     } else if ([mediaType isEqualToString:@"public.image"] && [info valueForKey:UIImagePickerControllerReferenceURL]) {
@@ -345,11 +351,13 @@ static char actionSheetUserinfoKey;
         if (![fileManager createDirectoryAtPath:[tmpMediaFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil]) {
             
             //TODO:提示错误 V
+            /*
             if (_hud != nil) {
                 
                 [_hud show:NO];
                 [_hud setHidden:YES];
             }
+             */
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"视频路径创建失败"
                                                                 message:nil
@@ -391,19 +399,23 @@ static char actionSheetUserinfoKey;
                 NSLog(@"error: %@", err);
             }
             
+            /*
             if (_hud != nil) {
                 
                 [_hud show:NO];
                 [_hud setHidden:YES];
             }
+             */
         });
     }
     
+    /*
     if (_hud != nil) {
         
         [_hud show:NO];
         [_hud setHidden:YES];
     }
+     */
     
     [picker dismissViewControllerAnimated:YES completion:^{
         
@@ -1148,7 +1160,7 @@ static char actionSheetUserinfoKey;
 
 - (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller {
     
-    if ([AppDelegate sharedAppDelegate].interruption) {
+    //if ([AppDelegate sharedAppDelegate].interruption) {
         
         try {
             
@@ -1159,7 +1171,7 @@ static char actionSheetUserinfoKey;
             
             
         }
-    }
+    //}
 }
 
 
