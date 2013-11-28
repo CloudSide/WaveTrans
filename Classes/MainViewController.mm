@@ -885,7 +885,8 @@ static char actionSheetUserinfoKey;
 
 - (NSString *)tableView:(UITableView *)tableView titleForMoreOptionButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return @"More";
+    return @"更多";
+    //return @"More";
 }
 
 -(UIColor *)tableView:(UITableView *)tableView backgroundColorForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
