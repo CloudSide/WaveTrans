@@ -134,7 +134,10 @@ static char actionSheetUserinfoKey;
     [self.view addSubview:self.mTableView];
     
     
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton setImage:[UIImage imageNamed:@"sent_btn"] forState:UIControlStateNormal];
+    [addButton setShowsTouchWhenHighlighted:YES];
+    [addButton setExclusiveTouch:YES];
     //addButton.backgroundColor = [UIColor redColor];
     [addButton setFrame:CGRectMake(320-50, 20.0, 50, 40)];
     addButton.titleLabel.text = @"添加";

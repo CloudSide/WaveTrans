@@ -24,6 +24,11 @@
     
 }
 
+-(void)awakeFromNib
+{
+    [self.sendBeepBtn setExclusiveTouch:YES];
+}
+
 #pragma mark - private method
 -(void)initViews
 {
