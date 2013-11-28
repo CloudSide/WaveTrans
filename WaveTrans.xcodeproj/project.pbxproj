@@ -112,6 +112,8 @@
 		C15BB01F184482FD00690D74 /* PureTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BB01E184482FD00690D74 /* PureTextCell.xib */; };
 		C1618EA81846EA5600C7413D /* sent_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EA61846EA5600C7413D /* sent_btn.png */; };
 		C1618EA91846EA5600C7413D /* sent_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EA71846EA5600C7413D /* sent_btn@2x.png */; };
+		C1618EAC184715C000C7413D /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAA184715C000C7413D /* error.wav */; };
+		C1618EAD184715C000C7413D /* success_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAB184715C000C7413D /* success_1.wav */; };
 		F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */; };
 		F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */; };
 		F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD150DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp */; };
@@ -301,6 +303,8 @@
 		C15BB01E184482FD00690D74 /* PureTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PureTextCell.xib; sourceTree = "<group>"; };
 		C1618EA61846EA5600C7413D /* sent_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sent_btn.png; sourceTree = "<group>"; };
 		C1618EA71846EA5600C7413D /* sent_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sent_btn@2x.png"; sourceTree = "<group>"; };
+		C1618EAA184715C000C7413D /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
+		C1618EAB184715C000C7413D /* success_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_1.wav; sourceTree = "<group>"; };
 		F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aurio_helper.cpp; sourceTree = "<group>"; };
 		F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurio_helper.h; sourceTree = "<group>"; };
 		F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
@@ -532,6 +536,8 @@
 		3FC75CF3184302B0006C84F5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C1618EAA184715C000C7413D /* error.wav */,
+				C1618EAB184715C000C7413D /* success_1.wav */,
 				C1618EA61846EA5600C7413D /* sent_btn.png */,
 				C1618EA71846EA5600C7413D /* sent_btn@2x.png */,
 				3210489318464A8B00371D8B /* top_gb.png */,
@@ -814,11 +820,13 @@
 				3210489618464A8B00371D8B /* top_gb@2x.png in Resources */,
 				C15BB00A1844599F00690D74 /* arrow_left@2x.png in Resources */,
 				C15BB0091844599F00690D74 /* text_bg@2x.png in Resources */,
+				C1618EAC184715C000C7413D /* error.wav in Resources */,
 				C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */,
 				C140F04F1844C71000083B9B /* quotes_l@2x.png in Resources */,
 				C15BB00B1844599F00690D74 /* arrow_right@2x.png in Resources */,
 				C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */,
 				C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */,
+				C1618EAD184715C000C7413D /* success_1.wav in Resources */,
 				3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */,
 				3F4E5001184614C2006D7205 /* html in Resources */,
 				C15BB0021844599F00690D74 /* play_beep.png in Resources */,

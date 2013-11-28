@@ -66,12 +66,70 @@ static char actionSheetUserinfoKey;
 
 @property (nonatomic, retain) MBProgressHUD *hud;
 
+@property (nonatomic,retain) AVAudioPlayer *successPlayer;
+@property (nonatomic,retain) AVAudioPlayer *errorPlayer;
+
 @end
 
 @implementation MainViewController
 
 @synthesize audioPlayer = _audioPlayer;
 @synthesize hud = _hud;
+
+-(void)playSuccessSound
+{
+    if (self.successPlayer == nil) {
+        
+        NSError *error = nil;
+        self.successPlayer = [[[AVAudioPlayer alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"success_1" withExtension:@"wav"] error:&error] autorelease];
+        
+        [self.successPlayer setVolume:1.0];
+        
+        if (error) {
+            
+            NSLog(@"successPlayer init error....%@",[error localizedDescription]);
+            
+        } else {
+            
+            self.successPlayer.delegate = self;
+            
+            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+            AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+            
+            [self.successPlayer prepareToPlay];
+        }
+    }
+    
+    [self.successPlayer play];
+}
+
+-(void)playErrorSound
+{
+    if (self.errorPlayer == nil) {
+        
+        NSError *error = nil;
+        self.errorPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"error" withExtension:@"wav"] error:&error];
+        
+        [self.errorPlayer setVolume:1.0];
+        
+        if (error) {
+            
+            NSLog(@"errorPlayer init error....%@",[error localizedDescription]);
+            
+        } else {
+            
+            self.errorPlayer.delegate = self;
+            
+            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+            AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+            
+            [self.errorPlayer prepareToPlay];
+        }
+        
+    }
+    
+    [self.errorPlayer play];
+}
 
 
 - (NSString *)fileTmpPath:(NSString *)fileName {
@@ -89,6 +147,12 @@ static char actionSheetUserinfoKey;
     
     _hud.delegate = nil;
     [_hud release];
+    
+    [self.successPlayer stop];
+    self.successPlayer = nil;
+    
+    [self.errorPlayer stop];
+    self.errorPlayer = nil;
     
     [super dealloc];
 }
@@ -513,12 +577,16 @@ static char actionSheetUserinfoKey;
         md.uploaded = YES;
         [md save];
         [self refreshMetadataList];
+        //播放成功声音
+        [self playSuccessSound];
     
     } else if (md && ![md.type isEqualToString:@"file"]) {
         
         md.uploaded = YES;
         [md save];
         [self refreshMetadataList];
+        //播放成功声音
+        [self playSuccessSound];
     
     } else {
         
@@ -624,6 +692,9 @@ static char actionSheetUserinfoKey;
             
             //接收成功
             
+            //播放成功声音
+            [self playSuccessSound];
+            
             WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
             
             NSLog(@"%@", metadataReceive.code);
@@ -636,8 +707,6 @@ static char actionSheetUserinfoKey;
             metadataReceive.uploaded = YES;
             [metadataReceive save];
             [self refreshMetadataList];
-            
-            //TODO:播放成功声音
             
             if ([metadataReceive.type isEqualToString:@"file"]) {
                 
@@ -690,6 +759,8 @@ static char actionSheetUserinfoKey;
     
     NSError *error = [request error];
     NSLog(@"%@", error);
+    
+    [self playErrorSound];
 }
 
 - (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes {
