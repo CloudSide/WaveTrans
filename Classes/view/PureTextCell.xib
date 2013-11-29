@@ -34,6 +34,7 @@
                         <state key="normal" image="play_beep.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="play_beep_disable.png"/>
                     </button>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vdu-ti-ZAD">
                         <rect key="frame" x="8" y="22" width="254" height="50"/>
@@ -82,6 +83,7 @@
     </objects>
     <resources>
         <image name="play_beep.png" width="44" height="44"/>
+        <image name="play_beep_disable.png" width="44" height="44"/>
         <image name="quotes_l.png" width="40" height="32"/>
         <image name="quotes_r.png" width="40" height="32"/>
     </resources>

@@ -34,6 +34,7 @@
                         <state key="normal" image="play_beep.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="play_beep_disable.png"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAo-3A-byT">
                         <rect key="frame" x="20" y="25" width="50" height="50"/>
@@ -57,10 +58,16 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <view alpha="0.85000002384185791" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2O-4D-gfB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="yRX-Pj-FeC" id="DaS-6e-Wbw"/>
+                <outlet property="progressView" destination="w2O-4D-gfB" id="xkq-2m-u4B"/>
                 <outlet property="receiveState" destination="zuC-7z-BIz" id="0Bk-SW-2cX"/>
                 <outlet property="sendBeepBtn" destination="SJI-qb-DhQ" id="aGF-88-0Yl"/>
                 <outlet property="sepraterView" destination="pGx-yO-26u" id="TpL-Ql-PSr"/>
@@ -69,5 +76,6 @@
     </objects>
     <resources>
         <image name="play_beep.png" width="44" height="44"/>
+        <image name="play_beep_disable.png" width="44" height="44"/>
     </resources>
 </document>

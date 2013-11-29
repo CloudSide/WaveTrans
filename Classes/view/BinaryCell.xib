@@ -43,6 +43,7 @@
                         <state key="normal" image="play_beep.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="play_beep_disable.png"/>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="文件名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="el1-EA-ln3">
                         <rect key="frame" x="20" y="76" width="174" height="21"/>
@@ -71,5 +72,6 @@
         <image name="binary_bg.png" width="640" height="200"/>
         <image name="photo_cell_alpha_cover.png" width="30" height="30"/>
         <image name="play_beep.png" width="44" height="44"/>
+        <image name="play_beep_disable.png" width="44" height="44"/>
     </resources>
 </document>

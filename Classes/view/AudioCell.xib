@@ -47,6 +47,7 @@
                         <state key="normal" image="play_beep.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="play_beep_disable.png"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="play_btn.png" translatesAutoresizingMaskIntoConstraints="NO" id="52u-qA-bfK">
                         <rect key="frame" x="20" y="28" width="44" height="44"/>
@@ -82,6 +83,7 @@
         <image name="audio_bg.png" width="640" height="200"/>
         <image name="photo_cell_alpha_cover.png" width="30" height="30"/>
         <image name="play_beep.png" width="44" height="44"/>
+        <image name="play_beep_disable.png" width="44" height="44"/>
         <image name="play_btn.png" width="44" height="44"/>
     </resources>
 </document>

@@ -43,6 +43,7 @@
                         <state key="normal" image="play_beep.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="play_beep_disable.png"/>
                     </button>
                     <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26h-oz-KIB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
@@ -63,5 +64,6 @@
     <resources>
         <image name="photo_cell_alpha_cover.png" width="30" height="30"/>
         <image name="play_beep.png" width="44" height="44"/>
+        <image name="play_beep_disable.png" width="44" height="44"/>
     </resources>
 </document>

@@ -114,6 +114,8 @@
 		C1618EA91846EA5600C7413D /* sent_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EA71846EA5600C7413D /* sent_btn@2x.png */; };
 		C1618EAC184715C000C7413D /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAA184715C000C7413D /* error.wav */; };
 		C1618EAD184715C000C7413D /* success_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAB184715C000C7413D /* success_1.wav */; };
+		C1618EB018486BED00C7413D /* play_beep_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAE18486BED00C7413D /* play_beep_disable.png */; };
+		C1618EB118486BEE00C7413D /* play_beep_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAF18486BED00C7413D /* play_beep_disable@2x.png */; };
 		F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */; };
 		F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */; };
 		F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F74ADD150DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp */; };
@@ -305,6 +307,8 @@
 		C1618EA71846EA5600C7413D /* sent_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sent_btn@2x.png"; sourceTree = "<group>"; };
 		C1618EAA184715C000C7413D /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		C1618EAB184715C000C7413D /* success_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_1.wav; sourceTree = "<group>"; };
+		C1618EAE18486BED00C7413D /* play_beep_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_beep_disable.png; sourceTree = "<group>"; };
+		C1618EAF18486BED00C7413D /* play_beep_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_beep_disable@2x.png"; sourceTree = "<group>"; };
 		F712EAAE0DF0FEAF003F7B58 /* aurio_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aurio_helper.cpp; sourceTree = "<group>"; };
 		F712EAAF0DF0FEAF003F7B58 /* aurio_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurio_helper.h; sourceTree = "<group>"; };
 		F74ADD0F0DDA24AA0046BEC2 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
@@ -543,6 +547,8 @@
 				3210489318464A8B00371D8B /* top_gb.png */,
 				3210489418464A8B00371D8B /* top_gb@2x.png */,
 				C140F04A1844C71000083B9B /* quotes_l.png */,
+				C1618EAE18486BED00C7413D /* play_beep_disable.png */,
+				C1618EAF18486BED00C7413D /* play_beep_disable@2x.png */,
 				C140F04B1844C71000083B9B /* quotes_l@2x.png */,
 				C140F04C1844C71000083B9B /* quotes_r.png */,
 				C140F04D1844C71000083B9B /* quotes_r@2x.png */,
@@ -822,7 +828,9 @@
 				C15BB0091844599F00690D74 /* text_bg@2x.png in Resources */,
 				C1618EAC184715C000C7413D /* error.wav in Resources */,
 				C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */,
+				C1618EB118486BEE00C7413D /* play_beep_disable@2x.png in Resources */,
 				C140F04F1844C71000083B9B /* quotes_l@2x.png in Resources */,
+				C1618EB018486BED00C7413D /* play_beep_disable.png in Resources */,
 				C15BB00B1844599F00690D74 /* arrow_right@2x.png in Resources */,
 				C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */,
 				C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */,

@@ -43,6 +43,7 @@
                         <state key="normal" image="play_beep.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="play_beep_disable.png"/>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="文件名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVs-Tk-TRd">
                         <rect key="frame" x="20" y="75" width="174" height="21"/>
@@ -51,11 +52,17 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.85000002384185791" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6qX-l1-T0B">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="qAi-vH-yEo" id="F2J-ds-XOg"/>
                 <outlet property="fileNameLabel" destination="RVs-Tk-TRd" id="dRx-9t-7ah"/>
+                <outlet property="progressView" destination="6qX-l1-T0B" id="14t-C6-cfk"/>
                 <outlet property="receiveState" destination="PAW-9M-cES" id="e5A-eq-DrY"/>
                 <outlet property="sendBeepBtn" destination="XBf-J1-ykk" id="CJ0-tX-ODf"/>
             </connections>
@@ -64,6 +71,7 @@
     <resources>
         <image name="photo_cell_alpha_cover.png" width="30" height="30"/>
         <image name="play_beep.png" width="44" height="44"/>
+        <image name="play_beep_disable.png" width="44" height="44"/>
         <image name="text_bg.png" width="320" height="200"/>
     </resources>
 </document>

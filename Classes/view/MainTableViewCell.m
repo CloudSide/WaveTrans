@@ -65,6 +65,10 @@
     
     if ([self getProgressLayer]==nil)
         [self initProgressView];
+    
+    
+    self.sendBeepBtn.enabled = self.progressView.hidden;
+
 }
 
 -(void)sendBeepAction:(id)sender
@@ -122,6 +126,8 @@
     }else{
         self.progressView.hidden = NO;
     }
+    
+    self.sendBeepBtn.enabled = self.progressView.hidden;
 
 }
 
