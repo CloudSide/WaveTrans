@@ -27,6 +27,7 @@
 #import "CAXException.h"
 #import "PhotoCell.h"
 #import "TextViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 
 @interface UIActionSheet (userinfo)
@@ -93,8 +94,17 @@ static char actionSheetUserinfoKey;
             
             self.successPlayer.delegate = self;
             
-            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
-            AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+            
+            if ([self isAirPlayActive]) {
+                
+                UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
+                AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+                
+            } else {
+                
+                UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+                AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+            }
             
             [self.successPlayer prepareToPlay];
         }
@@ -105,6 +115,7 @@ static char actionSheetUserinfoKey;
 
 - (void)playErrorSound {
     
+    /*
     return;
     
     if (self.errorPlayer == nil) {
@@ -131,6 +142,7 @@ static char actionSheetUserinfoKey;
     }
     
     [self.errorPlayer play];
+     */
 }
 
 
@@ -244,6 +256,21 @@ static char actionSheetUserinfoKey;
     
 }
 
+- (BOOL)isAirPlayActive{
+    CFDictionaryRef currentRouteDescriptionDictionary = nil;
+    UInt32 dataSize = sizeof(currentRouteDescriptionDictionary);
+    AudioSessionGetProperty(kAudioSessionProperty_AudioRouteDescription, &dataSize, &currentRouteDescriptionDictionary);
+    if (currentRouteDescriptionDictionary) {
+        CFArrayRef outputs = (CFArrayRef)CFDictionaryGetValue(currentRouteDescriptionDictionary, kAudioSession_AudioRouteKey_Outputs);
+        if(CFArrayGetCount(outputs) > 0) {
+            CFDictionaryRef currentOutput = (CFDictionaryRef)CFArrayGetValueAtIndex(outputs, 0);
+            CFStringRef outputType = (CFStringRef)CFDictionaryGetValue(currentOutput, kAudioSession_AudioRouteKey_Type);
+            return (CFStringCompare(outputType, kAudioSessionOutputRoute_AirPlay, 0) == kCFCompareEqualTo);
+        }
+    }
+    
+    return NO;
+}
 
 - (void)playWithMetadata:(WaveTransMetadata *)metadata
 {
@@ -278,11 +305,16 @@ static char actionSheetUserinfoKey;
         //UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
         //AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
         
+        if ([self isAirPlayActive]) {
+            
+            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None; //kAudioSessionProperty_OverrideCategoryDefaultToSpeaker
+            AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
         
-        UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker; //kAudioSessionProperty_OverrideCategoryDefaultToSpeaker
-        AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
-        
-    
+        } else {
+         
+            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker; //kAudioSessionProperty_OverrideCategoryDefaultToSpeaker
+            AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+        }
         
         
         [self.audioPlayer prepareToPlay];
