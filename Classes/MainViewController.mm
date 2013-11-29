@@ -76,8 +76,8 @@ static char actionSheetUserinfoKey;
 @synthesize audioPlayer = _audioPlayer;
 @synthesize hud = _hud;
 
--(void)playSuccessSound
-{
+- (void)playSuccessSound {
+    
     if (self.successPlayer == nil) {
         
         NSError *error = nil;
@@ -93,7 +93,7 @@ static char actionSheetUserinfoKey;
             
             self.successPlayer.delegate = self;
             
-            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
             AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
             
             [self.successPlayer prepareToPlay];
@@ -103,12 +103,14 @@ static char actionSheetUserinfoKey;
     [self.successPlayer play];
 }
 
--(void)playErrorSound
-{
+- (void)playErrorSound {
+    
+    return;
+    
     if (self.errorPlayer == nil) {
         
         NSError *error = nil;
-        self.errorPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"error" withExtension:@"wav"] error:&error];
+        self.errorPlayer = [[[AVAudioPlayer alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"error" withExtension:@"wav"] error:&error] autorelease];
         
         [self.errorPlayer setVolume:1.0];
         
@@ -120,7 +122,7 @@ static char actionSheetUserinfoKey;
             
             self.errorPlayer.delegate = self;
             
-            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+            UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
             AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
             
             [self.errorPlayer prepareToPlay];
@@ -275,8 +277,13 @@ static char actionSheetUserinfoKey;
         
         //UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
         //AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-        UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+        
+        
+        UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker; //kAudioSessionProperty_OverrideCategoryDefaultToSpeaker
         AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteOverride), &audioRouteOverride);
+        
+    
+        
         
         [self.audioPlayer prepareToPlay];
     }
