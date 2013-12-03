@@ -234,10 +234,10 @@ static char actionSheetUserinfoKey;
     [settingButton setShowsTouchWhenHighlighted:YES];
     [settingButton setExclusiveTouch:YES];
     //addButton.backgroundColor = [UIColor redColor];
-    [settingButton setFrame:CGRectMake(320-100, 20.0, 50, 40)];
+    [settingButton setFrame:CGRectMake(320-90, 20.0, 40, 40)];
     [settingButton setTitle:@"设置" forState:UIControlStateNormal];
     [settingButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [settingButton addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
+    [settingButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:settingButton];
     
     
@@ -253,6 +253,35 @@ static char actionSheetUserinfoKey;
     
 }
 
+- (void)settingAction {
+
+    
+    UIActionSheet *chooseImageSheet;
+    
+    if ([PCMRender isHighFreq]) {
+        
+        chooseImageSheet = [[UIActionSheet alloc] initWithTitle:@"设置"
+                                                       delegate:self
+                                              cancelButtonTitle:@"取消"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"切换为高频模式 √", @"切换为低频模式  ", nil];
+    
+    } else {
+    
+        chooseImageSheet = [[UIActionSheet alloc] initWithTitle:@"设置"
+                                                       delegate:self
+                                              cancelButtonTitle:@"取消"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"切换为高频模式  ", @"切换为低频模式 √", nil];
+    }
+    
+    
+    chooseImageSheet.userinfo = @{@"type" : @"switchFreq"};
+    
+    [chooseImageSheet showInView:self.view];
+    
+    [chooseImageSheet release];
+}
 
 - (void)openAlbum {
     
@@ -1219,6 +1248,27 @@ static char actionSheetUserinfoKey;
         default:
             break;
         }
+    
+    } else if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"switchFreq"]) {
+    
+        switch (buttonIndex) {
+            case 0:
+            {
+                [PCMRender switchFreq:YES];
+                switch_freq(1);
+            }
+                break;
+            case 1:
+            {
+                [PCMRender switchFreq:NO];
+                switch_freq(0);
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
     }
 }
 

@@ -222,6 +222,11 @@ void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int f
     }
 }
 
++ (BOOL)isHighFreq {
+    
+    return !!freq_init_is_high;
+}
+
 + (void)switchFreq:(BOOL)isHigh {
 
     int is_high = (isHigh ? 1 : 0);

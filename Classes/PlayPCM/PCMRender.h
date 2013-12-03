@@ -12,5 +12,6 @@
 
 + (NSData *)renderChirpData:(NSString *)serializeStr;
 + (void)switchFreq:(BOOL)isHigh;
++ (BOOL)isHighFreq;
 
 @end
