@@ -34,14 +34,31 @@ void freq_init() {
 		return;
 	}
     
-    
-#if 1
-    
 	printf("----------------------\n");
 	
 	int i, len;
 	
+    /*
 	for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
+		
+		unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
+		frequencies[i] = freq;
+        
+	}
+     */
+    
+    
+#if BB_BASEFREQUENCY_IS_H
+    
+	for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
+		
+		unsigned int freq = (unsigned int)(BB_BASEFREQUENCY_H + (i * 64));
+		frequencies[i] = freq;
+	}
+    
+#else
+    
+    for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
 		
 		unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
 		frequencies[i] = freq;
@@ -50,9 +67,7 @@ void freq_init() {
     
 #endif
     
-    
     flag = 1;
-    
 }
 
 

@@ -12,6 +12,8 @@
 #define SAMPLE_RATE             44100                                                    //采样频率
 #define BB_SEMITONE 			1.05946311
 #define BB_BASEFREQUENCY		1760
+#define BB_BASEFREQUENCY_H		18000
+#define BB_BASEFREQUENCY_IS_H	1
 #define BB_CHARACTERS			"0123456789abcdefghijklmnopqrstuv"
 //#define BB_THRESHOLD            16
 #define BITS_PER_SAMPLE         16
@@ -90,6 +92,7 @@ int addWAVHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int
 
 
 #pragma mark - 数字转频率
+
 void freq_init() {
 	
 	static int flag = 0;
@@ -101,12 +104,24 @@ void freq_init() {
 	
 	int i, len;
 	
+#if BB_BASEFREQUENCY_IS_H
+    
 	for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
+		
+		unsigned int freq = (unsigned int)(BB_BASEFREQUENCY_H + (i * 64));
+		frequencies[i] = freq;
+	}
+    
+#else
+    
+    for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
 		
 		unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
 		frequencies[i] = freq;
         
 	}
+    
+#endif
     
     flag = 1;
 }
