@@ -247,7 +247,7 @@ static char actionSheetUserinfoKey;
                                                                   delegate:self
                                                          cancelButtonTitle:@"取消"
                                                     destructiveButtonTitle:nil
-                                                         otherButtonTitles:@"拍照", @"相册", @"文本", nil];
+                                                         otherButtonTitles:@"拍照",@"相册", @"文本", @"联系人", nil];
     chooseImageSheet.userinfo = @{@"type" : @"addFile"};
     
     [chooseImageSheet showInView:self.view];
@@ -1100,6 +1100,14 @@ static char actionSheetUserinfoKey;
                 textEditorViewController.postWaveTransMetadataDelegate = self;
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
                 [self presentViewController:navigationController animated:YES completion:^{}];
+            }
+                break;
+            case 3:
+            {
+//                TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
+//                textEditorViewController.postWaveTransMetadataDelegate = self;
+//                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
+//                [self presentViewController:navigationController animated:YES completion:^{}];
             }
                 break;
             default:
