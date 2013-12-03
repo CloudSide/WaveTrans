@@ -264,7 +264,7 @@ static char actionSheetUserinfoKey;
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"切换为高频模式 √", @"切换为低频模式  ", nil];
+                                              otherButtonTitles:@"√ 切换为高频模式", @"  切换为低频模式", nil];
     
     } else {
     
@@ -272,7 +272,7 @@ static char actionSheetUserinfoKey;
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"切换为高频模式  ", @"切换为低频模式 √", nil];
+                                              otherButtonTitles:@"  切换为高频模式", @"√ 切换为低频模式", nil];
     }
     
     
