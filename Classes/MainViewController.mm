@@ -234,7 +234,7 @@ static char actionSheetUserinfoKey;
     [settingButton setShowsTouchWhenHighlighted:YES];
     [settingButton setExclusiveTouch:YES];
     //addButton.backgroundColor = [UIColor redColor];
-    [settingButton setFrame:CGRectMake(320-90, 20.0, 40, 40)];
+    [settingButton setFrame:CGRectMake(320-80, 18.0, 40, 40)];
     [settingButton setTitle:@"设置" forState:UIControlStateNormal];
     [settingButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [settingButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
