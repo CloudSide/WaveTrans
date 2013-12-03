@@ -11,5 +11,6 @@
 @interface PCMRender : NSObject
 
 + (NSData *)renderChirpData:(NSString *)serializeStr;
++ (void)switchFreq:(BOOL)isHigh;
 
 @end

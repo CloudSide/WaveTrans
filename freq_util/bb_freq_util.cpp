@@ -5,8 +5,8 @@
 #include "kiss_fastfir.h"
 
 
-/*const */float frequencies[32] = BB_FREQUENCIES;
-/*static */double theta = 0;
+static float frequencies[32];
+static double theta = 0;
 
 struct _bb_item_group {
 	
@@ -25,49 +25,51 @@ struct _bb_item_group {
  */
 
 
+static int freq_init_flag = 0;
+static int freq_init_is_high = 0;
+
 void freq_init() {
 	
-	static int flag = 0;
-	
-	if (flag) {
+	if (freq_init_flag) {
 		
 		return;
 	}
     
-	printf("----------------------\n");
+	//printf("----------------------\n");
 	
 	int i, len;
 	
-    /*
-	for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
-		
-		unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
-		frequencies[i] = freq;
+    if (freq_init_is_high) {
         
-	}
-     */
+        for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
+            
+            unsigned int freq = (unsigned int)(BB_BASEFREQUENCY_H + (i * 64));
+            frequencies[i] = freq;
+        }
     
+    } else {
     
-#if BB_BASEFREQUENCY_IS_H
+        for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
+            
+            unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
+            frequencies[i] = freq;
+            
+        }
+    }
     
-	for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
-		
-		unsigned int freq = (unsigned int)(BB_BASEFREQUENCY_H + (i * 64));
-		frequencies[i] = freq;
-	}
-    
-#else
-    
-    for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
-		
-		unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
-		frequencies[i] = freq;
+    freq_init_flag = 1;
+}
+
+
+void switch_freq(int is_high) {
+
+    if (is_high == 0 || is_high == 1) {
         
-	}
-    
-#endif
-    
-    flag = 1;
+        freq_init_flag = 0;
+        freq_init_is_high = is_high;
+        
+        freq_init();
+    }
 }
 
 

@@ -229,6 +229,19 @@ static char actionSheetUserinfoKey;
     [self.view addSubview:addButton];
     
     
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //[settingButton setImage:[UIImage imageNamed:@"sent_btn"] forState:UIControlStateNormal];
+    [settingButton setShowsTouchWhenHighlighted:YES];
+    [settingButton setExclusiveTouch:YES];
+    //addButton.backgroundColor = [UIColor redColor];
+    [settingButton setFrame:CGRectMake(320-100, 20.0, 50, 40)];
+    [settingButton setTitle:@"设置" forState:UIControlStateNormal];
+    [settingButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [settingButton addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:settingButton];
+    
+    
+    
     [self.mTableView setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:.8 alpha:1.]];
     
 #ifdef __IPHONE_7_0

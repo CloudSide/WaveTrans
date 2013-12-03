@@ -58,6 +58,8 @@ typedef struct {
 
 //void freq_init();
 
+void switch_freq(int is_high);
+
 int freq_to_num(unsigned int f, int *n);
 
 int num_to_char(int n, char *c);
