@@ -123,6 +123,16 @@
 		F7E58EDA0DCFD988006C4A2F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E58ED90DCFD988006C4A2F /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3F6E5C69184EC9FC004FB1E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3FA18FB0158F43D0002FF989;
+			remoteInfo = "VdiskSDK-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0765F5860DF0DC28006468E4 /* rad2fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rad2fft.c; sourceTree = "<group>"; };
 		0765F5870DF0DC28006468E4 /* rad2fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rad2fft.h; sourceTree = "<group>"; };
@@ -174,6 +184,7 @@
 		3F4E4FAE18460F8D006D7205 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
 		3F4E4FAF18460F8D006D7205 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
 		3F4E5000184614C2006D7205 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = html; sourceTree = SOURCE_ROOT; };
+		3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VdiskSDK.xcodeproj; path = VdiskSDK/VdiskSDK.xcodeproj; sourceTree = "<group>"; };
 		3FA69695184323DF00B6FFDE /* VdiskBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
 		3FA69696184323DF00B6FFDE /* VdiskBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskBase64.m; sourceTree = "<group>"; };
 		3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
@@ -350,6 +361,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */,
 				C140F0661845D6E700083B9B /* Controller */,
 				3F4E4F9B18449341006D7205 /* DDHTextView.h */,
 				3F4E4F9C18449341006D7205 /* DDHTextView.m */,
@@ -516,6 +528,14 @@
 				3F4E4F8B184355D5006D7205 /* FMResultSet.m */,
 			);
 			path = FMDB;
+			sourceTree = "<group>";
+		};
+		3F6E5C66184EC9FB004FB1E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F6E5C6A184EC9FC004FB1E1 /* libVdiskSDK-iOS.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3FA69694184323DF00B6FFDE /* VdiskBase64 */ = {
@@ -794,15 +814,32 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3F6E5C66184EC9FB004FB1E1 /* Products */;
+					ProjectRef = 3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* WaveTrans */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3F6E5C6A184EC9FC004FB1E1 /* libVdiskSDK-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libVdiskSDK-iOS.a";
+			remoteRef = 3F6E5C69184EC9FC004FB1E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {

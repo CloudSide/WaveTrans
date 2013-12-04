@@ -1,0 +1,763 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3248543C16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3248543A16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.h */; };
+		3248543D16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3248543B16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		328F93B315DD5536004E320C /* VdiskKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 328F93B115DD5536004E320C /* VdiskKeychain.h */; };
+		328F93B515DD5536004E320C /* VdiskKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 328F93B215DD5536004E320C /* VdiskKeychain.m */; };
+		3F35F2F516A531AF00BD21AA /* VdiskSharesCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F35F2F316A531AE00BD21AA /* VdiskSharesCategory.h */; };
+		3F35F2F616A531AF00BD21AA /* VdiskSharesCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F35F2F416A531AE00BD21AA /* VdiskSharesCategory.m */; };
+		3F49D6DD168840850090B2BA /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6C6168840850090B2BA /* DDAbstractDatabaseLogger.h */; };
+		3F49D6DE168840850090B2BA /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6C7168840850090B2BA /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6DF168840850090B2BA /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6C8168840850090B2BA /* DDASLLogger.h */; };
+		3F49D6E0168840850090B2BA /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6C9168840850090B2BA /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6E1168840850090B2BA /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6CA168840850090B2BA /* DDFileLogger.h */; };
+		3F49D6E2168840850090B2BA /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6CB168840850090B2BA /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6E3168840850090B2BA /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6CC168840850090B2BA /* DDLog.h */; };
+		3F49D6E4168840850090B2BA /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6CD168840850090B2BA /* DDLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6E5168840850090B2BA /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6CE168840850090B2BA /* DDTTYLogger.h */; };
+		3F49D6E6168840850090B2BA /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6CF168840850090B2BA /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6E7168840850090B2BA /* CLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6D1168840850090B2BA /* CLog.h */; };
+		3F49D6E8168840850090B2BA /* CLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6D2168840850090B2BA /* CLog.m */; };
+		3F49D6E9168840850090B2BA /* CLogReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6D3168840850090B2BA /* CLogReport.h */; };
+		3F49D6EA168840850090B2BA /* CLogReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6D4168840850090B2BA /* CLogReport.m */; };
+		3F49D6EB168840850090B2BA /* CompressingLogFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6D5168840850090B2BA /* CompressingLogFileManager.h */; };
+		3F49D6EC168840850090B2BA /* CompressingLogFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6D6168840850090B2BA /* CompressingLogFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6ED168840850090B2BA /* ContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6D7168840850090B2BA /* ContextFilterLogFormatter.h */; };
+		3F49D6EE168840850090B2BA /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6D8168840850090B2BA /* ContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6EF168840850090B2BA /* DispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6D9168840850090B2BA /* DispatchQueueLogFormatter.h */; };
+		3F49D6F0168840850090B2BA /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6DA168840850090B2BA /* DispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6F1168840850090B2BA /* VdiskLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6DB168840850090B2BA /* VdiskLogFormatter.h */; };
+		3F49D6F2168840850090B2BA /* VdiskLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6DC168840850090B2BA /* VdiskLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3F49D6F61688429B0090B2BA /* UIDevice-Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6F41688429B0090B2BA /* UIDevice-Hardware.h */; };
+		3F49D6F71688429B0090B2BA /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6F51688429B0090B2BA /* UIDevice-Hardware.m */; };
+		3FA18FB4158F43D0002FF989 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA18FB3158F43D0002FF989 /* Foundation.framework */; };
+		3FA18FEB158F44C8002FF989 /* VdiskAccountInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FCB158F44C8002FF989 /* VdiskAccountInfo.h */; };
+		3FA18FEC158F44C8002FF989 /* VdiskAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FCC158F44C8002FF989 /* VdiskAccountInfo.m */; };
+		3FA18FED158F44C8002FF989 /* VdiskAuthorize.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FCD158F44C8002FF989 /* VdiskAuthorize.h */; };
+		3FA18FEE158F44C8002FF989 /* VdiskAuthorize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FCE158F44C8002FF989 /* VdiskAuthorize.m */; };
+		3FA18FEF158F44C8002FF989 /* VdiskAuthorizeWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FCF158F44C8002FF989 /* VdiskAuthorizeWebView.h */; };
+		3FA18FF0158F44C8002FF989 /* VdiskAuthorizeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FD0158F44C8002FF989 /* VdiskAuthorizeWebView.m */; };
+		3FA18FF1158F44C8002FF989 /* VdiskComplexRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FD1158F44C8002FF989 /* VdiskComplexRequest.h */; };
+		3FA18FF2158F44C8002FF989 /* VdiskComplexRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FD2158F44C8002FF989 /* VdiskComplexRequest.m */; };
+		3FA18FF3158F44C8002FF989 /* VdiskDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FD3158F44C8002FF989 /* VdiskDefines.h */; };
+		3FA18FF4158F44C8002FF989 /* VdiskDeltaEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FD4158F44C8002FF989 /* VdiskDeltaEntry.h */; };
+		3FA18FF5158F44C8002FF989 /* VdiskDeltaEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FD5158F44C8002FF989 /* VdiskDeltaEntry.m */; };
+		3FA18FF8158F44C8002FF989 /* VdiskError.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FD8158F44C8002FF989 /* VdiskError.h */; };
+		3FA18FF9158F44C8002FF989 /* VdiskError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FD9158F44C8002FF989 /* VdiskError.m */; };
+		3FA18FFC158F44C8002FF989 /* VdiskLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FDC158F44C8002FF989 /* VdiskLog.h */; };
+		3FA18FFD158F44C8002FF989 /* VdiskLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FDD158F44C8002FF989 /* VdiskLog.m */; };
+		3FA18FFE158F44C8002FF989 /* VdiskMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FDE158F44C8002FF989 /* VdiskMetadata.h */; };
+		3FA18FFF158F44C8002FF989 /* VdiskMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FDF158F44C8002FF989 /* VdiskMetadata.m */; };
+		3FA19000158F44C8002FF989 /* VdiskQuota.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FE0158F44C8002FF989 /* VdiskQuota.h */; };
+		3FA19001158F44C8002FF989 /* VdiskQuota.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FE1158F44C8002FF989 /* VdiskQuota.m */; };
+		3FA19002158F44C8002FF989 /* VdiskRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FE2158F44C8002FF989 /* VdiskRequest.h */; };
+		3FA19003158F44C8002FF989 /* VdiskRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FE3158F44C8002FF989 /* VdiskRequest.m */; };
+		3FA19004158F44C8002FF989 /* VdiskRestClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FE4158F44C8002FF989 /* VdiskRestClient.h */; };
+		3FA19005158F44C8002FF989 /* VdiskRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FE5158F44C8002FF989 /* VdiskRestClient.m */; };
+		3FA19006158F44C8002FF989 /* VdiskSDKGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FE6158F44C8002FF989 /* VdiskSDKGlobal.h */; };
+		3FA19007158F44C8002FF989 /* VdiskSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FE7158F44C8002FF989 /* VdiskSession.h */; };
+		3FA19008158F44C8002FF989 /* VdiskSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FE8158F44C8002FF989 /* VdiskSession.m */; };
+		3FA19009158F44C8002FF989 /* VdiskUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FE9158F44C8002FF989 /* VdiskUtil.h */; };
+		3FA1900A158F44C8002FF989 /* VdiskUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FEA158F44C8002FF989 /* VdiskUtil.m */; };
+		3FA1901C158F44D8002FF989 /* NSObject+VdiskJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA1900C158F44D7002FF989 /* NSObject+VdiskJSON.h */; };
+		3FA1901D158F44D8002FF989 /* NSObject+VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1900D158F44D7002FF989 /* NSObject+VdiskJSON.m */; };
+		3FA1901E158F44D8002FF989 /* NSString+VdiskJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA1900E158F44D7002FF989 /* NSString+VdiskJSON.h */; };
+		3FA1901F158F44D8002FF989 /* NSString+VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1900F158F44D8002FF989 /* NSString+VdiskJSON.m */; };
+		3FA19020158F44D8002FF989 /* VdiskJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA19010158F44D8002FF989 /* VdiskJSON.h */; };
+		3FA19021158F44D8002FF989 /* VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA19011158F44D8002FF989 /* VdiskJSON.m */; };
+		3FA19022158F44D8002FF989 /* VdiskJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA19012158F44D8002FF989 /* VdiskJsonBase.h */; };
+		3FA19023158F44D8002FF989 /* VdiskJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA19013158F44D8002FF989 /* VdiskJsonBase.m */; };
+		3FA19024158F44D8002FF989 /* VdiskJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA19014158F44D8002FF989 /* VdiskJsonParser.h */; };
+		3FA19025158F44D8002FF989 /* VdiskJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA19015158F44D8002FF989 /* VdiskJsonParser.m */; };
+		3FA19026158F44D8002FF989 /* VdiskJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA19016158F44D8002FF989 /* VdiskJsonWriter.h */; };
+		3FA19027158F44D8002FF989 /* VdiskJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA19017158F44D8002FF989 /* VdiskJsonWriter.m */; };
+		3FA19028158F44D8002FF989 /* VdiskBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA19019158F44D8002FF989 /* VdiskBase64.h */; };
+		3FA19029158F44D8002FF989 /* VdiskBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1901A158F44D8002FF989 /* VdiskBase64.m */; };
+		3FA1902A158F44D8002FF989 /* VdiskBase64Defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA1901B158F44D8002FF989 /* VdiskBase64Defines.h */; };
+		3FBA43FE1682DA8E008F31CD /* VdiskSharesMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FBA43FC1682DA8C008F31CD /* VdiskSharesMetadata.h */; };
+		3FBA43FF1682DA8E008F31CD /* VdiskSharesMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA43FD1682DA8D008F31CD /* VdiskSharesMetadata.m */; };
+		3FD1DD8C1698268900FD757F /* SinaWeibo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FD1DD831698268900FD757F /* SinaWeibo.h */; };
+		3FD1DD8D1698268900FD757F /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1DD841698268900FD757F /* SinaWeibo.m */; };
+		3FD1DD8E1698268900FD757F /* SinaWeiboAuthorizeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FD1DD851698268900FD757F /* SinaWeiboAuthorizeView.h */; };
+		3FD1DD8F1698268900FD757F /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1DD861698268900FD757F /* SinaWeiboAuthorizeView.m */; };
+		3FD1DD901698268900FD757F /* SinaWeiboConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FD1DD871698268900FD757F /* SinaWeiboConstants.h */; };
+		3FD1DD911698268900FD757F /* SinaWeiboRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FD1DD881698268900FD757F /* SinaWeiboRequest.h */; };
+		3FD1DD921698268900FD757F /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1DD891698268900FD757F /* SinaWeiboRequest.m */; };
+		3FE354CD15DCEB8300BCFD72 /* VdiskSDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FB7158F43D1002FF989 /* VdiskSDK-Prefix.pch */; };
+		3FE3BF39165CA3B200ACD976 /* ASIAuthenticationDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF23165CA3B200ACD976 /* ASIAuthenticationDialog.h */; };
+		3FE3BF3A165CA3B200ACD976 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF24165CA3B200ACD976 /* ASIAuthenticationDialog.m */; };
+		3FE3BF3B165CA3B200ACD976 /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF25165CA3B200ACD976 /* ASICacheDelegate.h */; };
+		3FE3BF3C165CA3B200ACD976 /* ASIDataCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF26165CA3B200ACD976 /* ASIDataCompressor.h */; };
+		3FE3BF3D165CA3B200ACD976 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF27165CA3B200ACD976 /* ASIDataCompressor.m */; };
+		3FE3BF3E165CA3B200ACD976 /* ASIDataDecompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF28165CA3B200ACD976 /* ASIDataDecompressor.h */; };
+		3FE3BF3F165CA3B200ACD976 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF29165CA3B200ACD976 /* ASIDataDecompressor.m */; };
+		3FE3BF40165CA3B200ACD976 /* ASIDownloadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF2A165CA3B200ACD976 /* ASIDownloadCache.h */; };
+		3FE3BF41165CA3B200ACD976 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF2B165CA3B200ACD976 /* ASIDownloadCache.m */; };
+		3FE3BF42165CA3B200ACD976 /* ASIFormDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF2C165CA3B200ACD976 /* ASIFormDataRequest.h */; };
+		3FE3BF43165CA3B200ACD976 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF2D165CA3B200ACD976 /* ASIFormDataRequest.m */; };
+		3FE3BF44165CA3B200ACD976 /* ASIHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF2E165CA3B200ACD976 /* ASIHTTPRequest.h */; };
+		3FE3BF45165CA3B200ACD976 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF2F165CA3B200ACD976 /* ASIHTTPRequest.m */; };
+		3FE3BF46165CA3B200ACD976 /* ASIHTTPRequestConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF30165CA3B200ACD976 /* ASIHTTPRequestConfig.h */; };
+		3FE3BF47165CA3B200ACD976 /* ASIHTTPRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF31165CA3B200ACD976 /* ASIHTTPRequestDelegate.h */; };
+		3FE3BF48165CA3B200ACD976 /* ASIInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF32165CA3B200ACD976 /* ASIInputStream.h */; };
+		3FE3BF49165CA3B200ACD976 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF33165CA3B200ACD976 /* ASIInputStream.m */; };
+		3FE3BF4A165CA3B200ACD976 /* ASINetworkQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF34165CA3B200ACD976 /* ASINetworkQueue.h */; };
+		3FE3BF4B165CA3B200ACD976 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF35165CA3B200ACD976 /* ASINetworkQueue.m */; };
+		3FE3BF4C165CA3B200ACD976 /* ASIProgressDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF36165CA3B200ACD976 /* ASIProgressDelegate.h */; };
+		3FE3BF4D165CA3B200ACD976 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3BF37165CA3B200ACD976 /* Reachability.h */; };
+		3FE3BF4E165CA3B200ACD976 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE3BF38165CA3B200ACD976 /* Reachability.m */; };
+		6237921F15DE3CAD00FAB428 /* VdiskComplexUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = 624F7B9E15D38EFB00F0F14B /* VdiskComplexUpload.m */; };
+		6237922115DE3CB000FAB428 /* VdiskComplexUpload.h in Headers */ = {isa = PBXBuildFile; fileRef = 624F7B9D15D38EFB00F0F14B /* VdiskComplexUpload.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3248543A16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskLogDebugFormatter.h; sourceTree = "<group>"; };
+		3248543B16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskLogDebugFormatter.m; sourceTree = "<group>"; };
+		328F93B115DD5536004E320C /* VdiskKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskKeychain.h; sourceTree = "<group>"; };
+		328F93B215DD5536004E320C /* VdiskKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskKeychain.m; sourceTree = "<group>"; };
+		328F93BB15DD5AAA004E320C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		328F93BD15DD5AD7004E320C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
+		328F93BF15DD5AE1004E320C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		328F93C115DD5AE9004E320C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		328F93C315DD5B19004E320C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		3F35F2F316A531AE00BD21AA /* VdiskSharesCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskSharesCategory.h; sourceTree = "<group>"; };
+		3F35F2F416A531AE00BD21AA /* VdiskSharesCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskSharesCategory.m; sourceTree = "<group>"; };
+		3F49D6C6168840850090B2BA /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		3F49D6C7168840850090B2BA /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		3F49D6C8168840850090B2BA /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		3F49D6C9168840850090B2BA /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		3F49D6CA168840850090B2BA /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		3F49D6CB168840850090B2BA /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		3F49D6CC168840850090B2BA /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		3F49D6CD168840850090B2BA /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		3F49D6CE168840850090B2BA /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		3F49D6CF168840850090B2BA /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		3F49D6D1168840850090B2BA /* CLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLog.h; sourceTree = "<group>"; };
+		3F49D6D2168840850090B2BA /* CLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLog.m; sourceTree = "<group>"; };
+		3F49D6D3168840850090B2BA /* CLogReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLogReport.h; sourceTree = "<group>"; };
+		3F49D6D4168840850090B2BA /* CLogReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLogReport.m; sourceTree = "<group>"; };
+		3F49D6D5168840850090B2BA /* CompressingLogFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompressingLogFileManager.h; sourceTree = "<group>"; };
+		3F49D6D6168840850090B2BA /* CompressingLogFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompressingLogFileManager.m; sourceTree = "<group>"; };
+		3F49D6D7168840850090B2BA /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		3F49D6D8168840850090B2BA /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		3F49D6D9168840850090B2BA /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		3F49D6DA168840850090B2BA /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		3F49D6DB168840850090B2BA /* VdiskLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskLogFormatter.h; sourceTree = "<group>"; };
+		3F49D6DC168840850090B2BA /* VdiskLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskLogFormatter.m; sourceTree = "<group>"; };
+		3F49D6F41688429B0090B2BA /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		3F49D6F51688429B0090B2BA /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
+		3F6C76AE158F4B2D0046BDDF /* VdiskSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VdiskSDK.h; sourceTree = "<group>"; };
+		3FA18FB0158F43D0002FF989 /* libVdiskSDK-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVdiskSDK-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FA18FB3158F43D0002FF989 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3FA18FB7158F43D1002FF989 /* VdiskSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VdiskSDK-Prefix.pch"; sourceTree = "<group>"; };
+		3FA18FCB158F44C8002FF989 /* VdiskAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskAccountInfo.h; sourceTree = "<group>"; };
+		3FA18FCC158F44C8002FF989 /* VdiskAccountInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskAccountInfo.m; sourceTree = "<group>"; };
+		3FA18FCD158F44C8002FF989 /* VdiskAuthorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskAuthorize.h; sourceTree = "<group>"; };
+		3FA18FCE158F44C8002FF989 /* VdiskAuthorize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskAuthorize.m; sourceTree = "<group>"; };
+		3FA18FCF158F44C8002FF989 /* VdiskAuthorizeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskAuthorizeWebView.h; sourceTree = "<group>"; };
+		3FA18FD0158F44C8002FF989 /* VdiskAuthorizeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskAuthorizeWebView.m; sourceTree = "<group>"; };
+		3FA18FD1158F44C8002FF989 /* VdiskComplexRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskComplexRequest.h; sourceTree = "<group>"; };
+		3FA18FD2158F44C8002FF989 /* VdiskComplexRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskComplexRequest.m; sourceTree = "<group>"; };
+		3FA18FD3158F44C8002FF989 /* VdiskDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskDefines.h; sourceTree = "<group>"; };
+		3FA18FD4158F44C8002FF989 /* VdiskDeltaEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskDeltaEntry.h; sourceTree = "<group>"; };
+		3FA18FD5158F44C8002FF989 /* VdiskDeltaEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskDeltaEntry.m; sourceTree = "<group>"; };
+		3FA18FD8158F44C8002FF989 /* VdiskError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskError.h; sourceTree = "<group>"; };
+		3FA18FD9158F44C8002FF989 /* VdiskError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskError.m; sourceTree = "<group>"; };
+		3FA18FDC158F44C8002FF989 /* VdiskLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskLog.h; sourceTree = "<group>"; };
+		3FA18FDD158F44C8002FF989 /* VdiskLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskLog.m; sourceTree = "<group>"; };
+		3FA18FDE158F44C8002FF989 /* VdiskMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskMetadata.h; sourceTree = "<group>"; };
+		3FA18FDF158F44C8002FF989 /* VdiskMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskMetadata.m; sourceTree = "<group>"; };
+		3FA18FE0158F44C8002FF989 /* VdiskQuota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskQuota.h; sourceTree = "<group>"; };
+		3FA18FE1158F44C8002FF989 /* VdiskQuota.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskQuota.m; sourceTree = "<group>"; };
+		3FA18FE2158F44C8002FF989 /* VdiskRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskRequest.h; sourceTree = "<group>"; };
+		3FA18FE3158F44C8002FF989 /* VdiskRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskRequest.m; sourceTree = "<group>"; };
+		3FA18FE4158F44C8002FF989 /* VdiskRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskRestClient.h; sourceTree = "<group>"; };
+		3FA18FE5158F44C8002FF989 /* VdiskRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskRestClient.m; sourceTree = "<group>"; };
+		3FA18FE6158F44C8002FF989 /* VdiskSDKGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskSDKGlobal.h; sourceTree = "<group>"; };
+		3FA18FE7158F44C8002FF989 /* VdiskSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskSession.h; sourceTree = "<group>"; };
+		3FA18FE8158F44C8002FF989 /* VdiskSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskSession.m; sourceTree = "<group>"; };
+		3FA18FE9158F44C8002FF989 /* VdiskUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskUtil.h; sourceTree = "<group>"; };
+		3FA18FEA158F44C8002FF989 /* VdiskUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskUtil.m; sourceTree = "<group>"; };
+		3FA1900C158F44D7002FF989 /* NSObject+VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VdiskJSON.h"; sourceTree = "<group>"; };
+		3FA1900D158F44D7002FF989 /* NSObject+VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VdiskJSON.m"; sourceTree = "<group>"; };
+		3FA1900E158F44D7002FF989 /* NSString+VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VdiskJSON.h"; sourceTree = "<group>"; };
+		3FA1900F158F44D8002FF989 /* NSString+VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VdiskJSON.m"; sourceTree = "<group>"; };
+		3FA19010158F44D8002FF989 /* VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJSON.h; sourceTree = "<group>"; };
+		3FA19011158F44D8002FF989 /* VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJSON.m; sourceTree = "<group>"; };
+		3FA19012158F44D8002FF989 /* VdiskJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonBase.h; sourceTree = "<group>"; };
+		3FA19013158F44D8002FF989 /* VdiskJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonBase.m; sourceTree = "<group>"; };
+		3FA19014158F44D8002FF989 /* VdiskJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonParser.h; sourceTree = "<group>"; };
+		3FA19015158F44D8002FF989 /* VdiskJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonParser.m; sourceTree = "<group>"; };
+		3FA19016158F44D8002FF989 /* VdiskJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonWriter.h; sourceTree = "<group>"; };
+		3FA19017158F44D8002FF989 /* VdiskJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonWriter.m; sourceTree = "<group>"; };
+		3FA19019158F44D8002FF989 /* VdiskBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
+		3FA1901A158F44D8002FF989 /* VdiskBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskBase64.m; sourceTree = "<group>"; };
+		3FA1901B158F44D8002FF989 /* VdiskBase64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
+		3FBA43FC1682DA8C008F31CD /* VdiskSharesMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskSharesMetadata.h; sourceTree = "<group>"; };
+		3FBA43FD1682DA8D008F31CD /* VdiskSharesMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskSharesMetadata.m; sourceTree = "<group>"; };
+		3FD1DD801698268900FD757F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		3FD1DD811698268900FD757F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		3FD1DD821698268900FD757F /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
+		3FD1DD831698268900FD757F /* SinaWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
+		3FD1DD841698268900FD757F /* SinaWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeibo.m; sourceTree = "<group>"; };
+		3FD1DD851698268900FD757F /* SinaWeiboAuthorizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboAuthorizeView.h; sourceTree = "<group>"; };
+		3FD1DD861698268900FD757F /* SinaWeiboAuthorizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboAuthorizeView.m; sourceTree = "<group>"; };
+		3FD1DD871698268900FD757F /* SinaWeiboConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboConstants.h; sourceTree = "<group>"; };
+		3FD1DD881698268900FD757F /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
+		3FD1DD891698268900FD757F /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
+		3FE3BF23165CA3B200ACD976 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		3FE3BF24165CA3B200ACD976 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
+		3FE3BF25165CA3B200ACD976 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
+		3FE3BF26165CA3B200ACD976 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
+		3FE3BF27165CA3B200ACD976 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
+		3FE3BF28165CA3B200ACD976 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
+		3FE3BF29165CA3B200ACD976 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
+		3FE3BF2A165CA3B200ACD976 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
+		3FE3BF2B165CA3B200ACD976 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
+		3FE3BF2C165CA3B200ACD976 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		3FE3BF2D165CA3B200ACD976 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
+		3FE3BF2E165CA3B200ACD976 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
+		3FE3BF2F165CA3B200ACD976 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
+		3FE3BF30165CA3B200ACD976 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		3FE3BF31165CA3B200ACD976 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		3FE3BF32165CA3B200ACD976 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
+		3FE3BF33165CA3B200ACD976 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
+		3FE3BF34165CA3B200ACD976 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		3FE3BF35165CA3B200ACD976 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
+		3FE3BF36165CA3B200ACD976 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		3FE3BF37165CA3B200ACD976 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3FE3BF38165CA3B200ACD976 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		624F7B9D15D38EFB00F0F14B /* VdiskComplexUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskComplexUpload.h; sourceTree = "<group>"; };
+		624F7B9E15D38EFB00F0F14B /* VdiskComplexUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskComplexUpload.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3FA18FAD158F43D0002FF989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FA18FB4158F43D0002FF989 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F49D6C5168840840090B2BA /* Logs */ = {
+			isa = PBXGroup;
+			children = (
+				3F49D6C6168840850090B2BA /* DDAbstractDatabaseLogger.h */,
+				3F49D6C7168840850090B2BA /* DDAbstractDatabaseLogger.m */,
+				3F49D6C8168840850090B2BA /* DDASLLogger.h */,
+				3F49D6C9168840850090B2BA /* DDASLLogger.m */,
+				3F49D6CA168840850090B2BA /* DDFileLogger.h */,
+				3F49D6CB168840850090B2BA /* DDFileLogger.m */,
+				3F49D6CC168840850090B2BA /* DDLog.h */,
+				3F49D6CD168840850090B2BA /* DDLog.m */,
+				3F49D6CE168840850090B2BA /* DDTTYLogger.h */,
+				3F49D6CF168840850090B2BA /* DDTTYLogger.m */,
+				3F49D6D0168840850090B2BA /* Extensions */,
+			);
+			path = Logs;
+			sourceTree = "<group>";
+		};
+		3F49D6D0168840850090B2BA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F49D6D1168840850090B2BA /* CLog.h */,
+				3F49D6D2168840850090B2BA /* CLog.m */,
+				3F49D6D3168840850090B2BA /* CLogReport.h */,
+				3F49D6D4168840850090B2BA /* CLogReport.m */,
+				3F49D6D5168840850090B2BA /* CompressingLogFileManager.h */,
+				3F49D6D6168840850090B2BA /* CompressingLogFileManager.m */,
+				3F49D6D7168840850090B2BA /* ContextFilterLogFormatter.h */,
+				3F49D6D8168840850090B2BA /* ContextFilterLogFormatter.m */,
+				3F49D6D9168840850090B2BA /* DispatchQueueLogFormatter.h */,
+				3F49D6DA168840850090B2BA /* DispatchQueueLogFormatter.m */,
+				3F49D6DB168840850090B2BA /* VdiskLogFormatter.h */,
+				3F49D6DC168840850090B2BA /* VdiskLogFormatter.m */,
+				3248543A16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.h */,
+				3248543B16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3FA18FA5158F43D0002FF989 = {
+			isa = PBXGroup;
+			children = (
+				3FA18FB5158F43D1002FF989 /* VdiskSDK */,
+				3FA18FB2158F43D0002FF989 /* Frameworks */,
+				3FA18FB1158F43D0002FF989 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3FA18FB1158F43D0002FF989 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FA18FB0158F43D0002FF989 /* libVdiskSDK-iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3FA18FB2158F43D0002FF989 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				328F93BB15DD5AAA004E320C /* Cocoa.framework */,
+				3FA18FB3158F43D0002FF989 /* Foundation.framework */,
+				3FE3549415DCEA1200BCFD72 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3FA18FB5158F43D1002FF989 /* VdiskSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3FA18FCA158F449F002FF989 /* Classes */,
+				3FA18FB6158F43D1002FF989 /* Supporting Files */,
+			);
+			path = VdiskSDK;
+			sourceTree = "<group>";
+		};
+		3FA18FB6158F43D1002FF989 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3FA18FB7158F43D1002FF989 /* VdiskSDK-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3FA18FCA158F449F002FF989 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3FD1DD7E1698268900FD757F /* Weibo */,
+				3F49D6C5168840840090B2BA /* Logs */,
+				3FE3BF22165CA3B200ACD976 /* ASIHttpRequest */,
+				3FA1900B158F44D7002FF989 /* JSON */,
+				3FA19018158F44D8002FF989 /* VdiskBase64 */,
+				3FA18FCB158F44C8002FF989 /* VdiskAccountInfo.h */,
+				3FA18FCC158F44C8002FF989 /* VdiskAccountInfo.m */,
+				3FA18FCD158F44C8002FF989 /* VdiskAuthorize.h */,
+				3FA18FCE158F44C8002FF989 /* VdiskAuthorize.m */,
+				3FA18FCF158F44C8002FF989 /* VdiskAuthorizeWebView.h */,
+				3FA18FD0158F44C8002FF989 /* VdiskAuthorizeWebView.m */,
+				3FA18FD1158F44C8002FF989 /* VdiskComplexRequest.h */,
+				3FA18FD2158F44C8002FF989 /* VdiskComplexRequest.m */,
+				624F7B9D15D38EFB00F0F14B /* VdiskComplexUpload.h */,
+				624F7B9E15D38EFB00F0F14B /* VdiskComplexUpload.m */,
+				3FA18FD3158F44C8002FF989 /* VdiskDefines.h */,
+				3FA18FD4158F44C8002FF989 /* VdiskDeltaEntry.h */,
+				3FA18FD5158F44C8002FF989 /* VdiskDeltaEntry.m */,
+				3FA18FD8158F44C8002FF989 /* VdiskError.h */,
+				3FA18FD9158F44C8002FF989 /* VdiskError.m */,
+				328F93B115DD5536004E320C /* VdiskKeychain.h */,
+				328F93B215DD5536004E320C /* VdiskKeychain.m */,
+				3FA18FDC158F44C8002FF989 /* VdiskLog.h */,
+				3FA18FDD158F44C8002FF989 /* VdiskLog.m */,
+				3FA18FDE158F44C8002FF989 /* VdiskMetadata.h */,
+				3FA18FDF158F44C8002FF989 /* VdiskMetadata.m */,
+				3FBA43FC1682DA8C008F31CD /* VdiskSharesMetadata.h */,
+				3FBA43FD1682DA8D008F31CD /* VdiskSharesMetadata.m */,
+				3F35F2F316A531AE00BD21AA /* VdiskSharesCategory.h */,
+				3F35F2F416A531AE00BD21AA /* VdiskSharesCategory.m */,
+				3FA18FE0158F44C8002FF989 /* VdiskQuota.h */,
+				3FA18FE1158F44C8002FF989 /* VdiskQuota.m */,
+				3FA18FE2158F44C8002FF989 /* VdiskRequest.h */,
+				3FA18FE3158F44C8002FF989 /* VdiskRequest.m */,
+				3FA18FE4158F44C8002FF989 /* VdiskRestClient.h */,
+				3FA18FE5158F44C8002FF989 /* VdiskRestClient.m */,
+				3FA18FE6158F44C8002FF989 /* VdiskSDKGlobal.h */,
+				3FA18FE7158F44C8002FF989 /* VdiskSession.h */,
+				3FA18FE8158F44C8002FF989 /* VdiskSession.m */,
+				3FA18FE9158F44C8002FF989 /* VdiskUtil.h */,
+				3FA18FEA158F44C8002FF989 /* VdiskUtil.m */,
+				3F49D6F41688429B0090B2BA /* UIDevice-Hardware.h */,
+				3F49D6F51688429B0090B2BA /* UIDevice-Hardware.m */,
+				3F6C76AE158F4B2D0046BDDF /* VdiskSDK.h */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		3FA1900B158F44D7002FF989 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				3FA1900C158F44D7002FF989 /* NSObject+VdiskJSON.h */,
+				3FA1900D158F44D7002FF989 /* NSObject+VdiskJSON.m */,
+				3FA1900E158F44D7002FF989 /* NSString+VdiskJSON.h */,
+				3FA1900F158F44D8002FF989 /* NSString+VdiskJSON.m */,
+				3FA19010158F44D8002FF989 /* VdiskJSON.h */,
+				3FA19011158F44D8002FF989 /* VdiskJSON.m */,
+				3FA19012158F44D8002FF989 /* VdiskJsonBase.h */,
+				3FA19013158F44D8002FF989 /* VdiskJsonBase.m */,
+				3FA19014158F44D8002FF989 /* VdiskJsonParser.h */,
+				3FA19015158F44D8002FF989 /* VdiskJsonParser.m */,
+				3FA19016158F44D8002FF989 /* VdiskJsonWriter.h */,
+				3FA19017158F44D8002FF989 /* VdiskJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		3FA19018158F44D8002FF989 /* VdiskBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				3FA19019158F44D8002FF989 /* VdiskBase64.h */,
+				3FA1901A158F44D8002FF989 /* VdiskBase64.m */,
+				3FA1901B158F44D8002FF989 /* VdiskBase64Defines.h */,
+			);
+			path = VdiskBase64;
+			sourceTree = "<group>";
+		};
+		3FD1DD7E1698268900FD757F /* Weibo */ = {
+			isa = PBXGroup;
+			children = (
+				3FD1DD7F1698268900FD757F /* JSONKit */,
+				3FD1DD821698268900FD757F /* SinaWeibo.bundle */,
+				3FD1DD831698268900FD757F /* SinaWeibo.h */,
+				3FD1DD841698268900FD757F /* SinaWeibo.m */,
+				3FD1DD851698268900FD757F /* SinaWeiboAuthorizeView.h */,
+				3FD1DD861698268900FD757F /* SinaWeiboAuthorizeView.m */,
+				3FD1DD871698268900FD757F /* SinaWeiboConstants.h */,
+				3FD1DD881698268900FD757F /* SinaWeiboRequest.h */,
+				3FD1DD891698268900FD757F /* SinaWeiboRequest.m */,
+			);
+			path = Weibo;
+			sourceTree = "<group>";
+		};
+		3FD1DD7F1698268900FD757F /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				3FD1DD801698268900FD757F /* JSONKit.h */,
+				3FD1DD811698268900FD757F /* JSONKit.m */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		3FE3549415DCEA1200BCFD72 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				328F93C315DD5B19004E320C /* Security.framework */,
+				328F93C115DD5AE9004E320C /* Foundation.framework */,
+				328F93BF15DD5AE1004E320C /* CoreData.framework */,
+				328F93BD15DD5AD7004E320C /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		3FE3BF22165CA3B200ACD976 /* ASIHttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+				3FE3BF23165CA3B200ACD976 /* ASIAuthenticationDialog.h */,
+				3FE3BF24165CA3B200ACD976 /* ASIAuthenticationDialog.m */,
+				3FE3BF25165CA3B200ACD976 /* ASICacheDelegate.h */,
+				3FE3BF26165CA3B200ACD976 /* ASIDataCompressor.h */,
+				3FE3BF27165CA3B200ACD976 /* ASIDataCompressor.m */,
+				3FE3BF28165CA3B200ACD976 /* ASIDataDecompressor.h */,
+				3FE3BF29165CA3B200ACD976 /* ASIDataDecompressor.m */,
+				3FE3BF2A165CA3B200ACD976 /* ASIDownloadCache.h */,
+				3FE3BF2B165CA3B200ACD976 /* ASIDownloadCache.m */,
+				3FE3BF2C165CA3B200ACD976 /* ASIFormDataRequest.h */,
+				3FE3BF2D165CA3B200ACD976 /* ASIFormDataRequest.m */,
+				3FE3BF2E165CA3B200ACD976 /* ASIHTTPRequest.h */,
+				3FE3BF2F165CA3B200ACD976 /* ASIHTTPRequest.m */,
+				3FE3BF30165CA3B200ACD976 /* ASIHTTPRequestConfig.h */,
+				3FE3BF31165CA3B200ACD976 /* ASIHTTPRequestDelegate.h */,
+				3FE3BF32165CA3B200ACD976 /* ASIInputStream.h */,
+				3FE3BF33165CA3B200ACD976 /* ASIInputStream.m */,
+				3FE3BF34165CA3B200ACD976 /* ASINetworkQueue.h */,
+				3FE3BF35165CA3B200ACD976 /* ASINetworkQueue.m */,
+				3FE3BF36165CA3B200ACD976 /* ASIProgressDelegate.h */,
+				3FE3BF37165CA3B200ACD976 /* Reachability.h */,
+				3FE3BF38165CA3B200ACD976 /* Reachability.m */,
+			);
+			path = ASIHttpRequest;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3FA18FAE158F43D0002FF989 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FA18FEB158F44C8002FF989 /* VdiskAccountInfo.h in Headers */,
+				3FA18FED158F44C8002FF989 /* VdiskAuthorize.h in Headers */,
+				3FA18FEF158F44C8002FF989 /* VdiskAuthorizeWebView.h in Headers */,
+				3FA18FF1158F44C8002FF989 /* VdiskComplexRequest.h in Headers */,
+				3FA18FF3158F44C8002FF989 /* VdiskDefines.h in Headers */,
+				3FA18FF4158F44C8002FF989 /* VdiskDeltaEntry.h in Headers */,
+				3FA18FF8158F44C8002FF989 /* VdiskError.h in Headers */,
+				3FA18FFC158F44C8002FF989 /* VdiskLog.h in Headers */,
+				3FA18FFE158F44C8002FF989 /* VdiskMetadata.h in Headers */,
+				3FA19000158F44C8002FF989 /* VdiskQuota.h in Headers */,
+				3FA19002158F44C8002FF989 /* VdiskRequest.h in Headers */,
+				3FA19004158F44C8002FF989 /* VdiskRestClient.h in Headers */,
+				3FA19006158F44C8002FF989 /* VdiskSDKGlobal.h in Headers */,
+				3FA19007158F44C8002FF989 /* VdiskSession.h in Headers */,
+				3FA19009158F44C8002FF989 /* VdiskUtil.h in Headers */,
+				3FA1901C158F44D8002FF989 /* NSObject+VdiskJSON.h in Headers */,
+				3FA1901E158F44D8002FF989 /* NSString+VdiskJSON.h in Headers */,
+				3FA19020158F44D8002FF989 /* VdiskJSON.h in Headers */,
+				3FA19022158F44D8002FF989 /* VdiskJsonBase.h in Headers */,
+				3FA19024158F44D8002FF989 /* VdiskJsonParser.h in Headers */,
+				3FA19026158F44D8002FF989 /* VdiskJsonWriter.h in Headers */,
+				3FA19028158F44D8002FF989 /* VdiskBase64.h in Headers */,
+				3FA1902A158F44D8002FF989 /* VdiskBase64Defines.h in Headers */,
+				3FE354CD15DCEB8300BCFD72 /* VdiskSDK-Prefix.pch in Headers */,
+				328F93B315DD5536004E320C /* VdiskKeychain.h in Headers */,
+				6237922115DE3CB000FAB428 /* VdiskComplexUpload.h in Headers */,
+				3FE3BF39165CA3B200ACD976 /* ASIAuthenticationDialog.h in Headers */,
+				3FE3BF3B165CA3B200ACD976 /* ASICacheDelegate.h in Headers */,
+				3FE3BF3C165CA3B200ACD976 /* ASIDataCompressor.h in Headers */,
+				3FE3BF3E165CA3B200ACD976 /* ASIDataDecompressor.h in Headers */,
+				3FE3BF40165CA3B200ACD976 /* ASIDownloadCache.h in Headers */,
+				3FE3BF42165CA3B200ACD976 /* ASIFormDataRequest.h in Headers */,
+				3FE3BF44165CA3B200ACD976 /* ASIHTTPRequest.h in Headers */,
+				3FE3BF46165CA3B200ACD976 /* ASIHTTPRequestConfig.h in Headers */,
+				3FE3BF47165CA3B200ACD976 /* ASIHTTPRequestDelegate.h in Headers */,
+				3FE3BF48165CA3B200ACD976 /* ASIInputStream.h in Headers */,
+				3FE3BF4A165CA3B200ACD976 /* ASINetworkQueue.h in Headers */,
+				3FE3BF4C165CA3B200ACD976 /* ASIProgressDelegate.h in Headers */,
+				3FE3BF4D165CA3B200ACD976 /* Reachability.h in Headers */,
+				3FBA43FE1682DA8E008F31CD /* VdiskSharesMetadata.h in Headers */,
+				3F49D6DD168840850090B2BA /* DDAbstractDatabaseLogger.h in Headers */,
+				3F49D6DF168840850090B2BA /* DDASLLogger.h in Headers */,
+				3F49D6E1168840850090B2BA /* DDFileLogger.h in Headers */,
+				3F49D6E3168840850090B2BA /* DDLog.h in Headers */,
+				3F49D6E5168840850090B2BA /* DDTTYLogger.h in Headers */,
+				3F49D6E7168840850090B2BA /* CLog.h in Headers */,
+				3F49D6E9168840850090B2BA /* CLogReport.h in Headers */,
+				3F49D6EB168840850090B2BA /* CompressingLogFileManager.h in Headers */,
+				3F49D6ED168840850090B2BA /* ContextFilterLogFormatter.h in Headers */,
+				3F49D6EF168840850090B2BA /* DispatchQueueLogFormatter.h in Headers */,
+				3F49D6F1168840850090B2BA /* VdiskLogFormatter.h in Headers */,
+				3F49D6F61688429B0090B2BA /* UIDevice-Hardware.h in Headers */,
+				3FD1DD8C1698268900FD757F /* SinaWeibo.h in Headers */,
+				3FD1DD8E1698268900FD757F /* SinaWeiboAuthorizeView.h in Headers */,
+				3FD1DD901698268900FD757F /* SinaWeiboConstants.h in Headers */,
+				3FD1DD911698268900FD757F /* SinaWeiboRequest.h in Headers */,
+				3248543C16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.h in Headers */,
+				3F35F2F516A531AF00BD21AA /* VdiskSharesCategory.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3FA18FAF158F43D0002FF989 /* VdiskSDK-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3FA18FBD158F43D1002FF989 /* Build configuration list for PBXNativeTarget "VdiskSDK-iOS" */;
+			buildPhases = (
+				3FA18FAC158F43D0002FF989 /* Sources */,
+				3FA18FAD158F43D0002FF989 /* Frameworks */,
+				3FA18FAE158F43D0002FF989 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VdiskSDK-iOS";
+			productName = VdiskSDK;
+			productReference = 3FA18FB0158F43D0002FF989 /* libVdiskSDK-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3FA18FA7158F43D0002FF989 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = 3FA18FAA158F43D0002FF989 /* Build configuration list for PBXProject "VdiskSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3FA18FA5158F43D0002FF989;
+			productRefGroup = 3FA18FB1158F43D0002FF989 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3FA18FAF158F43D0002FF989 /* VdiskSDK-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3FA18FAC158F43D0002FF989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FA18FEC158F44C8002FF989 /* VdiskAccountInfo.m in Sources */,
+				3FA18FEE158F44C8002FF989 /* VdiskAuthorize.m in Sources */,
+				3FA18FF0158F44C8002FF989 /* VdiskAuthorizeWebView.m in Sources */,
+				3FA18FF2158F44C8002FF989 /* VdiskComplexRequest.m in Sources */,
+				3FA18FF5158F44C8002FF989 /* VdiskDeltaEntry.m in Sources */,
+				3FA18FF9158F44C8002FF989 /* VdiskError.m in Sources */,
+				3FA18FFD158F44C8002FF989 /* VdiskLog.m in Sources */,
+				3FA18FFF158F44C8002FF989 /* VdiskMetadata.m in Sources */,
+				3FA19001158F44C8002FF989 /* VdiskQuota.m in Sources */,
+				3FA19003158F44C8002FF989 /* VdiskRequest.m in Sources */,
+				3FA19005158F44C8002FF989 /* VdiskRestClient.m in Sources */,
+				3FA19008158F44C8002FF989 /* VdiskSession.m in Sources */,
+				3FA1900A158F44C8002FF989 /* VdiskUtil.m in Sources */,
+				3FA1901D158F44D8002FF989 /* NSObject+VdiskJSON.m in Sources */,
+				3FA1901F158F44D8002FF989 /* NSString+VdiskJSON.m in Sources */,
+				3FA19021158F44D8002FF989 /* VdiskJSON.m in Sources */,
+				3FA19023158F44D8002FF989 /* VdiskJsonBase.m in Sources */,
+				3FA19025158F44D8002FF989 /* VdiskJsonParser.m in Sources */,
+				3FA19027158F44D8002FF989 /* VdiskJsonWriter.m in Sources */,
+				3FA19029158F44D8002FF989 /* VdiskBase64.m in Sources */,
+				328F93B515DD5536004E320C /* VdiskKeychain.m in Sources */,
+				6237921F15DE3CAD00FAB428 /* VdiskComplexUpload.m in Sources */,
+				3FE3BF3A165CA3B200ACD976 /* ASIAuthenticationDialog.m in Sources */,
+				3FE3BF3D165CA3B200ACD976 /* ASIDataCompressor.m in Sources */,
+				3FE3BF3F165CA3B200ACD976 /* ASIDataDecompressor.m in Sources */,
+				3FE3BF41165CA3B200ACD976 /* ASIDownloadCache.m in Sources */,
+				3FE3BF43165CA3B200ACD976 /* ASIFormDataRequest.m in Sources */,
+				3FE3BF45165CA3B200ACD976 /* ASIHTTPRequest.m in Sources */,
+				3FE3BF49165CA3B200ACD976 /* ASIInputStream.m in Sources */,
+				3FE3BF4B165CA3B200ACD976 /* ASINetworkQueue.m in Sources */,
+				3FE3BF4E165CA3B200ACD976 /* Reachability.m in Sources */,
+				3FBA43FF1682DA8E008F31CD /* VdiskSharesMetadata.m in Sources */,
+				3F49D6DE168840850090B2BA /* DDAbstractDatabaseLogger.m in Sources */,
+				3F49D6E0168840850090B2BA /* DDASLLogger.m in Sources */,
+				3F49D6E2168840850090B2BA /* DDFileLogger.m in Sources */,
+				3F49D6E4168840850090B2BA /* DDLog.m in Sources */,
+				3F49D6E6168840850090B2BA /* DDTTYLogger.m in Sources */,
+				3F49D6E8168840850090B2BA /* CLog.m in Sources */,
+				3F49D6EA168840850090B2BA /* CLogReport.m in Sources */,
+				3F49D6EC168840850090B2BA /* CompressingLogFileManager.m in Sources */,
+				3F49D6EE168840850090B2BA /* ContextFilterLogFormatter.m in Sources */,
+				3F49D6F0168840850090B2BA /* DispatchQueueLogFormatter.m in Sources */,
+				3F49D6F2168840850090B2BA /* VdiskLogFormatter.m in Sources */,
+				3F49D6F71688429B0090B2BA /* UIDevice-Hardware.m in Sources */,
+				3FD1DD8D1698268900FD757F /* SinaWeibo.m in Sources */,
+				3FD1DD8F1698268900FD757F /* SinaWeiboAuthorizeView.m in Sources */,
+				3FD1DD921698268900FD757F /* SinaWeiboRequest.m in Sources */,
+				3248543D16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.m in Sources */,
+				3F35F2F616A531AF00BD21AA /* VdiskSharesCategory.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3FA18FBB158F43D1002FF989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3FA18FBC158F43D1002FF989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3FA18FBE158F43D1002FF989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/VdiskSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VdiskSDK/VdiskSDK-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3FA18FBF158F43D1002FF989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/VdiskSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VdiskSDK/VdiskSDK-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3FA18FAA158F43D0002FF989 /* Build configuration list for PBXProject "VdiskSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FA18FBB158F43D1002FF989 /* Debug */,
+				3FA18FBC158F43D1002FF989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FA18FBD158F43D1002FF989 /* Build configuration list for PBXNativeTarget "VdiskSDK-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FA18FBE158F43D1002FF989 /* Debug */,
+				3FA18FBF158F43D1002FF989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3FA18FA7158F43D0002FF989 /* Project object */;
+}

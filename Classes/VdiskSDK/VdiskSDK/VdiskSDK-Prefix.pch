@@ -1,0 +1,11 @@
+//
+// Prefix header for all source files of the 'VdiskSDK' target in the 'VdiskSDK' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
+
+#if TARGET_OS_IPHONE
+    #import <UIKit/UIKit.h>
+#endif
