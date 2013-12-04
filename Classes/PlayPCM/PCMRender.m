@@ -12,6 +12,8 @@
 #define SAMPLE_RATE             44100                                                    //采样频率
 #define BB_SEMITONE 			1.05946311
 #define BB_BASEFREQUENCY		1760
+#define BB_BASEFREQUENCY_H		18000
+#define BB_BASEFREQUENCY_IS_H	1
 #define BB_CHARACTERS			"0123456789abcdefghijklmnopqrstuv"
 //#define BB_THRESHOLD            16
 #define BITS_PER_SAMPLE         16
@@ -165,25 +167,52 @@ typedef   struct    {
 
 
 #pragma mark - 数字转频率
+
+static int freq_init_flag = 0;
+static int freq_init_is_high = 0;
+
 void freq_init() {
 	
-	static int flag = 0;
-	
-	if (flag) {
+	if (freq_init_flag) {
 		
 		return;
 	}
+    
+	//printf("----------------------\n");
 	
 	int i, len;
 	
-	for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
-		
-		unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
-		frequencies[i] = freq;
+    if (freq_init_is_high) {
         
-	}
+        for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
+            
+            unsigned int freq = (unsigned int)(BB_BASEFREQUENCY_H + (i * 64));
+            frequencies[i] = freq;
+        }
+        
+    } else {
+        
+        for (i=0, len = strlen(BB_CHARACTERS); i<len; ++i) {
+            
+            unsigned int freq = (unsigned int)floor(BB_BASEFREQUENCY * pow(BB_SEMITONE, i));
+            frequencies[i] = freq;
+            
+        }
+    }
     
-    flag = 1;
+    freq_init_flag = 1;
+}
+
+
+void switch_freq(int is_high) {
+    
+    if (is_high == 0 || is_high == 1) {
+        
+        freq_init_flag = 0;
+        freq_init_is_high = is_high;
+        
+        freq_init();
+    }
 }
 
 int num_to_freq(int n, unsigned int *f) {
@@ -268,6 +297,16 @@ void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int f
     }
 }
 
++ (BOOL)isHighFreq {
+    
+    return !!freq_init_is_high;
+}
+
++ (void)switchFreq:(BOOL)isHigh {
+
+    int is_high = (isHigh ? 1 : 0);
+    switch_freq(is_high);
+}
 
 + (NSData *)renderChirpData:(NSString *)serializeStr {
 
