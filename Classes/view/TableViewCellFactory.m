@@ -51,6 +51,7 @@
                 identifier = @"WeiboCell";
             }else{
                 //TODO:其他
+                identifier = @"PureTextCell";
             }
         }else{
             //字符串
