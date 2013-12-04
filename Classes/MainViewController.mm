@@ -91,7 +91,7 @@ static char alertViewUserinfoKey;
 
 
 
-@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate, UIDocumentInteractionControllerDelegate,ABPeoplePickerNavigationControllerDelegate, VdiskSessionDelegate, SinaWeiboDelegate>
+@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate, UIDocumentInteractionControllerDelegate,ABPeoplePickerNavigationControllerDelegate, VdiskSessionDelegate, SinaWeiboDelegate, VdiskRestClientDelegate>
 
 @property (nonatomic, retain) UITableView *mTableView;
 @property (nonatomic, retain) NSMutableArray *metadataList;
@@ -104,12 +104,24 @@ static char alertViewUserinfoKey;
 
 @property (nonatomic,retain) ABPeoplePickerNavigationController *peoplePicker;
 
+@property (nonatomic,retain) VdiskRestClient *restClient;
+
 @end
 
 @implementation MainViewController
 
 @synthesize audioPlayer = _audioPlayer;
 @synthesize hud = _hud;
+
+
+- (void)loadMyWeibo {
+    
+    [self.restClient cancelAllRequests];
+    self.restClient = [[[VdiskRestClient alloc] initWithSession:[VdiskSession sharedSession]] autorelease];
+    self.restClient.delegate = self;
+    
+    [_restClient callWeiboAPI:@"/users/show" params:[NSDictionary dictionaryWithObjectsAndKeys:[VdiskSession sharedSession].sinaUserID, @"uid", nil] method:@"GET" responseType:[NSDictionary class]];
+}
 
 - (void)playSuccessSound {
     
@@ -188,6 +200,9 @@ static char alertViewUserinfoKey;
 }
 
 - (void)dealloc {
+    
+    [_restClient cancelAllRequests];
+    [_restClient release], _restClient = nil;
     
     [_audioPlayer release];
     
@@ -308,7 +323,7 @@ static char alertViewUserinfoKey;
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"√ 切换为高频模式", @"  切换为低频模式", nil];
+                                              otherButtonTitles:@"√ 切换为高频模式", @"  切换为低频模式", @"  绑定/切换微博账号", nil];
     
     } else {
     
@@ -316,7 +331,7 @@ static char alertViewUserinfoKey;
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"  切换为高频模式", @"√ 切换为低频模式", nil];
+                                              otherButtonTitles:@"  切换为高频模式", @"√ 切换为低频模式", @"  绑定/切换微博账号", nil];
     }
     
     
@@ -1181,7 +1196,31 @@ static char alertViewUserinfoKey;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 
-    
+    if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"switchFreq"]) {
+        
+        switch (buttonIndex) {
+            case 0:
+            {
+                [PCMRender switchFreq:YES];
+                switch_freq(1);
+            }
+                break;
+            case 1:
+            {
+                [PCMRender switchFreq:NO];
+                switch_freq(0);
+            }
+                break;
+            case 2:
+            {
+                [[VdiskSession sharedSession] unlink];
+                [self performSelector:@selector(linkWeibo) withObject:nil afterDelay:0.1];
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -1245,14 +1284,14 @@ static char alertViewUserinfoKey;
                 break;
             case 4:
             {
-                [[VdiskSession sharedSession] unlink];
-                
                 if ([[VdiskSession sharedSession] isLinked] && ![[VdiskSession sharedSession] isExpired]) {
                     
+                    [self loadMyWeibo];
+                    [self loading:@"正在获取微博信息"];
                     
                 } else {
                 
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有绑定微博账号,是否绑定?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有绑定微博账号或者已经过期,是否绑定?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                     alert.userinfo = @{@"type" : @"linkWeibo"};
                     [alert show];
                     [alert release];
@@ -1355,6 +1394,43 @@ static char alertViewUserinfoKey;
         default:
             break;
         }
+        
+        
+    } else if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"weiboCard"]) {
+    
+        switch (buttonIndex) {
+            case 0:
+            {
+                [[UIApplication sharedApplication] openURL:[actionSheet.userinfo objectForKey:@"url"]];
+            }
+                break;
+            case 1:
+            {
+                if ([[VdiskSession sharedSession] isLinked] && ![[VdiskSession sharedSession] isExpired]) {
+                    
+                    NSDictionary *weiboInfo = [actionSheet.userinfo objectForKey:@"weiboInfo"];
+                    [self.restClient cancelAllRequests];
+                    self.restClient = [[[VdiskRestClient alloc] initWithSession:[VdiskSession sharedSession]] autorelease];
+                    _restClient.delegate = self;
+                    
+                    [self loading:@"正在关注"];
+                    
+                    [_restClient callWeiboAPI:@"/friendships/create" params:@{@"screen_name":[weiboInfo objectForKey:@"screen_name"], @"uid":[weiboInfo objectForKey:@"id"]} method:@"POST" responseType:[NSDictionary class]];
+                    
+                } else {
+                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有绑定微博账号或者已经过期,是否绑定?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                    alert.userinfo = @{@"type" : @"linkWeibo"};
+                    [alert show];
+                    [alert release];
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
     } else if(actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"contact"]){
     
         WaveTransMetadata *metadata = [actionSheet.userinfo objectForKey:@"metadata"];
@@ -1449,24 +1525,6 @@ static char alertViewUserinfoKey;
                 break;
         }
     
-    } else if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"switchFreq"]) {
-    
-        switch (buttonIndex) {
-            case 0:
-            {
-                [PCMRender switchFreq:YES];
-                switch_freq(1);
-            }
-                break;
-            case 1:
-            {
-                [PCMRender switchFreq:NO];
-                switch_freq(0);
-            }
-                break;
-            default:
-                break;
-        }
     }
 }
 
@@ -1474,6 +1532,7 @@ static char alertViewUserinfoKey;
 
 - (void)linkWeibo {
 
+    [self loading:@"正在绑定"];
     [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeWeiboAccessToken];
 }
 
@@ -1511,9 +1570,9 @@ static char alertViewUserinfoKey;
                                                                          delegate:self
                                                                 cancelButtonTitle:@"取消"
                                                            destructiveButtonTitle:nil
-                                                                otherButtonTitles:@"访问微博主页", nil];
+                                                                otherButtonTitles:@"访问微博主页", @"关注TA", nil];
                 
-                actionSheet.userinfo = @{@"type" : @"openURL", @"url" : [NSURL URLWithString:[NSString stringWithFormat:@"http://rest.sinaapp.com/?a=weibo_user_info&code=%@", metadata.code]]};
+                actionSheet.userinfo = @{@"type" : @"weiboCard", @"weiboInfo" : jsonDict, @"url" : [NSURL URLWithString:[NSString stringWithFormat:@"http://rest.sinaapp.com/?a=weibo_user_info&code=%@", metadata.code]]};
                 [actionSheet showInView:self.view];
                 [actionSheet release];
             
@@ -1706,6 +1765,7 @@ static BOOL kIsRefreshLinking = NO;
 - (void)sessionLinkedSuccess:(VdiskSession *)session {
     
     NSLog(@"sessionLinkedSuccess");
+    [self loadedSuccess:@"绑定成功"];
 }
 
 //log fail
@@ -1713,6 +1773,8 @@ static BOOL kIsRefreshLinking = NO;
 - (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
     
     NSLog(@"session:didFailToLinkWithError:");
+    
+    [self handleErrors:error title:@"绑定失败"];
 }
 
 // Log out successfully.
@@ -1761,6 +1823,11 @@ static BOOL kIsRefreshLinking = NO;
 - (void)sessionLinkDidCancel:(VdiskSession *)session {
     
     NSLog(@"sessionLinkDidCancel:");
+    
+    if (self.hud) {
+        
+        [_hud hide:NO];
+    }
 }
 
 
@@ -1793,6 +1860,95 @@ static BOOL kIsRefreshLinking = NO;
     
 }
 
+#pragma mark - VdiskRestClient
+
+- (void)restClient:(VdiskRestClient *)client calledWeiboAPI:(NSString *)apiName result:(id)result {
+    
+    if ([apiName isEqualToString:@"/users/show"]){
+        
+        [self loadedSuccess:@"获取成功"];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict addEntriesFromDictionary:result];
+        [dict setValue:@"wave_weibo_card" forKey:@"wave_weibo_card"];
+        NSString *content = [dict JSONFragment];
+        WaveTransMetadata *md = [[[WaveTransMetadata alloc] initWithSha1:[content SHA1EncodedString] type:@"text" content:content size:[content lengthOfBytesUsingEncoding:NSUTF8StringEncoding] filename:nil] autorelease];
+        [md setUploaded:NO];
+        [md save];
+        
+        [self postWaveTransMetadata:md];
+        
+        
+    } else if ([apiName isEqualToString:@"/friendships/create"]) {
+        
+        [self loadedSuccess:@"关注成功"];
+    }
+}
+
+- (void)restClient:(VdiskRestClient *)client callWeiboAPIFailedWithError:(NSError *)error apiName:(NSString *)apiName {
+    
+    if ([apiName isEqualToString:@"/users/show"]) {
+        
+        [self handleErrors:error title:@"获取失败"];
+        
+    } else if ([apiName isEqualToString:@"/friendships/create"]) {
+        
+        [self handleErrors:error title:@"关注失败"];
+    }
+}
+
+#pragma - handleErrors && loading
+
+- (void)loadedSuccess:(NSString *)text {
+    
+    _hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
+    _hud.mode = MBProgressHUDModeCustomView;
+    _hud.labelText = text;
+    [_hud hide:YES afterDelay:1.5];
+}
+
+- (void)loading:(NSString *)text {
+    
+    [_hud hide:NO];
+    
+    self.hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
+    [self.view addSubview:_hud];
+    
+    _hud.dimBackground = YES;
+    _hud.delegate = self;
+    _hud.labelText = text;
+    [_hud show:NO];
+}
+
+- (void)handleErrors:(NSError *)error title:(NSString *)title {
+    
+    [_hud hide:NO];
+    
+    self.hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
+    [self.view addSubview:_hud];
+    
+    _hud.dimBackground = YES;
+    _hud.delegate = self;
+    
+    _hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"X.png"]] autorelease];
+    _hud.mode = MBProgressHUDModeCustomView;
+    _hud.labelText = title;
+    
+    _hud.detailsLabelText = VdiskErrorMessageWithCode__(error);
+    
+    [_hud show:NO];
+    [_hud hide:YES afterDelay:1.5];
+}
+
+- (void)handleErrors:(NSError *)error {
+    
+    [self handleErrors:error title:@"加载失败"];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    
+	[_hud removeFromSuperview];
+}
 
 
 @end

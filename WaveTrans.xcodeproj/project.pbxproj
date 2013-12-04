@@ -36,6 +36,11 @@
 		3F6E5C70184ECAEB004FB1E1 /* libVdiskSDK-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6E5C6F184ECAC4004FB1E1 /* libVdiskSDK-iOS.a */; };
 		3F6E5C73184EDE9F004FB1E1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6E5C72184EDE9F004FB1E1 /* Security.framework */; };
 		3F6E5C79184EFE78004FB1E1 /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F6E5C78184EFE78004FB1E1 /* SinaWeibo.bundle */; };
+		3F6E5C7E184F0DC7004FB1E1 /* VdiskError__.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3F6E5C7D184F0DC7004FB1E1 /* VdiskError__.mm */; };
+		3F6E5C85184F1102004FB1E1 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6E5C81184F1102004FB1E1 /* 37x-Checkmark.png */; };
+		3F6E5C86184F1102004FB1E1 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6E5C82184F1102004FB1E1 /* 37x-Checkmark@2x.png */; };
+		3F6E5C87184F1102004FB1E1 /* X.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6E5C83184F1102004FB1E1 /* X.png */; };
+		3F6E5C88184F1102004FB1E1 /* X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F6E5C84184F1102004FB1E1 /* X@2x.png */; };
 		3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FA696991843247C00B6FFDE /* Images.xcassets */; };
 		3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CFD18431DB0006C84F5 /* FileExt.plist */; };
 		3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */; };
@@ -178,6 +183,12 @@
 		3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VdiskSDK.xcodeproj; path = Classes/VdiskSDK/VdiskSDK.xcodeproj; sourceTree = "<group>"; };
 		3F6E5C72184EDE9F004FB1E1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3F6E5C78184EFE78004FB1E1 /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
+		3F6E5C7C184F0DC7004FB1E1 /* VdiskError__.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskError__.h; sourceTree = "<group>"; };
+		3F6E5C7D184F0DC7004FB1E1 /* VdiskError__.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VdiskError__.mm; sourceTree = "<group>"; };
+		3F6E5C81184F1102004FB1E1 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		3F6E5C82184F1102004FB1E1 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
+		3F6E5C83184F1102004FB1E1 /* X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = X.png; sourceTree = "<group>"; };
+		3F6E5C84184F1102004FB1E1 /* X@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "X@2x.png"; sourceTree = "<group>"; };
 		3FA696991843247C00B6FFDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WaveTrans/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3FC75CF1184302A6006C84F5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
@@ -325,6 +336,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3F6E5C7C184F0DC7004FB1E1 /* VdiskError__.h */,
+				3F6E5C7D184F0DC7004FB1E1 /* VdiskError__.mm */,
 				C140F0661845D6E700083B9B /* Controller */,
 				3F4E4F9B18449341006D7205 /* DDHTextView.h */,
 				3F4E4F9C18449341006D7205 /* DDHTextView.m */,
@@ -512,6 +525,10 @@
 		3FC75CF3184302B0006C84F5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3F6E5C81184F1102004FB1E1 /* 37x-Checkmark.png */,
+				3F6E5C82184F1102004FB1E1 /* 37x-Checkmark@2x.png */,
+				3F6E5C83184F1102004FB1E1 /* X.png */,
+				3F6E5C84184F1102004FB1E1 /* X@2x.png */,
 				3F6E5C78184EFE78004FB1E1 /* SinaWeibo.bundle */,
 				C15F686C184E03F600232309 /* UITabBarContactsTemplate.png */,
 				C15F686D184E03F600232309 /* UITabBarContactsTemplate@2x.png */,
@@ -771,6 +788,7 @@
 				C15BB0041844599F00690D74 /* play_btn.png in Resources */,
 				C15BB01F184482FD00690D74 /* PureTextCell.xib in Resources */,
 				3210489618464A8B00371D8B /* top_gb@2x.png in Resources */,
+				3F6E5C87184F1102004FB1E1 /* X.png in Resources */,
 				C15BB00A1844599F00690D74 /* arrow_left@2x.png in Resources */,
 				3F6E5C79184EFE78004FB1E1 /* SinaWeibo.bundle in Resources */,
 				C15BB0091844599F00690D74 /* text_bg@2x.png in Resources */,
@@ -790,6 +808,9 @@
 				C15BB0061844599F00690D74 /* photo_cell_alpha_cover.png in Resources */,
 				C15BB0081844599F00690D74 /* binary_bg.png in Resources */,
 				C15BB0031844599F00690D74 /* play_beep@2x.png in Resources */,
+				3F6E5C86184F1102004FB1E1 /* 37x-Checkmark@2x.png in Resources */,
+				3F6E5C88184F1102004FB1E1 /* X@2x.png in Resources */,
+				3F6E5C85184F1102004FB1E1 /* 37x-Checkmark.png in Resources */,
 				C1618EA81846EA5600C7413D /* sent_btn.png in Resources */,
 				C140F04E1844C71000083B9B /* quotes_l.png in Resources */,
 				C15F686F184E03F600232309 /* UITabBarContactsTemplate@2x.png in Resources */,
@@ -829,6 +850,7 @@
 				ADB16D23183F0BAA00115067 /* WaveTransMetadata.mm in Sources */,
 				3F4E4F8F184355D5006D7205 /* FMDatabaseQueue.m in Sources */,
 				C15BAFC618444E0C00690D74 /* MSCMoreOptionTableViewCell.m in Sources */,
+				3F6E5C7E184F0DC7004FB1E1 /* VdiskError__.mm in Sources */,
 				C15BB01D184482EE00690D74 /* PureTextCell.m in Sources */,
 				C15BAFF218444F6900690D74 /* PhotoCell.m in Sources */,
 				F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */,

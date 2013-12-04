@@ -37,6 +37,7 @@
 		3F49D6F2168840850090B2BA /* VdiskLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6DC168840850090B2BA /* VdiskLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		3F49D6F61688429B0090B2BA /* UIDevice-Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F49D6F41688429B0090B2BA /* UIDevice-Hardware.h */; };
 		3F49D6F71688429B0090B2BA /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49D6F51688429B0090B2BA /* UIDevice-Hardware.m */; };
+		3F6E5C80184F0E00004FB1E1 /* VdiskError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FD9158F44C8002FF989 /* VdiskError.m */; };
 		3FA18FB4158F43D0002FF989 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA18FB3158F43D0002FF989 /* Foundation.framework */; };
 		3FA18FEB158F44C8002FF989 /* VdiskAccountInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FCB158F44C8002FF989 /* VdiskAccountInfo.h */; };
 		3FA18FEC158F44C8002FF989 /* VdiskAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FCC158F44C8002FF989 /* VdiskAccountInfo.m */; };
@@ -50,7 +51,6 @@
 		3FA18FF4158F44C8002FF989 /* VdiskDeltaEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FD4158F44C8002FF989 /* VdiskDeltaEntry.h */; };
 		3FA18FF5158F44C8002FF989 /* VdiskDeltaEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FD5158F44C8002FF989 /* VdiskDeltaEntry.m */; };
 		3FA18FF8158F44C8002FF989 /* VdiskError.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FD8158F44C8002FF989 /* VdiskError.h */; };
-		3FA18FF9158F44C8002FF989 /* VdiskError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FD9158F44C8002FF989 /* VdiskError.m */; };
 		3FA18FFC158F44C8002FF989 /* VdiskLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FDC158F44C8002FF989 /* VdiskLog.h */; };
 		3FA18FFD158F44C8002FF989 /* VdiskLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA18FDD158F44C8002FF989 /* VdiskLog.m */; };
 		3FA18FFE158F44C8002FF989 /* VdiskMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FA18FDE158F44C8002FF989 /* VdiskMetadata.h */; };
@@ -601,7 +601,6 @@
 				3FA18FF0158F44C8002FF989 /* VdiskAuthorizeWebView.m in Sources */,
 				3FA18FF2158F44C8002FF989 /* VdiskComplexRequest.m in Sources */,
 				3FA18FF5158F44C8002FF989 /* VdiskDeltaEntry.m in Sources */,
-				3FA18FF9158F44C8002FF989 /* VdiskError.m in Sources */,
 				3FA18FFD158F44C8002FF989 /* VdiskLog.m in Sources */,
 				3FA18FFF158F44C8002FF989 /* VdiskMetadata.m in Sources */,
 				3FA19001158F44C8002FF989 /* VdiskQuota.m in Sources */,
@@ -641,6 +640,7 @@
 				3F49D6F2168840850090B2BA /* VdiskLogFormatter.m in Sources */,
 				3F49D6F71688429B0090B2BA /* UIDevice-Hardware.m in Sources */,
 				3FD1DD8D1698268900FD757F /* SinaWeibo.m in Sources */,
+				3F6E5C80184F0E00004FB1E1 /* VdiskError.m in Sources */,
 				3FD1DD8F1698268900FD757F /* SinaWeiboAuthorizeView.m in Sources */,
 				3FD1DD921698268900FD757F /* SinaWeiboRequest.m in Sources */,
 				3248543D16A2B2AA00CEE7EA /* VdiskLogDebugFormatter.m in Sources */,

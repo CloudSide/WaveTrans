@@ -54,6 +54,7 @@
 #import <UIKit/UIKit.h>
 #import "VdiskUtil.h"
 #import "VdiskSDK.h"
+#import "VdiskError__.h"
 
 #define kWeiboAppKey                           @"1396484607"
 #define kWeiboAppSecret                        @"d391e9c2aadd796a6a42e65802dd1278"
