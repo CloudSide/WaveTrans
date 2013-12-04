@@ -52,9 +52,10 @@
     width = width*radio; 
     height = height*radio; 
     
+    /*
     int xPos = (size.width - width)/2;
     int yPos = (size.height-height)/2; 
-    
+    */
     
     
     UIGraphicsBeginImageContext(CGSizeMake(width, height));

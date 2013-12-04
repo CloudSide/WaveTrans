@@ -801,7 +801,7 @@ static char alertViewUserinfoKey;
             
             //上传成功
             
-            WaveTransMetadata *metadata = [[WaveTransMetadata alloc] initWithDictionary:dict];
+            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithDictionary:dict] autorelease];
             
             //WaveTransMetadata *metadataReceive = [_request.userInfo objectForKey:@"metadata"];
             
@@ -835,7 +835,7 @@ static char alertViewUserinfoKey;
             //播放成功声音
             [self playSuccessSound];
             
-            WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
+            WaveTransMetadata *metadataReceive = [[[WaveTransMetadata alloc] initWithDictionary:dict] autorelease];
             
             NSLog(@"%@", metadataReceive.code);
             NSLog(@"%@", metadataReceive.sha1);

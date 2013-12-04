@@ -155,7 +155,7 @@
     // 测试直接用[WaveTransMetadata codeWithSha1:metadata.sha1]获取code发声
     self.pcmData = [PCMRender renderChirpData:metadata.rsCode];
     
-    NSError *error;
+    NSError *error = nil;
     
     if (self.audioPlayer != nil) {
         
@@ -470,7 +470,7 @@
         
         if ([dict isKindOfClass:[NSDictionary class]]) {
             
-            WaveTransMetadata *metadata = [[WaveTransMetadata alloc] initWithDictionary:dict];
+            WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithDictionary:dict] autorelease];
             
             //WaveTransMetadata *metadataReceive = [_request.userInfo objectForKey:@"metadata"];
             
@@ -495,7 +495,7 @@
         
         if ([dict isKindOfClass:[NSDictionary class]] && ![dict objectForKey:@"errno"]) {
             
-            WaveTransMetadata *metadataReceive = [[WaveTransMetadata alloc] initWithDictionary:dict];
+            WaveTransMetadata *metadataReceive = [[[WaveTransMetadata alloc] initWithDictionary:dict] autorelease];
             
             NSLog(@"%@", metadataReceive.code);
             NSLog(@"%@", metadataReceive.sha1);
