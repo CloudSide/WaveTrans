@@ -942,7 +942,7 @@ static OSStatus	PerformThru(
 	// go from 0 to 1 along the X, and -1 to 1 along the Y
 	glTranslatef(0., self.view.frame.size.height / 2.0, 0.);
 	//glScalef(self.view.frame.size.width - 48., self.view.frame.size.height, 1.);
-	glScalef(self.view.frame.size.width - 78., self.view.frame.size.height, 1.);
+	glScalef(self.view.frame.size.width - 88., self.view.frame.size.height, 1.);
 	
 	// Set up some GL state for our oscilloscope lines
 	glDisable(GL_TEXTURE_2D);

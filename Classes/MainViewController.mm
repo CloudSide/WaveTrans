@@ -282,18 +282,18 @@ static char alertViewUserinfoKey;
     [addButton setShowsTouchWhenHighlighted:YES];
     [addButton setExclusiveTouch:YES];
     //addButton.backgroundColor = [UIColor redColor];
-    [addButton setFrame:CGRectMake(320-50, 20.0, 50, 40)];
+    [addButton setFrame:CGRectMake(320-50, 20.0, 40, 40)];
     addButton.titleLabel.text = @"添加";
     [addButton addTarget:self action:@selector(openAlbum) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addButton];
     
     
-    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    //[settingButton setImage:[UIImage imageNamed:@"sent_btn"] forState:UIControlStateNormal];
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [settingButton setImage:[UIImage imageNamed:@"setting_btn"] forState:UIControlStateNormal];
     [settingButton setShowsTouchWhenHighlighted:YES];
     [settingButton setExclusiveTouch:YES];
     //addButton.backgroundColor = [UIColor redColor];
-    [settingButton setFrame:CGRectMake(320-80, 18.0, 40, 40)];
+    [settingButton setFrame:CGRectMake(320-90, 18.0, 40, 40)];
     [settingButton setTitle:@"设置" forState:UIControlStateNormal];
     [settingButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [settingButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];

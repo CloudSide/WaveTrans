@@ -70,6 +70,10 @@
 		C140F0501844C71000083B9B /* quotes_r.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04C1844C71000083B9B /* quotes_r.png */; };
 		C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C140F04D1844C71000083B9B /* quotes_r@2x.png */; };
 		C140F0541845907100083B9B /* UIImage+UIImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = C140F0531845907100083B9B /* UIImage+UIImageScale.m */; };
+		C1415B50184F4575005BC4FE /* sent_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = C1415B4E184F4575005BC4FE /* sent_btn.png */; };
+		C1415B51184F4575005BC4FE /* sent_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1415B4F184F4575005BC4FE /* sent_btn@2x.png */; };
+		C1415B54184F4583005BC4FE /* setting_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = C1415B52184F4583005BC4FE /* setting_btn.png */; };
+		C1415B55184F4583005BC4FE /* setting_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1415B53184F4583005BC4FE /* setting_btn@2x.png */; };
 		C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB718444E0C00690D74 /* AudioCell.xib */; };
 		C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BAFB818444E0C00690D74 /* BinaryCell.xib */; };
 		C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFBA18444E0C00690D74 /* MainTableViewCell.m */; };
@@ -106,8 +110,6 @@
 		C15F6867184DDCB300232309 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C15F6865184DDCB300232309 /* AddressBookUI.framework */; };
 		C15F686E184E03F600232309 /* UITabBarContactsTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = C15F686C184E03F600232309 /* UITabBarContactsTemplate.png */; };
 		C15F686F184E03F600232309 /* UITabBarContactsTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C15F686D184E03F600232309 /* UITabBarContactsTemplate@2x.png */; };
-		C1618EA81846EA5600C7413D /* sent_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EA61846EA5600C7413D /* sent_btn.png */; };
-		C1618EA91846EA5600C7413D /* sent_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EA71846EA5600C7413D /* sent_btn@2x.png */; };
 		C1618EAC184715C000C7413D /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAA184715C000C7413D /* error.wav */; };
 		C1618EAD184715C000C7413D /* success_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAB184715C000C7413D /* success_1.wav */; };
 		C1618EB018486BED00C7413D /* play_beep_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAE18486BED00C7413D /* play_beep_disable.png */; };
@@ -235,6 +237,10 @@
 		C140F04D1844C71000083B9B /* quotes_r@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quotes_r@2x.png"; sourceTree = "<group>"; };
 		C140F0521845907100083B9B /* UIImage+UIImageScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageScale.h"; sourceTree = "<group>"; };
 		C140F0531845907100083B9B /* UIImage+UIImageScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageScale.m"; sourceTree = "<group>"; };
+		C1415B4E184F4575005BC4FE /* sent_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sent_btn.png; sourceTree = "<group>"; };
+		C1415B4F184F4575005BC4FE /* sent_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sent_btn@2x.png"; sourceTree = "<group>"; };
+		C1415B52184F4583005BC4FE /* setting_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_btn.png; sourceTree = "<group>"; };
+		C1415B53184F4583005BC4FE /* setting_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_btn@2x.png"; sourceTree = "<group>"; };
 		C15BAFB318444D6900690D74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C15BAFB418444D6900690D74 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		C15BAFB718444E0C00690D74 /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
@@ -285,8 +291,6 @@
 		C15F6865184DDCB300232309 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		C15F686C184E03F600232309 /* UITabBarContactsTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarContactsTemplate.png; sourceTree = "<group>"; };
 		C15F686D184E03F600232309 /* UITabBarContactsTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarContactsTemplate@2x.png"; sourceTree = "<group>"; };
-		C1618EA61846EA5600C7413D /* sent_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sent_btn.png; sourceTree = "<group>"; };
-		C1618EA71846EA5600C7413D /* sent_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sent_btn@2x.png"; sourceTree = "<group>"; };
 		C1618EAA184715C000C7413D /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		C1618EAB184715C000C7413D /* success_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_1.wav; sourceTree = "<group>"; };
 		C1618EAE18486BED00C7413D /* play_beep_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_beep_disable.png; sourceTree = "<group>"; };
@@ -534,10 +538,12 @@
 				C15F686D184E03F600232309 /* UITabBarContactsTemplate@2x.png */,
 				C1618EAA184715C000C7413D /* error.wav */,
 				C1618EAB184715C000C7413D /* success_1.wav */,
-				C1618EA61846EA5600C7413D /* sent_btn.png */,
-				C1618EA71846EA5600C7413D /* sent_btn@2x.png */,
 				3210489318464A8B00371D8B /* top_gb.png */,
+				C1415B52184F4583005BC4FE /* setting_btn.png */,
+				C1415B53184F4583005BC4FE /* setting_btn@2x.png */,
 				3210489418464A8B00371D8B /* top_gb@2x.png */,
+				C1415B4E184F4575005BC4FE /* sent_btn.png */,
+				C1415B4F184F4575005BC4FE /* sent_btn@2x.png */,
 				C140F04A1844C71000083B9B /* quotes_l.png */,
 				C1618EAE18486BED00C7413D /* play_beep_disable.png */,
 				C1618EAF18486BED00C7413D /* play_beep_disable@2x.png */,
@@ -772,6 +778,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1415B54184F4583005BC4FE /* setting_btn.png in Resources */,
 				3210489518464A8B00371D8B /* top_gb.png in Resources */,
 				3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */,
 				C15BB0051844599F00690D74 /* play_btn@2x.png in Resources */,
@@ -783,7 +790,6 @@
 				C15BB01418447A8600690D74 /* WeiboCell.xib in Resources */,
 				C15BB0071844599F00690D74 /* audio_bg.png in Resources */,
 				C15BAFCA18444E0C00690D74 /* VideoCell.xib in Resources */,
-				C1618EA91846EA5600C7413D /* sent_btn@2x.png in Resources */,
 				C15BB00D1844599F00690D74 /* tableview_sep_line.png in Resources */,
 				C15BB0041844599F00690D74 /* play_btn.png in Resources */,
 				C15BB01F184482FD00690D74 /* PureTextCell.xib in Resources */,
@@ -794,12 +800,14 @@
 				C15BB0091844599F00690D74 /* text_bg@2x.png in Resources */,
 				C1618EAC184715C000C7413D /* error.wav in Resources */,
 				C15BAFC418444E0C00690D74 /* BinaryCell.xib in Resources */,
+				C1415B51184F4575005BC4FE /* sent_btn@2x.png in Resources */,
 				C1618EB118486BEE00C7413D /* play_beep_disable@2x.png in Resources */,
 				C140F04F1844C71000083B9B /* quotes_l@2x.png in Resources */,
 				C1618EB018486BED00C7413D /* play_beep_disable.png in Resources */,
 				C15BB00B1844599F00690D74 /* arrow_right@2x.png in Resources */,
 				C15BAFC318444E0C00690D74 /* AudioCell.xib in Resources */,
 				C140F0511844C71000083B9B /* quotes_r@2x.png in Resources */,
+				C1415B50184F4575005BC4FE /* sent_btn.png in Resources */,
 				C1618EAD184715C000C7413D /* success_1.wav in Resources */,
 				3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */,
 				3F4E5001184614C2006D7205 /* html in Resources */,
@@ -811,8 +819,8 @@
 				3F6E5C86184F1102004FB1E1 /* 37x-Checkmark@2x.png in Resources */,
 				3F6E5C88184F1102004FB1E1 /* X@2x.png in Resources */,
 				3F6E5C85184F1102004FB1E1 /* 37x-Checkmark.png in Resources */,
-				C1618EA81846EA5600C7413D /* sent_btn.png in Resources */,
 				C140F04E1844C71000083B9B /* quotes_l.png in Resources */,
+				C1415B55184F4583005BC4FE /* setting_btn@2x.png in Resources */,
 				C15F686F184E03F600232309 /* UITabBarContactsTemplate@2x.png in Resources */,
 				C15BAFC718444E0C00690D74 /* PhotoCell.xib in Resources */,
 				C15BB00C1844599F00690D74 /* tableview_sep_line@2x.png in Resources */,
