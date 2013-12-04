@@ -28,5 +28,15 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sinaweibosso.1396484607</string>
+				<string>sinavdisksso.1396484607</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

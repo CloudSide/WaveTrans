@@ -549,6 +549,22 @@ static OSStatus	PerformThru(
 - (void)applicationWillEnterForeground:(UIApplication *)application {
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    NSString *scheme = [url scheme];
+    //NSString *host = [url host];
+    //NSString *query = [url query];
+    //NSDictionary *params = [self parseQueryString:query];
+    
+    if([scheme caseInsensitiveCompare:[NSString stringWithFormat:@"sinaweibosso.%@", kWeiboAppKey]] == NSOrderedSame || [scheme caseInsensitiveCompare:[NSString stringWithFormat:@"sinavdsiksso.%@", kWeiboAppKey]] == NSOrderedSame) {
+        
+        [[VdiskSession sharedSession].sinaWeibo handleOpenURL:url];
+        
+    }
+    
+    return YES;
+}
+
 
 - (void)dealloc
 {	

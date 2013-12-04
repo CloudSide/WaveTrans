@@ -62,8 +62,36 @@ static char actionSheetUserinfoKey;
 #pragma mark -
 
 
+@interface UIAlertView (userinfo)
 
-@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate, UIDocumentInteractionControllerDelegate,ABPeoplePickerNavigationControllerDelegate>
+@property (nonatomic, retain) NSDictionary *userinfo;
+
+@end
+
+@implementation UIAlertView (userinfo)
+
+static char alertViewUserinfoKey;
+
+- (NSDictionary *)userinfo {
+    
+    return objc_getAssociatedObject(self, &alertViewUserinfoKey);
+}
+
+- (void)setUserinfo:(NSDictionary *)userinfo {
+    
+    objc_setAssociatedObject(self, &alertViewUserinfoKey, userinfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
+@end
+
+
+
+#pragma mark -
+
+
+
+@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate, UIDocumentInteractionControllerDelegate,ABPeoplePickerNavigationControllerDelegate, VdiskSessionDelegate, SinaWeiboDelegate>
 
 @property (nonatomic, retain) UITableView *mTableView;
 @property (nonatomic, retain) NSMutableArray *metadataList;
@@ -180,10 +208,20 @@ static char actionSheetUserinfoKey;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
         
         [[AppDelegate sharedAppDelegate] setGetWaveTransMetadataDelegate:self];
+        
+        
+        SinaWeibo *sinaWeibo = [[SinaWeibo alloc] initWithAppKey:kWeiboAppKey appSecret:kWeiboAppSecret appRedirectURI:kWeiboAppRedirectURI andDelegate:self];
+        VdiskSession *session = [[VdiskSession alloc] initWithAppKey:kVdiskAppKey appSecret:kVdiskAppSecret appRoot:@"basic" sinaWeibo:[sinaWeibo autorelease]];
+        session.delegate = self;
+        [session setRedirectURI:kVdiskAppRedirectURI];
+        [VdiskSession setSharedSession:[session autorelease]];
+        
     }
+    
     return self;
 }
 
@@ -295,7 +333,7 @@ static char actionSheetUserinfoKey;
                                                                   delegate:self
                                                          cancelButtonTitle:@"取消"
                                                     destructiveButtonTitle:nil
-                                                         otherButtonTitles:@"拍照",@"相册", @"文本", @"联系人", nil];
+                                                         otherButtonTitles:@"拍照",@"相册", @"文本", @"联系人", @"微博名片", nil];
     chooseImageSheet.userinfo = @{@"type" : @"addFile"};
     
     [chooseImageSheet showInView:self.view];
@@ -1070,12 +1108,13 @@ static char actionSheetUserinfoKey;
     //return @"More";
 }
 
--(UIColor *)tableView:(UITableView *)tableView backgroundColorForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UIColor *)tableView:(UITableView *)tableView backgroundColorForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return [UIColor colorWithRed:0.18f green:0.67f blue:0.84f alpha:1.0f];
 }
 
 #pragma mark - actionSheet
+
 - (void)showMoreActionSheet:(NSIndexPath *)indexPath {
     
     
@@ -1116,8 +1155,36 @@ static char actionSheetUserinfoKey;
 
 #pragma mark - UIActionSheetDelegate <NSObject>
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+
+    if (alertView.userinfo && [[alertView.userinfo objectForKey:@"type"] isEqualToString:@"linkWeibo"]) {
+    
+        switch (buttonIndex) {
+            case 0:
+            {
+
+            }
+                break;
+                
+            case 1:
+            {
+                [self performSelector:@selector(linkWeibo) withObject:nil afterDelay:0.1];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if (actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"addFile"]) {
         
@@ -1125,14 +1192,17 @@ static char actionSheetUserinfoKey;
         picker.delegate = self;
         
         switch (buttonIndex) {
+                
             case 0://Take picture
                 
                 if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                     
-                }else{
+                } else {
+                    
                     NSLog(@"模拟器无法打开相机");
                 }
+                
                 [self presentViewController:picker animated:YES completion:^{}];
                 break;
                 
@@ -1171,6 +1241,22 @@ static char actionSheetUserinfoKey;
                 // showing the picker
                 [self presentViewController:self.peoplePicker animated:YES completion:^{}];
 
+            }
+                break;
+            case 4:
+            {
+                [[VdiskSession sharedSession] unlink];
+                
+                if ([[VdiskSession sharedSession] isLinked] && ![[VdiskSession sharedSession] isExpired]) {
+                    
+                    
+                } else {
+                
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有绑定微博账号,是否绑定?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                    alert.userinfo = @{@"type" : @"linkWeibo"};
+                    [alert show];
+                    [alert release];
+                }
             }
                 break;
             default:
@@ -1386,6 +1472,11 @@ static char actionSheetUserinfoKey;
 
 #pragma mark - private method
 
+- (void)linkWeibo {
+
+    [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeWeiboAccessToken];
+}
+
 /*
 - (UIDocumentInteractionController *)docControllerForFile:(NSURL *)fileURL {
 	
@@ -1598,5 +1689,110 @@ static char actionSheetUserinfoKey;
     [self.peoplePicker dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+
+
+#pragma mark -
+#pragma mark VdiskSessionDelegate methods
+
+static BOOL kIsRefreshLinking = NO;
+
+- (void)sessionAlreadyLinked:(VdiskSession *)session {
+    
+    NSLog(@"sessionAlreadyLinked");
+}
+
+// Log in successfully.
+- (void)sessionLinkedSuccess:(VdiskSession *)session {
+    
+    NSLog(@"sessionLinkedSuccess");
+}
+
+//log fail
+
+- (void)session:(VdiskSession *)session didFailToLinkWithError:(NSError *)error {
+    
+    NSLog(@"session:didFailToLinkWithError:");
+}
+
+// Log out successfully.
+
+- (void)sessionUnlinkedSuccess:(VdiskSession *)session {
+    
+    if (kIsRefreshLinking) {
+        
+        kIsRefreshLinking = NO;
+    }
+    
+    NSLog(@"sessionUnlinkedSuccess");
+}
+
+// When you use the VdiskSession's request methods,
+// you may receive the following four callbacks.
+- (void)sessionNotLink:(VdiskSession *)session {
+    
+    if (kIsRefreshLinking) {
+        
+        kIsRefreshLinking = NO;
+    }
+    
+    NSLog(@"sessionNotLink");
+}
+
+
+- (void)sessionExpired:(VdiskSession *)session {
+    
+    @synchronized(self) {
+        
+        NSLog(@"sessionExpired");
+        
+        if (!kIsRefreshLinking) {
+            
+            //[MBProgressHUD showHUDAddedTo:kKeyWindow animated:YES].labelText = @"正在重新登录...";
+            
+            kIsRefreshLinking = YES;
+            [session performSelectorOnMainThread:@selector(refreshLink) withObject:nil waitUntilDone:YES];
+            
+            NSLog(@"startRefreshLinking");
+        }
+    }
+}
+
+- (void)sessionLinkDidCancel:(VdiskSession *)session {
+    
+    NSLog(@"sessionLinkDidCancel:");
+}
+
+
+#pragma mark - SinaWeibo Delegate
+
+- (void)sinaweiboDidLogIn:(SinaWeibo *)sinaweibo {
+    
+    NSLog(@"sinaweiboDidLogIn userID = %@ accesstoken = %@ expirationDate = %@ refresh_token = %@", sinaweibo.userID, sinaweibo.accessToken, sinaweibo.expirationDate,sinaweibo.refreshToken);
+}
+
+- (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo {
+    
+    NSLog(@"sinaweiboDidLogOut");
+    
+}
+
+- (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo {
+    
+    NSLog(@"sinaweiboLogInDidCancel");
+}
+
+- (void)sinaweibo:(SinaWeibo *)sinaweibo logInDidFailWithError:(NSError *)error {
+    
+    NSLog(@"sinaweibo logInDidFailWithError %@", error);
+}
+
+- (void)sinaweibo:(SinaWeibo *)sinaweibo accessTokenInvalidOrExpired:(NSError *)error {
+    
+    NSLog(@"sinaweiboAccessTokenInvalidOrExpired %@", error);
+    
+}
+
+
 
 @end

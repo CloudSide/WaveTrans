@@ -49,8 +49,18 @@
 
 
 #ifdef __OBJC__
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "VdiskUtil.h"
 #import "VdiskSDK.h"
+
+#define kWeiboAppKey                           @"1396484607"
+#define kWeiboAppSecret                        @"d391e9c2aadd796a6a42e65802dd1278"
+#define kWeiboAppRedirectURI                   @"http://2.vauth.appsina.com/callback.php"
+
+#define kVdiskAppKey                           @"4131924685"
+#define kVdiskAppSecret                        @"270fbfca4cb7032bbeb400f860aa26ce"
+#define kVdiskAppRedirectURI                   @"https://vauth.appsina.com/callback.php"
+
 #endif
