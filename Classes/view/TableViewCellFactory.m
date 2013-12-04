@@ -49,6 +49,10 @@
             if ([[jsonDict allKeys] containsObject:@"wave_weibo_card"]) {//weibo
                 
                 identifier = @"WeiboCell";
+
+            }else if ([[jsonDict allKeys] containsObject:@"wave_people_card"]) {//weibo
+                
+                identifier = @"ContactsCell";
             }else{
                 //TODO:其他
                 identifier = @"PureTextCell";

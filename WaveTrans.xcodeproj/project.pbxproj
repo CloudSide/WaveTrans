@@ -95,6 +95,11 @@
 		C15BB01718447A9000690D74 /* WeiboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BB01618447A9000690D74 /* WeiboCell.m */; };
 		C15BB01D184482EE00690D74 /* PureTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C15BB01C184482EE00690D74 /* PureTextCell.m */; };
 		C15BB01F184482FD00690D74 /* PureTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C15BB01E184482FD00690D74 /* PureTextCell.xib */; };
+		C15F6863184DDC6500232309 /* ChoosePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C15F6862184DDC6500232309 /* ChoosePeopleViewController.m */; };
+		C15F6866184DDCB300232309 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C15F6864184DDCB300232309 /* AddressBook.framework */; };
+		C15F6867184DDCB300232309 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C15F6865184DDCB300232309 /* AddressBookUI.framework */; };
+		C15F686E184E03F600232309 /* UITabBarContactsTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = C15F686C184E03F600232309 /* UITabBarContactsTemplate.png */; };
+		C15F686F184E03F600232309 /* UITabBarContactsTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C15F686D184E03F600232309 /* UITabBarContactsTemplate@2x.png */; };
 		C1618EA81846EA5600C7413D /* sent_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EA61846EA5600C7413D /* sent_btn.png */; };
 		C1618EA91846EA5600C7413D /* sent_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1618EA71846EA5600C7413D /* sent_btn@2x.png */; };
 		C1618EAC184715C000C7413D /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1618EAA184715C000C7413D /* error.wav */; };
@@ -261,6 +266,12 @@
 		C15BB01B184482EE00690D74 /* PureTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureTextCell.h; sourceTree = "<group>"; };
 		C15BB01C184482EE00690D74 /* PureTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PureTextCell.m; sourceTree = "<group>"; };
 		C15BB01E184482FD00690D74 /* PureTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PureTextCell.xib; sourceTree = "<group>"; };
+		C15F6861184DDC6500232309 /* ChoosePeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleViewController.h; sourceTree = SOURCE_ROOT; };
+		C15F6862184DDC6500232309 /* ChoosePeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleViewController.m; sourceTree = SOURCE_ROOT; };
+		C15F6864184DDCB300232309 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		C15F6865184DDCB300232309 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		C15F686C184E03F600232309 /* UITabBarContactsTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarContactsTemplate.png; sourceTree = "<group>"; };
+		C15F686D184E03F600232309 /* UITabBarContactsTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarContactsTemplate@2x.png"; sourceTree = "<group>"; };
 		C1618EA61846EA5600C7413D /* sent_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sent_btn.png; sourceTree = "<group>"; };
 		C1618EA71846EA5600C7413D /* sent_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sent_btn@2x.png"; sourceTree = "<group>"; };
 		C1618EAA184715C000C7413D /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
@@ -286,6 +297,8 @@
 			files = (
 				3F6E5C73184EDE9F004FB1E1 /* Security.framework in Frameworks */,
 				3F6E5C70184ECAEB004FB1E1 /* libVdiskSDK-iOS.a in Frameworks */,
+				C15F6866184DDCB300232309 /* AddressBook.framework in Frameworks */,
+				C15F6867184DDCB300232309 /* AddressBookUI.framework in Frameworks */,
 				ADB84CD01845C6D80021D9FF /* MediaPlayer.framework in Frameworks */,
 				32CECB021845003A00772F34 /* libsqlite3.0.dylib in Frameworks */,
 				3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */,
@@ -395,6 +408,8 @@
 			children = (
 				3F6E5C72184EDE9F004FB1E1 /* Security.framework */,
 				3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */,
+				C15F6864184DDCB300232309 /* AddressBook.framework */,
+				C15F6865184DDCB300232309 /* AddressBookUI.framework */,
 				ADB84CCF1845C6D80021D9FF /* MediaPlayer.framework */,
 				32CECB011845003A00772F34 /* libsqlite3.0.dylib */,
 				3F4E4F92184355EE006D7205 /* libsqlite3.dylib */,
@@ -495,6 +510,8 @@
 		3FC75CF3184302B0006C84F5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C15F686C184E03F600232309 /* UITabBarContactsTemplate.png */,
+				C15F686D184E03F600232309 /* UITabBarContactsTemplate@2x.png */,
 				C1618EAA184715C000C7413D /* error.wav */,
 				C1618EAB184715C000C7413D /* success_1.wav */,
 				C1618EA61846EA5600C7413D /* sent_btn.png */,
@@ -599,6 +616,8 @@
 		C140F0661845D6E700083B9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C15F6861184DDC6500232309 /* ChoosePeopleViewController.h */,
+				C15F6862184DDC6500232309 /* ChoosePeopleViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -736,6 +755,7 @@
 				3210489518464A8B00371D8B /* top_gb.png in Resources */,
 				3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */,
 				C15BB0051844599F00690D74 /* play_btn@2x.png in Resources */,
+				C15F686E184E03F600232309 /* UITabBarContactsTemplate.png in Resources */,
 				C15BB012184478B400690D74 /* ContactsCell.xib in Resources */,
 				3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */,
 				C140F0501844C71000083B9B /* quotes_r.png in Resources */,
@@ -768,6 +788,7 @@
 				C15BB0031844599F00690D74 /* play_beep@2x.png in Resources */,
 				C1618EA81846EA5600C7413D /* sent_btn.png in Resources */,
 				C140F04E1844C71000083B9B /* quotes_l.png in Resources */,
+				C15F686F184E03F600232309 /* UITabBarContactsTemplate@2x.png in Resources */,
 				C15BAFC718444E0C00690D74 /* PhotoCell.xib in Resources */,
 				C15BB00C1844599F00690D74 /* tableview_sep_line@2x.png in Resources */,
 			);
@@ -819,6 +840,7 @@
 				C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */,
 				ADBE4A2E18432EF700B8E6A3 /* MBProgressHUD.m in Sources */,
 				F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */,
+				C15F6863184DDC6500232309 /* ChoosePeopleViewController.m in Sources */,
 				32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */,
 				C15BAFEF18444F5100690D74 /* TextCell.m in Sources */,
 				3F4E4F91184355D5006D7205 /* FMResultSet.m in Sources */,

@@ -90,6 +90,81 @@ int addWAVHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int
     return 0;
 }
 
+typedef   struct    {
+    UInt32  mFileType;
+    UInt16  mFileVersion;
+    UInt16  mFileFlags;
+}CAFFileHeader;
+
+typedef   struct    {
+    UInt32  mChunkType;
+    SInt64  mChunkSize;
+}CAFChunkHeader;
+
+typedef   struct    {
+    Float64 mSampleRate;
+    UInt32  mFormatID;
+    UInt32  mFormatFlags;
+    UInt32  mBytesPerPacket;
+    UInt32  mFramesPerPacket;
+    UInt32  mChannelsPerFrame;
+    UInt32  mBitsPerChannel;
+}CAFAudioFormat;
+
+////添加wav头信息
+//int addCAFHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int channels, long dataByteSize)
+//{
+//    //以下是为了建立.wav头而准备的变量
+//    CAFFileHeader   fileHEADER;
+//    CAFChunkHeader   chunkHEADER;
+//    CAFAudioFormat  audioFormatHEADER;
+//    
+//    
+//    strcpy(fileHEADER.mFileType,"caff");
+//    fileHEADER.mFileVersion = 1;
+//    fileHEADER.mFileFlags = 0;
+//    
+//    strcpy(chunkHEADER.mChunkType,"desc");
+//    chunkHEADER.mChunkSize = sizeof(CAFAudioFormat);
+//    
+//    audioFormatHEADER.mSampleRate = 44100;
+//    strcpy(audioFormatHEADER.mFormatID,"lpcm");
+//    audioFormatHEADER.mFormatFlags = (1L << 0);
+//    audioFormatHEADER.mBytesPerPacket =
+//    audioFormatHEADER
+//    
+//    
+//    //以下是创建wav头的HEADER;但.dwsize未定，因为不知道Data的长度。
+//    strcpy(pcmHEADER.fccID,"RIFF");
+//    pcmHEADER.dwSize=44+dataByteSize;   //根据pcmDATA.dwsize得出pcmHEADER.dwsize的值
+//    memcpy(pcmHEADER.fccType, "WAVE", sizeof(char)*4);
+//    
+//    memcpy(buffer, &pcmHEADER, sizeof(pcmHEADER));
+//    
+//    //以上是创建wav头的HEADER;
+//    
+//    //以下是创建wav头的FMT;
+//    strcpy(pcmFMT.fccID,"fmt ");
+//    pcmFMT.dwSize=16;
+//    pcmFMT.wFormatTag=3;
+//    pcmFMT.wChannels=channels;
+//    pcmFMT.dwSamplesPerSec=sample_rate;
+//    pcmFMT.dwAvgBytesPerSec=sample_rate * bytesPerSample * channels;//F * M * Nc
+//    pcmFMT.wBlockAlign=bytesPerSample * channels;//M * Nc
+//    pcmFMT.uiBitsPerSample=ceil(8 * bytesPerSample);
+//    
+//    memcpy(buffer+sizeof(pcmHEADER), &pcmFMT, sizeof (pcmFMT));
+//    //以上是创建wav头的FMT;
+//    
+//    //以下是创建wav头的DATA;   但由于DATA.dwsize未知所以不能写入.wav文件
+//    strcpy(pcmDATA.fccID,"data");
+//    pcmDATA.dwSize=dataByteSize; //给pcmDATA.dwsize   0以便于下面给它赋值
+//    
+//    memcpy(buffer+sizeof(pcmHEADER)+sizeof(pcmFMT), &pcmDATA, sizeof(pcmDATA));
+//    
+//    return 0;
+//}
+
 
 #pragma mark - 数字转频率
 
