@@ -29,6 +29,10 @@
 #import "TextViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
+#import "ChoosePeopleViewController.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
 
 @interface UIActionSheet (userinfo)
 
@@ -59,7 +63,7 @@ static char actionSheetUserinfoKey;
 
 
 
-@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate, UIDocumentInteractionControllerDelegate>
+@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, MSCMoreOptionTableViewCellDelegate, UIActionSheetDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate, AVAudioPlayerDelegate, GetWaveTransMetadataDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate, PostWaveTransMetadataDelegate, UIDocumentInteractionControllerDelegate,ABPeoplePickerNavigationControllerDelegate>
 
 @property (nonatomic, retain) UITableView *mTableView;
 @property (nonatomic, retain) NSMutableArray *metadataList;
@@ -69,6 +73,8 @@ static char actionSheetUserinfoKey;
 
 @property (nonatomic,retain) AVAudioPlayer *successPlayer;
 @property (nonatomic,retain) AVAudioPlayer *errorPlayer;
+
+@property (nonatomic,retain) ABPeoplePickerNavigationController *peoplePicker;
 
 @end
 
@@ -1104,10 +1110,25 @@ static char actionSheetUserinfoKey;
                 break;
             case 3:
             {
-//                TextEditorViewController *textEditorViewController = [[[TextEditorViewController alloc] init] autorelease];
-//                textEditorViewController.postWaveTransMetadataDelegate = self;
-//                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:textEditorViewController];
+                
+//                ChoosePeopleViewController *cpvc = [[[ChoosePeopleViewController alloc] init] autorelease];
+//                UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:cpvc] autorelease];
 //                [self presentViewController:navigationController animated:YES completion:^{}];
+
+                
+                if(!self.peoplePicker){
+                    
+                    self.peoplePicker = [[[ABPeoplePickerNavigationController alloc] init] autorelease];
+                    
+                    // place the delegate of the picker to the controll
+                    
+                    self.peoplePicker.peoplePickerDelegate = self;
+                    
+                }
+                
+                // showing the picker
+                [self presentViewController:self.peoplePicker animated:YES completion:^{}];
+
             }
                 break;
             default:
@@ -1206,6 +1227,103 @@ static char actionSheetUserinfoKey;
         default:
             break;
         }
+    } else if(actionSheet.userinfo && [[actionSheet.userinfo objectForKey:@"type"] isEqualToString:@"contact"]){
+    
+        WaveTransMetadata *metadata = [actionSheet.userinfo objectForKey:@"metadata"];
+        NSDictionary *jsonDict = [[metadata content] JSONValue];
+        switch (buttonIndex) {
+            case 0:
+            {
+                CFErrorRef error = NULL;
+                // create addressBook
+                ABAddressBookRef iPhoneAddressBook = ABAddressBookCreate();
+                
+                //// Creating a person
+                // create a new person --------------------
+                ABRecordRef newPerson = ABPersonCreate();
+                // set the first name for person
+                ABRecordSetValue(newPerson, kABPersonFirstNameProperty, [jsonDict objectForKey:@"name"], &error);
+                // set the last name
+//                ABRecordSetValue(newPerson, kABPersonLastNameProperty, @"SugarTin.info", &error);
+                // set the company name
+//                ABRecordSetValue(newPerson, kABPersonOrganizationProperty, @"Apple Inc.", &error);
+                // set the job-title
+//                ABRecordSetValue(newPerson, kABPersonJobTitleProperty, @"Senior Developer", &error);
+                // --------------------------------------------------------------------------------
+                
+                //// Adding Phone details
+                // create a new phone --------------------
+                ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+                // set the main phone number
+                ABMultiValueAddValueAndLabel(multiPhone, [jsonDict objectForKey:@"phone"], kABPersonPhoneMainLabel, NULL);
+//                // set the mobile number
+//                ABMultiValueAddValueAndLabel(multiPhone, @"1-123-456-7890", kABPersonPhoneMobileLabel, NULL);
+//                // set the other number
+//                ABMultiValueAddValueAndLabel(multiPhone, @"1-987-654-3210", kABOtherLabel, NULL);
+//                // add phone details to person
+                ABRecordSetValue(newPerson, kABPersonPhoneProperty, multiPhone,nil);
+                // release phone object
+                CFRelease(multiPhone);
+                // --------------------------------------------------------------------------------
+                
+//                //// Adding email details
+//                // create new email-ref
+//                ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+//                // set the work mail
+//                ABMultiValueAddValueAndLabel(multiEmail, @"johndoe@modelmetrics.com", kABWorkLabel, NULL);
+//                // add the mail to person
+//                ABRecordSetValue(newPerson, kABPersonEmailProperty, multiEmail, &error);
+//                // release mail object
+//                CFRelease(multiEmail);
+//                // --------------------------------------------------------------------------------
+//                
+//                //// adding address details
+//                // create address object
+//                ABMutableMultiValueRef multiAddress = ABMultiValueCreateMutable(kABMultiDictionaryPropertyType);
+//                // create a new dictionary
+//                NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
+//                // set the address line to new dictionary object
+//                [addressDictionary setObject:@"Some Complete Address" forKey:(NSString *) kABPersonAddressStreetKey];
+//                // set the city to new dictionary object
+//                [addressDictionary setObject:@"Bengaluru" forKey:(NSString *)kABPersonAddressCityKey];
+//                // set the state to new dictionary object
+//                [addressDictionary setObject:@"Karnataka" forKey:(NSString *)kABPersonAddressStateKey];
+//                // set the zip/pin to new dictionary object
+//                [addressDictionary setObject:@"560068 " forKey:(NSString *)kABPersonAddressZIPKey];
+//                // retain the dictionary
+//                CFTypeRef ctr = CFBridgingRetain(addressDictionary);
+//                // copy all key-values from ctr to Address object
+//                ABMultiValueAddValueAndLabel(multiAddress,ctr, kABWorkLabel, NULL);
+//                // add address object to person
+//                ABRecordSetValue(newPerson, kABPersonAddressProperty, multiAddress,&error);
+//                // release address object
+//                CFRelease(multiAddress);
+                // --------------------------------------------------------------------------------
+                
+                //// adding entry to contact-book
+                // add person to addressbook
+                ABAddressBookAddRecord(iPhoneAddressBook, newPerson, &error);
+                // save/commit entry
+                ABAddressBookSave(iPhoneAddressBook, &error);
+                
+                if (error != NULL) {
+                    NSLog(@"Kaa boom ! couldn't save");
+                }
+            }
+                break;
+            case 1:
+            {
+                NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",[jsonDict objectForKey:@"phone"]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]]; //拨号
+            }
+                break;
+            default:
+                break;
+        }
+        
+        
+        
+    
     }
 }
 
@@ -1251,7 +1369,19 @@ static char actionSheetUserinfoKey;
                 [actionSheet showInView:self.view];
                 [actionSheet release];
             
-            } else {
+            } else if([[jsonDict allKeys] containsObject:@"wave_people_card"]){
+                
+                UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                         delegate:self
+                                                                cancelButtonTitle:@"取消"
+                                                           destructiveButtonTitle:nil
+                                                                otherButtonTitles:@"添加到通讯录", @"拨号", nil];
+                
+                actionSheet.userinfo = @{@"type" : @"contact", @"metadata" : metadata};
+                [actionSheet showInView:self.view];
+                [actionSheet release];
+                
+            } else{
             
                 [self viewText:metadata];
             }
@@ -1343,5 +1473,73 @@ static char actionSheetUserinfoKey;
 
 }
 
+#pragma mark - 
+- (BOOL)peoplePickerNavigationController: (ABPeoplePickerNavigationController *)peoplePicker
+
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+
+{
+    
+    return YES;
+    
+}
+
+- (BOOL)peoplePickerNavigationController: (ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier
+
+{
+    
+    if (property == kABPersonPhoneProperty) {
+        
+        ABMutableMultiValueRef phoneMulti = ABRecordCopyValue(person, property);
+        
+        int index = ABMultiValueGetIndexForIdentifier(phoneMulti,identifier);
+        
+        NSString *phone = (NSString*)ABMultiValueCopyValueAtIndex(phoneMulti, index);
+        
+        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+        firstName = firstName != nil?firstName:@"";
+        NSString *lastName =  CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
+        lastName = lastName != nil?lastName:@"";
+        NSString *name = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
+        
+        NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"wave_people_card",name,@"name",phone,@"phone", nil];
+        NSString *json = [jsonDict JSONRepresentation];
+        
+        WaveTransMetadata *metadata = [[[WaveTransMetadata alloc] initWithSha1:[json SHA1EncodedString]
+                                                                          type:@"text"
+                                                                       content:json
+                                                                          size:[json lengthOfBytesUsingEncoding:NSUTF8StringEncoding]
+                                                                      filename:nil] autorelease];
+        metadata.uploaded = NO;
+        [metadata save];
+        
+        [self postWaveTransMetadata:metadata];
+
+        
+        
+        [phone release];
+        
+        
+        [self.peoplePicker dismissViewControllerAnimated:YES completion:nil];
+        
+        
+        
+    }
+    
+    return NO;
+}
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+
+{
+    
+    // assigning control back to the main controller
+    
+    [self.peoplePicker dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 @end

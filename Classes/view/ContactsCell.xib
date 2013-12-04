@@ -36,7 +36,7 @@
                         </state>
                         <state key="disabled" image="play_beep_disable.png"/>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAo-3A-byT">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UITabBarContactsTemplate.png" translatesAutoresizingMaskIntoConstraints="NO" id="tAo-3A-byT" customClass="EGOImageView">
                         <rect key="frame" x="20" y="25" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -67,6 +67,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="createDateLabel" destination="yRX-Pj-FeC" id="DaS-6e-Wbw"/>
+                <outlet property="descriptionLabel" destination="ASY-1f-Z31" id="48X-nN-PGq"/>
+                <outlet property="headerImageView" destination="tAo-3A-byT" id="ax1-Vl-naw"/>
+                <outlet property="nameLabel" destination="Xzj-ox-ggK" id="wWC-DI-VE8"/>
                 <outlet property="progressView" destination="w2O-4D-gfB" id="xkq-2m-u4B"/>
                 <outlet property="receiveState" destination="zuC-7z-BIz" id="0Bk-SW-2cX"/>
                 <outlet property="sendBeepBtn" destination="SJI-qb-DhQ" id="aGF-88-0Yl"/>
@@ -75,6 +78,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="UITabBarContactsTemplate.png" width="25" height="25"/>
         <image name="play_beep.png" width="44" height="44"/>
         <image name="play_beep_disable.png" width="44" height="44"/>
     </resources>
