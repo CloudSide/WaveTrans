@@ -193,6 +193,9 @@
 {
 	animationTimer = [NSTimer scheduledTimerWithTimeInterval:animationInterval target:self selector:@selector(drawView) userInfo:nil repeats:YES];
 	animationStarted = [NSDate timeIntervalSinceReferenceDate];
+    
+    NSRunLoop *main = [NSRunLoop currentRunLoop];
+    [main addTimer:animationTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)stopAnimation

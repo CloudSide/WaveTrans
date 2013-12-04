@@ -751,6 +751,57 @@ static OSStatus	PerformThru(
 	
 }
 
+- (void)computeWave {
+
+    if (_isListenning == YES && fftBufferManager->HasNewAudioData()) {
+        
+        if (fftBufferManager->ComputeFFT(l_fftData)) {
+            
+            [self setFFTData:l_fftData length:fftBufferManager->GetNumberFrames() / 2];
+            
+            int i;
+            for (i=0; i<32; i++) {
+                
+                unsigned int freq;
+                int fftIdx;
+                
+                num_to_freq(i, &freq);
+                fftIdx = freq / (drawFormat.mSampleRate / 2.0) * fftLength;
+                
+                double fftIdx_i, fftIdx_f;
+                fftIdx_f = modf(fftIdx, &fftIdx_i);
+                
+                SInt8 fft_l, fft_r;
+                CGFloat fft_l_fl, fft_r_fl;
+                CGFloat interpVal;
+                
+                fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
+                fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
+                fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
+                fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
+                interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
+                
+                interpVal = sqrt(CLAMP(0., interpVal, 1.));
+                
+                //////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////
+                [self helper:fftIdx interpVal:interpVal timeSlice:6];///////////
+                //////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////
+                
+            }
+            
+            //////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////
+            [self helperResultWithTimeSlice:6];///////////////////////////////
+            //////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////
+        }
+        else
+            hasNewFFTData = NO;
+    }
+}
 
 
 - (void)drawOscilloscope
@@ -835,54 +886,7 @@ static OSStatus	PerformThru(
 	
 //	if (displayMode == aurioTouchDisplayModeOscilloscopeFFT)
 //	{			
-		if (_isListenning == YES && fftBufferManager->HasNewAudioData()) {
-            
-			if (fftBufferManager->ComputeFFT(l_fftData)) {
-                
-				[self setFFTData:l_fftData length:fftBufferManager->GetNumberFrames() / 2];
-                
-                int i;
-                for (i=0; i<32; i++) {
-                    
-                    unsigned int freq;
-                    int fftIdx;
-                    
-                    num_to_freq(i, &freq);
-                    fftIdx = freq / (drawFormat.mSampleRate / 2.0) * fftLength;
-                    
-                    double fftIdx_i, fftIdx_f;
-                    fftIdx_f = modf(fftIdx, &fftIdx_i);
-                    
-                    SInt8 fft_l, fft_r;
-                    CGFloat fft_l_fl, fft_r_fl;
-                    CGFloat interpVal;
-                    
-                    fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
-                    fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
-                    fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
-                    fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
-                    interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
-                    
-                    interpVal = sqrt(CLAMP(0., interpVal, 1.));
-                    
-                    //////////////////////////////////////////////////////////////////
-                    //////////////////////////////////////////////////////////////////
-                    //////////////////////////////////////////////////////////////////
-                    [self helper:fftIdx interpVal:interpVal timeSlice:6];///////////
-                    //////////////////////////////////////////////////////////////////
-                    //////////////////////////////////////////////////////////////////
-                    
-                }
-                
-                //////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////
-                [self helperResultWithTimeSlice:6];///////////////////////////////
-                //////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////
-            }
-			else
-				hasNewFFTData = NO;
-		}
+		
         
 //		if (hasNewFFTData)
 //		{
@@ -919,6 +923,8 @@ static OSStatus	PerformThru(
 //	}
 	
 	
+    [self computeWave];
+    
 	
 	GLfloat *oscilLine_ptr;
 	GLfloat max = drawBufferLen / 4 * self.view.frame.size.width / 320;
