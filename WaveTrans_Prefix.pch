@@ -52,4 +52,5 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "VdiskUtil.h"
+#import "VdiskSDK.h"
 #endif

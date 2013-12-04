@@ -33,38 +33,23 @@
 		3F4E4FA31844BDEC006D7205 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C15BAFB418444D6900690D74 /* MainViewController.mm */; };
 		3F4E4FB018460F8D006D7205 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E4FAF18460F8D006D7205 /* TextViewController.m */; };
 		3F4E5001184614C2006D7205 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 3F4E5000184614C2006D7205 /* html */; };
-		3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA69696184323DF00B6FFDE /* VdiskBase64.m */; };
+		3F6E5C70184ECAEB004FB1E1 /* libVdiskSDK-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6E5C6F184ECAC4004FB1E1 /* libVdiskSDK-iOS.a */; };
+		3F6E5C73184EDE9F004FB1E1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6E5C72184EDE9F004FB1E1 /* Security.framework */; };
 		3FA6969A1843247C00B6FFDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FA696991843247C00B6FFDE /* Images.xcassets */; };
 		3FA6969B184324C000B6FFDE /* FileExt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CFD18431DB0006C84F5 /* FileExt.plist */; };
 		3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */; };
-		3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16CFB183E31FE00115067 /* ASIAuthenticationDialog.m */; };
 		3FC75CF6184302B0006C84F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */; };
 		3FC75CF7184302B0006C84F5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC75CF5184302B0006C84F5 /* icon.png */; };
-		3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC75D001843236D006C84F5 /* VdiskUtil.m */; };
 		8250CD57145B602D00806437 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8250CD56145B602D00806437 /* Accelerate.framework */; };
 		A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A10A0C0E0DEDE20700E5A482 /* FFTBufferManager.cpp */; };
 		A16C46DE0DE37EC400F4A0B3 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = A16C46DC0DE37EC400F4A0B3 /* EAGLView.m */; };
 		A16C47120DE37F9E00F4A0B3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C47110DE37F9E00F4A0B3 /* OpenGLES.framework */; };
 		A16C473F0DE3801700F4A0B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C473E0DE3801700F4A0B3 /* QuartzCore.framework */; };
-		ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16CFE183E31FE00115067 /* ASIDataCompressor.m */; };
-		ADB16D12183E31FE00115067 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D00183E31FE00115067 /* ASIDataDecompressor.m */; };
-		ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D02183E31FE00115067 /* ASIDownloadCache.m */; };
-		ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D04183E31FE00115067 /* ASIFormDataRequest.m */; };
-		ADB16D15183E31FE00115067 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D06183E31FE00115067 /* ASIHTTPRequest.m */; };
-		ADB16D16183E31FE00115067 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D0A183E31FE00115067 /* ASIInputStream.m */; };
-		ADB16D17183E31FE00115067 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D0C183E31FE00115067 /* ASINetworkQueue.m */; };
-		ADB16D18183E31FE00115067 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D0F183E31FE00115067 /* Reachability.m */; };
 		ADB16D1A183E322C00115067 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB16D19183E322C00115067 /* CFNetwork.framework */; };
 		ADB16D1C183E337900115067 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB16D1B183E337900115067 /* SystemConfiguration.framework */; };
 		ADB16D1E183E338600115067 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB16D1D183E338600115067 /* MobileCoreServices.framework */; };
 		ADB16D20183E33AB00115067 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB16D1F183E33AB00115067 /* libz.dylib */; };
 		ADB16D23183F0BAA00115067 /* WaveTransMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D22183F0BAA00115067 /* WaveTransMetadata.mm */; };
-		ADB16D32183F115200115067 /* NSObject+VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D27183F115200115067 /* NSObject+VdiskJSON.m */; };
-		ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D29183F115200115067 /* NSString+VdiskJSON.m */; };
-		ADB16D34183F115200115067 /* VdiskJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2B183F115200115067 /* VdiskJSON.m */; };
-		ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2D183F115200115067 /* VdiskJsonBase.m */; };
-		ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D2F183F115200115067 /* VdiskJsonParser.m */; };
-		ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB16D31183F115200115067 /* VdiskJsonWriter.m */; };
 		ADB84CD01845C6D80021D9FF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB84CCF1845C6D80021D9FF /* MediaPlayer.framework */; };
 		ADBE4A2E18432EF700B8E6A3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE4A2D18432EF700B8E6A3 /* MBProgressHUD.m */; };
 		ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADF1D0D9183F47FE000BF5B5 /* RootViewController.mm */; };
@@ -124,7 +109,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3F6E5C69184EC9FC004FB1E1 /* PBXContainerItemProxy */ = {
+		3F6E5C6E184ECAC4004FB1E1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */;
 			proxyType = 2;
@@ -184,18 +169,14 @@
 		3F4E4FAE18460F8D006D7205 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
 		3F4E4FAF18460F8D006D7205 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
 		3F4E5000184614C2006D7205 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = html; sourceTree = SOURCE_ROOT; };
-		3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VdiskSDK.xcodeproj; path = VdiskSDK/VdiskSDK.xcodeproj; sourceTree = "<group>"; };
-		3FA69695184323DF00B6FFDE /* VdiskBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64.h; sourceTree = "<group>"; };
-		3FA69696184323DF00B6FFDE /* VdiskBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskBase64.m; sourceTree = "<group>"; };
-		3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskBase64Defines.h; sourceTree = "<group>"; };
+		3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VdiskSDK.xcodeproj; path = Classes/VdiskSDK/VdiskSDK.xcodeproj; sourceTree = "<group>"; };
+		3F6E5C72184EDE9F004FB1E1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3FA696991843247C00B6FFDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WaveTrans/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		3FA6969C1843296D00B6FFDE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3FC75CF1184302A6006C84F5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		3FC75CF4184302B0006C84F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3FC75CF5184302B0006C84F5 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		3FC75CFD18431DB0006C84F5 /* FileExt.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FileExt.plist; sourceTree = SOURCE_ROOT; };
-		3FC75CFF1843236D006C84F5 /* VdiskUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskUtil.h; sourceTree = "<group>"; };
-		3FC75D001843236D006C84F5 /* VdiskUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskUtil.m; sourceTree = "<group>"; };
 		8250CD55145B601A00806437 /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
 		8250CD56145B602D00806437 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A10A0C070DEDDFD000E5A482 /* SpectrumAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpectrumAnalysis.cpp; sourceTree = "<group>"; };
@@ -206,46 +187,12 @@
 		A16C46DD0DE37EC400F4A0B3 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = SOURCE_ROOT; };
 		A16C47110DE37F9E00F4A0B3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A16C473E0DE3801700F4A0B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		ADB16CFA183E31FE00115067 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
-		ADB16CFB183E31FE00115067 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
-		ADB16CFC183E31FE00115067 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
-		ADB16CFD183E31FE00115067 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
-		ADB16CFE183E31FE00115067 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
-		ADB16CFF183E31FE00115067 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
-		ADB16D00183E31FE00115067 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
-		ADB16D01183E31FE00115067 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
-		ADB16D02183E31FE00115067 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
-		ADB16D03183E31FE00115067 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
-		ADB16D04183E31FE00115067 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
-		ADB16D05183E31FE00115067 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
-		ADB16D06183E31FE00115067 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
-		ADB16D07183E31FE00115067 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
-		ADB16D08183E31FE00115067 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
-		ADB16D09183E31FE00115067 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
-		ADB16D0A183E31FE00115067 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
-		ADB16D0B183E31FE00115067 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
-		ADB16D0C183E31FE00115067 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
-		ADB16D0D183E31FE00115067 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
-		ADB16D0E183E31FE00115067 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		ADB16D0F183E31FE00115067 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		ADB16D19183E322C00115067 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		ADB16D1B183E337900115067 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ADB16D1D183E338600115067 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		ADB16D1F183E33AB00115067 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		ADB16D21183F0BAA00115067 /* WaveTransMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveTransMetadata.h; sourceTree = "<group>"; };
 		ADB16D22183F0BAA00115067 /* WaveTransMetadata.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WaveTransMetadata.mm; sourceTree = "<group>"; };
-		ADB16D26183F115200115067 /* NSObject+VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VdiskJSON.h"; sourceTree = "<group>"; };
-		ADB16D27183F115200115067 /* NSObject+VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VdiskJSON.m"; sourceTree = "<group>"; };
-		ADB16D28183F115200115067 /* NSString+VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VdiskJSON.h"; sourceTree = "<group>"; };
-		ADB16D29183F115200115067 /* NSString+VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VdiskJSON.m"; sourceTree = "<group>"; };
-		ADB16D2A183F115200115067 /* VdiskJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJSON.h; sourceTree = "<group>"; };
-		ADB16D2B183F115200115067 /* VdiskJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJSON.m; sourceTree = "<group>"; };
-		ADB16D2C183F115200115067 /* VdiskJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonBase.h; sourceTree = "<group>"; };
-		ADB16D2D183F115200115067 /* VdiskJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonBase.m; sourceTree = "<group>"; };
-		ADB16D2E183F115200115067 /* VdiskJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonParser.h; sourceTree = "<group>"; };
-		ADB16D2F183F115200115067 /* VdiskJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonParser.m; sourceTree = "<group>"; };
-		ADB16D30183F115200115067 /* VdiskJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskJsonWriter.h; sourceTree = "<group>"; };
-		ADB16D31183F115200115067 /* VdiskJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskJsonWriter.m; sourceTree = "<group>"; };
 		ADB84CCF1845C6D80021D9FF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		ADBE4A2C18432EF700B8E6A3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		ADBE4A2D18432EF700B8E6A3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -337,6 +284,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F6E5C73184EDE9F004FB1E1 /* Security.framework in Frameworks */,
+				3F6E5C70184ECAEB004FB1E1 /* libVdiskSDK-iOS.a in Frameworks */,
 				ADB84CD01845C6D80021D9FF /* MediaPlayer.framework in Frameworks */,
 				32CECB021845003A00772F34 /* libsqlite3.0.dylib in Frameworks */,
 				3FA6969D1843296D00B6FFDE /* AssetsLibrary.framework in Frameworks */,
@@ -361,23 +310,17 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */,
 				C140F0661845D6E700083B9B /* Controller */,
 				3F4E4F9B18449341006D7205 /* DDHTextView.h */,
 				3F4E4F9C18449341006D7205 /* DDHTextView.m */,
 				C15BAFB618444E0C00690D74 /* view */,
 				3F4E4F80184355D5006D7205 /* FMDB */,
 				ADBE4A2B18432EF700B8E6A3 /* MBProgressHUD */,
-				3FA69694184323DF00B6FFDE /* VdiskBase64 */,
-				3FC75CFF1843236D006C84F5 /* VdiskUtil.h */,
-				3FC75D001843236D006C84F5 /* VdiskUtil.m */,
 				3F4E4F9718436439006D7205 /* WaveTransModel.h */,
 				3F4E4F9818436439006D7205 /* WaveTransModel.m */,
 				3F4E4F94184360AD006D7205 /* Database.h */,
 				3F4E4F95184360AD006D7205 /* Database.m */,
 				ADF1D0DB183F58BE000BF5B5 /* PlayPCM */,
-				ADB16D25183F115200115067 /* JSON */,
-				ADB16CF9183E31FE00115067 /* ASIHTTPRequest */,
 				A16C46DD0DE37EC400F4A0B3 /* EAGLView.h */,
 				A16C46DC0DE37EC400F4A0B3 /* EAGLView.m */,
 				A10A0C0D0DEDE20700E5A482 /* FFTBufferManager.h */,
@@ -450,6 +393,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F6E5C72184EDE9F004FB1E1 /* Security.framework */,
+				3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */,
 				ADB84CCF1845C6D80021D9FF /* MediaPlayer.framework */,
 				32CECB011845003A00772F34 /* libsqlite3.0.dylib */,
 				3F4E4F92184355EE006D7205 /* libsqlite3.dylib */,
@@ -530,22 +475,12 @@
 			path = FMDB;
 			sourceTree = "<group>";
 		};
-		3F6E5C66184EC9FB004FB1E1 /* Products */ = {
+		3F6E5C6B184ECAC4004FB1E1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F6E5C6A184EC9FC004FB1E1 /* libVdiskSDK-iOS.a */,
+				3F6E5C6F184ECAC4004FB1E1 /* libVdiskSDK-iOS.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		3FA69694184323DF00B6FFDE /* VdiskBase64 */ = {
-			isa = PBXGroup;
-			children = (
-				3FA69695184323DF00B6FFDE /* VdiskBase64.h */,
-				3FA69696184323DF00B6FFDE /* VdiskBase64.m */,
-				3FA69697184323DF00B6FFDE /* VdiskBase64Defines.h */,
-			);
-			path = VdiskBase64;
 			sourceTree = "<group>";
 		};
 		3FC75CEE1842F462006C84F5 /* unused */ = {
@@ -599,54 +534,6 @@
 				A10A0C070DEDDFD000E5A482 /* SpectrumAnalysis.cpp */,
 			);
 			path = fft;
-			sourceTree = "<group>";
-		};
-		ADB16CF9183E31FE00115067 /* ASIHTTPRequest */ = {
-			isa = PBXGroup;
-			children = (
-				ADB16CFA183E31FE00115067 /* ASIAuthenticationDialog.h */,
-				ADB16CFB183E31FE00115067 /* ASIAuthenticationDialog.m */,
-				ADB16CFC183E31FE00115067 /* ASICacheDelegate.h */,
-				ADB16CFD183E31FE00115067 /* ASIDataCompressor.h */,
-				ADB16CFE183E31FE00115067 /* ASIDataCompressor.m */,
-				ADB16CFF183E31FE00115067 /* ASIDataDecompressor.h */,
-				ADB16D00183E31FE00115067 /* ASIDataDecompressor.m */,
-				ADB16D01183E31FE00115067 /* ASIDownloadCache.h */,
-				ADB16D02183E31FE00115067 /* ASIDownloadCache.m */,
-				ADB16D03183E31FE00115067 /* ASIFormDataRequest.h */,
-				ADB16D04183E31FE00115067 /* ASIFormDataRequest.m */,
-				ADB16D05183E31FE00115067 /* ASIHTTPRequest.h */,
-				ADB16D06183E31FE00115067 /* ASIHTTPRequest.m */,
-				ADB16D07183E31FE00115067 /* ASIHTTPRequestConfig.h */,
-				ADB16D08183E31FE00115067 /* ASIHTTPRequestDelegate.h */,
-				ADB16D09183E31FE00115067 /* ASIInputStream.h */,
-				ADB16D0A183E31FE00115067 /* ASIInputStream.m */,
-				ADB16D0B183E31FE00115067 /* ASINetworkQueue.h */,
-				ADB16D0C183E31FE00115067 /* ASINetworkQueue.m */,
-				ADB16D0D183E31FE00115067 /* ASIProgressDelegate.h */,
-				ADB16D0E183E31FE00115067 /* Reachability.h */,
-				ADB16D0F183E31FE00115067 /* Reachability.m */,
-			);
-			path = ASIHTTPRequest;
-			sourceTree = "<group>";
-		};
-		ADB16D25183F115200115067 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				ADB16D26183F115200115067 /* NSObject+VdiskJSON.h */,
-				ADB16D27183F115200115067 /* NSObject+VdiskJSON.m */,
-				ADB16D28183F115200115067 /* NSString+VdiskJSON.h */,
-				ADB16D29183F115200115067 /* NSString+VdiskJSON.m */,
-				ADB16D2A183F115200115067 /* VdiskJSON.h */,
-				ADB16D2B183F115200115067 /* VdiskJSON.m */,
-				ADB16D2C183F115200115067 /* VdiskJsonBase.h */,
-				ADB16D2D183F115200115067 /* VdiskJsonBase.m */,
-				ADB16D2E183F115200115067 /* VdiskJsonParser.h */,
-				ADB16D2F183F115200115067 /* VdiskJsonParser.m */,
-				ADB16D30183F115200115067 /* VdiskJsonWriter.h */,
-				ADB16D31183F115200115067 /* VdiskJsonWriter.m */,
-			);
-			path = JSON;
 			sourceTree = "<group>";
 		};
 		ADBE4A2B18432EF700B8E6A3 /* MBProgressHUD */ = {
@@ -820,7 +707,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3F6E5C66184EC9FB004FB1E1 /* Products */;
+					ProductGroup = 3F6E5C6B184ECAC4004FB1E1 /* Products */;
 					ProjectRef = 3F6E5C65184EC9FB004FB1E1 /* VdiskSDK.xcodeproj */;
 				},
 			);
@@ -832,11 +719,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3F6E5C6A184EC9FC004FB1E1 /* libVdiskSDK-iOS.a */ = {
+		3F6E5C6F184ECAC4004FB1E1 /* libVdiskSDK-iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libVdiskSDK-iOS.a";
-			remoteRef = 3F6E5C69184EC9FC004FB1E1 /* PBXContainerItemProxy */;
+			remoteRef = 3F6E5C6E184ECAC4004FB1E1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -897,36 +784,26 @@
 				C140F03E18449F7100083B9B /* EGOImageView.m in Sources */,
 				32B1BDDA1840F55900FFC32D /* kiss_fastfir.c in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
-				ADB16D12183E31FE00115067 /* ASIDataDecompressor.m in Sources */,
 				3F4E4F8C184355D5006D7205 /* FMDatabase.m in Sources */,
 				C15BB0101844789D00690D74 /* ContactsCell.m in Sources */,
-				ADB16D11183E31FE00115067 /* ASIDataCompressor.m in Sources */,
 				32B1BDDC1840F55900FFC32D /* kiss_fftr.c in Sources */,
 				3F4E4F8D184355D5006D7205 /* FMDatabaseAdditions.m in Sources */,
 				C140F03D18449F7100083B9B /* EGOImageLoader.m in Sources */,
-				ADB16D33183F115200115067 /* NSString+VdiskJSON.m in Sources */,
 				ADF1D0E0183F58BE000BF5B5 /* PCMRender.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */,
 				C15BAFF518444F7A00690D74 /* BinaryCell.m in Sources */,
-				3FA69698184323DF00B6FFDE /* VdiskBase64.m in Sources */,
-				ADB16D14183E31FE00115067 /* ASIFormDataRequest.m in Sources */,
 				3F4E4FB018460F8D006D7205 /* TextViewController.m in Sources */,
 				C15BAFC818444E0C00690D74 /* TableViewCellFactory.m in Sources */,
 				C15BAFEC18444F3B00690D74 /* VideoCell.m in Sources */,
-				3FC75D011843236D006C84F5 /* VdiskUtil.m in Sources */,
 				3F4E4F9918436439006D7205 /* WaveTransModel.m in Sources */,
 				3F4E4F96184360AD006D7205 /* Database.m in Sources */,
 				ADF1D0DA183F47FE000BF5B5 /* RootViewController.mm in Sources */,
-				3FC75CED1842F3E6006C84F5 /* ASIAuthenticationDialog.m in Sources */,
 				F74ADD190DDA24AA0046BEC2 /* CADebugMacros.cpp in Sources */,
 				3F4E4FA2184493EA006D7205 /* TextEditorViewController.m in Sources */,
 				3F4E4F9D18449341006D7205 /* DDHTextView.m in Sources */,
 				ADB16D23183F0BAA00115067 /* WaveTransMetadata.mm in Sources */,
 				3F4E4F8F184355D5006D7205 /* FMDatabaseQueue.m in Sources */,
-				ADB16D32183F115200115067 /* NSObject+VdiskJSON.m in Sources */,
-				ADB16D36183F115200115067 /* VdiskJsonParser.m in Sources */,
 				C15BAFC618444E0C00690D74 /* MSCMoreOptionTableViewCell.m in Sources */,
-				ADB16D17183E31FE00115067 /* ASINetworkQueue.m in Sources */,
 				C15BB01D184482EE00690D74 /* PureTextCell.m in Sources */,
 				C15BAFF218444F6900690D74 /* PhotoCell.m in Sources */,
 				F74ADD1B0DDA24AA0046BEC2 /* CAStreamBasicDescription.cpp in Sources */,
@@ -934,24 +811,17 @@
 				3F4E4FA31844BDEC006D7205 /* MainViewController.mm in Sources */,
 				F74ADD1C0DDA24AA0046BEC2 /* CAXException.cpp in Sources */,
 				C140F03C18449F7100083B9B /* EGOImageLoadConnection.m in Sources */,
-				ADB16D35183F115200115067 /* VdiskJsonBase.m in Sources */,
 				C140F0541845907100083B9B /* UIImage+UIImageScale.m in Sources */,
 				32B1BDDB1840F55900FFC32D /* kiss_fft.c in Sources */,
-				ADB16D37183F115200115067 /* VdiskJsonWriter.m in Sources */,
 				A16C46DE0DE37EC400F4A0B3 /* EAGLView.m in Sources */,
 				A10A0C0F0DEDE20700E5A482 /* FFTBufferManager.cpp in Sources */,
 				32B1BDE11840F57A00FFC32D /* bb_freq_util.cpp in Sources */,
-				ADB16D13183E31FE00115067 /* ASIDownloadCache.m in Sources */,
 				C15BAFC518444E0C00690D74 /* MainTableViewCell.m in Sources */,
 				ADBE4A2E18432EF700B8E6A3 /* MBProgressHUD.m in Sources */,
-				ADB16D18183E31FE00115067 /* Reachability.m in Sources */,
-				ADB16D34183F115200115067 /* VdiskJSON.m in Sources */,
-				ADB16D15183E31FE00115067 /* ASIHTTPRequest.m in Sources */,
 				F712EAB00DF0FEAF003F7B58 /* aurio_helper.cpp in Sources */,
 				32B1BDE91840F59400FFC32D /* rscode.cpp in Sources */,
 				C15BAFEF18444F5100690D74 /* TextCell.m in Sources */,
 				3F4E4F91184355D5006D7205 /* FMResultSet.m in Sources */,
-				ADB16D16183E31FE00115067 /* ASIInputStream.m in Sources */,
 				C15BAFE918444F0900690D74 /* AudioCell.m in Sources */,
 				32B1BDE51840F58900FFC32D /* queue.cpp in Sources */,
 				C15BB01718447A9000690D74 /* WeiboCell.m in Sources */,
@@ -1002,7 +872,17 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/Classes/VdiskSDK/VdiskSDK/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "B04D3B55-C164-4FAF-B582-F7D94F403D99";
 				SDKROOT = iphoneos;
 			};
@@ -1015,6 +895,16 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/Classes/VdiskSDK/VdiskSDK/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
+				OTHER_LDFLAGS = "-all_load";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
