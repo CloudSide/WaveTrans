@@ -61,7 +61,8 @@ int addWAVHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int
     DATA   pcmDATA;
     
     //以下是创建wav头的HEADER;但.dwsize未定，因为不知道Data的长度。
-    strcpy(pcmHEADER.fccID,"RIFF");
+//    strcpy(pcmHEADER.fccID,"RIFF");
+    memcpy(pcmHEADER.fccID, "RIFF", sizeof(char)*4);
     pcmHEADER.dwSize=44+dataByteSize;   //根据pcmDATA.dwsize得出pcmHEADER.dwsize的值
     memcpy(pcmHEADER.fccType, "WAVE", sizeof(char)*4);
     
@@ -70,7 +71,8 @@ int addWAVHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int
     //以上是创建wav头的HEADER;
     
     //以下是创建wav头的FMT;
-    strcpy(pcmFMT.fccID,"fmt ");
+//    strcpy(pcmFMT.fccID,"fmt ");
+    memcpy(pcmFMT.fccID, "fmt ", sizeof(char)*4);
     pcmFMT.dwSize=16;
     pcmFMT.wFormatTag=3;
     pcmFMT.wChannels=channels;
@@ -83,7 +85,8 @@ int addWAVHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int
     //以上是创建wav头的FMT;
     
     //以下是创建wav头的DATA;   但由于DATA.dwsize未知所以不能写入.wav文件
-    strcpy(pcmDATA.fccID,"data");
+//    strcpy(pcmDATA.fccID,"data");
+    memcpy(pcmDATA.fccID, "data", sizeof(char)*4);
     pcmDATA.dwSize=dataByteSize; //给pcmDATA.dwsize   0以便于下面给它赋值
     
     memcpy(buffer+sizeof(pcmHEADER)+sizeof(pcmFMT), &pcmDATA, sizeof(pcmDATA));

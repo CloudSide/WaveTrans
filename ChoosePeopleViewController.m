@@ -135,12 +135,18 @@
     for (int k = 0; k<ABMultiValueGetCount(phone); k++)
     {
         //获取电话Label
-        NSString * personPhoneLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(phone, k));
+        CFStringRef phoneRef = ABMultiValueCopyLabelAtIndex(phone, k);
+        NSString * personPhoneLabel = (NSString*)ABAddressBookCopyLocalizedLabel(phoneRef);
+        CFRelease(phoneRef);
         //获取該Label下的电话值
         NSString * personPhone = (NSString*)ABMultiValueCopyValueAtIndex(phone, k);
         
         [phoneNum stringByAppendingFormat:@"%@:%@\n",personPhoneLabel,personPhone];
+        [personPhoneLabel release];
+        [personPhone release];
     }
+    
+    CFRelease(phone);
     
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",phoneNum];

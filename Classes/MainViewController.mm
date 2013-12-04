@@ -1510,6 +1510,9 @@ static char alertViewUserinfoKey;
                 // save/commit entry
                 ABAddressBookSave(iPhoneAddressBook, &error);
                 
+                CFRelease(newPerson);
+                CFRelease(iPhoneAddressBook);
+                
                 if (error != NULL) {
                     NSLog(@"Kaa boom ! couldn't save");
                 }
@@ -1517,7 +1520,7 @@ static char alertViewUserinfoKey;
                 break;
             case 1:
             {
-                NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",[jsonDict objectForKey:@"phone"]];
+                NSString *num = [[[NSString alloc] initWithFormat:@"tel://%@",[jsonDict objectForKey:@"phone"]] autorelease];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]]; //拨号
             }
                 break;
@@ -1705,6 +1708,8 @@ static char alertViewUserinfoKey;
         int index = ABMultiValueGetIndexForIdentifier(phoneMulti,identifier);
         
         NSString *phone = (NSString*)ABMultiValueCopyValueAtIndex(phoneMulti, index);
+        
+        CFRelease(phoneMulti);
         
         NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
         firstName = firstName != nil?firstName:@"";

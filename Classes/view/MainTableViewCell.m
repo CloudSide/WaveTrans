@@ -34,7 +34,7 @@
 {
     self.sepraterView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableview_sep_line"]];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
     
     [formatter setDateFormat:@"HH:mm:ss"];//y-MM-dd HH:mm:ss
     
