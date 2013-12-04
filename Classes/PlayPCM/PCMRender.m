@@ -7,6 +7,7 @@
 //
 
 #import "PCMRender.h"
+#import <AudioToolbox/CAFFile.h>
 
 
 #define SAMPLE_RATE             44100                                                    //采样频率
@@ -90,27 +91,6 @@ int addWAVHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int
     return 0;
 }
 
-typedef   struct    {
-    UInt32  mFileType;
-    UInt16  mFileVersion;
-    UInt16  mFileFlags;
-}CAFFileHeader;
-
-typedef   struct    {
-    UInt32  mChunkType;
-    SInt64  mChunkSize;
-}CAFChunkHeader;
-
-typedef   struct    {
-    Float64 mSampleRate;
-    UInt32  mFormatID;
-    UInt32  mFormatFlags;
-    UInt32  mBytesPerPacket;
-    UInt32  mFramesPerPacket;
-    UInt32  mChannelsPerFrame;
-    UInt32  mBitsPerChannel;
-}CAFAudioFormat;
-
 ////添加wav头信息
 //int addCAFHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int channels, long dataByteSize)
 //{
@@ -133,37 +113,71 @@ typedef   struct    {
 //    audioFormatHEADER.mBytesPerPacket =
 //    audioFormatHEADER
 //    
-//    
-//    //以下是创建wav头的HEADER;但.dwsize未定，因为不知道Data的长度。
-//    strcpy(pcmHEADER.fccID,"RIFF");
-//    pcmHEADER.dwSize=44+dataByteSize;   //根据pcmDATA.dwsize得出pcmHEADER.dwsize的值
-//    memcpy(pcmHEADER.fccType, "WAVE", sizeof(char)*4);
-//    
-//    memcpy(buffer, &pcmHEADER, sizeof(pcmHEADER));
-//    
-//    //以上是创建wav头的HEADER;
-//    
-//    //以下是创建wav头的FMT;
-//    strcpy(pcmFMT.fccID,"fmt ");
-//    pcmFMT.dwSize=16;
-//    pcmFMT.wFormatTag=3;
-//    pcmFMT.wChannels=channels;
-//    pcmFMT.dwSamplesPerSec=sample_rate;
-//    pcmFMT.dwAvgBytesPerSec=sample_rate * bytesPerSample * channels;//F * M * Nc
-//    pcmFMT.wBlockAlign=bytesPerSample * channels;//M * Nc
-//    pcmFMT.uiBitsPerSample=ceil(8 * bytesPerSample);
-//    
-//    memcpy(buffer+sizeof(pcmHEADER), &pcmFMT, sizeof (pcmFMT));
-//    //以上是创建wav头的FMT;
-//    
-//    //以下是创建wav头的DATA;   但由于DATA.dwsize未知所以不能写入.wav文件
-//    strcpy(pcmDATA.fccID,"data");
-//    pcmDATA.dwSize=dataByteSize; //给pcmDATA.dwsize   0以便于下面给它赋值
-//    
-//    memcpy(buffer+sizeof(pcmHEADER)+sizeof(pcmFMT), &pcmDATA, sizeof(pcmDATA));
+//
 //    
 //    return 0;
 //}
+
+//添加caf头信息
+int addCAFHeader(unsigned char *buffer, int sample_rate, int bytesPerSample, int channels, long dataByteSize)
+{
+    NSMutableData *headerData = [NSMutableData data];
+    // caf header
+    CAFFileHeader ch = {kCAF_FileType, kCAF_FileVersion_Initial, 0};
+    ch.mFileType = CFSwapInt32HostToBig(ch.mFileType);
+    ch.mFileVersion = CFSwapInt16HostToBig(ch.mFileVersion);
+    ch.mFileFlags = CFSwapInt16HostToBig(ch.mFileFlags);
+//    write(fd, &ch, sizeof(CAFFileHeader));
+    [headerData appendBytes:&ch length:sizeof(CAFFileHeader)];
+    
+    // audio description chunk
+    CAFChunkHeader cch;
+    cch.mChunkType = CFSwapInt32HostToBig(kCAF_StreamDescriptionChunkID);
+    cch.mChunkSize = sizeof(CAFAudioDescription);
+    cch.mChunkSize = CFSwapInt64(cch.mChunkSize);
+//    write(fd, &cch.mChunkType, sizeof(cch.mChunkType));
+    [headerData appendBytes:&cch.mChunkType length:sizeof(cch.mChunkType)];
+//    write(fd, &cch.mChunkSize, sizeof(cch.mChunkSize));
+    [headerData appendBytes:&cch.mChunkSize length:sizeof(cch.mChunkSize)];
+    
+    // CAFAudioDescription
+    CAFAudioDescription cad;
+    CFSwappedFloat64 swapped_sr = CFConvertFloat64HostToSwapped(sample_rate);
+    cad.mSampleRate = *((Float64*)(&swapped_sr.v));
+    cad.mFormatID = CFSwapInt32HostToBig(kAudioFormatLinearPCM);
+    cad.mFormatFlags = 0;
+    cad.mFormatFlags |= kCAFLinearPCMFormatFlagIsFloat;
+    cad.mFormatFlags = CFSwapInt32HostToBig(cad.mFormatFlags);
+
+    cad.mBytesPerPacket = CFSwapInt32HostToBig(bytesPerSample);
+    cad.mFramesPerPacket = CFSwapInt32HostToBig(channels);
+    cad.mChannelsPerFrame = CFSwapInt32HostToBig(channels);
+    cad.mBitsPerChannel = CFSwapInt32HostToBig(bytesPerSample);
+//    write(fd, &cad, sizeof(CAFAudioDescription));
+    [headerData appendBytes:&cad length:sizeof(CAFAudioDescription)];
+    
+    // audio data chunk
+    cch.mChunkType = CFSwapInt32HostToBig(kCAF_AudioDataChunkID);
+    cch.mChunkSize = (SInt64)CFSwapInt64HostToBig(dataByteSize + sizeof(UInt32));
+//    write(fd, &cch.mChunkType, sizeof(cch.mChunkType));
+    [headerData appendBytes:&cch.mChunkType length:sizeof(cch.mChunkType)];
+//    write(fd, &cch.mChunkSize, sizeof(cch.mChunkSize));
+    [headerData appendBytes:&cch.mChunkSize length:sizeof(cch.mChunkSize)];
+    
+    
+//    // audio data
+//    UInt32 edit_count = 0;
+//    write(fd, &edit_count, sizeof(UInt32));
+//    write(fd, samples, samples_size);
+    
+//    // flush to disk
+//    close(fd);
+//    
+//    // free the samples buffer
+//    free(samples);
+    
+    return 0;
+}
 
 
 #pragma mark - 数字转频率
@@ -271,7 +285,7 @@ int char_to_freq(char c, unsigned int *f) {
 
 
 void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int freqArrayLength, double duration_secs,
-               long sample_rate, int bits_persample) {
+               long sample_rate, int bits_persample, int channels) {
     
     double theta = 0;
     int idx = 0;
@@ -281,11 +295,14 @@ void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int f
         
         // Generate the samples
         for (UInt32 frame = 0; frame < (duration_secs * sample_rate); frame++)
+//        for (UInt32 frame = 0; frame < (bufferLength / freqArrayLength); frame++)
         {
             Float32 vol = MAX_VOLUME * sqrt( 1.0 - (pow(frame - ((duration_secs * sample_rate) / 2), 2)
                                                     / pow(((duration_secs * sample_rate) / 2), 2)));
             
             buffer[idx++] = vol * sin(theta);
+            if(channels == 2)
+                buffer[idx++] = vol * sin(theta);
             
             theta += theta_increment;
             if (theta > 2.0 * M_PI)
@@ -346,14 +363,14 @@ void makeChirp(Float32 buffer[],int bufferLength,unsigned int freqArray[], int f
         
         int sampleRate = SAMPLE_RATE;
         float duration = DURATION;
-        int channels = 1;
+        int channels = 2;//1
         
         //定义buffer总长度
-        long bufferLength = (long)(duration * sampleRate * (serializeStr.length+2));//所有频率总长度(包括17，19)
+        long bufferLength = (long)(duration * sampleRate * (serializeStr.length+2) * channels);//所有频率总长度(包括17，19)
         Float32 buffer[bufferLength];
         memset(buffer, 0, sizeof(buffer));
         
-        makeChirp(buffer, bufferLength, freqArray, serializeStr.length+2, duration, sampleRate, BITS_PER_SAMPLE);
+        makeChirp(buffer, bufferLength, freqArray, serializeStr.length+2, duration, sampleRate, BITS_PER_SAMPLE, channels);
         
         unsigned char wavHeaderByteArray[44];
         memset(wavHeaderByteArray, 0, sizeof(wavHeaderByteArray));
