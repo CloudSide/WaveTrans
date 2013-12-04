@@ -344,7 +344,7 @@ static char alertViewUserinfoKey;
 
 - (void)openAlbum {
     
-    UIActionSheet *chooseImageSheet = [[UIActionSheet alloc] initWithTitle:nil
+    UIActionSheet *chooseImageSheet = [[UIActionSheet alloc] initWithTitle:@"选择要发送的内容"
                                                                   delegate:self
                                                          cancelButtonTitle:@"取消"
                                                     destructiveButtonTitle:nil
