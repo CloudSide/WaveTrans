@@ -106,12 +106,15 @@ static char alertViewUserinfoKey;
 
 @property (nonatomic,retain) VdiskRestClient *restClient;
 
+@property (nonatomic,retain) UILabel *freqStatusLabel;
+
 @end
 
 @implementation MainViewController
 
 @synthesize audioPlayer = _audioPlayer;
 @synthesize hud = _hud;
+@synthesize freqStatusLabel = _freqStatusLabel;
 
 
 - (void)loadMyWeibo {
@@ -217,6 +220,8 @@ static char alertViewUserinfoKey;
     [self.errorPlayer stop];
     self.errorPlayer = nil;
     
+    [_freqStatusLabel release], _freqStatusLabel = nil;
+    
     [super dealloc];
 }
 
@@ -300,6 +305,11 @@ static char alertViewUserinfoKey;
     [self.view addSubview:settingButton];
     
     
+    _freqStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(6., 44., 40., 20.)];
+    [_freqStatusLabel setBackgroundColor:[UIColor clearColor]];
+    [_freqStatusLabel setFont:[UIFont systemFontOfSize:9.]];
+    [_freqStatusLabel setTextColor:[UIColor whiteColor]];
+    [self.view addSubview:_freqStatusLabel];
     
     [self.mTableView setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:.8 alpha:1.]];
     
@@ -310,6 +320,8 @@ static char alertViewUserinfoKey;
     }
 #endif
     
+    
+    [self switchToHighFreq:NO];
 }
 
 - (void)settingAction {
@@ -323,7 +335,7 @@ static char alertViewUserinfoKey;
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"√ 切换为高频模式", @"  切换为低频模式", @"  绑定/切换微博账号", nil];
+                                              otherButtonTitles:@"√ 切换为超声模式", @"  切换为低频模式", @"  绑定/切换微博账号", nil];
     
     } else {
     
@@ -331,7 +343,7 @@ static char alertViewUserinfoKey;
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"  切换为高频模式", @"√ 切换为低频模式", @"  绑定/切换微博账号", nil];
+                                              otherButtonTitles:@"  切换为超声模式", @"√ 切换为低频模式", @"  绑定/切换微博账号", nil];
     }
     
     
@@ -430,6 +442,27 @@ static char alertViewUserinfoKey;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)switchToHighFreq:(BOOL)isHigh {
+
+    int is_high = (isHigh ? 1 : 0);
+    
+    switch_freq(is_high);
+    [PCMRender switchFreq:isHigh];
+    
+    if (isHigh) {
+        
+        [_freqStatusLabel setTextColor:[UIColor redColor]];
+        _freqStatusLabel.text = @"超声模式";
+        
+    } else {
+    
+        [_freqStatusLabel setTextColor:[UIColor whiteColor]];
+        _freqStatusLabel.text = @"低频模式";
+    }
+}
+
 
 #pragma mark - UIImagePickerControllerDelegate
 
@@ -1201,14 +1234,20 @@ static char alertViewUserinfoKey;
         switch (buttonIndex) {
             case 0:
             {
-                [PCMRender switchFreq:YES];
-                switch_freq(1);
+                [self switchToHighFreq:YES];
+                
+                UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"提示" message:@"您已经切换到超声模式,只能以超声形式接收/发送数据。(提示:超声人耳是无法感知的)" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
+                [alert show];
+                
             }
                 break;
             case 1:
             {
-                [PCMRender switchFreq:NO];
-                switch_freq(0);
+              
+                [self switchToHighFreq:NO];
+                
+                UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"提示" message:@"您已经切换到低频模式,只能以低频形式接收/发送数据。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
+                [alert show];
             }
                 break;
             case 2:
@@ -1440,7 +1479,7 @@ static char alertViewUserinfoKey;
             {
                 CFErrorRef error = NULL;
                 // create addressBook
-                ABAddressBookRef iPhoneAddressBook = ABAddressBookCreate();
+                ABAddressBookRef iPhoneAddressBook = ABAddressBookCreateWithOptions(NULL, nil);//ABAddressBookCreate();
                 
                 //// Creating a person
                 // create a new person --------------------

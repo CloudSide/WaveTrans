@@ -55,6 +55,7 @@
 #import "WaveTransMetadata.h"
 
 #import "MainViewController.h"
+#import "PCMRender.h"
 
 @implementation AppDelegate
 
@@ -984,10 +985,23 @@ static OSStatus	PerformThru(
 		}
 		
 		// If we're drawing the newest line, draw it in solid green. Otherwise, draw it in a faded green.
-		if (drawBuffer_i == 0)
-			glColor4f(.8, .8, .8, 1.);
-		else
-			glColor4f(.8, .8, .8, (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
+        
+        if ([PCMRender isHighFreq]) {
+            
+            if (drawBuffer_i == 0)
+                glColor4f(1., 0., 0., 1.);
+            else
+                glColor4f(1., 0., 0., (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
+            
+        } else {
+        
+            if (drawBuffer_i == 0)
+                glColor4f(.8, .8, .8, 1.);
+            else
+                glColor4f(.8, .8, .8, (.24 * (1. - ((GLfloat)drawBuffer_i / (GLfloat)kNumDrawBuffers))));
+        }
+        
+		
 		
 		// Set up vertex pointer,
 		glVertexPointer(2, GL_FLOAT, 0, oscilLine);
