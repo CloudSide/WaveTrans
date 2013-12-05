@@ -1236,7 +1236,7 @@ static char alertViewUserinfoKey;
             {
                 [self switchToHighFreq:YES];
                 
-                UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"提示" message:@"您已经切换到超声模式,只能以超声形式接收/发送数据。(提示:超声人耳是无法感知的)" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
+                UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"提示" message:@"您已经切换到超声模式,只能以超声形式接收/发送数据,您也可以使用此模式接收混音广告。(提示:超声人耳是无法感知的)" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] autorelease];
                 [alert show];
                 
             }
