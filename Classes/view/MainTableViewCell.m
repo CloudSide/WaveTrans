@@ -27,6 +27,7 @@
 -(void)awakeFromNib
 {
     [self.sendBeepBtn setExclusiveTouch:YES];
+    self.receiveState.text = @"created";
 }
 
 #pragma mark - private method
