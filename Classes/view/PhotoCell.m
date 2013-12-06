@@ -30,8 +30,16 @@
 }
 */
 
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.photoImageView.clipsToBounds = YES;
+}
+
 -(void)setMetadata:(WaveTransMetadata *)metadata
 {
+    self.photoImageView.frame = CGRectMake(4, 0, self.bounds.size.width - 10, self.bounds.size.height);
+    
     super.metadata = metadata;
     
     if (super.metadata.fileURL!= nil && [super.metadata.fileURL.absoluteString hasPrefix:@"http://"]) {

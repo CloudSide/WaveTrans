@@ -23,6 +23,7 @@
 
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
     self.pureTextParentView.layer.cornerRadius = 4.0f;
 }
 

@@ -28,6 +28,11 @@
 {
     [self.sendBeepBtn setExclusiveTouch:YES];
     self.receiveState.text = @"created";
+    
+    self.clipsToBounds = YES;
+    self.contentView.clipsToBounds = YES;
+    
+//    self.contentView.frame = CGRectMake(70, 0, self.bounds.size.width - 10, self.bounds.size.height);
 }
 
 #pragma mark - private method

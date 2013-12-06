@@ -33,7 +33,7 @@
 }
 
 - (void)awakeFromNib {
-    
+    [super awakeFromNib];
     [self.playAudioBtn addTarget:self action:@selector(playAudioAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
