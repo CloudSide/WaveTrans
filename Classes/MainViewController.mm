@@ -108,6 +108,9 @@ static char alertViewUserinfoKey;
 
 @property (nonatomic,retain) UILabel *freqStatusLabel;
 
+@property (nonatomic, assign) BOOL playFlag;
+
+
 @end
 
 @implementation MainViewController
@@ -718,6 +721,11 @@ static char alertViewUserinfoKey;
 /* audioPlayerDidFinishPlaying:successfully: is called when a sound has finished playing. This method is NOT called if the player is stopped due to an interruption. */
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
+    if (self.playFlag && [self.audioPlayer play]) {
+
+        return;
+    }
+    
     [[AppDelegate sharedAppDelegate] setListenning:YES];
 }
 
