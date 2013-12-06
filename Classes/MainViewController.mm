@@ -486,7 +486,8 @@ static char alertViewUserinfoKey;
     [_hud show:YES];
      */
     
-    if ([mediaType isEqualToString:@"public.image"] && ![info valueForKey:UIImagePickerControllerReferenceURL]) {
+    //if ([mediaType isEqualToString:@"public.image"] && ![info valueForKey:UIImagePickerControllerReferenceURL]) {
+    if ([mediaType isEqualToString:@"public.image"]) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -494,7 +495,7 @@ static char alertViewUserinfoKey;
             
             UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
             
-            NSData *imgData = UIImageJPEGRepresentation(capturedImage, 0.5);
+            NSData *imgData = UIImageJPEGRepresentation(capturedImage, 0.2);
             
             NSString *fileName = [NSString stringWithFormat:@"%lu.jpg", (long)[[NSDate date] timeIntervalSince1970]];
             
