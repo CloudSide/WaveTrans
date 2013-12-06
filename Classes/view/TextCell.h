@@ -9,5 +9,5 @@
 #import "MainTableViewCell.h"
 
 @interface TextCell : MainTableViewCell
-
+@property (nonatomic,retain) IBOutlet UIImageView *bgImageView;
 @end

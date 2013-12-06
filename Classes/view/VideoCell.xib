@@ -52,6 +52,11 @@
                         </state>
                         <state key="disabled" image="play_beep_disable.png"/>
                     </button>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OGL-dY-Ic1">
+                        <rect key="frame" x="0.0" y="98" width="320" height="2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <view alpha="0.30000001192092896" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAd-NK-68e">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -65,6 +70,7 @@
                 <outlet property="receiveState" destination="7sN-4w-gYI" id="pZ5-D6-uXM"/>
                 <outlet property="screenshotImageView" destination="47E-WE-gko" id="9pB-Ei-LD4"/>
                 <outlet property="sendBeepBtn" destination="7au-8L-AFV" id="7XQ-XB-JnJ"/>
+                <outlet property="sepraterView" destination="OGL-dY-Ic1" id="3T6-3A-XD2"/>
             </connections>
         </tableViewCell>
     </objects>

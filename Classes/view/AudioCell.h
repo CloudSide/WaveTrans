@@ -12,4 +12,6 @@
 
 @property (nonatomic,retain) IBOutlet UIButton *playAudioBtn;
 
+@property (nonatomic,retain) UIImageView *bgImageView;
+
 @end

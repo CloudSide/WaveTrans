@@ -45,6 +45,11 @@
                         </state>
                         <state key="disabled" image="play_beep_disable.png"/>
                     </button>
+                    <view contentMode="scaleToFill" id="Loy-jP-V6r">
+                        <rect key="frame" x="0.0" y="98" width="320" height="2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <view alpha="0.40000000000000002" contentMode="scaleToFill" id="26h-oz-KIB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -58,6 +63,7 @@
                 <outlet property="progressView" destination="26h-oz-KIB" id="Qzk-OU-Mli"/>
                 <outlet property="receiveState" destination="Zdj-IL-N9a" id="SJL-MV-3Fq"/>
                 <outlet property="sendBeepBtn" destination="aQr-v0-av2" id="ix5-Kx-PVj"/>
+                <outlet property="sepraterView" destination="Loy-jP-V6r" id="925-P0-fYw"/>
             </connections>
         </tableViewCell>
     </objects>

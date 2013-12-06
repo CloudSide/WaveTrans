@@ -12,6 +12,9 @@
 
 #import "MainViewController.h"
 
+#define RECEIVED_VIEW_COLOR     [UIColor colorWithRed:0.18f green:0.67f blue:0.84f alpha:1.0f]
+#define CREATED_VIEW_COLOR     [UIColor colorWithRed:30/255.0f green:252/255.0f blue:192/255.0f alpha:1.0f]
+
 @class WaveTransMetadata;
 
 //@protocol MainTableViewCellProtocol <NSObject>

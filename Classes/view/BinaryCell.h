@@ -11,4 +11,6 @@
 
 @interface BinaryCell :MainTableViewCell //<MainTableViewCellProtocol>
 
+@property (nonatomic,retain) IBOutlet UIImageView *bgImageView;
+
 @end
