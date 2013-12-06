@@ -108,7 +108,7 @@ static char alertViewUserinfoKey;
 
 @property (nonatomic,retain) UILabel *freqStatusLabel;
 
-@property (nonatomic, assign) BOOL playFlag;
+
 
 
 @end

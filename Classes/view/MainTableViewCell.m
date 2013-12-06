@@ -8,6 +8,7 @@
 
 #import "MainTableViewCell.h"
 #import "WaveTransMetadata.h"
+#import "MainViewController.h"
 
 @implementation MainTableViewCell
 
@@ -82,8 +83,8 @@
     self.createDateLabel.text = [formatter stringFromDate:self.metadata.ctime];
     self.fileNameLabel.text = self.metadata.filename;
     [self.sendBeepBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    [self.sendBeepBtn addTarget:self action:@selector(sendBeepAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self.sendBeepBtn addTarget:self action:@selector(sendBeepDownAction:) forControlEvents:UIControlEventTouchDown];
+    [self.sendBeepBtn addTarget:self action:@selector(sendBeepUpAction:) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside|UIControlEventTouchCancel];
     
     if ([self.metadata.type isEqualToString:@"file"]) {
 
@@ -112,16 +113,29 @@
 
 }
 
--(void)sendBeepAction:(id)sender
+-(void)sendBeepDownAction:(id)sender
 {
-    //TODO:send beep
+    //send beep
     
     if ([self.delegate respondsToSelector:@selector(playWithMetadata:)]) {
-        
-        
+        MainViewController *mvc = (MainViewController *)self.delegate;
+        [mvc setPlayFlag:YES];
         [self.delegate performSelector:@selector(playWithMetadata:) withObject:self.metadata];
     }
 }
+
+-(void)sendBeepUpAction:(id)sender
+{
+    //send beep
+    
+    if ([self.delegate respondsToSelector:@selector(setPlayFlag:)]) {
+        
+        MainViewController *mvc = (MainViewController *)self.delegate;
+        [mvc setPlayFlag:NO];
+    }
+}
+
+
 
 -(CALayer *)getProgressLayer{
     

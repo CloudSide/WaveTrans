@@ -11,7 +11,7 @@
 @class WaveTransMetadata;
 
 @interface MainViewController : UIViewController
-
+@property (nonatomic, assign) BOOL playFlag;
 @end
 
 @protocol MainViewControllerDelegate <NSObject>
