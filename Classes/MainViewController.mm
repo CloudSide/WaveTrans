@@ -747,6 +747,7 @@ static char alertViewUserinfoKey;
     
     if (md && [md.type isEqualToString:@"file"] && md.hasCache) {
         
+        md.isReceived = YES;
         md.uploaded = YES;
         [md save];
         [self refreshMetadataList];
@@ -755,6 +756,7 @@ static char alertViewUserinfoKey;
     
     } else if (md && ![md.type isEqualToString:@"file"]) {
         
+        md.isReceived = YES;
         md.uploaded = YES;
         [md save];
         [self refreshMetadataList];
@@ -868,7 +870,7 @@ static char alertViewUserinfoKey;
             //播放成功声音
             [self playSuccessSound];
             
-            WaveTransMetadata *metadataReceive = [[[WaveTransMetadata alloc] initWithDictionary:dict] autorelease];
+            WaveTransMetadata *metadataReceive = [[[WaveTransMetadata alloc] initWithDictionary:dict isReceived:YES] autorelease];
             
             NSLog(@"%@", metadataReceive.code);
             NSLog(@"%@", metadataReceive.sha1);

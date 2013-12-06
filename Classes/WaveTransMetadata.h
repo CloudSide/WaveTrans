@@ -29,6 +29,9 @@
 @property (nonatomic, assign) BOOL uploaded;
 @property (nonatomic, readonly) BOOL isJson;
 
+@property (nonatomic, assign) BOOL isReceived;
+
+
 /*
  code
  sha1
@@ -42,6 +45,7 @@
 - (void)setFilename:(NSString *)filename;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
+- (id)initWithDictionary:(NSDictionary *)dict isReceived:(BOOL)isReceived;
 
 - (id)initWithSha1:(NSString *)sha1 type:(NSString *)type content:(NSString *)content size:(unsigned long long )size filename:(NSString *)filename;
 

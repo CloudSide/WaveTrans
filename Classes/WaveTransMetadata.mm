@@ -21,6 +21,7 @@
 @synthesize content = _content;
 @synthesize filename = _filename;
 @synthesize uploaded = _uploaded;
+@synthesize isReceived = _isReceived;
 
 
 static NSDictionary *kSharedFileExtNameDictionary = nil;
@@ -307,6 +308,16 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     [super dealloc];
 }
 
+- (id)initWithDictionary:(NSDictionary *)dict isReceived:(BOOL)isReceived {
+    
+    if (self = [self initWithDictionary:dict]) {
+        
+        self.isReceived = isReceived;
+    }
+    
+    return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dict {
     
     if (self = [super init]) {
@@ -391,6 +402,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
         _ctime = [[coder decodeObjectForKey:@"ctime"] retain];
         _uploaded = [coder decodeBoolForKey:@"uploaded"];
         _filename = [[coder decodeObjectForKey:@"filename"] retain];
+        _isReceived = [coder decodeBoolForKey:@"isReceived"];
         
     }
     
@@ -407,6 +419,7 @@ static NSDictionary *kSharedFileExtNameDictionary = nil;
     [coder encodeObject:self.type forKey:@"type"];
     [coder encodeObject:self.ctime forKey:@"ctime"];
     [coder encodeObject:self.filename forKey:@"filename"];
+    [coder encodeBool:self.isReceived forKey:@"isReceived"];
 }
 
 
