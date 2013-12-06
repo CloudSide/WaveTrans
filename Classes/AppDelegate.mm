@@ -532,10 +532,27 @@ static OSStatus	PerformThru(
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    /*
+    if (self.interruption) {
+    
+        try {
+            
+            AudioSessionSetActive(true);
+            AudioOutputUnitStart(self.rioUnit);
+            
+        } catch (CAXException e) {
+            
+            
+        }
+    }
+    */
+    
 	//start animation now that we're in the foreground
     view.applicationResignedActive = NO;
 	[view startAnimation];
 	AudioSessionSetActive(true);
+    AudioOutputUnitStart(self.rioUnit);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
